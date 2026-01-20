@@ -1,10 +1,9 @@
-// import { useState } from 'react';
 import { format } from 'date-fns';
 import { CalendarIcon } from 'lucide-react';
+import * as PopoverPrimitive from '@radix-ui/react-popover';
 
 import { cn } from '../../lib/utils';
-import { Button } from '../ui/button';
-import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
+import { Button } from '../button';
 import { Label } from '../label';
 import { Calendar } from '../calendar';
 
@@ -38,15 +37,12 @@ export function DatePicker({
   disableClickPropagation?: boolean;
 }): React.ReactElement {
   return (
-    <Popover>
-      <PopoverTrigger asChild>
+    <PopoverPrimitive.Root>
+      <PopoverPrimitive.Trigger asChild>
         <Button
-          variant={'outline'}
-          className={cn(
-            'w-50 border-none bg-white hover:bg-white',
-            'text-gray-900 inset-ring-[1px] inset-ring-gray-400',
-            'flex justify-between cursor-pointer'
-          )}
+          variant="input"
+          size="md"
+          className={cn('w-50', 'text-gray-900')}
         >
           {value ? (
             <Label size="body2" weight="regular">
@@ -60,16 +56,19 @@ export function DatePicker({
 
           <CalendarIcon size="16" />
         </Button>
-      </PopoverTrigger>
-      <PopoverContent
-        className="w-auto p-0"
-        align="start"
-        {...(disableClickPropagation
-          ? { onMouseDownCapture: (event: React.MouseEvent) => event.stopPropagation() }
-          : {})}
-      >
-        <Calendar mode="single" selected={value} onSelect={onChange} initialFocus />
-      </PopoverContent>
-    </Popover>
+      </PopoverPrimitive.Trigger>
+      <PopoverPrimitive.Portal>
+        <PopoverPrimitive.Content
+          className="z-50 w-auto rounded-md border border-gray-200 bg-white p-0 text-gray-950 shadow-md outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2"
+          align="start"
+          sideOffset={4}
+          {...(disableClickPropagation
+            ? { onMouseDownCapture: (event: React.MouseEvent) => event.stopPropagation() }
+            : {})}
+        >
+          <Calendar mode="single" selected={value} onSelect={onChange} initialFocus />
+        </PopoverPrimitive.Content>
+      </PopoverPrimitive.Portal>
+    </PopoverPrimitive.Root>
   );
 }

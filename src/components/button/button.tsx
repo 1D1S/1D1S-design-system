@@ -14,6 +14,7 @@ const customButtonVariants = cva(allButtonVariants, {
       warning: 'bg-warning text-white',
       loading: 'bg-main-900 opacity-80 cursor-wait',
       outline: 'text-gray-900 hover:bg-main-900 hover:text-white inset-ring-[1.5px] inset-ring-main-900 bg-transparent',
+      input: 'bg-white text-gray-900 hover:bg-gray-50 inset-ring-[1px] inset-ring-gray-400 justify-between font-normal',
     },
     size: {
       lg: 'rounded-2 py-4 px-6',
@@ -36,7 +37,7 @@ export interface ButtonProps
 /**
  * Button
  * 커스텀 버튼 컴포넌트
- * @param variant 버튼스타일 : default, disabled, warning, loading, outline
+ * @param variant 버튼스타일 : default, disabled, warning, loading, outline, input
  * @param size 버튼 크기 : lg, md, sm
  *
  * @example 기본 버튼
@@ -60,6 +61,8 @@ export function Button({
     sm: 'caption3',
   } as const;
 
+  const isInputVariant = variant === 'input';
+
   return (
     <Comp
       data-slot="button"
@@ -67,9 +70,13 @@ export function Button({
       disabled={disabled}
       {...props}
     >
-      <Label size={labelSizeMap[size || 'lg']} weight={disabled ? 'regular' : 'bold'}>
-        {props.children}
-      </Label>
+      {isInputVariant ? (
+        props.children
+      ) : (
+        <Label size={labelSizeMap[size || 'lg']} weight={disabled ? 'regular' : 'bold'}>
+          {props.children}
+        </Label>
+      )}
     </Comp>
   );
 }

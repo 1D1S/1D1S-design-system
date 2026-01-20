@@ -6,13 +6,17 @@ const meta: Meta<typeof TextField> = {
   component: TextField,
   tags: ['autodocs'],
   argTypes: {
+    variant: {
+      control: 'select',
+      options: ['default', 'search'],
+    },
     label: {
       control: 'text',
     },
     error: {
       control: 'text',
     },
-    disabled: {
+    multiline: {
       control: 'boolean',
     },
   },
@@ -23,30 +27,34 @@ type Story = StoryObj<typeof TextField>;
 
 export const Default: Story = {
   args: {
-    placeholder: 'Enter text here',
-  },
-};
-
-export const WithLabel: Story = {
-  args: {
-    label: 'Username',
-    placeholder: 'Enter username',
+    variant: 'default',
+    placeholder: '텍스트를 입력하세요',
+    label: '기본 텍스트 필드',
   },
 };
 
 export const WithError: Story = {
   args: {
-    label: 'Email',
-    placeholder: 'Enter email',
-    value: 'invalid-email',
-    error: 'Please enter a valid email address',
+    variant: 'default',
+    placeholder: '텍스트를 입력하세요',
+    label: '오류가 있는 필드',
+    error: '필수 입력 항목입니다.',
   },
 };
 
-export const Disabled: Story = {
+export const Search: Story = {
   args: {
-    label: 'Disabled Input',
-    placeholder: 'Cannot type here',
-    disabled: true,
+    variant: 'search',
+    placeholder: '검색어를 입력하세요',
+  },
+};
+
+export const TextArea: Story = {
+  args: {
+    variant: 'default',
+    multiline: true,
+    placeholder: '긴 텍스트를 입력하세요',
+    label: '텍스트 영역',
+    rows: 4,
   },
 };
