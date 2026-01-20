@@ -1,8 +1,8 @@
 'use client';
 import Image from 'next/image';
 import { useRef, useState } from 'react';
-import { Logo } from '../icons/Logo';
-import { Plus } from '../icons/Plus';
+import { Logo } from '../Icons/Logo';
+import { Plus } from '../Icons/Plus';
 
 /**
  * ImagePicker

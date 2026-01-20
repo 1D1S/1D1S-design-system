@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { Text } from '../Text';
 import { Tag } from '../Tag';
 import { cn } from '../../lib/utils';
-import { Person } from '../icons/Person';
+import { Person } from '../Icons/Person';
 import { ImagePlaceholder } from '../ImagePlaceholder/ImagePlaceholder';
 
 interface ChallengeListItemProps {

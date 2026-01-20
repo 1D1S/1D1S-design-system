@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { cn } from '../../lib/utils';
 import { Text, textVariants } from '../Text';
-import { Search } from '../icons/Search';
+import { Search } from '../Icons/Search';
 import { cva, type VariantProps } from 'class-variance-authority';
 
 const textFieldVariants = cva(
@@ -37,6 +37,8 @@ interface TextFieldProps
   label?: string;
   error?: string;
   multiline?: boolean;
+  rows?: number;
+  cols?: number;
 }
 
 /**

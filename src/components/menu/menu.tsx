@@ -3,8 +3,8 @@
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
 import { Text } from '../Text';
-import { HamburgerMenu } from '../icons/HamburgerMenu';
-import { Close } from '../icons/Close';
+import { HamburgerMenu } from '../Icons/HamburgerMenu';
+import { Close } from '../Icons/Close';
 
 const menuItems = [
   { label: '메인', path: '/' },

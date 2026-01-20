@@ -1,5 +1,5 @@
 import { Text } from '../Text';
-import { Logo } from '../icons/Logo';
+import { Logo } from '../Icons/Logo';
 
 /**
  * Footer

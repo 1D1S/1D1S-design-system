@@ -1,8 +1,8 @@
 import { cn } from '../../lib/utils';
 import { Text } from '../Text';
 import { Tag } from '../Tag';
-import { Logo } from '../icons/Logo';
-import { Person } from '../icons/Person';
+import { Logo } from '../Icons/Logo';
+import { Person } from '../Icons/Person';
 
 interface ChallengeProps {
   challengeTitle: string;

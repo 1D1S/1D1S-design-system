@@ -6,7 +6,7 @@ import { Text } from '../Text';
 import { Button } from '../Button';
 import { cn } from '../../lib/utils';
 import { useRouter } from 'next/navigation';
-import { Chevron } from '../icons/Chevron';
+import { Chevron } from '../Icons/Chevron';
 
 type Mode = 'collapsed' | 'expanding' | 'expanded' | 'collapsing';
 

@@ -8,8 +8,8 @@ import { CircularProgress } from "../CircularProgress";
 import { cn } from "../../lib/utils";
 import { CircleAvatar } from "../CircleAvatar";
 import Link from "next/link";
-import { Heart } from "../icons/Heart";
-import { HeartFilled } from "../icons/HeartFilled";
+import { Heart } from "../Icons/Heart";
+import { HeartFilled } from "../Icons/HeartFilled";
 import { ImagePlaceholder } from "../ImagePlaceholder/ImagePlaceholder";
 
 type Emotion = "happy" | "soso" | "sad";

@@ -1,7 +1,7 @@
 import { cn } from '../../lib/utils';
 import { Text } from '../Text';
 import { cva, VariantProps } from 'class-variance-authority';
-import { Logo } from '../icons/Logo';
+import { Logo } from '../Icons/Logo';
 
 const pageTitleVariants = cva('flex flex-col items-center', {
   variants: {

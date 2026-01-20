@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { cn } from '../../lib/utils';
-import { Logo } from '../icons/Logo';
+import { Logo } from '../Icons/Logo';
 
 interface ImagePlaceholderProps {
   className?: string;

@@ -2,7 +2,7 @@
 
 import { cn } from '../../lib/utils';
 import { useRouter } from 'next/navigation';
-import { ChevronLeft } from '../icons/ChevronLeft';
+import { ChevronLeft } from '../Icons/ChevronLeft';
 
 export function BackButton(): React.ReactElement {
   const router = useRouter();

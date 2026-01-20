@@ -1,0 +1,103 @@
+name: Auto Release and Publish
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - 'CHANGELOG.md'
+      - 'package.json'
+      - '.github/**'
+
+jobs:
+  check-commits:
+    runs-on: ubuntu-latest
+    outputs:
+      should-release: ${{ steps.check.outputs.should-release }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check commit messages
+        id: check
+        run: |
+          # 마지막 커밋이 release 커밋이 아닌지 확인
+          LAST_COMMIT=$(git log -1 --pretty=%B)
+          if [[ "$LAST_COMMIT" =~ ^chore\(release\): ]]; then
+            echo "should-release=false" >> $GITHUB_OUTPUT
+          else
+            echo "should-release=true" >> $GITHUB_OUTPUT
+          fi
+
+  release:
+    needs: check-commits
+    if: needs.check-commits.outputs.should-release == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      id-token: write
+      packages: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9.0.0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # LTS version recommended
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@1d1s'
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm build
+
+      - name: Bump version and generate changelog
+        # standard-version or similar tool assumed to be aliased to 'release' script
+        run: npm run release
+
+      - name: Push changes
+        run: |
+          git push --follow-tags origin main
+
+      - name: Get version
+        id: version
+        run: echo "version=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
+
+      - name: Publish to GitHub Packages
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create GitHub Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ steps.version.outputs.version }}
+          release_name: Release v${{ steps.version.outputs.version }}
+          body: |
+            🎉 새로운 버전이 릴리스되었습니다!
+
+            자세한 변경 사항은 [CHANGELOG.md](https://github.com/1d1s/1d1s-design-system/blob/main/CHANGELOG.md)를 참고하세요.
+          draft: false
+          prerelease: false
