@@ -9,7 +9,7 @@ import {
   DialogDescription,
   DialogClose,
 } from "./dialog";
-import { Button } from "../button";
+import { Button } from "../Button";
 
 const meta: Meta<typeof Dialog> = {
   title: "Dialog",

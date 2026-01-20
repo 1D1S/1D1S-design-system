@@ -1,7 +1,7 @@
 'use client';
 
 import * as TogglePrimitive from '@radix-ui/react-toggle';
-import { Label } from '../label';
+import { Text } from '../Text';
 import { cn } from '../../lib/utils';
 
 interface ToggleProps extends React.ComponentProps<typeof TogglePrimitive.Root> {
@@ -38,13 +38,13 @@ export function Toggle({
       {...props}
     >
       {icon && (
-        <Label size="body2" weight="regular">
+        <Text size="body2" weight="regular">
           {icon}
-        </Label>
+        </Text>
       )}
-      <Label size="body2" weight={null}>
+      <Text size="body2" weight={null}>
         {children}
-      </Label>
+      </Text>
     </TogglePrimitive.Root>
   );
 }

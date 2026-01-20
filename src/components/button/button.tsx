@@ -1,35 +1,38 @@
-import { cn } from '../../lib/utils';
-import { buttonVariants } from '../ui/button';
-import { Slot } from '@radix-ui/react-slot';
-import { cva, type VariantProps } from 'class-variance-authority';
-import { Label } from '../label';
+import { cn } from "../../lib/utils";
+import { Slot } from "@radix-ui/react-slot";
+import { cva, type VariantProps } from "class-variance-authority";
+import { Text } from "../Text";
 
-const allButtonVariants = 'h-auto border-none shadow-none cursor-pointer flex items-center justify-center';
+const allButtonVariants =
+  "h-auto border-none shadow-none cursor-pointer flex items-center justify-center transition-all duration-200";
 
 const customButtonVariants = cva(allButtonVariants, {
   variants: {
     variant: {
-      default: 'bg-main-900 text-white hover:bg-main-800',
-      disabled: 'bg-gray-400 text-gray-600 cursor-not-allowed',
-      warning: 'bg-warning text-white',
-      loading: 'bg-main-900 opacity-80 cursor-wait',
-      outline: 'text-gray-900 hover:bg-main-900 hover:text-white inset-ring-[1.5px] inset-ring-main-900 bg-transparent',
-      input: 'bg-white text-gray-900 hover:bg-gray-50 inset-ring-[1px] inset-ring-gray-400 justify-between font-normal',
+      default: "bg-main-900 text-white hover:bg-main-800",
+      disabled: "bg-gray-400 text-gray-600 cursor-not-allowed",
+      warning: "bg-warning text-white",
+      loading: "bg-main-900 opacity-80 cursor-wait",
+      outline:
+        "text-gray-900 hover:bg-main-900 hover:text-white inset-ring-[1.5px] inset-ring-main-900 bg-transparent",
+      input:
+        "bg-white text-gray-900 hover:bg-gray-50 inset-ring-[1px] inset-ring-gray-400 justify-between font-normal",
     },
     size: {
-      lg: 'rounded-2 py-4 px-6',
-      md: 'rounded-1.5 py-2.5 px-5',
-      sm: 'rounded-1 py-1.5 px-4',
+      lg: "rounded-2 py-2 px-3.5",
+      md: "rounded-1.5 py-2 px-2.5",
+      sm: "rounded-1 py-1.5 px-2",
     },
   },
   defaultVariants: {
-    variant: 'default',
-    size: 'lg',
+    variant: "default",
+    size: "lg",
   },
 });
 
 export interface ButtonProps
-  extends React.ComponentProps<'button'>,
+  extends
+    React.ComponentProps<"button">,
     VariantProps<typeof customButtonVariants> {
   asChild?: boolean;
 }
@@ -47,35 +50,41 @@ export interface ButtonProps
  */
 export function Button({
   className,
-  variant = 'default',
-  size = 'lg',
+  variant = "default",
+  size = "lg",
   asChild = false,
   disabled = false,
   ...props
 }: ButtonProps): React.ReactElement {
-  const Comp = asChild ? Slot : 'button';
-  
+  const Comp = asChild ? Slot : "button";
+
   const labelSizeMap = {
-    lg: 'body1',
-    md: 'body2',
-    sm: 'caption3',
+    lg: "body2",
+    md: "caption1",
+    sm: "caption2",
   } as const;
 
-  const isInputVariant = variant === 'input';
+  const isInputVariant = variant === "input";
 
   return (
     <Comp
       data-slot="button"
-      className={cn(customButtonVariants({ variant: disabled ? 'disabled' : variant, size, className }))}
+      className={cn(
+        customButtonVariants({
+          variant: disabled ? "disabled" : variant,
+          size,
+          className,
+        }),
+      )}
       disabled={disabled}
       {...props}
     >
       {isInputVariant ? (
         props.children
       ) : (
-        <Label size={labelSizeMap[size || 'lg']} weight={disabled ? 'regular' : 'bold'}>
+        <Text size={labelSizeMap[size || "lg"]} weight="regular">
           {props.children}
-        </Label>
+        </Text>
       )}
     </Comp>
   );

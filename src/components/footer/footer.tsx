@@ -1,4 +1,4 @@
-import { Label } from '../label';
+import { Text } from '../Text';
 import { Logo } from '../icons/Logo';
 
 /**
@@ -14,28 +14,28 @@ export function Footer(): React.ReactElement {
       <div className="flex w-250 flex-col gap-7.5 px-7.5">
         <div className="flex flex-row items-center gap-5">
           <Logo width={30} height={50} className="text-white" />
-          <Label size="heading1" weight="bold" className="text-white">
+          <Text size="heading1" weight="bold" className="text-white">
             1D1S
-          </Label>
+          </Text>
         </div>
         <div className="flex flex-row gap-2.5">
-          <Label size="body2" weight="medium" className="text-white">
+          <Text size="body2" weight="medium" className="text-white">
             고객문의
-          </Label>
-          <Label size="body2" weight="regular" className="text-white">
+          </Text>
+          <Text size="body2" weight="regular" className="text-white">
             1d1s@gmail.com
-          </Label>
+          </Text>
         </div>
         <div className="flex flex-row gap-12.5">
-          <Label size="body2" weight="medium" className="text-white">
+          <Text size="body2" weight="medium" className="text-white">
             서비스 이용약관
-          </Label>
-          <Label size="body2" weight="medium" className="text-white">
+          </Text>
+          <Text size="body2" weight="medium" className="text-white">
             개인정보 처리방침
-          </Label>
-          <Label size="body2" weight="medium" className="text-white">
+          </Text>
+          <Text size="body2" weight="medium" className="text-white">
             운영정책
-          </Label>
+          </Text>
         </div>
       </div>
     </footer>

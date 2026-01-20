@@ -4,7 +4,7 @@ import * as React from "react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { cn } from "../../lib/utils";
 import { Close } from "../icons/Close";
-import { Label } from "../label";
+import { Text } from "../Text";
 
 const Dialog = DialogPrimitive.Root;
 
@@ -97,13 +97,13 @@ function DialogTitle({
 }: React.ComponentProps<typeof DialogPrimitive.Title>): React.ReactElement {
   return (
     <DialogPrimitive.Title asChild {...props}>
-      <Label
+      <Text
         size="heading2"
         weight="bold"
         className={cn("text-black", className)}
       >
         {children}
-      </Label>
+      </Text>
     </DialogPrimitive.Title>
   );
 }
@@ -117,13 +117,13 @@ function DialogDescription({
 >): React.ReactElement {
   return (
     <DialogPrimitive.Description asChild {...props}>
-      <Label
+      <Text
         size="body2"
         weight="regular"
         className={cn("text-gray-600 mt-2", className)}
       >
         {children}
-      </Label>
+      </Text>
     </DialogPrimitive.Description>
   );
 }

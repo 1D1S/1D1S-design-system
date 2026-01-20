@@ -8,7 +8,7 @@ import {
   SelectValue,
   SelectLabel,
   SelectSeparator,
-} from './dropdown';
+} from './Dropdown';
 
 const meta: Meta<typeof Select> = {
   title: 'Dropdown',

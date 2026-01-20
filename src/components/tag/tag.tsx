@@ -1,6 +1,6 @@
 import { cn } from '../../lib/utils';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { Label } from '../label';
+import { Text } from '../Text';
 
 const tagVariants = cva(
   'inline-flex items-center rounded-1 px-1.5 py-1 bg-main-900 text-white',
@@ -47,13 +47,13 @@ export function Tag({
   return (
     <span className={cn(tagVariants({ hasIcon: Boolean(icon) }), className)}>
       {icon && (
-        <Label size={size} weight="medium">
+        <Text size={size} weight="medium">
           {icon}
-        </Label>
+        </Text>
       )}
-      <Label size={size} weight={weight}>
+      <Text size={size} weight={weight}>
         {children}
-      </Label>
+      </Text>
     </span>
   );
 }

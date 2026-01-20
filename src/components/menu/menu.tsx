@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
-import { Label } from '../label';
+import { Text } from '../Text';
 import { HamburgerMenu } from '../icons/HamburgerMenu';
 import { Close } from '../icons/Close';
 
@@ -62,9 +62,9 @@ export function Menu(): React.ReactElement {
                   onClick={() => setIsOpen(false)}
                   className="mb-8 block text-lg text-gray-700 transition-colors duration-200 hover:text-black"
                 >
-                  <Label size="heading1" weight={'bold'}>
+                  <Text size="heading1" weight={'bold'}>
                     {label}
-                  </Label>
+                  </Text>
                 </Link>
               </li>
             ))}
