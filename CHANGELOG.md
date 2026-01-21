@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.6](https://github.com/1D1S/1D1S-design-system/compare/v0.1.5...v0.1.6) (2026-01-21)
+
+
+### Bug Fixes
+
+* add repository url for npm provenance ([85a86cf](https://github.com/1D1S/1D1S-design-system/commit/85a86cf82bc08b3b8c8b4d4622c8bdb348357839))
+* re-trigger release after adding repository url ([76ae476](https://github.com/1D1S/1D1S-design-system/commit/76ae476ddfd70450d59509102530660ed98a795c))
+
 ### [0.1.5](https://github.com/1D1S/1D1S-design-system/compare/v0.1.4...v0.1.5) (2026-01-21)
 
 
