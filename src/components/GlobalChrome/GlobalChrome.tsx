@@ -13,6 +13,10 @@ export function GlobalChrome(): React.ReactElement | null {
   const backOnlyRoutes = ['/auth/login'];
   const noProfileRoutes = ['/mypage']; // 프로필 카드가 숨겨질 경로들
 
+  if (!pathname) {
+    return null;
+  }
+
   const isBackOnly = backOnlyRoutes.some((prefix) => pathname.startsWith(prefix));
   const isNoChrome = noChromeRoutes.some((prefix) => pathname.startsWith(prefix));
   const isNoProfile = noProfileRoutes.some((prefix) => pathname.startsWith(prefix));
