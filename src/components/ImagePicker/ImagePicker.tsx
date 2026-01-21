@@ -1,8 +1,9 @@
-'use client';
-import Image from 'next/image';
-import { useRef, useState } from 'react';
-import { Logo } from '../Icons/Logo';
-import { Plus } from '../Icons/Plus';
+"use client";
+import Image from "next/image";
+import { useRef, useState } from "react";
+import { Logo } from "../Icons/Logo";
+import { Plus } from "../Icons/Plus";
+import { cn } from "@/lib/utils";
 
 /**
  * ImagePicker
@@ -18,7 +19,7 @@ import { Plus } from '../Icons/Plus';
 export function ImagePicker({
   onChange,
   ...props
-}: React.ComponentPropsWithoutRef<'input'>): React.ReactElement {
+}: React.ComponentPropsWithoutRef<"input">): React.ReactElement {
   const inputRef = useRef<HTMLInputElement>(null);
   const [preview, setPreview] = useState<string | null>(null);
 
@@ -49,7 +50,12 @@ export function ImagePicker({
         }}
         {...props}
       />
-      <div className="bg-main-300 flex h-full w-full items-center justify-center rounded-full">
+      <div
+        className={cn(
+          "bg-main-300 flex h-full w-full",
+          "items-center justify-center rounded-full overflow-hidden",
+        )}
+      >
         {preview ? (
           <Image
             src={preview}
