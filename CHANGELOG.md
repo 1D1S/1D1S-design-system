@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.5](https://github.com/1D1S/1D1S-design-system/compare/v0.1.4...v0.1.5) (2026-01-21)
+
+
+### Bug Fixes
+
+* trigger release with pnpm 10 ([f15994b](https://github.com/1D1S/1D1S-design-system/commit/f15994b64fed69673f8de6b192998a16b58c0ee9))
+* trigger release with updated workflow ([50df9a5](https://github.com/1D1S/1D1S-design-system/commit/50df9a557e14a8bfdbd9df3cdbff73e9af88fc6e))
+
 ### [0.1.4](https://github.com/1D1S/1D1S-design-system/compare/v0.1.3...v0.1.4) (2026-01-21)
 
 
