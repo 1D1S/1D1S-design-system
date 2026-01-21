@@ -79,7 +79,10 @@ jobs:
         run: echo "version=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
 
       - name: Publish to npm
-        run: npm publish --provenance --access public
+        run: |
+          # OIDC를 사용한 배포를 위해 기존 .npmrc가 있다면 삭제하여 간섭 방지
+          rm -f .npmrc
+          npm publish --provenance --access public
 
       - name: Create GitHub Release
         uses: actions/create-release@v1
