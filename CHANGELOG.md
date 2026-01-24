@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.9](https://github.com/1D1S/1D1S-design-system/compare/v0.1.8...v0.1.9) (2026-01-24)
+
+
+### Bug Fixes
+
+* decrease tooltip delay duration to 200ms ([8a999ea](https://github.com/1D1S/1D1S-design-system/commit/8a999eab79af233757a73d30a73fd236af1b85ec))
+
 ### [0.1.8](https://github.com/1D1S/1D1S-design-system/compare/v0.1.7...v0.1.8) (2026-01-24)
 
 
