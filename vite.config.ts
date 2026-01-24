@@ -21,11 +21,18 @@ export default defineConfig({
       fileName: (format) => `index.${format}.js`,
     },
     rollupOptions: {
-      external: ['react', 'react-dom', 'next', 'lucide-react'],
+      external: [
+        'react', 
+        'react-dom', 
+        'react/jsx-runtime',
+        /^next/,
+        'lucide-react'
+      ],
       output: {
         globals: {
           react: 'React',
           'react-dom': 'ReactDOM',
+          'react/jsx-runtime': 'jsxRuntime',
           next: 'Next',
           'lucide-react': 'LucideReact',
         },
