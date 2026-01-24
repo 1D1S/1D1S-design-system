@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.8](https://github.com/1D1S/1D1S-design-system/compare/v0.1.7...v0.1.8) (2026-01-24)
+
+
+### Features
+
+* add Tooltip component and update build config ([b614756](https://github.com/1D1S/1D1S-design-system/commit/b6147560390c2990b5a3ad9d387a18c082b623bc))
+
 ### [0.1.7](https://github.com/1D1S/1D1S-design-system/compare/v0.1.6...v0.1.7) (2026-01-24)
 
 
