@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.7](https://github.com/1D1S/1D1S-design-system/compare/v0.1.6...v0.1.7) (2026-01-24)
+
+
+### Bug Fixes
+
+* externalize next and react submodules to prevent instance conflicts ([b5b4cd9](https://github.com/1D1S/1D1S-design-system/commit/b5b4cd97491fa99fac1618239f5cb447be78fdd1))
+
 ### [0.1.6](https://github.com/1D1S/1D1S-design-system/compare/v0.1.5...v0.1.6) (2026-01-21)
 
 
