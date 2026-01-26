@@ -123,4 +123,19 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  button,
+  [role="button"],
+  a,
+  input[type="checkbox"],
+  input[type="radio"],
+  label {
+    @apply cursor-pointer;
+  }
+
+  button:disabled,
+  [role="button"]:disabled,
+  input:disabled {
+    @apply cursor-not-allowed;
+  }
 }
