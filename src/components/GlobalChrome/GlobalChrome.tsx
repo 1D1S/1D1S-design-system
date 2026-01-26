@@ -6,8 +6,9 @@ import { ProfileCard } from '../ProfileCard';
 import { BackButton } from '../BackButton';
 import { Menu } from '../Menu';
 
-export function GlobalChrome(): React.ReactElement | null {
-  const pathname = usePathname();
+export function GlobalChrome({ pathname: propPathname }: { pathname?: string } = {}): React.ReactElement | null {
+  const currentPathname = usePathname();
+  const pathname = propPathname ?? currentPathname;
 
   const noChromeRoutes = ['/diary/create', '/challenge/create'];
   const backOnlyRoutes = ['/auth/login'];
@@ -27,7 +28,7 @@ export function GlobalChrome(): React.ReactElement | null {
 
   if (isBackOnly) {
     return (
-      <div className="fixed top-4 left-4 z-50">
+      <div className="fixed top-3 left-3 sm:top-4 sm:left-4 z-50">
         <BackButton />
       </div>
     );
@@ -35,11 +36,11 @@ export function GlobalChrome(): React.ReactElement | null {
 
   return (
     <>
-      <div className="fixed top-4 left-4 z-50">
+      <div className="fixed top-3 left-3 sm:top-4 sm:left-4 z-50">
         <Menu />
       </div>
       {!isNoProfile && (
-        <div className="fixed top-4 right-4 z-50">
+        <div className="fixed top-3 right-3 sm:top-4 sm:right-4 z-50">
           <ProfileCard />
         </div>
       )}

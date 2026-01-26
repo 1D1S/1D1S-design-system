@@ -44,7 +44,7 @@ function DialogContent({
           "fixed top-[50%] left-[50%] z-50",
           "w-full max-w-[calc(100%-2rem)] sm:max-w-md",
           "translate-x-[-50%] translate-y-[-50%]",
-          "rounded-2 bg-white p-6 shadow-default",
+          "rounded-2 bg-white p-4 sm:p-6 shadow-default",
           "data-[state=open]:animate-in data-[state=closed]:animate-out",
           "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
           "data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",
@@ -54,8 +54,8 @@ function DialogContent({
         {...props}
       >
         {children}
-        <DialogPrimitive.Close className="absolute top-4 right-4 rounded-full p-1 opacity-70 transition-opacity hover:opacity-100 focus:outline-none cursor-pointer">
-          <Close width={20} height={20} className="text-gray-500" />
+        <DialogPrimitive.Close className="absolute top-3 right-3 sm:top-4 sm:right-4 rounded-full p-1.5 opacity-70 transition-opacity hover:opacity-100 focus:outline-none cursor-pointer">
+          <Close width={18} height={18} className="text-gray-500 sm:w-5 sm:h-5" />
           <span className="sr-only">닫기</span>
         </DialogPrimitive.Close>
       </DialogPrimitive.Content>
@@ -82,7 +82,7 @@ function DialogFooter({
   return (
     <div
       className={cn(
-        "mt-6 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end",
+        "mt-4 sm:mt-6 flex flex-row justify-end gap-2",
         className,
       )}
       {...props}

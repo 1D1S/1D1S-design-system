@@ -67,8 +67,8 @@ function AccordionTrigger({
     <AccordionPrimitive.Header className="flex">
       <AccordionPrimitive.Trigger
         className={cn(
-          "flex flex-1 items-center justify-between py-4 text-left",
-          "font-medium text-gray-900 transition-colors",
+          "flex flex-1 items-center justify-between py-3 sm:py-4 text-left",
+          "text-sm sm:text-base font-medium text-gray-900 transition-colors",
           "hover:text-main-900",
           "focus:outline-none focus-visible:ring-2 focus-visible:ring-main-500 focus-visible:ring-offset-2 rounded-1",
           "[&[data-state=open]>svg]:rotate-180",
@@ -80,7 +80,7 @@ function AccordionTrigger({
         {children}
         <ChevronDown
           className={cn(
-            "h-5 w-5 shrink-0 text-gray-500 transition-transform duration-200"
+            "h-4 w-4 sm:h-5 sm:w-5 shrink-0 text-gray-500 transition-transform duration-200"
           )}
         />
       </AccordionPrimitive.Trigger>
@@ -106,7 +106,7 @@ function AccordionContent({
       )}
       {...props}
     >
-      <div className={cn("pb-4 pt-0", className)}>{children}</div>
+      <div className={cn("pb-3 sm:pb-4 pt-0 text-sm sm:text-base", className)}>{children}</div>
     </AccordionPrimitive.Content>
   );
 }

@@ -3,11 +3,11 @@ import { Text } from '../Text';
 import { cva, VariantProps } from 'class-variance-authority';
 import { Logo } from '../Icons/Logo';
 
-const pageTitleVariants = cva('flex flex-col items-center', {
+const pageTitleVariants = cva('flex flex-col items-center sm:items-center', {
   variants: {
     variant: {
-      withSubtitle: 'pb-2 pt-6 gap-2',
-      noSubtitle: 'py-5',
+      withSubtitle: 'pb-1 pt-3 gap-1 sm:pb-2 sm:pt-6 sm:gap-2',
+      noSubtitle: 'py-3 sm:py-5',
     },
   },
   defaultVariants: {
@@ -46,14 +46,14 @@ export function PageTitle({
   className,
 }: PageTitleProps): React.ReactElement {
   return (
-    <div className={cn('flex items-end gap-6', className)}>
-      <Logo width={48} height={80} className="text-main-700" />
+    <div className={cn('flex items-end gap-3 sm:gap-6', className)}>
+      <Logo width={32} height={54} className="text-main-700 sm:w-12 sm:h-20" />
       <div className={pageTitleVariants({ variant })}>
-        <Text size="pageTitle" weight="bold" className="text-black">
+        <Text size="heading1" weight="bold" className="text-black sm:text-3xl">
           {title}
         </Text>
         {variant === 'withSubtitle' && subtitle && (
-          <Text size="caption1" weight="medium" className="text-black">
+          <Text size="caption2" weight="medium" className="text-black sm:text-base">
             {subtitle}
           </Text>
         )}

@@ -31,8 +31,8 @@ export function ChallengeListItem({
   return (
     <div
       className={cn(
-        'flex h-20 w-full items-center',
-        'gap-4 p-2.5',
+        'flex w-full items-center',
+        'gap-3 p-2',
         'cursor-pointer rounded-lg transition-shadow duration-200 ease-in-out',
         'hover:shadow-default',
         className
@@ -41,7 +41,7 @@ export function ChallengeListItem({
     >
       {/* 썸네일 이미지 - 정사각형 */}
       {challengeImageUrl ? (
-        <div className="relative h-[60px] w-[60px] flex-shrink-0 overflow-hidden rounded-lg">
+        <div className="relative h-12 w-12 flex-shrink-0 overflow-hidden rounded-lg">
           <Image
             src={challengeImageUrl}
             alt={challengeName}
@@ -51,29 +51,29 @@ export function ChallengeListItem({
         </div>
       ) : (
         <ImagePlaceholder
-          className="h-[60px] w-[60px] flex-shrink-0 rounded-lg"
+          className="h-12 w-12 flex-shrink-0 rounded-lg"
           logoSize="sm"
         />
       )}
 
-      <div className="flex h-15 w-full flex-col justify-between">
+      <div className="flex min-w-0 flex-1 flex-col gap-1">
         {/* 챌린지 이름과 날짜 */}
-        <div className="flex w-full items-center justify-between">
-          <Text size="body1" weight="bold">
+        <div className="flex w-full flex-col gap-0.5">
+          <Text size="body2" weight="bold" className="truncate">
             {challengeName}
           </Text>
-          <Text size="caption3" weight="medium">
+          <Text size="caption3" weight="medium" className="text-gray-600 shrink-0">
             {startDate} - {endDate}
           </Text>
         </div>
         <div className="flex w-full items-center justify-between">
           {/* 태그 */}
-          <div className="flex gap-2">
+          <div className="flex gap-1.5 overflow-hidden">
             <Tag icon="💻">태그</Tag>
             <Tag>태그</Tag>
           </div>
           {/* 참여자 수 */}
-          <div className="flex gap-2 items-center">
+          <div className="flex gap-1.5 items-center shrink-0">
             <Person width={12} height={12} className="text-gray-600" />
             <Text size="caption3" weight="medium">
               {currentParticipants} / {maxParticipants}

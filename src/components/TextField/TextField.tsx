@@ -100,7 +100,7 @@ export const TextField = React.forwardRef<HTMLInputElement | HTMLTextAreaElement
                 weight: isSearch ? 'light' : 'regular',
               }),
               textFieldVariants({ variant, className }),
-              multiline && "resize-none min-h-[80px]"
+              multiline && "resize-none min-h-[60px] sm:min-h-[80px]"
             )}
             // @ts-ignore - ref types are compatible enough for this use case
             ref={ref}

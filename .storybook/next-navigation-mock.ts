@@ -5,5 +5,5 @@ export const useRouter = () => ({
   back: () => {},
 });
 
-export const usePathname = () => '';
+export const usePathname = () => '/';
 export const useSearchParams = () => new URLSearchParams();

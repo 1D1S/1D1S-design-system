@@ -31,7 +31,7 @@ export function ToggleGroup({
   return (
     <ToggleGroupPrimitive.Root
       data-slot="toggle-group"
-      className={cn('flex flex-wrap gap-x-2.5 gap-y-2.5 rounded-none', className)}
+      className={cn('flex flex-wrap gap-x-2 gap-y-2 sm:gap-x-2.5 sm:gap-y-2.5 rounded-none', className)}
       {...props}
     >
       {children}
@@ -62,18 +62,18 @@ export function ToggleGroupItem({
       data-slot="toggle-group-item"
       className={cn(
         "hover:bg-muted hover:text-muted-foreground data-[state=on]:bg-accent data-[state=on]:text-accent-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
-        'data-[state=on]:bg-main-900 bg-gray-200 px-3 py-2 font-light text-gray-700 data-[state=on]:font-bold data-[state=on]:text-white cursor-pointer',
-        hasIcon && 'gap-2.5',
+        'data-[state=on]:bg-main-900 bg-gray-200 px-2.5 py-1.5 sm:px-3 sm:py-2 font-light text-gray-700 data-[state=on]:font-bold data-[state=on]:text-white cursor-pointer',
+        hasIcon && 'gap-2',
         className
       )}
       {...props}
     >
       {icon && (
-        <Text size="body2" weight="regular">
+        <Text size="caption1" weight="regular" className="sm:text-lg">
           {icon}
         </Text>
       )}
-      <Text size="body2" weight={null}>
+      <Text size="caption1" weight={null} className="sm:text-lg">
         {children}
       </Text>
     </ToggleGroupPrimitive.Item>

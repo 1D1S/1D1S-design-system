@@ -44,7 +44,7 @@ export function ProfileCard({
     <div
       className={cn(
         'rounded-2 shadow-default relative flex flex-col bg-white transition-all duration-300 ease-in-out',
-        mode === 'collapsed' ? 'h-20 w-20 justify-center p-4' : 'w-100 p-6'
+        mode === 'collapsed' ? 'h-14 w-14 sm:h-20 sm:w-20 justify-center p-2 sm:p-4' : 'w-72 sm:w-100 p-4 sm:p-6'
       )}
       onClick={isExpanded !== true ? handleToggle : undefined}
     >
@@ -53,7 +53,7 @@ export function ProfileCard({
         <Image
           src="/DefaultProfile.png"
           alt="profile-image"
-          className="rounded-full object-cover"
+          className="rounded-full object-cover w-10 h-10 sm:w-[50px] sm:h-[50px]"
           width={50}
           height={50}
         />
@@ -62,15 +62,15 @@ export function ProfileCard({
         {shouldRenderContent && (
           <div
             className={cn(
-              'ml-4 flex flex-col justify-between',
+              'ml-3 sm:ml-4 flex flex-col justify-between',
               mode === 'expanded' && 'fade-in',
               mode === 'collapsing' && 'fade-out'
             )}
           >
-            <Text size="body1" weight="medium">
+            <Text size="body2" weight="medium" className="sm:text-xl">
               로그인이 필요해요.
             </Text>
-            <Text size="caption2" weight="regular">
+            <Text size="caption3" weight="regular" className="sm:text-sm">
               오늘의 목표 ?개
             </Text>
           </div>
@@ -80,15 +80,15 @@ export function ProfileCard({
       {shouldRenderContent && (
         <div
           className={cn(
-            'mt-6 flex w-full items-center justify-center',
+            'mt-4 sm:mt-6 flex w-full items-center justify-center',
             mode === 'expanded' && 'fade-in',
             mode === 'collapsing' && 'fade-out'
           )}
         >
-          <Text size="heading2" weight="bold" className="text-main-900">
+          <Text size="body1" weight="bold" className="text-main-900 sm:text-2xl">
             ??
           </Text>
-          <Text size="heading2" weight="bold">
+          <Text size="body1" weight="bold" className="sm:text-2xl">
             일 연속 수행
           </Text>
         </div>
@@ -97,12 +97,12 @@ export function ProfileCard({
       {shouldRenderContent && (
         <div
           className={cn(
-            'mt-6',
+            'mt-4 sm:mt-6',
             mode === 'expanded' && 'fade-in',
             mode === 'collapsing' && 'fade-out'
           )}
         >
-          <Button className="w-full" onClick={isLoggedIn ? handleGoDiary : handleGoLogin}>
+          <Button className="w-full" size="md" onClick={isLoggedIn ? handleGoDiary : handleGoLogin}>
             {isLoggedIn ? '일지 쓰러 가기 →' : '로그인 하러 가기 →'}
           </Button>
         </div>

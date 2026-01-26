@@ -40,7 +40,7 @@ function ImageSection({
   };
 
   return (
-    <div className="rounded-2 relative h-62.5 w-50 overflow-hidden">
+    <div className="rounded-2 relative aspect-[4/5] w-full overflow-hidden">
       {/* 배경 이미지 */}
       {imageUrl ? (
         <Image src={imageUrl} alt={alt} fill className="object-cover" />
@@ -49,10 +49,10 @@ function ImageSection({
       )}
 
       {/* 달성 퍼센티지 */}
-      <div className="absolute top-2 left-2 z-20">
+      <div className="absolute top-1.5 left-1.5 z-20">
         <div
           className={cn(
-            "flex items-center space-x-2",
+            "flex items-center space-x-1.5",
             "bg-main-200/80 rounded-2 p-1",
           )}
         >
@@ -62,8 +62,8 @@ function ImageSection({
             color="red"
             showPercentage={false}
           />
-          <div className="flex h-7.5 flex-col justify-between">
-            <Text size="caption1" weight="bold" className="text-main-900">
+          <div className="flex flex-col justify-between">
+            <Text size="caption2" weight="bold" className="text-main-900">
               {percent}%
             </Text>
             <Text
@@ -78,17 +78,17 @@ function ImageSection({
       </div>
 
       {/* 감정 이미지 */}
-      <div className="absolute top-2 right-2 z-20">
+      <div className="absolute top-1.5 right-1.5 z-20">
         <Image
           src={emotionImageMap[emotion]}
           alt={emotion}
-          width={30}
-          height={30}
+          width={24}
+          height={24}
         />
       </div>
 
       {/* 좋아요 토글 */}
-      <div className="absolute bottom-2 left-2 z-20">
+      <div className="absolute bottom-1.5 left-1.5 z-20">
         <Button
           variant="default"
           size="sm"
@@ -129,14 +129,14 @@ function TextSection({
   date,
 }: TextSectionProps): React.ReactElement {
   return (
-    <div className="mt-2 flex w-full flex-col">
-      <Text size="body1" weight="bold" className="truncate">
+    <div className="mt-1.5 flex w-full flex-col">
+      <Text size="body2" weight="bold" className="truncate">
         {title}
       </Text>
 
       <div className="mt-1 flex items-center">
         <CircleAvatar imageUrl={userImage} size="sm" />
-        <div className="ml-2 flex h-10 flex-col justify-between">
+        <div className="ml-2 flex flex-col justify-between gap-0.5">
           <Text size="caption3" weight="medium">
             {user}
           </Text>
@@ -151,7 +151,7 @@ function TextSection({
           </Link>
         </div>
       </div>
-      <Text size="caption3" weight="medium" className="mt-2 text-gray-900">
+      <Text size="caption3" weight="medium" className="mt-1.5 text-gray-900">
         {date}
       </Text>
     </div>
@@ -194,8 +194,8 @@ export function DiaryCard({
   };
 
   return (
-    <div className="block w-54 cursor-pointer" onClick={onClick}>
-      <div className="rounded-2 transform p-2 transition-transform duration-200 hover:-translate-y-1 hover:shadow-lg">
+    <div className="block w-full cursor-pointer" onClick={onClick}>
+      <div className="rounded-2 transform p-1.5 transition-transform duration-200 hover:-translate-y-1 hover:shadow-lg">
         <ImageSection
           imageUrl={imageUrl}
           alt={title}

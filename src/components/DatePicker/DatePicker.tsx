@@ -42,7 +42,7 @@ export function DatePicker({
         <Button
           variant="input"
           size="md"
-          className={cn('w-50', 'text-gray-900')}
+          className={cn('w-full sm:w-50', 'text-gray-900')}
         >
           {value ? (
             <Text size="body2" weight="regular">

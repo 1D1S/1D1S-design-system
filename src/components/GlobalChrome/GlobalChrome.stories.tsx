@@ -18,14 +18,14 @@ const meta: Meta<typeof GlobalChrome> = {
 export default meta;
 type Story = StoryObj<typeof GlobalChrome>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  args: {
+    pathname: '/',
+  },
+};
 
 export const BackOnly: Story = {
-  parameters: {
-    nextjs: {
-      navigation: {
-        pathname: '/auth/login',
-      },
-    },
+  args: {
+    pathname: '/auth/login',
   },
 };

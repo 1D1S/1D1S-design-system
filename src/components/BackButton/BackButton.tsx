@@ -11,14 +11,14 @@ export function BackButton(): React.ReactElement {
     <button
       onClick={() => router.back()}
       className={cn(
-        'rounded-2 shadow-default flex h-15 w-15',
+        'rounded-2 shadow-default flex h-11 w-11 sm:h-15 sm:w-15',
         'cursor-pointer items-center',
-        'justify-center bg-white px-4 py-4',
+        'justify-center bg-white p-2 sm:px-4 sm:py-4',
         'text-sm transition-colors',
         'duration-200 hover:bg-gray-300'
       )}
     >
-      <ChevronLeft width={24} height={24} className="text-black" />
+      <ChevronLeft width={20} height={20} className="text-black sm:w-6 sm:h-6" />
     </button>
   );
 }

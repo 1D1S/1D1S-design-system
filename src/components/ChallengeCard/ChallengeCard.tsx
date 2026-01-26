@@ -55,36 +55,38 @@ export function ChallengeCard({
   return (
     <div
       className={cn(
-        'w-min px-2 py-4 cursor-pointer',
+        'w-full px-2 py-3 cursor-pointer',
         'hover:rounded-2 hover:shadow-default hover:-translate-y-1 hover:bg-white',
         'transition-all duration-200 ease-in-out'
       )}
       onClick={onClick}
     >
-      <div className={cn('flex w-50 flex-wrap items-start justify-between gap-y-2', className)}>
-        <Text size="body1" weight="bold" className="text-black">
+      <div className={cn('flex flex-col w-full gap-y-1.5', className)}>
+        <Text size="body2" weight="bold" className="text-black truncate w-full">
           {challengeTitle}
         </Text>
-        <div className="rounded-2 bg-main-200 relative h-37.5 w-50">
-          <div className="absolute flex flex-row gap-1.5 pt-1 pl-1">
+        <div className="rounded-2 bg-main-200 relative aspect-[4/3] w-full">
+          <div className="absolute flex flex-row gap-1 pt-1 pl-1">
             <Tag icon="💻">개발</Tag>
             {isOngoing && <Tag className="bg-mint-700">진행중</Tag>}
             {!isOngoing && <Tag className="bg-blue-500">모집중</Tag>}
           </div>
           <div className="absolute inset-0 flex items-center justify-center">
-            <Logo width={48} height={48} className="text-main-700" />
+            <Logo width={36} height={36} className="text-main-700" />
           </div>
         </div>
-        <Text size="caption3" weight="bold">
-          {challengeType}
-        </Text>
-        <div className="flex flex-row gap-1 items-center">
-          <Person width={12} height={12} className="text-gray-600" />
-          <Text size="caption2" weight="medium">
-            {currentUserCount} / {maxUserCount}
+        <div className="flex w-full items-center justify-between">
+          <Text size="caption3" weight="bold">
+            {challengeType}
           </Text>
+          <div className="flex flex-row gap-1 items-center">
+            <Person width={12} height={12} className="text-gray-600" />
+            <Text size="caption2" weight="medium">
+              {currentUserCount} / {maxUserCount}
+            </Text>
+          </div>
         </div>
-        <Text size="caption3" weight="medium">
+        <Text size="caption3" weight="medium" className="text-gray-600">
           {startDate} - {endDate}
         </Text>
       </div>

@@ -36,7 +36,7 @@ export function ImagePicker({
   };
 
   return (
-    <div className="relative h-25 w-25 cursor-pointer" onClick={handleClick}>
+    <div className="relative h-20 w-20 sm:h-25 sm:w-25 cursor-pointer" onClick={handleClick}>
       <input
         type="file"
         accept="image/*"
@@ -60,12 +60,11 @@ export function ImagePicker({
           <Image
             src={preview}
             alt="이미지 미리보기"
-            width={100}
-            height={100}
+            fill
             className="rounded-full object-cover"
           />
         ) : (
-          <Logo width={30} height={50} className="text-main-700" />
+          <Logo width={24} height={40} className="text-main-700 sm:w-[30px] sm:h-[50px]" />
         )}
       </div>
       <div className="absolute right-0 bottom-0 flex h-7.5 w-7.5 items-center justify-center rounded-full bg-white inset-ring-1 inset-ring-gray-400">

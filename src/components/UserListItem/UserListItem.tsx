@@ -19,18 +19,18 @@ export function UserListItem({
   onReject,
 }: UserListItemProps): React.ReactElement {
   return (
-    <div className={`rounded-2 bg-main-200 flex items-center gap-2 p-4 ${className}`}>
+    <div className={`rounded-2 bg-main-200 flex items-center gap-2 p-3 sm:p-4 ${className}`}>
       <Image
         src={userImageSrc ?? '/DefaultProfile.png'}
         alt="user-profile-image"
-        width={40}
-        height={40}
-        className="rounded-full object-cover"
+        width={36}
+        height={36}
+        className="rounded-full object-cover sm:w-10 sm:h-10"
       />
       <div className="flex w-full items-center justify-between">
-        <Text>{userName}</Text>
+        <Text size="body2">{userName}</Text>
         {isAuthor && (
-          <div className="flex gap-2">
+          <div className="flex gap-1.5 sm:gap-2">
             <Text
               size={'caption3'}
               weight={'medium'}

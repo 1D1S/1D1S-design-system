@@ -31,18 +31,18 @@ export function Toggle({
   return (
     <TogglePrimitive.Root
       className={cn(
-        'rounded-2 data-[state=on]:bg-main-900 bg-gray-200 px-3 py-2 font-light text-gray-700 data-[state=on]:font-bold data-[state=on]:text-white cursor-pointer transition-all duration-200',
-        hasIcon && 'gap-2.5',
+        'rounded-2 data-[state=on]:bg-main-900 bg-gray-200 px-2.5 py-1.5 sm:px-3 sm:py-2 font-light text-gray-700 data-[state=on]:font-bold data-[state=on]:text-white cursor-pointer transition-all duration-200',
+        hasIcon && 'gap-2',
         className
       )}
       {...props}
     >
       {icon && (
-        <Text size="body2" weight="regular">
+        <Text size="caption1" weight="regular" className="sm:text-lg">
           {icon}
         </Text>
       )}
-      <Text size="body2" weight={null}>
+      <Text size="caption1" weight={null} className="sm:text-lg">
         {children}
       </Text>
     </TogglePrimitive.Root>
