@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.13](https://github.com/1D1S/1D1S-design-system/compare/v0.1.12...v0.1.13) (2026-01-26)
+
+
+### Features
+
+* Streak 컴포넌트 추가 ([a772886](https://github.com/1D1S/1D1S-design-system/commit/a772886b454a01b029ea2227e1317b8eacd4f6d1))
+
 ### [0.1.12](https://github.com/1D1S/1D1S-design-system/compare/v0.1.11...v0.1.12) (2026-01-26)
 
 
