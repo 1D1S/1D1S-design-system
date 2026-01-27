@@ -26,7 +26,8 @@
   "scripts": {
     "lint": "eslint .",
     "type-check": "tsc --noEmit",
-    "build": "vite build",
+    "build": "storybook build",
+    "build:lib": "vite build",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "release": "standard-version"
