@@ -5,7 +5,8 @@
   "module": "dist/index.es.js",
   "types": "dist/index.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "src/styles"
   ],
   "repository": {
     "type": "git",
@@ -28,6 +29,7 @@
     "type-check": "tsc --noEmit",
     "build": "storybook build",
     "build:lib": "vite build",
+    "prepare": "npm run build:lib",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "release": "standard-version"
