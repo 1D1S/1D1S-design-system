@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.14](https://github.com/1D1S/1D1S-design-system/compare/v0.1.13...v0.1.14) (2026-01-28)
+
+
+### Features
+
+* Streak 간격 및 ReadMe 추가 ([69a5ff2](https://github.com/1D1S/1D1S-design-system/commit/69a5ff28830ac669fae50e8a6af4851366c35737))
+* 스토리북 배포 ([8ac7f78](https://github.com/1D1S/1D1S-design-system/commit/8ac7f78f06bcfe763c74a3f2d1d6760bed86dee0))
+
 ### [0.1.13](https://github.com/1D1S/1D1S-design-system/compare/v0.1.12...v0.1.13) (2026-01-26)
 
 
