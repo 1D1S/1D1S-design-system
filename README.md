@@ -2,7 +2,9 @@
 
 1D1S 프로젝트를 위한 React 디자인 시스템입니다. Tailwind CSS와 Radix UI를 기반으로 구축되었으며, 모바일 퍼스트 사용자 경험에 최적화되어 있습니다.
 
-[Storybook 배포 링크](https://your-storybook-url.vercel.app) 👈 (배포 후 URL을 수정해주세요)
+[Storybook 배포 링크](https://your-storybook-url.vercel.app)
+
+> **Note:** 최근 Pagination, ToggleCheck, CheckList, Checkbox, Streak 컴포넌트가 추가되었습니다.
 
 ## ✨ 특징
 
