@@ -42,7 +42,7 @@ export function Streak({
     <div className={cn("w-full overflow-x-auto pb-2", className)}>
       <TooltipProvider>
         <div 
-          className="grid grid-flow-col grid-rows-7 gap-1"
+          className="grid grid-flow-col grid-rows-7 gap-[2px]"
           style={{ 
             gridTemplateRows: `repeat(7, ${size}px)`,
           }}
