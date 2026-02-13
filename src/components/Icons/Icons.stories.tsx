@@ -1,6 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { AddCircle } from './AddCircle';
 import { Calendar } from './Calendar';
+import { ChallengeDumbbell } from './ChallengeDumbbell';
+import { ChallengeFlag } from './ChallengeFlag';
+import { ChallengeFlame } from './ChallengeFlame';
+import { ChallengeLaptop } from './ChallengeLaptop';
+import { ChallengeTarget } from './ChallengeTarget';
+import { ChallengeTrophy } from './ChallengeTrophy';
 import { Check } from './Check';
 import { Chevron } from './Chevron';
 import { ChevronDown } from './ChevronDown';
@@ -25,6 +31,12 @@ import { Search } from './Search';
 const icons = {
   AddCircle,
   Calendar,
+  ChallengeDumbbell,
+  ChallengeFlag,
+  ChallengeFlame,
+  ChallengeLaptop,
+  ChallengeTarget,
+  ChallengeTrophy,
   Check,
   Chevron,
   ChevronDown,

@@ -29,7 +29,7 @@ export function ToggleCheck({
     <TogglePrimitive.Root
       className={cn(
         "group flex w-full items-center justify-between gap-3 rounded-2 px-4 py-3.5 transition-all duration-200 cursor-pointer",
-        "bg-white border border-gray-300 text-gray-600 hover:bg-gray-50",
+        "bg-white border border-gray-300 text-gray-600 hover:bg-white",
         "data-[state=on]:border-main-900 data-[state=on]:bg-main-200 data-[state=on]:text-main-900",
         className
       )}

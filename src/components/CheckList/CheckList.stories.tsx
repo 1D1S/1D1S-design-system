@@ -8,7 +8,7 @@ const meta: Meta<typeof CheckList> = {
   tags: ["autodocs"],
   decorators: [
     (Story) => (
-      <div style={{ maxWidth: "400px", padding: "1rem" }}>
+      <div style={{ width: "100%", maxWidth: "1500px", padding: "1rem" }}>
         <Story />
       </div>
     ),
@@ -19,15 +19,14 @@ export default meta;
 type Story = StoryObj<typeof CheckList>;
 
 const options = [
-  { id: "apple", label: "Apple 🍎" },
-  { id: "banana", label: "Banana 🍌" },
-  { id: "orange", label: "Orange 🍊" },
-  { id: "grape", label: "Grape 🍇", disabled: true },
+  { id: "wake-up", label: "아침 7시에 기상하기" },
+  { id: "water", label: "물 2L 마시기" },
+  { id: "reading", label: "하루 30분 독서" },
 ];
 
 export const Default: Story = {
   render: () => {
-    const [selected, setSelected] = useState<string[]>(["apple"]);
+    const [selected, setSelected] = useState<string[]>(["wake-up", "water"]);
     return (
       <CheckList
         options={options}
@@ -54,7 +53,7 @@ export const Empty: Story = {
 export const Disabled: Story = {
   args: {
     options: options,
-    value: ["apple"],
+    value: ["wake-up"],
     disabled: true,
     onValueChange: () => {},
   },

@@ -38,7 +38,7 @@ export const Default: Story = {
         </DialogHeader>
         <DialogFooter>
           <DialogClose asChild>
-            <Button variant="outline">취소</Button>
+            <Button variant="outlined">취소</Button>
           </DialogClose>
           <Button>확인</Button>
         </DialogFooter>
@@ -86,7 +86,7 @@ export const WithForm: Story = {
         </div>
         <DialogFooter>
           <DialogClose asChild>
-            <Button variant="outline">취소</Button>
+            <Button variant="outlined">취소</Button>
           </DialogClose>
           <Button>로그인</Button>
         </DialogFooter>
@@ -99,7 +99,7 @@ export const Confirmation: Story = {
   render: () => (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="warning">삭제하기</Button>
+        <Button variant="default">삭제하기</Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
@@ -110,9 +110,9 @@ export const Confirmation: Story = {
         </DialogHeader>
         <DialogFooter>
           <DialogClose asChild>
-            <Button variant="outline">취소</Button>
+            <Button variant="outlined">취소</Button>
           </DialogClose>
-          <Button variant="warning">삭제</Button>
+          <Button variant="default">삭제</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
@@ -123,7 +123,7 @@ export const SimpleAlert: Story = {
   render: () => (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">알림 보기</Button>
+        <Button variant="outlined">알림 보기</Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>

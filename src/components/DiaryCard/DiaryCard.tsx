@@ -3,9 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { Text } from "../Text";
-import { Button } from "../Button";
 import { CircularProgress } from "../CircularProgress";
-import { cn } from "../../lib/utils";
 import { CircleAvatar } from "../CircleAvatar";
 import Link from "next/link";
 import { Heart } from "../Icons/Heart";
@@ -33,79 +31,64 @@ function ImageSection({
   likeCount,
   onToggleLike,
 }: ImageSectionProps): React.ReactElement {
-  const emotionImageMap: Record<Emotion, string> = {
-    happy: "/EmotionHappy.png",
-    soso: "/EmotionSoso.png",
-    sad: "/EmotionSad.png",
+  const emotionEmojiMap: Record<Emotion, string> = {
+    happy: "😎",
+    soso: "🙂",
+    sad: "🥲",
   };
+  const clampedPercent = Math.min(Math.max(percent, 0), 100);
+  const hasImage = Boolean(imageUrl && imageUrl.trim().length > 0);
 
   return (
-    <div className="rounded-2 relative aspect-[4/5] w-full overflow-hidden">
-      {/* 배경 이미지 */}
-      {imageUrl ? (
-        <Image src={imageUrl} alt={alt} fill className="object-cover" />
+    <div className="relative aspect-11/10 w-full overflow-hidden bg-gray-100">
+      {hasImage ? (
+        <Image
+          src={imageUrl as string}
+          alt={alt}
+          fill
+          className="h-full w-full object-cover"
+        />
       ) : (
-        <ImagePlaceholder className="absolute inset-0" logoSize="lg" />
+        <ImagePlaceholder className="h-full w-full" logoSize="lg" />
       )}
+      {hasImage ? (
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-10 bg-linear-to-t from-black/15 to-transparent" />
+      ) : null}
 
-      {/* 달성 퍼센티지 */}
-      <div className="absolute top-1.5 left-1.5 z-20">
-        <div
-          className={cn(
-            "flex items-center space-x-1.5",
-            "bg-main-200/80 rounded-2 p-1",
-          )}
-        >
+      <div className="absolute top-4 left-4 z-20">
+        <div className="relative flex h-13 w-13 items-center justify-center rounded-full bg-white shadow-[0_6px_14px_rgba(34,34,34,0.2)]">
           <CircularProgress
-            value={percent}
+            value={clampedPercent}
             size="sm"
-            color="red"
-            showPercentage={false}
+            showPercentage={true}
           />
-          <div className="flex flex-col justify-between">
-            <Text size="caption2" weight="bold" className="text-main-900">
-              {percent}%
-            </Text>
-            <Text
-              size="caption3"
-              weight="medium"
-              className="text-gray-700"
-            >
-              달성
-            </Text>
-          </div>
         </div>
       </div>
 
-      {/* 감정 이미지 */}
-      <div className="absolute top-1.5 right-1.5 z-20">
-        <Image
-          src={emotionImageMap[emotion]}
-          alt={emotion}
-          width={24}
-          height={24}
-        />
+      <div className="absolute top-4 right-4 z-20 text-4xl leading-none">
+        <span role="img" aria-label={emotion}>
+          {emotionEmojiMap[emotion]}
+        </span>
       </div>
 
-      {/* 좋아요 토글 */}
-      <div className="absolute bottom-1.5 left-1.5 z-20">
-        <Button
-          variant="default"
-          size="sm"
-          onClick={onToggleLike}
-          className="pr-2 pl-2"
+      <div className="absolute bottom-4 left-4 z-20">
+        <button
+          type="button"
+          onClick={(event) => {
+            event.stopPropagation();
+            onToggleLike();
+          }}
+          className="inline-flex items-center gap-1.5 rounded-full bg-main-800 px-3.5 py-2 text-white shadow-[0_4px_10px_rgba(34,34,34,0.25)] transition-colors hover:bg-main-900"
         >
-          <div className="flex flex-row items-center space-x-1">
-            {isLiked ? (
-              <HeartFilled width={10} height={9} className="text-red-500" />
-            ) : (
-              <Heart width={10} height={9} className="text-gray-600" />
-            )}
-            <Text weight="light" size="caption3">
-              {likeCount}
-            </Text>
-          </div>
-        </Button>
+          {isLiked ? (
+            <HeartFilled width={16} height={16} className="text-white" />
+          ) : (
+            <Heart width={16} height={16} className="text-white" />
+          )}
+          <Text size="body1" weight="bold" className="text-white">
+            {likeCount}
+          </Text>
+        </button>
       </div>
     </div>
   );
@@ -129,31 +112,39 @@ function TextSection({
   date,
 }: TextSectionProps): React.ReactElement {
   return (
-    <div className="mt-1.5 flex w-full flex-col">
-      <Text size="body2" weight="bold" className="truncate">
+    <div className="flex w-full flex-col gap-4 p-5">
+      <Text
+        as="p"
+        size="heading2"
+        weight="bold"
+        className="line-clamp-2 min-h-12.5 leading-tight text-gray-900"
+      >
         {title}
       </Text>
 
-      <div className="mt-1 flex items-center">
+      <Link href={challengeUrl} className="block w-full no-underline">
+        <Text
+          size="body1"
+          weight="medium"
+          className="block w-full truncate text-blue-500"
+        >
+          {challengeLabel}
+        </Text>
+      </Link>
+
+      <div className="h-px w-full bg-gray-200" />
+
+      <div className="flex items-center gap-3">
         <CircleAvatar imageUrl={userImage} size="sm" />
-        <div className="ml-2 flex flex-col justify-between gap-0.5">
-          <Text size="caption3" weight="medium">
+        <div className="flex flex-col gap-1">
+          <Text size="body1" weight="bold" className="text-gray-900">
             {user}
           </Text>
-          <Link href={challengeUrl} className="m-0 p-0 no-underline">
-            <Text
-              size="caption3"
-              weight="medium"
-              className="text-mint-900"
-            >
-              {challengeLabel}
-            </Text>
-          </Link>
+          <Text size="caption1" weight="regular" className="text-gray-500">
+            {date}
+          </Text>
         </div>
       </div>
-      <Text size="caption3" weight="medium" className="mt-1.5 text-gray-900">
-        {date}
-      </Text>
     </div>
   );
 }
@@ -195,7 +186,7 @@ export function DiaryCard({
 
   return (
     <div className="block w-full cursor-pointer" onClick={onClick}>
-      <div className="rounded-2 transform p-1.5 transition-transform duration-200 hover:-translate-y-1 hover:shadow-lg">
+      <div className="overflow-hidden rounded-4 border border-gray-200 bg-white transition-transform duration-200 hover:-translate-y-1 hover:shadow-lg">
         <ImageSection
           imageUrl={imageUrl}
           alt={title}

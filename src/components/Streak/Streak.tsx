@@ -16,6 +16,8 @@ export interface StreakProps {
   data?: StreakData[];
   /** 각 날짜 박스의 크기 (픽셀) */
   size?: number;
+  /** 박스 사이 간격 (픽셀) */
+  gap?: number;
   /** 추가 클래스 */
   className?: string;
 }
@@ -27,25 +29,27 @@ export interface StreakProps {
  */
 export function Streak({
   data = [],
-  size = 16,
+  size = 26,
+  gap = 8,
   className,
 }: StreakProps): React.ReactElement {
   const getLevelColor = (count: number) => {
-    if (count === 0) return "bg-gray-100 dark:bg-gray-800";
-    if (count <= 1) return "bg-main-200";
-    if (count <= 3) return "bg-main-400";
-    if (count <= 6) return "bg-main-600";
+    if (count <= 0) return "bg-gray-100";
+    if (count === 1) return "bg-main-300";
+    if (count === 2) return "bg-main-500";
+    if (count === 3) return "bg-main-700";
     return "bg-main-800";
   };
 
   return (
     <div className={cn("w-full overflow-x-auto pb-2", className)}>
       <TooltipProvider>
-        <div 
-          className="grid grid-flow-col grid-rows-7 gap-[2px] w-max"
-          style={{ 
+        <div
+          className="grid w-max grid-flow-col grid-rows-7"
+          style={{
             gridTemplateRows: `repeat(7, ${size}px)`,
             gridAutoColumns: `${size}px`,
+            gap: `${gap}px`,
           }}
         >
           {data.map((item, index) => (
@@ -53,12 +57,13 @@ export function Streak({
               <TooltipTrigger asChild>
                 <div
                   className={cn(
-                    "rounded-[2px] transition-colors duration-200 hover:ring-2 hover:ring-gray-400 hover:ring-offset-1 dark:hover:ring-gray-600",
-                    getLevelColor(item.count)
+                    "transition-colors duration-200",
+                    getLevelColor(item.count),
                   )}
                   style={{
                     width: size,
                     height: size,
+                    borderRadius: `${Math.max(4, Math.round(size * 0.23))}px`,
                   }}
                 />
               </TooltipTrigger>

@@ -2,7 +2,8 @@
 
 import React from "react";
 import { cn } from "../../lib/utils";
-import { ToggleCheck } from "../ToggleCheck";
+import { Text } from "../Text";
+import { Checkbox } from "../Checkbox";
 
 export interface CheckListOption {
   id: string;
@@ -25,7 +26,7 @@ export interface CheckListProps {
 
 /**
  * CheckList
- * 여러 개의 ToggleCheck를 리스트 형태로 보여주고 다중 선택을 관리하는 컴포넌트
+ * 여러 개의 Checkbox를 리스트 형태로 보여주고 다중 선택을 관리하는 컴포넌트
  *
  * @example
  * ```tsx
@@ -46,26 +47,82 @@ export function CheckList({
   className,
   disabled = false,
 }: CheckListProps): React.ReactElement {
-  const handlePressedChange = (id: string, pressed: boolean) => {
-    if (pressed) {
-      onValueChange([...value, id]);
-    } else {
-      onValueChange(value.filter((item) => item !== id));
+  const baseId = React.useId();
+
+  const handleToggle = (id: string, nextChecked: boolean): void => {
+    if (nextChecked) {
+      onValueChange(value.includes(id) ? value : [...value, id]);
+      return;
     }
+
+    onValueChange(value.filter((item) => item !== id));
   };
 
   return (
-    <div className={cn("flex flex-col gap-2", className)}>
-      {options.map((option) => (
-        <ToggleCheck
-          key={option.id}
-          pressed={value.includes(option.id)}
-          onPressedChange={(pressed) => handlePressedChange(option.id, pressed)}
-          disabled={option.disabled || disabled}
-        >
-          {option.label}
-        </ToggleCheck>
-      ))}
+    <div
+      className={cn(
+        "overflow-hidden rounded-4 border border-gray-200 bg-white",
+        className
+      )}
+    >
+      {options.map((option, index) => {
+        const isChecked = value.includes(option.id);
+        const isDisabled = disabled || option.disabled;
+        const optionId = `${baseId}-${option.id}`;
+
+        return (
+          <div
+            key={option.id}
+            role="group"
+            aria-disabled={isDisabled}
+            onClick={() => {
+              if (isDisabled) return;
+              handleToggle(option.id, !isChecked);
+            }}
+            className={cn(
+              "flex w-full items-center gap-4 px-4 py-4 text-left transition-colors",
+              index > 0 && "border-t border-gray-200",
+              !isDisabled && "cursor-pointer hover:bg-gray-100/70",
+              isDisabled && "cursor-not-allowed"
+            )}
+          >
+            <Checkbox
+              id={optionId}
+              checked={isChecked}
+              disabled={isDisabled}
+              onClick={(event) => {
+                event.stopPropagation();
+              }}
+              onCheckedChange={(checkedState) => {
+                if (isDisabled || checkedState === "indeterminate") return;
+                handleToggle(option.id, checkedState === true);
+              }}
+              className={cn(
+                "h-[22px] w-[22px] rounded-1.5",
+                "data-[state=checked]:border-main-800 data-[state=checked]:bg-main-800"
+              )}
+            />
+
+            {typeof option.label === "string" || typeof option.label === "number" ? (
+              <Text
+                size="heading2"
+                weight="medium"
+                className={cn(
+                  "transition-colors",
+                  isChecked ? "text-gray-900" : "text-gray-500",
+                  isDisabled && "text-gray-400"
+                )}
+              >
+                {option.label}
+              </Text>
+            ) : (
+              <span className={cn(!isChecked && "text-gray-500", isDisabled && "opacity-60")}>
+                {option.label}
+              </span>
+            )}
+          </div>
+        );
+      })}
     </div>
   );
 }

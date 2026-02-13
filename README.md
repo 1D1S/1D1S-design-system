@@ -4,7 +4,7 @@
 
 [Storybook 배포 링크](https://your-storybook-url.vercel.app)
 
-> **Note:** 최근 Pagination, ToggleCheck, CheckList, Checkbox, Streak 컴포넌트가 추가되었습니다.
+> **Note:** (v0.1.17) 최근 Pagination, ToggleCheck, CheckList, Checkbox, Streak 컴포넌트가 추가되었습니다.
 
 ## ✨ 특징
 

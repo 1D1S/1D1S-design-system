@@ -11,11 +11,7 @@ const meta: Meta<typeof CircularProgress> = {
     },
     size: {
       control: 'select',
-      options: ['sm', 'md', 'lg', 'xl'],
-    },
-    color: {
-      control: 'select',
-      options: ['red', 'blue', 'green'],
+      options: ['sm', 'lg'],
     },
     showPercentage: {
       control: 'boolean',
@@ -28,27 +24,24 @@ type Story = StoryObj<typeof CircularProgress>;
 
 export const Default: Story = {
   args: {
-    value: 75,
-    size: 'md',
-    color: 'red',
+    value: 80,
+    size: 'sm',
     showPercentage: true,
   },
 };
 
-export const Blue: Story = {
+export const Large: Story = {
   args: {
-    value: 50,
+    value: 80,
     size: 'lg',
-    color: 'blue',
     showPercentage: true,
   },
 };
 
-export const Green: Story = {
+export const ExtraLarge: Story = {
   args: {
-    value: 90,
-    size: 'xl',
-    color: 'green',
-    showPercentage: false,
+    value: 80,
+    size: 'lg',
+    showPercentage: true,
   },
 };

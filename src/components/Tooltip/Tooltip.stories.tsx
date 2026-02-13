@@ -29,7 +29,7 @@ export const Default: Story = {
   render: () => (
     <Tooltip>
       <TooltipTrigger asChild>
-        <Button variant="outline">Hover me</Button>
+        <Button variant="outlined">Hover me</Button>
       </TooltipTrigger>
       <TooltipContent>
         <p>Add to library</p>
@@ -43,7 +43,7 @@ export const CustomSide: Story = {
     <div className="flex gap-4">
       <Tooltip>
         <TooltipTrigger asChild>
-          <Button variant="outline">Top</Button>
+          <Button variant="outlined">Top</Button>
         </TooltipTrigger>
         <TooltipContent side="top">
           <p>Tooltip on top</p>
@@ -51,7 +51,7 @@ export const CustomSide: Story = {
       </Tooltip>
       <Tooltip>
         <TooltipTrigger asChild>
-          <Button variant="outline">Bottom</Button>
+          <Button variant="outlined">Bottom</Button>
         </TooltipTrigger>
         <TooltipContent side="bottom">
           <p>Tooltip on bottom</p>
@@ -59,7 +59,7 @@ export const CustomSide: Story = {
       </Tooltip>
       <Tooltip>
         <TooltipTrigger asChild>
-          <Button variant="outline">Left</Button>
+          <Button variant="outlined">Left</Button>
         </TooltipTrigger>
         <TooltipContent side="left">
           <p>Tooltip on left</p>
@@ -67,7 +67,7 @@ export const CustomSide: Story = {
       </Tooltip>
       <Tooltip>
         <TooltipTrigger asChild>
-          <Button variant="outline">Right</Button>
+          <Button variant="outlined">Right</Button>
         </TooltipTrigger>
         <TooltipContent side="right">
           <p>Tooltip on right</p>

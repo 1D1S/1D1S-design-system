@@ -6,6 +6,13 @@ const meta: Meta<typeof Pagination> = {
   title: "Pagination",
   component: Pagination,
   tags: ["autodocs"],
+  decorators: [
+    (Story) => (
+      <div className="bg-gray-100 p-8">
+        <Story />
+      </div>
+    ),
+  ],
   argTypes: {
     currentPage: {
       control: { type: "number", min: 1 },
@@ -37,8 +44,8 @@ export const Default: Story = {
   render: (args) => <PaginationWithState {...args} />,
   args: {
     currentPage: 1,
-    totalPages: 10,
-    siblingCount: 1,
+    totalPages: 5,
+    siblingCount: 0,
   },
 };
 

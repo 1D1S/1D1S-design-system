@@ -1,48 +1,60 @@
 'use client';
 
 import * as TogglePrimitive from '@radix-ui/react-toggle';
+import { cva, type VariantProps } from 'class-variance-authority';
 import { Text } from '../Text';
 import { cn } from '../../lib/utils';
 
-interface ToggleProps extends React.ComponentProps<typeof TogglePrimitive.Root> {
-  icon?: string;
+const toggleVariants = cva(
+  [
+    'inline-flex w-fit items-center justify-center gap-2.5 border bg-white whitespace-nowrap',
+    'text-gray-700 transition-all duration-200',
+    'cursor-pointer disabled:pointer-events-none disabled:opacity-50',
+    'focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-main-300/60',
+    'hover:bg-gray-100',
+    'data-[state=on]:border-main-800 data-[state=on]:bg-main-800 data-[state=on]:text-white',
+    'data-[state=on]:shadow-[0_4px_10px_rgba(255,87,34,0.22)]',
+  ],
+  {
+    variants: {
+      shape: {
+        rounded: 'h-10 rounded-full px-5',
+        square: 'h-10 rounded-3 px-4',
+      },
+    },
+    defaultVariants: {
+      shape: 'rounded',
+    },
+  }
+);
+
+interface ToggleProps
+  extends React.ComponentProps<typeof TogglePrimitive.Root>,
+    VariantProps<typeof toggleVariants> {
+  icon?: React.ReactNode;
   children: React.ReactNode;
   className?: string;
 }
 
 /**
  * Toggle
- * 간단한 토글 스타일을 위한 컴포넌트 (텍스트 + 아이콘 구성)
- *
- * @param icon 선택적 아이콘 이모지 텍스트
- *
- * @example 기본 사용
- * ```tsx
- * <Toggle icon="🔥">인기</Toggle>
- * ```
+ * 카테고리 선택형 토글 버튼 컴포넌트. `shape`로 둥근/사각 스타일을 선택할 수 있습니다.
  */
 export function Toggle({
   icon,
+  shape = 'rounded',
   children,
   className,
   ...props
 }: ToggleProps): React.ReactElement {
-  const hasIcon = Boolean(icon);
   return (
-    <TogglePrimitive.Root
-      className={cn(
-        'rounded-2 data-[state=on]:bg-main-900 bg-gray-200 px-2.5 py-1.5 sm:px-3 sm:py-2 font-light text-gray-700 data-[state=on]:font-bold data-[state=on]:text-white cursor-pointer transition-all duration-200',
-        hasIcon && 'gap-2',
-        className
-      )}
-      {...props}
-    >
-      {icon && (
-        <Text size="caption1" weight="regular" className="sm:text-lg">
+    <TogglePrimitive.Root className={cn(toggleVariants({ shape }), className)} {...props}>
+      {icon ? (
+        <span className="inline-flex items-center justify-center text-[18px] leading-none text-inherit [&>svg]:h-5 [&>svg]:w-5">
           {icon}
-        </Text>
-      )}
-      <Text size="caption1" weight={null} className="sm:text-lg">
+        </span>
+      ) : null}
+      <Text size="body2" weight="bold" className="text-inherit">
         {children}
       </Text>
     </TogglePrimitive.Root>

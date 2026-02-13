@@ -1,60 +1,50 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { TextField } from './TextField';
+import { TextArea, TextField } from './TextField';
 
 const meta: Meta<typeof TextField> = {
   title: 'TextField',
   component: TextField,
   tags: ['autodocs'],
-  argTypes: {
-    variant: {
-      control: 'select',
-      options: ['default', 'search'],
-    },
-    label: {
-      control: 'text',
-    },
-    error: {
-      control: 'text',
-    },
-    multiline: {
-      control: 'boolean',
-    },
-  },
+  decorators: [
+    (Story) => (
+      <div className="w-full max-w-[1280px] bg-gray-100 p-4">
+        <Story />
+      </div>
+    ),
+  ],
 };
 
 export default meta;
 type Story = StoryObj<typeof TextField>;
 
-export const Default: Story = {
+export const InputOnly: Story = {
   args: {
-    variant: 'default',
-    placeholder: '텍스트를 입력하세요',
-    label: '기본 텍스트 필드',
+    placeholder: 'e.g. 30 Days of Morning Running',
   },
 };
 
-export const WithError: Story = {
+export const WithRequiredLabel: Story = {
   args: {
-    variant: 'default',
-    placeholder: '텍스트를 입력하세요',
-    label: '오류가 있는 필드',
-    error: '필수 입력 항목입니다.',
+    label: 'Challenge Title',
+    required: true,
+    placeholder: 'e.g. 30 Days of Morning Running',
   },
+};
+
+export const DescriptionTextArea: Story = {
+  render: () => (
+    <TextArea
+      label="Description"
+      labelHint="(Optional)"
+      placeholder="Describe what participants will do in this challenge..."
+      rows={8}
+    />
+  ),
 };
 
 export const Search: Story = {
   args: {
     variant: 'search',
     placeholder: '검색어를 입력하세요',
-  },
-};
-
-export const TextArea: Story = {
-  args: {
-    variant: 'default',
-    multiline: true,
-    placeholder: '긴 텍스트를 입력하세요',
-    label: '텍스트 영역',
-    rows: 4,
   },
 };

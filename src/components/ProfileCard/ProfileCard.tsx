@@ -102,7 +102,7 @@ export function ProfileCard({
             mode === 'collapsing' && 'fade-out'
           )}
         >
-          <Button className="w-full" size="md" onClick={isLoggedIn ? handleGoDiary : handleGoLogin}>
+          <Button className="w-full" size="medium" onClick={isLoggedIn ? handleGoDiary : handleGoLogin}>
             {isLoggedIn ? '일지 쓰러 가기 →' : '로그인 하러 가기 →'}
           </Button>
         </div>

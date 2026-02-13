@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { ChevronLeft } from 'lucide-react';
 import { Button } from './Button';
 
 const meta: Meta<typeof Button> = {
@@ -8,11 +9,11 @@ const meta: Meta<typeof Button> = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['default', 'disabled', 'warning', 'loading', 'outline'],
+      options: ['default', 'outlined', 'secondary', 'ghost'],
     },
     size: {
       control: 'select',
-      options: ['lg', 'md', 'sm'],
+      options: ['large', 'medium', 'small', 'icon'],
     },
   },
 };
@@ -23,7 +24,7 @@ type Story = StoryObj<typeof Button>;
 export const Large: Story = {
   args: {
     variant: 'default',
-    size: 'lg',
+    size: 'large',
     children: 'Large Button',
   },
 };
@@ -31,7 +32,7 @@ export const Large: Story = {
 export const Medium: Story = {
   args: {
     variant: 'default',
-    size: 'md',
+    size: 'medium',
     children: 'Medium Button',
   },
 };
@@ -39,32 +40,48 @@ export const Medium: Story = {
 export const Small: Story = {
   args: {
     variant: 'default',
-    size: 'sm',
+    size: 'small',
     children: 'Small Button',
   },
 };
 
-export const Outline: Story = {
+export const Outlined: Story = {
   args: {
-    variant: 'outline',
-    size: 'lg',
+    variant: 'outlined',
+    size: 'large',
     children: 'Outline Button',
   },
 };
 
-export const Warning: Story = {
+export const Secondary: Story = {
   args: {
-    variant: 'warning',
-    size: 'lg',
-    children: 'Warning Button',
+    variant: 'secondary',
+    size: 'large',
+    children: 'Secondary Button',
+  },
+};
+
+export const Ghost: Story = {
+  args: {
+    variant: 'ghost',
+    size: 'large',
+    children: 'Ghost Button',
   },
 };
 
 export const Disabled: Story = {
   args: {
-    variant: 'disabled',
-    size: 'lg',
+    variant: 'default',
+    size: 'large',
     children: 'Disabled Button',
     disabled: true,
+  },
+};
+
+export const Icon: Story = {
+  args: {
+    variant: 'outlined',
+    size: 'icon',
+    children: <ChevronLeft className="h-5 w-5" />,
   },
 };
