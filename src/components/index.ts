@@ -1,11 +1,9 @@
 // Component exports
 export * from "./Accordion";
 export * from "./AppHeader";
-export * from "./BackButton";
 export * from "./Button";
 export * from "./Calendar";
 export * from "./ChallengeCard";
-export * from "./ChallengeListItem";
 export * from "./CheckContainer";
 export * from "./CheckList";
 export * from "./Checkbox";
@@ -16,12 +14,10 @@ export * from "./Dialog";
 export * from "./DiaryCard";
 export * from "./Dropdown";
 export * from "./Footer";
-export * from "./GlobalChrome";
 export * from "./ImagePlaceholder";
 export * from "./ImagePicker";
 export * from "./InfoButton";
 export * from "./Text";
-export * from "./Menu";
 export * from "./PageBackground";
 export * from "./PageTitle";
 export * from "./PageWatermark";
