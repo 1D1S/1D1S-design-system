@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.1](https://github.com/1D1S/1D1S-design-system/compare/v0.2.0...v0.2.1) (2026-02-14)
+
+
+### Features
+
+* DiaryCard 사진 비율 수정 ([c237fdd](https://github.com/1D1S/1D1S-design-system/commit/c237fdd91677c6c4072ddcc9559942df0f69fcff))
+* 미사용 모듈 제거 ([fdd0134](https://github.com/1D1S/1D1S-design-system/commit/fdd01342c6db3fb34ea2a237658915430ea28670))
+* 전반적인 사이즈 조정 및 애니메이션 추가 ([ddefb00](https://github.com/1D1S/1D1S-design-system/commit/ddefb0075bd88d0a9374c7d484d0503b54040973))
+
 ## [0.2.0](https://github.com/1D1S/1D1S-design-system/compare/v0.1.17...v0.2.0) (2026-02-13)
 
 
