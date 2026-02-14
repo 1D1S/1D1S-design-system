@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.3](https://github.com/1D1S/1D1S-design-system/compare/v0.2.2...v0.2.3) (2026-02-14)
+
+
+### Features
+
+* 드랍다운 최소 너비 수정 ([e6f9841](https://github.com/1D1S/1D1S-design-system/commit/e6f984149d9e0e963c92afe1657fd6ab23763ea8))
+* 버튼, 이미지 피커 수정 ([bd92554](https://github.com/1D1S/1D1S-design-system/commit/bd9255464646040e4920b3d857a72c5770829d7c))
+
 ### [0.2.2](https://github.com/1D1S/1D1S-design-system/compare/v0.2.1...v0.2.2) (2026-02-14)
 
 
