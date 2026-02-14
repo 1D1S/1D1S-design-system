@@ -71,16 +71,16 @@ function FieldLabel({
 
   return (
     <label htmlFor={htmlFor} className="mb-2 inline-flex items-center gap-2">
-      <Text size="heading2" weight="bold" className="text-gray-900">
+      <Text size="body1" weight="bold" className="text-gray-900">
         {label}
       </Text>
       {required ? (
-        <Text size="heading2" weight="bold" className="text-main-800">
+        <Text size="body1" weight="bold" className="text-main-800">
           *
         </Text>
       ) : null}
       {labelHint ? (
-        <Text size="heading2" weight="regular" className="text-gray-500">
+        <Text size="body1" weight="regular" className="text-gray-500">
           {labelHint}
         </Text>
       ) : null}

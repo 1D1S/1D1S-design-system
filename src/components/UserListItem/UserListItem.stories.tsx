@@ -12,16 +12,18 @@ type Story = StoryObj<typeof UserListItem>;
 
 export const Default: Story = {
   args: {
-    userName: 'Jane Doe',
+    userName: 'Runner_Lee',
+    timeLabel: '1일 전',
     isAuthor: false,
-    className: 'w-[300px]',
+    className: 'w-[760px]',
   },
 };
 
 export const Author: Story = {
   args: {
-    userName: 'John Smith',
+    userName: 'Runner_Lee',
+    timeLabel: '1일 전',
     isAuthor: true,
-    className: 'w-[300px]',
+    className: 'w-[760px]',
   },
 };

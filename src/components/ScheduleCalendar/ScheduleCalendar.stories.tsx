@@ -153,7 +153,7 @@ function ScheduleCalendarPager({ preset }: { preset: CalendarPreset }) {
         </div>
       </div>
 
-      <ScheduleCalendar rows={rows} cellMinHeight={132} />
+      <ScheduleCalendar rows={rows} cellMinHeight={122} />
     </div>
   );
 }

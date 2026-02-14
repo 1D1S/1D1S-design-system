@@ -117,7 +117,7 @@ export function Pagination({
         disabled={currentPage === 1}
         variant="outlined"
         size="icon"
-        className="rounded-4 border-gray-300 bg-white text-gray-600 hover:bg-gray-100 disabled:bg-gray-100 disabled:text-gray-400"
+        className="rounded-3 border-gray-300 bg-white text-gray-600 hover:bg-gray-100 disabled:bg-gray-100 disabled:text-gray-400"
         aria-label="Go to previous page"
       >
         <ChevronLeft className="h-5 w-5" />
@@ -130,7 +130,7 @@ export function Pagination({
               key={`dots-${index}`}
               className="flex h-10 min-w-10 items-center justify-center px-1"
             >
-              <span className="text-xl font-medium text-gray-400">
+              <span className="text-lg font-medium text-gray-400">
                 ...
               </span>
             </div>
@@ -146,7 +146,7 @@ export function Pagination({
             variant={isCurrent ? "default" : "secondary"}
             size="icon"
             className={cn(
-              "rounded-4",
+              "rounded-3",
               isCurrent
                 ? "bg-main-800 text-white shadow-[0_8px_16px_rgba(255,87,34,0.3)] hover:bg-main-800"
                 : "bg-gray-100 text-gray-700 hover:bg-gray-200"
@@ -155,7 +155,7 @@ export function Pagination({
           >
             <span
               className={cn(
-                "text-[28px] leading-none",
+                "text-2xl leading-none",
                 isCurrent ? "font-bold text-white" : "font-medium text-gray-700"
               )}
             >
@@ -170,7 +170,7 @@ export function Pagination({
         disabled={currentPage === totalPages}
         variant="outlined"
         size="icon"
-        className="rounded-4 border-gray-300 bg-white text-gray-600 hover:bg-gray-100 disabled:bg-gray-100 disabled:text-gray-400"
+        className="rounded-3 border-gray-300 bg-white text-gray-600 hover:bg-gray-100 disabled:bg-gray-100 disabled:text-gray-400"
         aria-label="Go to next page"
       >
         <ChevronRight className="h-5 w-5" />

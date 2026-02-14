@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { ChallengeCard } from './ChallengeCard';
 import {
-  ChallengeDumbbell,
-  ChallengeFlag,
-  ChallengeFlame,
-  ChallengeLaptop,
-  ChallengeTarget,
-  ChallengeTrophy,
+  Dumbbell,
+  Flag,
+  Flame,
+  Laptop,
+  Target,
+  Trophy,
 } from '../Icons';
 
 const meta: Meta<typeof ChallengeCard> = {
@@ -23,7 +23,7 @@ export const Default: Story = {
     challengeTitle: '새벽 러닝 챌린지',
     challengeCategory: '운동',
     challengeType: '인증형',
-    challengeIcon: <ChallengeDumbbell />,
+    challengeIcon: <Dumbbell />,
     imageUrl:
       'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=1200&q=80',
     currentUserCount: 92,
@@ -39,7 +39,7 @@ export const Recruiting: Story = {
     challengeTitle: '아침 코딩 챌린지',
     challengeCategory: '개발',
     challengeType: '자율형',
-    challengeIcon: <ChallengeLaptop />,
+    challengeIcon: <Laptop />,
     imageUrl: '',
     currentUserCount: 5,
     maxUserCount: 15,
@@ -54,7 +54,7 @@ export const Ended: Story = {
     challengeTitle: '한 달 독서 기록 챌린지',
     challengeCategory: '자기계발',
     challengeType: '인증형',
-    challengeIcon: <ChallengeFlame />,
+    challengeIcon: <Flame />,
     imageUrl:
       'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=1200&q=80',
     currentUserCount: 60,
@@ -73,7 +73,7 @@ export const Grid3x2: Story = {
         challengeTitle: '새벽 러닝 챌린지',
         challengeCategory: '운동',
         challengeType: '인증형',
-        challengeIcon: <ChallengeDumbbell />,
+        challengeIcon: <Dumbbell />,
         currentUserCount: 92,
         maxUserCount: 100,
         startDate: '2025.03.01',
@@ -84,7 +84,7 @@ export const Grid3x2: Story = {
         challengeTitle: '아침 코딩 챌린지',
         challengeCategory: '개발',
         challengeType: '자율형',
-        challengeIcon: <ChallengeLaptop />,
+        challengeIcon: <Laptop />,
         currentUserCount: 15,
         maxUserCount: 30,
         startDate: '2025.04.10',
@@ -95,7 +95,7 @@ export const Grid3x2: Story = {
         challengeTitle: '한 달 독서 기록',
         challengeCategory: '자기계발',
         challengeType: '인증형',
-        challengeIcon: <ChallengeFlame />,
+        challengeIcon: <Flame />,
         imageUrl:
           'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=1200&q=80',
         currentUserCount: 44,
@@ -108,7 +108,7 @@ export const Grid3x2: Story = {
         challengeTitle: '하루 물 2L 마시기',
         challengeCategory: '건강',
         challengeType: '루틴형',
-        challengeIcon: <ChallengeTarget />,
+        challengeIcon: <Target />,
         imageUrl: '',
         currentUserCount: 23,
         maxUserCount: 40,
@@ -120,7 +120,7 @@ export const Grid3x2: Story = {
         challengeTitle: '주 3회 홈트 달성',
         challengeCategory: '운동',
         challengeType: '자율형',
-        challengeIcon: <ChallengeTrophy />,
+        challengeIcon: <Trophy />,
         imageUrl:
           'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&w=1200&q=80',
         currentUserCount: 8,
@@ -134,7 +134,7 @@ export const Grid3x2: Story = {
         challengeTitle: '프로젝트 회고 작성',
         challengeCategory: '커리어',
         challengeType: '인증형',
-        challengeIcon: <ChallengeFlag />,
+        challengeIcon: <Flag />,
         currentUserCount: 29,
         maxUserCount: 50,
         startDate: '2025.03.20',
@@ -158,12 +158,12 @@ export const Grid3x2: Story = {
 export const ChallengeIcons: Story = {
   render: () => {
     const icons = [
-      { name: 'ChallengeDumbbell', icon: <ChallengeDumbbell /> },
-      { name: 'ChallengeLaptop', icon: <ChallengeLaptop /> },
-      { name: 'ChallengeFlame', icon: <ChallengeFlame /> },
-      { name: 'ChallengeTarget', icon: <ChallengeTarget /> },
-      { name: 'ChallengeTrophy', icon: <ChallengeTrophy /> },
-      { name: 'ChallengeFlag', icon: <ChallengeFlag /> },
+      { name: 'Dumbbell', icon: <Dumbbell /> },
+      { name: 'Laptop', icon: <Laptop /> },
+      { name: 'Flame', icon: <Flame /> },
+      { name: 'Target', icon: <Target /> },
+      { name: 'Trophy', icon: <Trophy /> },
+      { name: 'Flag', icon: <Flag /> },
     ];
 
     return (

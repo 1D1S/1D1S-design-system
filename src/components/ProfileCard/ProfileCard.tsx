@@ -44,6 +44,7 @@ export function ProfileCard({
     <div
       className={cn(
         'rounded-2 shadow-default relative flex flex-col bg-white transition-all duration-300 ease-in-out',
+        isExpanded !== true && 'cursor-pointer',
         mode === 'collapsed' ? 'h-14 w-14 sm:h-20 sm:w-20 justify-center p-2 sm:p-4' : 'w-72 sm:w-100 p-4 sm:p-6'
       )}
       onClick={isExpanded !== true ? handleToggle : undefined}

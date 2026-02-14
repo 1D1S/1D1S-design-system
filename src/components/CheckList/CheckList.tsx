@@ -98,14 +98,14 @@ export function CheckList({
                 handleToggle(option.id, checkedState === true);
               }}
               className={cn(
-                "h-[22px] w-[22px] rounded-1.5",
+                "h-5 w-5 rounded-1.5",
                 "data-[state=checked]:border-main-800 data-[state=checked]:bg-main-800"
               )}
             />
 
             {typeof option.label === "string" || typeof option.label === "number" ? (
               <Text
-                size="heading2"
+                size="body1"
                 weight="medium"
                 className={cn(
                   "transition-colors",

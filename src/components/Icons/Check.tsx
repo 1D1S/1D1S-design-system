@@ -1,6 +1,9 @@
-import React from 'react';
+import React from "react";
 
-export const Check = (props: React.SVGProps<SVGSVGElement>) => (
+export const Check = ({
+  strokeWidth = 14,
+  ...props
+}: React.SVGProps<SVGSVGElement>) => (
   <svg
     width="65"
     height="50"
@@ -12,7 +15,7 @@ export const Check = (props: React.SVGProps<SVGSVGElement>) => (
     <path
       d="M57.5 7.5L23.125 41.875L7.5 26.25"
       stroke="currentColor"
-      strokeWidth="15"
+      strokeWidth={strokeWidth}
       strokeLinecap="round"
       strokeLinejoin="round"
     />

@@ -58,7 +58,7 @@ function getBarToneClass(barTone: BarTone = "main"): string {
 export function ScheduleCalendar({
   rows,
   weekLabels = [...DEFAULT_WEEK_LABELS],
-  cellMinHeight = 150,
+  cellMinHeight = 140,
   className,
 }: ScheduleCalendarProps): React.ReactElement {
   return (
@@ -70,12 +70,12 @@ export function ScheduleCalendar({
               <th
                 key={`${label}-${index}`}
                 className={cn(
-                  "h-14 border-b border-r border-gray-300 bg-gray-100 px-3 text-center align-middle",
+                  "h-12 border-b border-r border-gray-300 bg-gray-100 px-2.5 text-center align-middle",
                   index === weekLabels.length - 1 && "border-r-0"
                 )}
                 scope="col"
               >
-                <Text size="body1" weight="bold" className="text-gray-600">
+                <Text size="body2" weight="bold" className="text-gray-600">
                   {label}
                 </Text>
               </th>
@@ -104,7 +104,7 @@ export function ScheduleCalendar({
                   >
                     <div
                       className={cn(
-                        "flex h-full min-h-[120px] flex-col gap-2.5 p-2.5",
+                        "flex h-full min-h-[110px] flex-col gap-2 p-2",
                         cell.muted && "bg-gray-300",
                         cell.highlighted && "bg-main-200 ring-1 ring-inset ring-main-400"
                       )}
@@ -116,7 +116,7 @@ export function ScheduleCalendar({
                         <>
                           {cell.day !== undefined ? (
                             <Text
-                              size="body1"
+                              size="body2"
                               weight="medium"
                               className={cn("leading-tight", getDayToneClass(cell.dayTone))}
                             >
@@ -131,12 +131,12 @@ export function ScheduleCalendar({
                           ) : null}
 
                           {cell.bars && cell.bars.length > 0 ? (
-                            <div className="mt-1 flex flex-col gap-2">
+                            <div className="mt-0.5 flex flex-col gap-1.5">
                               {cell.bars.map((bar, barIndex) => (
                                 <span
                                   key={`${key}-bar-${barIndex}`}
                                   className={cn(
-                                    "block h-2 rounded-full transition-all duration-200",
+                                    "block h-1.5 rounded-full transition-all duration-200",
                                     getBarToneClass(bar.tone)
                                   )}
                                   style={{ width: resolveWidth(bar.width) }}
@@ -146,7 +146,7 @@ export function ScheduleCalendar({
                           ) : null}
 
                           {cell.subtitle !== undefined ? (
-                            <Text size="caption1" weight="medium" className="text-gray-600">
+                            <Text size="caption2" weight="medium" className="text-gray-600">
                               {cell.subtitle}
                             </Text>
                           ) : null}

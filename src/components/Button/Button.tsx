@@ -19,10 +19,10 @@ const customButtonVariants = cva(allButtonVariants, {
         "bg-transparent text-gray-800 hover:bg-gray-100 disabled:text-gray-400",
     },
     size: {
-      small: "h-[38px] px-4",
-      medium: "h-[50px] px-4",
-      large: "h-[60px] px-6",
-      icon: "h-10 w-10 p-0",
+      small: "h-9 px-3.5",
+      medium: "h-11 px-3.5",
+      large: "h-13 px-5",
+      icon: "h-9 w-9 p-0",
     },
   },
   defaultVariants: {
@@ -62,10 +62,10 @@ export function Button({
   const currentSize = size ?? "large";
 
   const labelStyleMap = {
-    small: { size: "caption1", weight: "bold" },
-    medium: { size: "body2", weight: "bold" },
-    large: { size: "body1", weight: "bold" },
-    icon: { size: "body2", weight: "bold" },
+    small: { size: "caption2", weight: "bold" },
+    medium: { size: "caption1", weight: "bold" },
+    large: { size: "body2", weight: "bold" },
+    icon: { size: "caption1", weight: "bold" },
   } as const;
 
   const shouldWrapWithText =

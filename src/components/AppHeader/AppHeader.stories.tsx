@@ -17,16 +17,28 @@ const meta: Meta<typeof AppHeader> = {
 export default meta;
 type Story = StoryObj<typeof AppHeader>;
 
-export const Default: Story = {
+const baseArgs = {
+  brandName: '1D1S',
+  activeKey: 'challenge',
+  navItems: [
+    { key: 'home', label: '홈' },
+    { key: 'explore', label: '탐색' },
+    { key: 'challenge', label: '챌린지' },
+    { key: 'diary', label: '일지' },
+  ],
+};
+
+export const WithProfile: Story = {
   args: {
-    brandName: '1D1S',
-    activeKey: 'challenge',
-    navItems: [
-      { key: 'home', label: '홈' },
-      { key: 'explore', label: '탐색' },
-      { key: 'challenge', label: '챌린지' },
-      { key: 'diary', label: '일지' },
-    ],
+    ...baseArgs,
+    showProfile: true,
     profileImage: '/DefaultProfile.png',
+  },
+};
+
+export const WithoutProfile: Story = {
+  args: {
+    ...baseArgs,
+    showProfile: false,
   },
 };

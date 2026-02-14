@@ -51,13 +51,14 @@ export function ChallengeCard({
   return (
     <div
       className={cn(
-        "min-w-62.5 w-full cursor-pointer overflow-hidden rounded-[12px] border border-gray-200 bg-white",
+        "min-w-62.5 w-full overflow-hidden rounded-[12px] border border-gray-200 bg-white",
+        onClick && "cursor-pointer",
         "transition-all duration-200 ease-in-out hover:-translate-y-1 hover:shadow-default",
         className,
       )}
       onClick={onClick}
     >
-      <div className="relative h-60 w-full overflow-hidden bg-gray-100">
+      <div className="relative h-52 w-full overflow-hidden bg-gray-100">
         {hasImage ? (
           <div className="absolute inset-0">
             <Image
@@ -72,54 +73,54 @@ export function ChallengeCard({
           <ImagePlaceholder className="absolute inset-0" logoSize="lg" />
         )}
         {hasImage ? (
-          <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-20 bg-linear-to-b from-black/20 to-transparent" />
+          <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-16 bg-linear-to-b from-black/20 to-transparent" />
         ) : null}
 
-        <div className="absolute top-4 left-4 z-20 flex items-center gap-2">
-          <span className="inline-flex items-center rounded-2 bg-main-800 px-3 py-1.5">
-            <Text size="caption1" weight="bold" className="text-white">
+        <div className="absolute top-3 left-3 z-20 flex items-center gap-1.5">
+          <span className="inline-flex items-center rounded-2 bg-main-800 px-2.5 py-1">
+            <Text size="caption2" weight="bold" className="text-white">
               {challengeCategory ?? challengeType}
             </Text>
           </span>
           <span
             className={cn(
-              "inline-flex items-center rounded-2 px-3 py-1.5",
+              "inline-flex items-center rounded-2 px-2.5 py-1",
               statusClassName,
             )}
           >
-            <Text size="caption1" weight="bold" className="text-white">
+            <Text size="caption2" weight="bold" className="text-white">
               {statusLabel}
             </Text>
           </span>
         </div>
       </div>
 
-      <div className="w-full bg-white px-6 py-7">
+      <div className="w-full bg-white px-5 py-5">
         <Text
-          size="heading1"
+          size="heading2"
           weight="bold"
-          className="line-clamp-2 min-h-12 text-gray-900"
+          className="line-clamp-2 min-h-10 text-gray-900"
         >
           {challengeTitle}
         </Text>
 
-        <div className="mt-5 flex w-full items-center justify-between">
+        <div className="mt-4 flex w-full items-center justify-between">
           <div className="flex items-center gap-1.5">
-            <UserRound className="h-4 w-4 text-gray-600" />
-            <Text size="body2" weight="medium" className="text-gray-600">
+            <UserRound className="h-3.5 w-3.5 text-gray-600" />
+            <Text size="caption1" weight="medium" className="text-gray-600">
               {challengeType}
             </Text>
           </div>
 
           <div className="flex items-center gap-1.5">
-            <Users className="h-4 w-4 text-gray-600" />
-            <Text size="body2" weight="medium" className="text-gray-600">
+            <Users className="h-3.5 w-3.5 text-gray-600" />
+            <Text size="caption1" weight="medium" className="text-gray-600">
               {currentUserCount} / {maxUserCount}
             </Text>
           </div>
         </div>
 
-        <Text size="body2" weight="regular" className="mt-4 text-gray-500">
+        <Text size="caption1" weight="regular" className="mt-3 text-gray-500">
           {startDate} - {endDate}
         </Text>
       </div>

@@ -1,103 +1,57 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { AddCircle } from './AddCircle';
-import { Calendar } from './Calendar';
-import { ChallengeDumbbell } from './ChallengeDumbbell';
-import { ChallengeFlag } from './ChallengeFlag';
-import { ChallengeFlame } from './ChallengeFlame';
-import { ChallengeLaptop } from './ChallengeLaptop';
-import { ChallengeTarget } from './ChallengeTarget';
-import { ChallengeTrophy } from './ChallengeTrophy';
-import { Check } from './Check';
-import { Chevron } from './Chevron';
-import { ChevronDown } from './ChevronDown';
-import { ChevronLeft } from './ChevronLeft';
-import { ChevronRight } from './ChevronRight';
-import { ChevronUp } from './ChevronUp';
-import { Close } from './Close';
-import { Endless } from './Endless';
-import { Eye } from './Eye';
-import { EyeOff } from './EyeOff';
-import { HamburgerMenu } from './HamburgerMenu';
-import { Heart } from './Heart';
-import { HeartFilled } from './HeartFilled';
-import { Logo } from './Logo';
-import { Minus } from './Minus';
-import { People } from './People';
-import { Person } from './Person';
-import { Pin } from './Pin';
-import { Plus } from './Plus';
-import { Search } from './Search';
-
-const icons = {
-  AddCircle,
-  Calendar,
-  ChallengeDumbbell,
-  ChallengeFlag,
-  ChallengeFlame,
-  ChallengeLaptop,
-  ChallengeTarget,
-  ChallengeTrophy,
-  Check,
-  Chevron,
-  ChevronDown,
-  ChevronLeft,
-  ChevronRight,
-  ChevronUp,
-  Close,
-  Endless,
-  Eye,
-  EyeOff,
-  HamburgerMenu,
-  Heart,
-  HeartFilled,
-  Logo,
-  Minus,
-  People,
-  Person,
-  Pin,
-  Plus,
-  Search,
-};
+import type { Meta, StoryObj } from "@storybook/react";
+import { ICON_NAMES, Icon } from "./Icon";
 
 const IconGallery = ({ size, color }: { size: number; color: string }) => (
   <div
     style={{
-      display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fill, minmax(120px, 1fr))',
-      gap: '24px',
-      padding: '20px',
+      display: "grid",
+      gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
+      gap: "16px",
+      padding: "16px",
     }}
   >
-    {Object.entries(icons).map(([name, Icon]) => (
+    {ICON_NAMES.map((name) => (
       <div
         key={name}
         style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: '8px',
-          padding: '16px',
-          borderRadius: '8px',
-          border: '1px solid #e5e5e5',
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: "8px",
+          minHeight: "96px",
+          padding: "12px",
+          borderRadius: "12px",
+          border: "1px solid #e5e5e5",
+          backgroundColor: "#fff",
         }}
       >
-        <Icon width={size} height={size} style={{ color }} />
-        <span style={{ fontSize: '12px', color: '#666' }}>{name}</span>
+        <Icon name={name} size={size} style={{ color }} />
+        <span style={{ fontSize: "11px", color: "#666", textAlign: "center" }}>
+          {name}
+        </span>
       </div>
     ))}
   </div>
 );
 
 const meta: Meta<typeof IconGallery> = {
-  title: 'Icons/All Icons',
+  title: "Icons/All Icons",
   component: IconGallery,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
+  decorators: [
+    (Story) => (
+      <div style={{ background: "#f5f5f5", padding: "16px" }}>
+        <Story />
+      </div>
+    ),
+  ],
   argTypes: {
     size: {
-      control: { type: 'range', min: 16, max: 64, step: 4 },
+      control: { type: "range", min: 16, max: 64, step: 2 },
     },
     color: {
-      control: 'color',
+      control: "color",
     },
   },
 };
@@ -108,6 +62,6 @@ type Story = StoryObj<typeof IconGallery>;
 export const Gallery: Story = {
   args: {
     size: 24,
-    color: '#000000',
+    color: "#000000",
   },
 };

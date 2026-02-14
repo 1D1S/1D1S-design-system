@@ -92,7 +92,7 @@ export function CheckContainer({
       {showCheckIndicator ? (
         <span
           className={cn(
-            "absolute top-4 right-4 flex h-[clamp(24px,12%,44px)] w-[clamp(24px,12%,44px)] items-center justify-center rounded-full border-2 transition-colors",
+            "absolute top-4 right-4 flex w-[clamp(22px,10%,40px)] aspect-square shrink-0 items-center justify-center rounded-full border-2 transition-colors",
             isChecked
               ? "border-main-800 bg-main-800 text-white"
               : "border-gray-300 bg-white text-transparent",

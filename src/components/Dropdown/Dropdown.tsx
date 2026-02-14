@@ -43,13 +43,13 @@ function SelectTrigger({
         "disabled:cursor-not-allowed disabled:opacity-50",
         "data-[placeholder]:text-gray-500 focus-visible:ring-3 focus-visible:ring-main-300/60",
         isSmall
-          ? "h-[52px] min-w-[200px] rounded-3 border-gray-300 px-4"
-          : "h-[136px] min-w-[560px] rounded-[32px] border-gray-300 px-14 shadow-[0_8px_16px_rgba(34,34,34,0.08)]",
+          ? "h-10 min-w-[180px] rounded-3 border-gray-300 px-3.5"
+          : "h-10 min-w-[220px] rounded-3 border-gray-300 px-4 shadow-[0_4px_10px_rgba(34,34,34,0.06)]",
         className,
       )}
       {...props}
     >
-      <Text size={isSmall ? "body2" : "display2"} weight="medium" className="line-clamp-1 text-gray-900">
+      <Text size="body2" weight="medium" className="line-clamp-1 text-gray-900">
         {children}
       </Text>
       <SelectPrimitive.Icon asChild>
@@ -57,7 +57,7 @@ function SelectTrigger({
           data-slot="select-chevron"
           className={cn(
             "pointer-events-none shrink-0 text-gray-600 transition-transform duration-200 group-data-[state=open]:rotate-180",
-            isSmall ? "h-5 w-5" : "h-10 w-10"
+            "h-4 w-4"
           )}
           strokeWidth={2.8}
         />
@@ -84,7 +84,7 @@ function SelectItem({
     <SelectPrimitive.Item
       data-slot="select-item"
       className={cn(
-        "relative flex w-full cursor-pointer items-center gap-3 rounded-2 px-4 py-3 outline-hidden select-none",
+        "relative flex w-full cursor-pointer items-center gap-3 rounded-2 px-3.5 py-2.5 outline-hidden select-none",
         "text-gray-900 transition-colors focus:bg-gray-100 focus:text-gray-900",
         "data-disabled:pointer-events-none data-disabled:opacity-50",
         className,
@@ -97,7 +97,7 @@ function SelectItem({
         </SelectPrimitive.ItemIndicator>
       </span>
       <SelectPrimitive.ItemText>
-        <Text size="body1" weight="medium">
+        <Text size="body2" weight="medium">
           {children}
         </Text>
       </SelectPrimitive.ItemText>

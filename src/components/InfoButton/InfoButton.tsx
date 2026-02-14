@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import React from 'react';
-import Image from 'next/image';
-import { Text } from '../Text';
-import { cn } from '../../lib/utils';
+import React from "react";
+import Image from "next/image";
+import { Text } from "../Text";
+import { cn } from "../../lib/utils";
 
 interface InfoButtonProps {
   /** 상단 작은 글씨 */
@@ -28,7 +28,7 @@ export function InfoButton({
   mainText,
   subText,
   imageSrc,
-  imageAlt = 'icon',
+  imageAlt = "icon",
   gradientFrom,
   gradientTo,
   onClick,
@@ -37,14 +37,14 @@ export function InfoButton({
   return (
     <div
       className={cn(
-        'rounded-2 relative overflow-hidden p-4 sm:p-6 text-white',
-        'flex flex-col justify-between',
-        'h-36 w-full sm:h-47.5 sm:w-56',
-        'hover:shadow-default',
-        'hover:-translate-y-1',
-        'transition-all duration-300',
-        'cursor-pointer',
-        className
+        "rounded-2 relative overflow-hidden p-4 sm:p-6 text-white",
+        "flex flex-col justify-between",
+        "h-36 w-full sm:h-47.5 sm:w-56",
+        "hover:shadow-default",
+        "hover:-translate-y-1",
+        "transition-all duration-300",
+        onClick && "cursor-pointer",
+        className,
       )}
       style={{
         backgroundImage: `linear-gradient(to bottom right, ${gradientFrom}, ${gradientTo})`,
@@ -62,10 +62,20 @@ export function InfoButton({
 
       {/* 하단 아이콘 (좌) */}
       <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-6">
-        <Image src={imageSrc} alt={imageAlt} width={36} height={60} className="object-contain sm:w-12 sm:h-[78px]" />
+        <Image
+          src={imageSrc}
+          alt={imageAlt}
+          width={36}
+          height={60}
+          className="object-contain sm:w-12 sm:h-19.5"
+        />
       </div>
       {/* 하단 화살표 (우) */}
-      <Text size="heading1" weight="bold" className="absolute right-4 bottom-4 sm:right-6 sm:bottom-6 sm:text-4xl">
+      <Text
+        size="heading1"
+        weight="bold"
+        className="absolute right-4 bottom-4 sm:right-6 sm:bottom-6 sm:text-4xl"
+      >
         →
       </Text>
     </div>

@@ -32,7 +32,7 @@ export const Checkbox = React.forwardRef<
         ref={ref}
         id={checkboxId}
         className={cn(
-          "peer h-[22px] w-[22px] shrink-0 rounded-1.5 border border-gray-300 bg-white transition-all duration-200",
+          "peer h-5 w-5 shrink-0 rounded-1.5 border border-gray-300 bg-white transition-all duration-200",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-main-900 focus-visible:ring-offset-2",
           "disabled:cursor-not-allowed disabled:opacity-50",
           "data-[state=checked]:bg-main-900 data-[state=checked]:border-main-900 data-[state=checked]:text-white",
@@ -44,7 +44,7 @@ export const Checkbox = React.forwardRef<
         <CheckboxPrimitive.Indicator
           className={cn("flex items-center justify-center text-current")}
         >
-          <Check className="h-3.5 w-3.5" strokeWidth={15} />
+          <Check className="h-3 w-3" strokeWidth={13} />
         </CheckboxPrimitive.Indicator>
       </CheckboxPrimitive.Root>
       {label && (

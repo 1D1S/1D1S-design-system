@@ -40,7 +40,7 @@ export function StepIndicator({
       <div className="relative">
         {steps.length > 1 ? (
           <div
-            className="absolute top-7"
+            className="absolute top-5"
             style={{
               left: edgeOffset,
               right: edgeOffset,
@@ -64,18 +64,18 @@ export function StepIndicator({
               <li key={key} className="flex flex-1 flex-col items-center">
                 <span
                   className={cn(
-                    "flex h-14 w-14 items-center justify-center rounded-full border-2 bg-white transition-colors duration-200",
+                    "flex h-10 w-10 items-center justify-center rounded-full border-2 bg-white transition-colors duration-200",
                     isCompleted && "border-main-800 bg-main-800 text-white",
-                    isCurrent && "border-main-800 bg-main-800 text-white ring-6 ring-main-300",
+                    isCurrent && "border-main-800 bg-main-800 text-white ring-4 ring-main-300",
                     !isCompleted && !isCurrent && "border-gray-300 text-gray-600"
                   )}
                   aria-current={isCurrent ? "step" : undefined}
                 >
                   {isCompleted ? (
-                    <Check className="h-6 w-6" strokeWidth={2.5} />
+                    <Check className="h-4 w-4" strokeWidth={2.5} />
                   ) : (
                     <Text
-                      size="heading1"
+                      size="body1"
                       weight="bold"
                       className={cn(isCurrent ? "text-white" : "text-gray-600")}
                     >

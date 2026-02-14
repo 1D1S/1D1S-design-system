@@ -9,6 +9,7 @@ import Link from "next/link";
 import { Heart } from "../Icons/Heart";
 import { HeartFilled } from "../Icons/HeartFilled";
 import { ImagePlaceholder } from "../ImagePlaceholder/ImagePlaceholder";
+import { cn } from "../../lib/utils";
 
 type Emotion = "happy" | "soso" | "sad";
 
@@ -40,7 +41,7 @@ function ImageSection({
   const hasImage = Boolean(imageUrl && imageUrl.trim().length > 0);
 
   return (
-    <div className="relative aspect-11/10 w-full overflow-hidden bg-gray-100">
+    <div className="relative aspect-[11/10] w-full overflow-hidden bg-gray-100">
       {hasImage ? (
         <Image
           src={imageUrl as string}
@@ -55,8 +56,8 @@ function ImageSection({
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-10 bg-linear-to-t from-black/15 to-transparent" />
       ) : null}
 
-      <div className="absolute top-4 left-4 z-20">
-        <div className="relative flex h-13 w-13 items-center justify-center rounded-full bg-white shadow-[0_6px_14px_rgba(34,34,34,0.2)]">
+      <div className="absolute top-3 left-3 z-20">
+        <div className="relative flex h-11 w-11 items-center justify-center rounded-full bg-white shadow-[0_6px_14px_rgba(34,34,34,0.2)]">
           <CircularProgress
             value={clampedPercent}
             size="sm"
@@ -65,27 +66,27 @@ function ImageSection({
         </div>
       </div>
 
-      <div className="absolute top-4 right-4 z-20 text-4xl leading-none">
+      <div className="absolute top-3 right-3 z-20 text-3xl leading-none">
         <span role="img" aria-label={emotion}>
           {emotionEmojiMap[emotion]}
         </span>
       </div>
 
-      <div className="absolute bottom-4 left-4 z-20">
+      <div className="absolute bottom-3 left-3 z-20">
         <button
           type="button"
           onClick={(event) => {
             event.stopPropagation();
             onToggleLike();
           }}
-          className="inline-flex items-center gap-1.5 rounded-full bg-main-800 px-3.5 py-2 text-white shadow-[0_4px_10px_rgba(34,34,34,0.25)] transition-colors hover:bg-main-900"
+          className="inline-flex items-center gap-1 rounded-full bg-main-800 px-3 py-1.5 text-white shadow-[0_4px_10px_rgba(34,34,34,0.25)] transition-colors hover:bg-main-900"
         >
           {isLiked ? (
-            <HeartFilled width={16} height={16} className="text-white" />
+            <HeartFilled width={14} height={14} className="text-white" />
           ) : (
-            <Heart width={16} height={16} className="text-white" />
+            <Heart width={14} height={14} className="text-white" />
           )}
-          <Text size="body1" weight="bold" className="text-white">
+          <Text size="body2" weight="bold" className="text-white">
             {likeCount}
           </Text>
         </button>
@@ -112,19 +113,19 @@ function TextSection({
   date,
 }: TextSectionProps): React.ReactElement {
   return (
-    <div className="flex w-full flex-col gap-4 p-5">
+    <div className="flex w-full flex-col gap-3 p-4">
       <Text
         as="p"
-        size="heading2"
+        size="body1"
         weight="bold"
-        className="line-clamp-2 min-h-12.5 leading-tight text-gray-900"
+        className="line-clamp-2 min-h-10 leading-tight text-gray-900"
       >
         {title}
       </Text>
 
       <Link href={challengeUrl} className="block w-full no-underline">
         <Text
-          size="body1"
+          size="body2"
           weight="medium"
           className="block w-full truncate text-blue-500"
         >
@@ -137,10 +138,10 @@ function TextSection({
       <div className="flex items-center gap-3">
         <CircleAvatar imageUrl={userImage} size="sm" />
         <div className="flex flex-col gap-1">
-          <Text size="body1" weight="bold" className="text-gray-900">
+          <Text size="body2" weight="bold" className="text-gray-900">
             {user}
           </Text>
-          <Text size="caption1" weight="regular" className="text-gray-500">
+          <Text size="caption2" weight="regular" className="text-gray-500">
             {date}
           </Text>
         </div>
@@ -185,7 +186,7 @@ export function DiaryCard({
   };
 
   return (
-    <div className="block w-full cursor-pointer" onClick={onClick}>
+    <div className={cn("block w-full", onClick && "cursor-pointer")} onClick={onClick}>
       <div className="overflow-hidden rounded-4 border border-gray-200 bg-white transition-transform duration-200 hover:-translate-y-1 hover:shadow-lg">
         <ImageSection
           imageUrl={imageUrl}
