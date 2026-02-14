@@ -43,8 +43,8 @@ function SelectTrigger({
         "disabled:cursor-not-allowed disabled:opacity-50",
         "data-[placeholder]:text-gray-500 focus-visible:ring-3 focus-visible:ring-main-300/60",
         isSmall
-          ? "h-10 min-w-[180px] rounded-3 border-gray-300 px-3.5"
-          : "h-10 min-w-[220px] rounded-3 border-gray-300 px-4 shadow-[0_4px_10px_rgba(34,34,34,0.06)]",
+          ? "h-10 min-w-[150px] rounded-3 border-gray-300 px-3.5"
+          : "h-10 min-w-[150px] rounded-3 border-gray-300 px-4 shadow-[0_4px_10px_rgba(34,34,34,0.06)]",
         className,
       )}
       {...props}
