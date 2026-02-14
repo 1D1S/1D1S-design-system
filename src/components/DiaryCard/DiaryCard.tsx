@@ -41,7 +41,7 @@ function ImageSection({
   const hasImage = Boolean(imageUrl && imageUrl.trim().length > 0);
 
   return (
-    <div className="relative aspect-[11/10] w-full overflow-hidden bg-gray-100">
+    <div className="relative aspect-4/5 w-full overflow-hidden bg-gray-100">
       {hasImage ? (
         <Image
           src={imageUrl as string}
@@ -57,7 +57,7 @@ function ImageSection({
       ) : null}
 
       <div className="absolute top-3 left-3 z-20">
-        <div className="relative flex h-11 w-11 items-center justify-center rounded-full bg-white shadow-[0_6px_14px_rgba(34,34,34,0.2)]">
+        <div className="relative flex h-12 w-12 items-center justify-center rounded-full bg-white shadow-[0_6px_14px_rgba(34,34,34,0.2)]">
           <CircularProgress
             value={clampedPercent}
             size="sm"
@@ -186,7 +186,10 @@ export function DiaryCard({
   };
 
   return (
-    <div className={cn("block w-full", onClick && "cursor-pointer")} onClick={onClick}>
+    <div
+      className={cn("block w-full", onClick && "cursor-pointer")}
+      onClick={onClick}
+    >
       <div className="overflow-hidden rounded-4 border border-gray-200 bg-white transition-transform duration-200 hover:-translate-y-1 hover:shadow-lg">
         <ImageSection
           imageUrl={imageUrl}
