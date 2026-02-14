@@ -1,15 +1,26 @@
 "use client";
-import Image from "next/image";
-import { useRef, useState } from "react";
-import { Logo } from "../Icons/Logo";
-import { Plus } from "../Icons/Plus";
-import { cn } from "@/lib/utils";
+import React, { useEffect, useRef, useState } from "react";
+import { cn } from "../../lib/utils";
+import { Logo, PencilLine } from "../Icons";
+import { Text } from "../Text";
+
+export interface ImagePickerProps extends Omit<React.ComponentPropsWithoutRef<"input">, "size"> {
+  /** 원형 이미지 영역 지름(px) */
+  size?: number;
+  /** 초기 이미지 URL */
+  defaultImageUrl?: string;
+  /** 하단 변경 버튼 텍스트 */
+  changeLabel?: string;
+}
 
 /**
  * ImagePicker
  * 이미지 업로드 및 미리보기를 위한 컴포넌트
  *
  * @param onChange 파일 선택 시 호출되는 콜백 함수(optional)
+ * @param size 원형 이미지 영역 지름(px), 기본값 300
+ * @param defaultImageUrl 초기 이미지 URL
+ * @param changeLabel 하단 변경 버튼 텍스트(기본값: Change)
  *
  * @example 기본 사용
  * ```tsx
@@ -18,25 +29,52 @@ import { cn } from "@/lib/utils";
  */
 export function ImagePicker({
   onChange,
+  size = 300,
+  defaultImageUrl,
+  changeLabel = "Change",
   ...props
-}: React.ComponentPropsWithoutRef<"input">): React.ReactElement {
+}: ImagePickerProps): React.ReactElement {
+  const normalizedSize = Math.max(size, 120);
+  const fallbackLogoHeight = Math.max(Math.round(normalizedSize * 0.3), 28);
+  const fallbackLogoWidth = Math.max(Math.round(fallbackLogoHeight * 0.6), 18);
+
   const inputRef = useRef<HTMLInputElement>(null);
-  const [preview, setPreview] = useState<string | null>(null);
+  const objectUrlRef = useRef<string | null>(null);
+  const [preview, setPreview] = useState<string | null>(defaultImageUrl ?? null);
 
   const handleClick = (): void => {
     inputRef.current?.click();
   };
 
+  useEffect(() => {
+    setPreview(defaultImageUrl ?? null);
+  }, [defaultImageUrl]);
+
+  useEffect(() => {
+    return () => {
+      if (objectUrlRef.current) {
+        URL.revokeObjectURL(objectUrlRef.current);
+      }
+    };
+  }, []);
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const file = event.target.files?.[0];
     if (file) {
+      if (objectUrlRef.current) {
+        URL.revokeObjectURL(objectUrlRef.current);
+      }
       const url = URL.createObjectURL(file);
+      objectUrlRef.current = url;
       setPreview(url);
     }
   };
 
   return (
-    <div className="relative h-20 w-20 sm:h-25 sm:w-25 cursor-pointer" onClick={handleClick}>
+    <div
+      className="relative inline-flex"
+      style={{ width: normalizedSize, height: normalizedSize }}
+    >
       <input
         type="file"
         accept="image/*"
@@ -50,26 +88,49 @@ export function ImagePicker({
         }}
         {...props}
       />
-      <div
+      <button
+        type="button"
+        onClick={handleClick}
+        aria-label="이미지 선택"
         className={cn(
-          "bg-main-300 flex h-full w-full",
-          "items-center justify-center rounded-full overflow-hidden",
+          "relative h-full w-full overflow-hidden rounded-full",
+          "cursor-pointer",
+          preview
+            ? "bg-main-300"
+            : "border-2 border-dashed border-gray-400 bg-white",
         )}
       >
         {preview ? (
-          <Image
+          <img
             src={preview}
             alt="이미지 미리보기"
-            fill
-            className="rounded-full object-cover"
+            className="h-full w-full object-cover"
+            loading="lazy"
           />
         ) : (
-          <Logo width={24} height={40} className="text-main-700 sm:w-[30px] sm:h-[50px]" />
+          <div className="flex h-full w-full items-center justify-center">
+            <Logo
+              width={fallbackLogoWidth}
+              height={fallbackLogoHeight}
+              className="text-gray-300"
+            />
+          </div>
         )}
-      </div>
-      <div className="absolute right-0 bottom-0 flex h-7.5 w-7.5 items-center justify-center rounded-full bg-white inset-ring-1 inset-ring-gray-400">
-        <Plus width={24} height={24} className="text-gray-500" />
-      </div>
+      </button>
+
+      <button
+        type="button"
+        onClick={handleClick}
+        className={cn(
+          "absolute bottom-0 left-1/2 z-10 inline-flex h-9 -translate-x-1/2 translate-y-1/2 items-center gap-1.5 rounded-full border border-gray-200 bg-white px-5",
+          "cursor-pointer shadow-[0_6px_16px_rgba(34,34,34,0.16)]",
+        )}
+      >
+        <PencilLine className="h-3.5 w-3.5 text-gray-700" />
+        <Text size="caption1" weight="medium" className="text-gray-700">
+          {changeLabel}
+        </Text>
+      </button>
     </div>
   );
 }
