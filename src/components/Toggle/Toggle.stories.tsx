@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { BookOpen, Code2, Dumbbell, Palette, Salad } from 'lucide-react';
+import { BookOpen, Code2, Dumbbell, Palette, Salad } from '../Icons';
 import { Toggle } from './Toggle';
 
 const meta: Meta<typeof Toggle> = {

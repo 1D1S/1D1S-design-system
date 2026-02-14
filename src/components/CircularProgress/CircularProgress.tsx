@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { cn } from "../../lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
+import { ProgressRing } from "../Icons";
 import { Text, textVariants } from "../Text";
 
 type LabelSize = VariantProps<typeof textVariants>["size"];
@@ -92,24 +93,14 @@ export function CircularProgress({
 
   return (
     <div className="relative inline-block">
-      <svg viewBox={`0 0 ${baseSize} ${baseSize}`} className={wrapperClasses}>
-        <circle
-          cx={baseSize / 2}
-          cy={baseSize / 2}
-          r={radius}
-          fill="none"
-          className="stroke-main-800"
-          strokeWidth={strokeWidth}
-          strokeDasharray={circumference}
-          strokeDashoffset={animatedOffset}
-          transform={`rotate(-100 ${baseSize / 2} ${baseSize / 2})`}
-          style={{
-            transition:
-              "stroke-dashoffset 800ms cubic-bezier(0.2, 0.7, 0.1, 1)",
-          }}
-          strokeLinecap="round"
-        />
-      </svg>
+      <ProgressRing
+        baseSize={baseSize}
+        radius={radius}
+        strokeWidth={strokeWidth}
+        circumference={circumference}
+        dashOffset={animatedOffset}
+        className={wrapperClasses}
+      />
 
       {showPercentage && (
         <Text

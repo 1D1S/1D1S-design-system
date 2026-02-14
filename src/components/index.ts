@@ -1,6 +1,7 @@
 // Component exports
 export * from "./Accordion";
 export * from "./AppHeader";
+export * from "./BannerCarousel";
 export * from "./Button";
 export * from "./Calendar";
 export * from "./ChallengeCard";
@@ -13,6 +14,7 @@ export * from "./DatePicker";
 export * from "./Dialog";
 export * from "./DiaryCard";
 export * from "./Dropdown";
+export * from "./GoalAddList";
 export { Icon } from "./Icons/Icon";
 export type { IconName, IconProps } from "./Icons/Icon";
 export * from "./ImagePlaceholder";
@@ -22,7 +24,6 @@ export * from "./Text";
 export * from "./PageWatermark";
 export * from "./Pagination";
 export * from "./ProgressBar";
-export * from "./ProfileCard";
 export * from "./RightSidebar";
 export * from "./ScheduleCalendar";
 export * from "./StatContainer";

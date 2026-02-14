@@ -1,8 +1,8 @@
 import { useMemo, useState } from "react";
 import { addDays, addMonths, endOfMonth, endOfWeek, format, isSameMonth, startOfMonth, startOfWeek, subMonths } from "date-fns";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { Button } from "../Button";
+import { ChevronLeft, ChevronRight } from "../Icons";
 import { Text } from "../Text";
 import { ScheduleCalendar, type ScheduleCalendarCell } from "./ScheduleCalendar";
 

@@ -1,13 +1,13 @@
 import { cn } from '../../lib/utils';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { Text } from '../Text';
+import { Text, textVariants } from '../Text';
 
 const tagVariants = cva(
-  'inline-flex items-center rounded-1 px-1.5 py-1 bg-main-900 text-white',
+  'inline-flex items-center rounded-2 px-2.5 py-1 bg-main-800 text-white',
   {
     variants: {
       hasIcon: {
-        true: 'gap-1',
+        true: 'gap-1.5',
         false: '',
       },
     },
@@ -18,10 +18,10 @@ const tagVariants = cva(
 );
 
 type TagProps = {
-  icon?: string;
+  icon?: React.ReactNode;
   children: React.ReactNode;
   className?: string;
-  size?: 'caption3' | 'body1';
+  size?: VariantProps<typeof textVariants>['size'];
   weight?: 'bold' | 'medium' | 'regular' | 'light';
 } & VariantProps<typeof tagVariants>;
 
@@ -40,7 +40,7 @@ type TagProps = {
 export function Tag({
   icon,
   children,
-  size = 'caption3',
+  size = 'caption2',
   weight = 'bold',
   className,
 }: TagProps): React.ReactElement {

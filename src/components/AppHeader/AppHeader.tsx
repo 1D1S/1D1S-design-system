@@ -1,10 +1,10 @@
 'use client';
 
 import React from 'react';
-import { Bell } from 'lucide-react';
 import { cn } from '../../lib/utils';
 import { Button } from '../Button';
 import { CircleAvatar } from '../CircleAvatar';
+import { Bell } from '../Icons';
 import { Logo } from '../Icons/Logo';
 import { Text } from '../Text';
 
@@ -61,7 +61,7 @@ export function AppHeader({
           <button
             type="button"
             onClick={onLogoClick}
-            className="inline-flex shrink-0 items-center gap-2"
+            className="inline-flex shrink-0 cursor-pointer items-center gap-2"
             aria-label="홈으로 이동"
           >
             <span className="inline-flex h-10 w-10 items-center justify-center rounded-3 bg-main-800">
@@ -85,7 +85,7 @@ export function AppHeader({
                       aria-current={isActive ? 'page' : undefined}
                       onClick={() => onNavChange?.(item.key)}
                       className={cn(
-                        'transition-colors',
+                        'cursor-pointer transition-colors',
                         item.disabled && 'cursor-not-allowed opacity-50',
                         !item.disabled && 'hover:text-main-700',
                       )}
@@ -112,13 +112,18 @@ export function AppHeader({
             size="icon"
             onClick={onNotificationClick}
             aria-label="알림"
-            className="text-gray-700 hover:text-gray-900"
+            className="cursor-pointer text-gray-700 hover:text-gray-900"
           >
             <Bell className="h-4 w-4" />
           </Button>
 
           {showProfile ? (
-            <button type="button" onClick={onProfileClick} aria-label="프로필 열기" className="rounded-full">
+            <button
+              type="button"
+              onClick={onProfileClick}
+              aria-label="프로필 열기"
+              className="cursor-pointer rounded-full"
+            >
               <CircleAvatar imageUrl={profileImage} size="sm" className="ring-2 ring-mint-900/30" />
             </button>
           ) : null}

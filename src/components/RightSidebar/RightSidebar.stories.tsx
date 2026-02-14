@@ -20,6 +20,7 @@ type Story = StoryObj<typeof RightSidebar>;
 export const Default: Story = {
   args: {
     fixed: false,
+    isLoggedIn: true,
     userName: '고라니',
     userHandle: 'gorani',
     streakDays: 12,
@@ -30,5 +31,15 @@ export const Default: Story = {
       { id: '1', title: '알고리즘 부시기', progress: 45, tone: 'blue' },
       { id: '2', title: '새벽 러닝', progress: 80, tone: 'green', hasDeadline: false },
     ],
+  },
+};
+
+export const LoggedOut: Story = {
+  args: {
+    fixed: false,
+    isLoggedIn: false,
+    streakDays: 0,
+    loginButtonLabel: '로그인',
+    loginPromptMessage: '로그인하고 연속 기록을 시작해보세요',
   },
 };

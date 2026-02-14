@@ -1,9 +1,10 @@
 import type { ReactNode } from "react";
 import Image from "next/image";
-import { UserRound, Users } from "lucide-react";
 import { cn } from "../../lib/utils";
 import { Text } from "../Text";
 import { ImagePlaceholder } from "../ImagePlaceholder/ImagePlaceholder";
+import { People, Person } from "../Icons";
+import { Tag } from "../Tag";
 
 export interface ChallengeCardProps {
   challengeTitle: string;
@@ -77,21 +78,12 @@ export function ChallengeCard({
         ) : null}
 
         <div className="absolute top-3 left-3 z-20 flex items-center gap-1.5">
-          <span className="inline-flex items-center rounded-2 bg-main-800 px-2.5 py-1">
-            <Text size="caption2" weight="bold" className="text-white">
-              {challengeCategory ?? challengeType}
-            </Text>
-          </span>
-          <span
-            className={cn(
-              "inline-flex items-center rounded-2 px-2.5 py-1",
-              statusClassName,
-            )}
-          >
-            <Text size="caption2" weight="bold" className="text-white">
-              {statusLabel}
-            </Text>
-          </span>
+          <Tag size="caption2" weight="bold">
+            {challengeCategory ?? challengeType}
+          </Tag>
+          <Tag size="caption2" weight="bold" className={statusClassName}>
+            {statusLabel}
+          </Tag>
         </div>
       </div>
 
@@ -106,14 +98,14 @@ export function ChallengeCard({
 
         <div className="mt-4 flex w-full items-center justify-between">
           <div className="flex items-center gap-1.5">
-            <UserRound className="h-3.5 w-3.5 text-gray-600" />
+            <Person className="h-3.5 w-3.5 text-gray-600" />
             <Text size="caption1" weight="medium" className="text-gray-600">
               {challengeType}
             </Text>
           </div>
 
           <div className="flex items-center gap-1.5">
-            <Users className="h-3.5 w-3.5 text-gray-600" />
+            <People className="h-3.5 w-3.5 text-gray-600" />
             <Text size="caption1" weight="medium" className="text-gray-600">
               {currentUserCount} / {maxUserCount}
             </Text>

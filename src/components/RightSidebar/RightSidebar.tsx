@@ -1,10 +1,17 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { ChevronRight, Flame, PencilLine, Settings, User } from "lucide-react";
 import { cn } from "../../lib/utils";
 import { CircleAvatar } from "../CircleAvatar";
 import { Button } from "../Button";
+import {
+  ChevronRight,
+  Flame,
+  LogIn,
+  PencilLine,
+  Person,
+  Settings,
+} from "../Icons";
 import { Text } from "../Text";
 import { ProgressBar } from "../ProgressBar";
 
@@ -19,14 +26,17 @@ export interface RightSidebarChallenge {
 }
 
 export interface RightSidebarProps {
-  userName: string;
-  userHandle: string;
+  isLoggedIn?: boolean;
+  userName?: string;
+  userHandle?: string;
   userImage?: string;
   streakDays: number;
   fixed?: boolean;
   className?: string;
   diaryButtonLabel?: string;
   myPageButtonLabel?: string;
+  loginButtonLabel?: string;
+  loginPromptMessage?: string;
   settingButtonLabel?: string;
   challengeTitle?: string;
   challenges?: RightSidebarChallenge[];
@@ -34,6 +44,7 @@ export interface RightSidebarProps {
   onOpenSettings?(): void;
   onWriteDiary?(): void;
   onGoMyPage?(): void;
+  onLogin?(): void;
 }
 
 const defaultChallenges: RightSidebarChallenge[] = [
@@ -48,6 +59,7 @@ const toneColorMap: Record<RightSidebarProgressTone, string> = {
 };
 
 export function RightSidebar({
+  isLoggedIn = true,
   userName,
   userHandle,
   userImage,
@@ -56,6 +68,8 @@ export function RightSidebar({
   className,
   diaryButtonLabel = "일지 작성하기",
   myPageButtonLabel = "마이페이지",
+  loginButtonLabel = "로그인",
+  loginPromptMessage = "로그인하고 연속 기록을 시작해보세요",
   settingButtonLabel = "설정",
   challengeTitle = "참여중인 챌린지",
   challenges = defaultChallenges,
@@ -63,6 +77,7 @@ export function RightSidebar({
   onOpenSettings,
   onWriteDiary,
   onGoMyPage,
+  onLogin,
 }: RightSidebarProps): React.ReactElement {
   const CONTENT_FADE_OUT_MS = 140;
   const CONTENT_FADE_IN_MS = 220;
@@ -220,88 +235,130 @@ export function RightSidebar({
                   />
                   <div className="flex flex-col gap-1">
                     <Text size="body1" weight="bold" className="text-gray-900">
-                      {userName}
+                      {isLoggedIn ? userName ?? "고라니" : "게스트"}
                     </Text>
                     <Text
                       size="caption1"
                       weight="regular"
                       className="text-gray-600"
                     >
-                      @{userHandle}
+                      {isLoggedIn
+                        ? `@${userHandle ?? "gorani"}`
+                        : "로그인 후 이용 가능"}
                     </Text>
                   </div>
                 </div>
 
-                <Button
-                  type="button"
-                  variant="ghost"
-                  size="icon"
-                  aria-label="설정"
-                  onClick={onOpenSettings}
-                  className="text-gray-500 hover:text-gray-700"
-                >
-                  <Settings className="h-5 w-5" />
-                </Button>
+                {isLoggedIn ? (
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="icon"
+                    aria-label="설정"
+                    onClick={onOpenSettings}
+                    className="text-gray-500 hover:text-gray-700"
+                  >
+                    <Settings className="h-5 w-5" />
+                  </Button>
+                ) : null}
               </div>
 
               <div className="mt-6 rounded-3 border border-main-400 bg-main-200 px-4 py-4 text-center">
-                <Text size="caption1" weight="medium" className="text-gray-700">
+                <Text
+                  as="p"
+                  size="caption1"
+                  weight="medium"
+                  className="text-gray-700"
+                >
                   현재 연속 기록
                 </Text>
-                <div className="mt-3 flex items-center justify-center gap-2.5">
-                  <Flame className="h-7 w-7 text-main-800" strokeWidth={2.2} />
-                  <Text size="heading1" weight="bold" className="text-main-800">
-                    {streakDays}
+                {isLoggedIn ? (
+                  <div className="mt-3 flex items-center justify-center gap-2.5">
+                    <Flame
+                      className="h-7 w-7 text-main-800"
+                      strokeWidth={2.2}
+                    />
+                    <Text
+                      size="heading1"
+                      weight="bold"
+                      className="text-main-800"
+                    >
+                      {streakDays}
+                    </Text>
+                    <Text size="body1" weight="bold" className="text-gray-800">
+                      Days
+                    </Text>
+                  </div>
+                ) : (
+                  <Text
+                    as="p"
+                    size="caption1"
+                    weight="medium"
+                    className="mt-3 block leading-tight text-gray-700"
+                  >
+                    {loginPromptMessage}
                   </Text>
-                  <Text size="body1" weight="bold" className="text-gray-800">
-                    Days
-                  </Text>
-                </div>
+                )}
               </div>
 
-              <Button
-                className="mt-5 w-full"
-                size="medium"
-                onClick={onWriteDiary}
-              >
-                <PencilLine className="h-4 w-4" />
-                <Text size="body2" weight="bold" className="text-inherit">
-                  {diaryButtonLabel}
-                </Text>
-              </Button>
+              {isLoggedIn ? (
+                <>
+                  <Button
+                    className="mt-5 w-full"
+                    size="medium"
+                    onClick={onWriteDiary}
+                  >
+                    <PencilLine className="h-4 w-4" />
+                    <Text size="body2" weight="bold" className="text-inherit">
+                      {diaryButtonLabel}
+                    </Text>
+                  </Button>
 
-              <Button
-                variant="outlined"
-                className="mt-3 w-full"
-                size="medium"
-                onClick={onGoMyPage}
-              >
-                <User className="h-4 w-4" />
-                <Text size="body2" weight="bold" className="text-inherit">
-                  {myPageButtonLabel}
-                </Text>
-              </Button>
+                  <Button
+                    variant="outlined"
+                    className="mt-3 w-full"
+                    size="medium"
+                    onClick={onGoMyPage}
+                  >
+                    <Person className="h-4 w-4" />
+                    <Text size="body2" weight="bold" className="text-inherit">
+                      {myPageButtonLabel}
+                    </Text>
+                  </Button>
 
-              <div className="mt-5 pt-5">
-                <Text size="caption1" weight="medium" className="text-gray-500">
-                  {challengeTitle}
-                </Text>
+                  <div className="mt-5 pt-5">
+                    <Text
+                      size="caption1"
+                      weight="medium"
+                      className="text-gray-500"
+                    >
+                      {challengeTitle}
+                    </Text>
 
-                <div className="mt-4 flex flex-col gap-5">
-                  {challenges.map((challenge) => {
-                    const tone = challenge.tone ?? "blue";
-                    return (
-                      <ProgressBar
-                        key={challenge.id}
-                        label={challenge.title}
-                        value={challenge.progress}
-                        infinite={challenge.hasDeadline === false}
-                        fillColor={toneColorMap[tone]}
-                      />
-                    );
-                  })}
-                </div>
-              </div>
+                    <div className="mt-4 flex flex-col gap-5">
+                      {challenges.map((challenge) => {
+                        const tone = challenge.tone ?? "blue";
+                        return (
+                          <ProgressBar
+                            key={challenge.id}
+                            label={challenge.title}
+                            value={challenge.progress}
+                            infinite={challenge.hasDeadline === false}
+                            fillColor={toneColorMap[tone]}
+                          />
+                        );
+                      })}
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <Button className="mt-5 w-full" size="medium" onClick={onLogin}>
+                  <LogIn className="h-4 w-4" />
+                  <Text size="body2" weight="bold" className="text-inherit">
+                    {loginButtonLabel}
+                  </Text>
+                </Button>
+              )}
             </div>
           ) : (
             <div className="flex w-full flex-col items-center pt-2">
@@ -312,34 +369,47 @@ export function RightSidebar({
               />
 
               <div className="mt-5 flex flex-col items-center gap-3">
-                <Button
-                  type="button"
-                  size="icon"
-                  aria-label={diaryButtonLabel}
-                  onClick={onWriteDiary}
-                >
-                  <PencilLine className="h-4 w-4" />
-                </Button>
+                {isLoggedIn ? (
+                  <>
+                    <Button
+                      type="button"
+                      size="icon"
+                      aria-label={diaryButtonLabel}
+                      onClick={onWriteDiary}
+                    >
+                      <PencilLine className="h-4 w-4" />
+                    </Button>
 
-                <Button
-                  type="button"
-                  variant="outlined"
-                  size="icon"
-                  aria-label={myPageButtonLabel}
-                  onClick={onGoMyPage}
-                >
-                  <User className="h-4 w-4" />
-                </Button>
+                    <Button
+                      type="button"
+                      variant="outlined"
+                      size="icon"
+                      aria-label={myPageButtonLabel}
+                      onClick={onGoMyPage}
+                    >
+                      <Person className="h-4 w-4" />
+                    </Button>
 
-                <Button
-                  type="button"
-                  variant="outlined"
-                  size="icon"
-                  aria-label={settingButtonLabel}
-                  onClick={onOpenSettings}
-                >
-                  <Settings className="h-4 w-4" />
-                </Button>
+                    <Button
+                      type="button"
+                      variant="outlined"
+                      size="icon"
+                      aria-label={settingButtonLabel}
+                      onClick={onOpenSettings}
+                    >
+                      <Settings className="h-4 w-4" />
+                    </Button>
+                  </>
+                ) : (
+                  <Button
+                    type="button"
+                    size="icon"
+                    aria-label={loginButtonLabel}
+                    onClick={onLogin}
+                  >
+                    <LogIn className="h-4 w-4" />
+                  </Button>
+                )}
               </div>
             </div>
           )}

@@ -1,6 +1,6 @@
 import Image from "next/image";
-import { Check, UserRound, X } from "lucide-react";
 import { cn } from "../../lib/utils";
+import { Check, Close, Person } from "../Icons";
 import { Text } from "../Text";
 
 export interface UserListItemProps {
@@ -39,7 +39,7 @@ export function UserListItem({
               className="object-cover"
             />
           ) : (
-            <UserRound className="h-4.5 w-4.5 text-gray-500" />
+            <Person className="h-4.5 w-4.5 text-gray-500" />
           )}
         </div>
 
@@ -77,7 +77,7 @@ export function UserListItem({
               onClick={onReject}
               className="inline-flex h-9 w-9 items-center justify-center rounded-2 bg-gray-100 text-gray-600 transition-colors hover:bg-gray-200"
             >
-              <X className="h-4.5 w-4.5" strokeWidth={2.4} />
+              <Close className="h-4.5 w-4.5" strokeWidth={2.4} />
             </button>
           </>
         </div>

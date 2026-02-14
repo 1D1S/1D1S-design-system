@@ -15,7 +15,7 @@ const meta: Meta<typeof Tag> = {
     },
     size: {
         control: 'select',
-        options: ['caption3', 'body1'],
+        options: ['caption3', 'caption2', 'caption1', 'body2', 'body1'],
     }
   },
 };

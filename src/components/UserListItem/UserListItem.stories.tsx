@@ -15,7 +15,7 @@ export const Default: Story = {
     userName: 'Runner_Lee',
     timeLabel: '1일 전',
     isAuthor: false,
-    className: 'w-[760px]',
+    className: 'w-[520px] max-w-full',
   },
 };
 
@@ -24,6 +24,6 @@ export const Author: Story = {
     userName: 'Runner_Lee',
     timeLabel: '1일 전',
     isAuthor: true,
-    className: 'w-[760px]',
+    className: 'w-[520px] max-w-full',
   },
 };

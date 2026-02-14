@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import { Check } from "lucide-react";
 import { cn } from "../../lib/utils";
+import { Check } from "../Icons";
 import { Text } from "../Text";
 
 export interface CheckContainerProps extends Omit<
@@ -92,13 +92,13 @@ export function CheckContainer({
       {showCheckIndicator ? (
         <span
           className={cn(
-            "absolute top-4 right-4 flex w-[clamp(22px,10%,40px)] aspect-square shrink-0 items-center justify-center rounded-full border-2 transition-colors",
+            "absolute top-4 right-4 flex w-[clamp(18px,8%,32px)] aspect-square shrink-0 items-center justify-center rounded-full border-2 transition-colors",
             isChecked
               ? "border-main-800 bg-main-800 text-white"
               : "border-gray-300 bg-white text-transparent",
           )}
         >
-          <Check className="h-1/2 w-1/2" strokeWidth={3.5} />
+          <Check className="h-[46%] w-[46%]" strokeWidth={4.4} />
         </span>
       ) : null}
 

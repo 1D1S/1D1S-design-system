@@ -1,7 +1,10 @@
 import React from "react";
 import { AddCircle } from "./AddCircle";
+import { Bell } from "./Bell";
+import { BookOpen } from "./BookOpen";
 import { Calendar } from "./Calendar";
 import { Check } from "./Check";
+import { Code2 } from "./Code2";
 import { Chevron } from "./Chevron";
 import { ChevronDown } from "./ChevronDown";
 import { ChevronLeft } from "./ChevronLeft";
@@ -18,20 +21,29 @@ import { HamburgerMenu } from "./HamburgerMenu";
 import { Heart } from "./Heart";
 import { HeartFilled } from "./HeartFilled";
 import { Laptop } from "./Laptop";
+import { LogIn } from "./LogIn";
 import { Logo } from "./Logo";
 import { Minus } from "./Minus";
+import { Palette } from "./Palette";
 import { People } from "./People";
+import { PencilLine } from "./PencilLine";
 import { Person } from "./Person";
 import { Pin } from "./Pin";
+import { Plane } from "./Plane";
 import { Plus } from "./Plus";
+import { Salad } from "./Salad";
 import { Search } from "./Search";
+import { Settings } from "./Settings";
 import { Target } from "./Target";
 import { Trophy } from "./Trophy";
 
 const iconComponents = {
   AddCircle,
+  Bell,
+  BookOpen,
   Calendar,
   Check,
+  Code2,
   Chevron,
   ChevronDown,
   ChevronLeft,
@@ -48,13 +60,19 @@ const iconComponents = {
   Heart,
   HeartFilled,
   Laptop,
+  LogIn,
   Logo,
   Minus,
+  Palette,
   People,
+  PencilLine,
   Person,
   Pin,
+  Plane,
   Plus,
+  Salad,
   Search,
+  Settings,
   Target,
   Trophy,
 } as const;

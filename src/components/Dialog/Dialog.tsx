@@ -48,6 +48,11 @@ function DialogContent({
           "data-[state=open]:animate-in data-[state=closed]:animate-out",
           "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
           "data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",
+          "[&_[data-slot=button].h-13]:!h-11",
+          "[&_[data-slot=button].h-13]:!px-3.5",
+          "[&_[data-slot=button].h-11]:!h-9",
+          "[&_[data-slot=button]_.text-lg]:!text-base",
+          "[&_[data-slot=button]_.text-base]:!text-sm",
           "duration-200",
           className,
         )}

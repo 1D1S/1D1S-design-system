@@ -2,11 +2,11 @@
 
 import React from "react";
 import { format } from "date-fns";
-import { CalendarIcon } from "lucide-react";
 import * as PopoverPrimitive from "@radix-ui/react-popover";
 import type { DateRange } from "react-day-picker";
 import { cn } from "../../lib/utils";
-import { Calendar } from "../Calendar";
+import { Calendar as CalendarView } from "../Calendar";
+import { Calendar as CalendarIcon } from "../Icons";
 import { Text } from "../Text";
 
 interface BasePickerProps {
@@ -101,7 +101,7 @@ export function DatePicker({
           sideOffset={8}
           {...getPopoverContentProps(disableClickPropagation)}
         >
-          <Calendar
+          <CalendarView
             mode="single"
             selected={value}
             onSelect={(date) => {
@@ -168,7 +168,7 @@ export function RangeDatePicker({
           sideOffset={8}
           {...getPopoverContentProps(disableClickPropagation)}
         >
-          <Calendar
+          <CalendarView
             mode="range"
             selected={value}
             onSelect={(nextRange, selectedDay) => {

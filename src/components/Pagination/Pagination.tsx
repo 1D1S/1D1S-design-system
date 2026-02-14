@@ -1,9 +1,9 @@
 "use client";
 
 import * as React from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "../../lib/utils";
 import { Button } from "../Button";
+import { ChevronLeft, ChevronRight } from "../Icons";
 
 export interface PaginationProps {
   /** 현재 페이지 (1부터 시작) */

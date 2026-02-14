@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Dumbbell, Plane } from "lucide-react";
+import { Dumbbell, Plane } from "../Icons";
 import { CheckContainer } from "./CheckContainer";
 import { Text } from "../Text";
 
