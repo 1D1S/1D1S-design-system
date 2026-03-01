@@ -34,6 +34,7 @@ export function GoalAddList({
   const isControlled = goals !== undefined;
   const [internalGoals, setInternalGoals] = React.useState<string[]>(defaultGoals);
   const [draft, setDraft] = React.useState("");
+  const isComposingRef = React.useRef(false);
 
   const goalList = isControlled ? goals : internalGoals;
 
@@ -93,8 +94,21 @@ export function GoalAddList({
         aria-label={inputAriaLabel}
         placeholder={placeholder}
         onChange={(event) => setDraft(event.target.value)}
+        onCompositionStart={() => {
+          isComposingRef.current = true;
+        }}
+        onCompositionEnd={() => {
+          isComposingRef.current = false;
+        }}
         onKeyDown={(event) => {
           if (event.key !== "Enter") return;
+          if (
+            event.nativeEvent.isComposing ||
+            isComposingRef.current ||
+            event.nativeEvent.keyCode === 229
+          ) {
+            return;
+          }
           event.preventDefault();
           commitDraft();
         }}
