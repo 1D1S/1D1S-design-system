@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { Text } from "../Text";
 import { CircularProgress } from "../CircularProgress";
@@ -154,6 +154,9 @@ export interface DiaryCardProps {
   imageUrl?: string;
   percent: number;
   likes: number;
+  isLiked?: boolean;
+  defaultLiked?: boolean;
+  onLikeToggle?(nextLiked: boolean): void;
   title: string;
   user: string;
   userImage?: string;
@@ -168,6 +171,9 @@ export function DiaryCard({
   imageUrl,
   percent,
   likes,
+  isLiked: isLikedProp,
+  defaultLiked = false,
+  onLikeToggle,
   title,
   user,
   userImage,
@@ -177,12 +183,26 @@ export function DiaryCard({
   emotion = "happy",
   onClick,
 }: DiaryCardProps): React.ReactElement {
-  const [isLiked, setIsLiked] = useState(false);
-  const [likeCount, setLikeCount] = useState<number>(likes);
+  const isLikeControlled = typeof isLikedProp === "boolean";
+  const [internalIsLiked, setInternalIsLiked] = useState<boolean>(defaultLiked);
+  const [internalLikeCount, setInternalLikeCount] = useState<number>(likes);
+  const isLiked = isLikeControlled ? isLikedProp : internalIsLiked;
+  const likeCount = isLikeControlled ? likes : internalLikeCount;
+
+  useEffect(() => {
+    if (isLikeControlled) return;
+    setInternalLikeCount(likes);
+  }, [isLikeControlled, likes]);
 
   const handleToggleLike = (): void => {
-    setLikeCount((prev) => (isLiked ? prev - 1 : prev + 1));
-    setIsLiked((prev) => !prev);
+    const nextLiked = !isLiked;
+    const nextLikeCount = Math.max(0, likeCount + (nextLiked ? 1 : -1));
+
+    if (!isLikeControlled) {
+      setInternalIsLiked(nextLiked);
+      setInternalLikeCount(nextLikeCount);
+    }
+    onLikeToggle?.(nextLiked);
   };
 
   return (

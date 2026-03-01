@@ -40,11 +40,16 @@ export interface RightSidebarProps {
   settingButtonLabel?: string;
   challengeTitle?: string;
   challenges?: RightSidebarChallenge[];
+  emptyChallengeMessage?: string;
+  joinChallengeButtonLabel?: string;
+  createChallengeButtonLabel?: string;
   onCollapseClick?(): void;
   onOpenSettings?(): void;
   onWriteDiary?(): void;
   onGoMyPage?(): void;
   onLogin?(): void;
+  onJoinChallenge?(): void;
+  onCreateChallenge?(): void;
 }
 
 const defaultChallenges: RightSidebarChallenge[] = [
@@ -73,11 +78,16 @@ export function RightSidebar({
   settingButtonLabel = "설정",
   challengeTitle = "참여중인 챌린지",
   challenges = defaultChallenges,
+  emptyChallengeMessage = "챌린지가 없어요.",
+  joinChallengeButtonLabel = "챌린지 참여하기",
+  createChallengeButtonLabel = "챌린지 생성하기",
   onCollapseClick,
   onOpenSettings,
   onWriteDiary,
   onGoMyPage,
   onLogin,
+  onJoinChallenge,
+  onCreateChallenge,
 }: RightSidebarProps): React.ReactElement {
   const CONTENT_FADE_OUT_MS = 140;
   const CONTENT_FADE_IN_MS = 220;
@@ -335,20 +345,53 @@ export function RightSidebar({
                       {challengeTitle}
                     </Text>
 
-                    <div className="mt-4 flex flex-col gap-5">
-                      {challenges.map((challenge) => {
-                        const tone = challenge.tone ?? "blue";
-                        return (
-                          <ProgressBar
-                            key={challenge.id}
-                            label={challenge.title}
-                            value={challenge.progress}
-                            infinite={challenge.hasDeadline === false}
-                            fillColor={toneColorMap[tone]}
-                          />
-                        );
-                      })}
-                    </div>
+                    {challenges.length > 0 ? (
+                      <div className="mt-4 flex flex-col gap-5">
+                        {challenges.map((challenge) => {
+                          const tone = challenge.tone ?? "blue";
+                          return (
+                            <ProgressBar
+                              key={challenge.id}
+                              label={challenge.title}
+                              value={challenge.progress}
+                              infinite={challenge.hasDeadline === false}
+                              fillColor={toneColorMap[tone]}
+                            />
+                          );
+                        })}
+                      </div>
+                    ) : (
+                      <div className="mt-4">
+                        <Text
+                          as="p"
+                          size="caption1"
+                          weight="medium"
+                          className="text-gray-600"
+                        >
+                          {emptyChallengeMessage}
+                        </Text>
+
+                        <div className="mt-3 flex flex-col gap-2.5">
+                          <Button
+                            type="button"
+                            className="w-full"
+                            size="medium"
+                            onClick={onJoinChallenge}
+                          >
+                            {joinChallengeButtonLabel}
+                          </Button>
+                          <Button
+                            type="button"
+                            variant="outlined"
+                            className="w-full"
+                            size="medium"
+                            onClick={onCreateChallenge}
+                          >
+                            {createChallengeButtonLabel}
+                          </Button>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </>
               ) : (

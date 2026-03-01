@@ -43,3 +43,20 @@ export const LoggedOut: Story = {
     loginPromptMessage: '로그인하고 연속 기록을 시작해보세요',
   },
 };
+
+export const EmptyChallenges: Story = {
+  args: {
+    fixed: false,
+    isLoggedIn: true,
+    userName: '고라니',
+    userHandle: 'gorani',
+    streakDays: 12,
+    diaryButtonLabel: '일지 작성하기',
+    myPageButtonLabel: '마이페이지',
+    challengeTitle: '참여중인 챌린지',
+    challenges: [],
+    emptyChallengeMessage: '챌린지가 없어요.',
+    joinChallengeButtonLabel: '챌린지 참여하기',
+    createChallengeButtonLabel: '챌린지 생성하기',
+  },
+};
