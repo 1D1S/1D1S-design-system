@@ -5,7 +5,6 @@ import Image from "next/image";
 import { Text } from "../Text";
 import { CircularProgress } from "../CircularProgress";
 import { CircleAvatar } from "../CircleAvatar";
-import Link from "next/link";
 import { Heart } from "../Icons/Heart";
 import { HeartFilled } from "../Icons/HeartFilled";
 import { ImagePlaceholder } from "../ImagePlaceholder/ImagePlaceholder";
@@ -100,7 +99,7 @@ interface TextSectionProps {
   user: string;
   userImage?: string;
   challengeLabel: string;
-  challengeUrl: string;
+  onChallengeClick?(): void;
   date: string;
 }
 
@@ -109,7 +108,7 @@ function TextSection({
   user,
   userImage,
   challengeLabel,
-  challengeUrl,
+  onChallengeClick,
   date,
 }: TextSectionProps): React.ReactElement {
   return (
@@ -123,7 +122,17 @@ function TextSection({
         {title}
       </Text>
 
-      <Link href={challengeUrl} className="block w-full no-underline">
+      <button
+        type="button"
+        onClick={(event) => {
+          event.stopPropagation();
+          onChallengeClick?.();
+        }}
+        className={cn(
+          "block w-full rounded-1 px-1 py-0.5 text-left transition-colors",
+          "hover:bg-gray-100"
+        )}
+      >
         <Text
           size="body2"
           weight="medium"
@@ -131,7 +140,7 @@ function TextSection({
         >
           {challengeLabel}
         </Text>
-      </Link>
+      </button>
 
       <div className="h-px w-full bg-gray-200" />
 
@@ -161,7 +170,7 @@ export interface DiaryCardProps {
   user: string;
   userImage?: string;
   challengeLabel: string;
-  challengeUrl: string;
+  onChallengeClick?(): void;
   date: string;
   emotion: Emotion;
   onClick?(): void;
@@ -178,7 +187,7 @@ export function DiaryCard({
   user,
   userImage,
   challengeLabel,
-  challengeUrl,
+  onChallengeClick,
   date,
   emotion = "happy",
   onClick,
@@ -226,7 +235,7 @@ export function DiaryCard({
           user={user}
           userImage={userImage}
           challengeLabel={challengeLabel}
-          challengeUrl={challengeUrl}
+          onChallengeClick={onChallengeClick}
           date={date}
         />
       </div>

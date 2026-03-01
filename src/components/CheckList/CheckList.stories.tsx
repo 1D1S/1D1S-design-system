@@ -58,3 +58,12 @@ export const Disabled: Story = {
     onValueChange: () => {},
   },
 };
+
+export const ReadOnly: Story = {
+  args: {
+    options: options,
+    value: ["wake-up"],
+    readOnly: true,
+    onValueChange: () => {},
+  },
+};

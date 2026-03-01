@@ -20,6 +20,8 @@ export interface CheckListProps {
   onValueChange: (value: string[]) => void;
   /** 추가 클래스 */
   className?: string;
+  /** 읽기 전용 여부 (시각 변화 없이 토글만 비활성화) */
+  readOnly?: boolean;
   /** 전체 비활성화 여부 */
   disabled?: boolean;
 }
@@ -45,6 +47,7 @@ export function CheckList({
   value,
   onValueChange,
   className,
+  readOnly = false,
   disabled = false,
 }: CheckListProps): React.ReactElement {
   const baseId = React.useId();
@@ -68,22 +71,25 @@ export function CheckList({
       {options.map((option, index) => {
         const isChecked = value.includes(option.id);
         const isDisabled = disabled || option.disabled;
+        const isReadOnly = !isDisabled && readOnly;
+        const isInteractionBlocked = isDisabled || isReadOnly;
         const optionId = `${baseId}-${option.id}`;
 
         return (
           <div
             key={option.id}
             role="group"
-            aria-disabled={isDisabled}
+            aria-disabled={isInteractionBlocked}
             onClick={() => {
-              if (isDisabled) return;
+              if (isInteractionBlocked) return;
               handleToggle(option.id, !isChecked);
             }}
             className={cn(
               "flex w-full items-center gap-4 px-4 py-4 text-left transition-colors",
               index > 0 && "border-t border-gray-200",
-              !isDisabled && "cursor-pointer hover:bg-gray-100/70",
-              isDisabled && "cursor-not-allowed"
+              !isInteractionBlocked && "cursor-pointer hover:bg-gray-100/70",
+              isDisabled && "cursor-not-allowed",
+              isReadOnly && "cursor-default hover:cursor-not-allowed"
             )}
           >
             <Checkbox
@@ -94,12 +100,13 @@ export function CheckList({
                 event.stopPropagation();
               }}
               onCheckedChange={(checkedState) => {
-                if (isDisabled || checkedState === "indeterminate") return;
+                if (isInteractionBlocked || checkedState === "indeterminate") return;
                 handleToggle(option.id, checkedState === true);
               }}
               className={cn(
                 "h-5 w-5 rounded-1.5",
-                "data-[state=checked]:border-main-800 data-[state=checked]:bg-main-800"
+                "data-[state=checked]:border-main-800 data-[state=checked]:bg-main-800",
+                isReadOnly && "cursor-default hover:cursor-not-allowed"
               )}
             />
 
