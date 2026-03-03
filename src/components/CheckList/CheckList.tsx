@@ -76,13 +76,13 @@ export function CheckList({
         const optionId = `${baseId}-${option.id}`;
 
         return (
-          <div
+          <label
             key={option.id}
-            role="group"
+            htmlFor={optionId}
             aria-disabled={isInteractionBlocked}
-            onClick={() => {
-              if (isInteractionBlocked) return;
-              handleToggle(option.id, !isChecked);
+            onClick={(event) => {
+              if (!isInteractionBlocked) return;
+              event.preventDefault();
             }}
             className={cn(
               "flex w-full items-center gap-4 px-4 py-4 text-left transition-colors",
@@ -96,9 +96,6 @@ export function CheckList({
               id={optionId}
               checked={isChecked}
               disabled={isDisabled}
-              onClick={(event) => {
-                event.stopPropagation();
-              }}
               onCheckedChange={(checkedState) => {
                 if (isInteractionBlocked || checkedState === "indeterminate") return;
                 handleToggle(option.id, checkedState === true);
@@ -115,19 +112,25 @@ export function CheckList({
                 size="body1"
                 weight="medium"
                 className={cn(
-                  "transition-colors",
-                  isChecked ? "text-gray-900" : "text-gray-500",
+                  "flex-1 transition-colors",
+                  isChecked ? "text-gray-900" : "text-gray-600",
                   isDisabled && "text-gray-400"
                 )}
               >
                 {option.label}
               </Text>
             ) : (
-              <span className={cn(!isChecked && "text-gray-500", isDisabled && "opacity-60")}>
+              <span
+                className={cn(
+                  "flex-1",
+                  !isChecked && "text-gray-600",
+                  isDisabled && "opacity-60"
+                )}
+              >
                 {option.label}
               </span>
             )}
-          </div>
+          </label>
         );
       })}
     </div>

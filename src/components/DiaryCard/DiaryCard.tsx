@@ -78,7 +78,7 @@ function ImageSection({
             event.stopPropagation();
             onToggleLike();
           }}
-          className="inline-flex items-center gap-1 rounded-full bg-main-800 px-3 py-1.5 text-white shadow-[0_4px_10px_rgba(34,34,34,0.25)] transition-colors hover:bg-main-900"
+          className="inline-flex cursor-pointer items-center gap-1 rounded-full bg-main-800 px-3 py-1.5 text-white shadow-[0_4px_10px_rgba(34,34,34,0.25)] transition-colors hover:bg-main-900"
         >
           {isLiked ? (
             <HeartFilled width={14} height={14} className="text-white" />
@@ -129,7 +129,7 @@ function TextSection({
           onChallengeClick?.();
         }}
         className={cn(
-          "block w-full rounded-1 px-1 py-0.5 text-left transition-colors",
+          "block w-full cursor-pointer rounded-1 px-1 py-0.5 text-left transition-colors",
           "hover:bg-gray-100"
         )}
       >
