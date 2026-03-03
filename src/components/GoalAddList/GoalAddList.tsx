@@ -77,7 +77,7 @@ export function GoalAddList({
             disabled={disabled}
             onClick={() => removeGoal(index)}
             className={cn(
-              "inline-flex h-8 w-8 items-center justify-center rounded-2 text-gray-600 transition-colors",
+              "inline-flex h-8 w-8 items-center justify-center rounded-2 text-gray-600 transition-colors hover:cursor-pointer",
               !disabled && "hover:bg-gray-100 hover:text-gray-700",
               disabled && "cursor-not-allowed text-gray-400"
             )}
