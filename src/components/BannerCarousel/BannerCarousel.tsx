@@ -32,6 +32,7 @@ export interface BannerCarouselProps extends React.HTMLAttributes<HTMLDivElement
   enableLoop?: boolean;
   showIndicators?: boolean;
   aspectRatioClassName?: string;
+  minHeightPx?: number;
   componentId?: string;
   enableDataLayerTracking?: boolean;
   impressionMode?: "once" | "always";
@@ -57,6 +58,7 @@ export function BannerCarousel({
   enableLoop = true,
   showIndicators = true,
   aspectRatioClassName = "aspect-[4/1]",
+  minHeightPx = 120,
   componentId,
   enableDataLayerTracking = false,
   impressionMode = "once",
@@ -68,6 +70,7 @@ export function BannerCarousel({
   ...props
 }: BannerCarouselProps): React.ReactElement | null {
   const itemCount = items.length;
+  const resolvedMinHeight = minHeightPx > 0 ? `${minHeightPx}px` : undefined;
 
   const normalizedInitialIndex = React.useMemo<number>(() => {
     if (itemCount === 0) return 0;
@@ -246,6 +249,7 @@ export function BannerCarousel({
                 )}
                 style={{
                   backgroundImage: `linear-gradient(to right, ${DEFAULT_GRADIENT_FROM}, ${DEFAULT_GRADIENT_TO})`,
+                  minHeight: resolvedMinHeight,
                 }}
               >
                 {isImageEnabled ? (

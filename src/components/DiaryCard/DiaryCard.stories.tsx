@@ -18,6 +18,9 @@ const meta: Meta<typeof DiaryCard> = {
       control: 'select',
       options: ['happy', 'soso', 'sad'],
     },
+    totalMemberCount: {
+      control: 'number',
+    },
     onChallengeClick: { action: 'challenge clicked' },
   },
 };
@@ -34,6 +37,7 @@ export const Default: Story = {
     userImage:
       'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&q=80',
     challengeLabel: '1D1S 챌린지',
+    totalMemberCount: 1,
     date: '5분 전',
     percent: 80,
     likes: 10,
@@ -50,6 +54,7 @@ export const ControlledLike: Story = {
     userImage:
       'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&q=80',
     challengeLabel: '1D1S 챌린지',
+    totalMemberCount: 3,
     date: '5분 전',
     percent: 80,
     likes: 10,

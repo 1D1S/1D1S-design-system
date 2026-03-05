@@ -49,6 +49,36 @@ export const Recruiting: Story = {
   },
 };
 
+export const IndividualParticipant: Story = {
+  args: {
+    challengeTitle: '개인 독서 챌린지',
+    challengeCategory: '자기계발',
+    challengeType: '인증형',
+    challengeIcon: <Flame />,
+    imageUrl: '',
+    currentUserCount: 1,
+    maxUserCount: 50,
+    startDate: '2025.04.01',
+    endDate: '2025.04.30',
+    isOngoing: true,
+  },
+};
+
+export const GroupParticipantCount: Story = {
+  args: {
+    challengeTitle: '스터디 인증 챌린지',
+    challengeCategory: '학습',
+    challengeType: '인증형',
+    challengeIcon: <Laptop />,
+    imageUrl: '',
+    currentUserCount: 2,
+    maxUserCount: 50,
+    startDate: '2025.04.01',
+    endDate: '2025.04.30',
+    isOngoing: true,
+  },
+};
+
 export const Ended: Story = {
   args: {
     challengeTitle: '한 달 독서 기록 챌린지',

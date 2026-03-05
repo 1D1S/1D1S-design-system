@@ -170,6 +170,7 @@ export interface DiaryCardProps {
   user: string;
   userImage?: string;
   challengeLabel: string;
+  totalMemberCount?: number;
   onChallengeClick?(): void;
   date: string;
   emotion: Emotion;
@@ -187,6 +188,7 @@ export function DiaryCard({
   user,
   userImage,
   challengeLabel,
+  totalMemberCount,
   onChallengeClick,
   date,
   emotion = "happy",
@@ -214,6 +216,13 @@ export function DiaryCard({
     onLikeToggle?.(nextLiked);
   };
 
+  const challengeTypeLabel =
+    typeof totalMemberCount === "number"
+      ? totalMemberCount <= 1
+        ? "개인"
+        : "단체"
+      : challengeLabel;
+
   return (
     <div
       className={cn("block w-full", onClick && "cursor-pointer")}
@@ -234,7 +243,7 @@ export function DiaryCard({
           title={title}
           user={user}
           userImage={userImage}
-          challengeLabel={challengeLabel}
+          challengeLabel={challengeTypeLabel}
           onChallengeClick={onChallengeClick}
           date={date}
         />

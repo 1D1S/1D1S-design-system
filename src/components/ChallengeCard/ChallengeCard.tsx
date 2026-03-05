@@ -41,6 +41,8 @@ export function ChallengeCard({
   onClick,
 }: ChallengeCardProps): React.ReactElement {
   const hasImage = Boolean(imageUrl && imageUrl.trim().length > 0);
+  const participantLabel =
+    currentUserCount <= 1 ? "개인" : `${currentUserCount} / ${maxUserCount}`;
 
   const statusLabel = isEnded ? "종료됨" : isOngoing ? "진행중" : "모집중";
   const statusClassName = isEnded
@@ -52,7 +54,7 @@ export function ChallengeCard({
   return (
     <div
       className={cn(
-        "min-w-62.5 w-full overflow-hidden rounded-[12px] border border-gray-200 bg-white",
+        "min-w-60 w-full overflow-hidden rounded-[12px] border border-gray-200 bg-white",
         onClick && "cursor-pointer",
         "transition-all duration-200 ease-in-out hover:-translate-y-1 hover:shadow-default",
         className,
@@ -107,7 +109,7 @@ export function ChallengeCard({
           <div className="flex items-center gap-1.5">
             <People className="h-3.5 w-3.5 text-gray-600" />
             <Text size="caption1" weight="medium" className="text-gray-600">
-              {currentUserCount} / {maxUserCount}
+              {participantLabel}
             </Text>
           </div>
         </div>
