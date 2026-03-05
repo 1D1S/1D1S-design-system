@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.6](https://github.com/1D1S/1D1S-design-system/compare/v0.2.5...v0.2.6) (2026-03-05)
+
+
+### Features
+
+* 다이어리 카드와 챌린지, 배너 수정 ([1bb9a1e](https://github.com/1D1S/1D1S-design-system/commit/1bb9a1ee4a445964d64b46657b8d3eec667ca62b))
+
 ### [0.2.5](https://github.com/1D1S/1D1S-design-system/compare/v0.2.4...v0.2.5) (2026-03-03)
 
 
