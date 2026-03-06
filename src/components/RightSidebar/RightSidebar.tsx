@@ -28,7 +28,7 @@ export interface RightSidebarChallenge {
 export interface RightSidebarProps {
   isLoggedIn?: boolean;
   userName?: string;
-  userHandle?: string;
+  userSubtitle?: string;
   userImage?: string;
   streakDays: number;
   fixed?: boolean;
@@ -42,6 +42,7 @@ export interface RightSidebarProps {
   challenges?: RightSidebarChallenge[];
   emptyChallengeMessage?: string;
   joinChallengeButtonLabel?: string;
+  joinChallengeMaxUserCount?: number;
   createChallengeButtonLabel?: string;
   onCollapseClick?(): void;
   onOpenSettings?(): void;
@@ -66,7 +67,7 @@ const toneColorMap: Record<RightSidebarProgressTone, string> = {
 export function RightSidebar({
   isLoggedIn = true,
   userName,
-  userHandle,
+  userSubtitle,
   userImage,
   streakDays,
   fixed = true,
@@ -80,6 +81,7 @@ export function RightSidebar({
   challenges = defaultChallenges,
   emptyChallengeMessage = "챌린지가 없어요.",
   joinChallengeButtonLabel = "챌린지 참여하기",
+  joinChallengeMaxUserCount,
   createChallengeButtonLabel = "챌린지 생성하기",
   onCollapseClick,
   onOpenSettings,
@@ -102,6 +104,9 @@ export function RightSidebar({
   const [heightLock, setHeightLock] = useState<number | null>(null);
   const asideRef = useRef<HTMLElement | null>(null);
   const transitionTimersRef = useRef<ReturnType<typeof setTimeout>[]>([]);
+  const isJoinChallengeDisabled =
+    typeof joinChallengeMaxUserCount === "number" &&
+    joinChallengeMaxUserCount <= 1;
 
   const clearTransitionTimers = (): void => {
     transitionTimersRef.current.forEach((timerId) => clearTimeout(timerId));
@@ -253,7 +258,7 @@ export function RightSidebar({
                       className="text-gray-600"
                     >
                       {isLoggedIn
-                        ? `@${userHandle ?? "gorani"}`
+                        ? (userSubtitle ?? "")
                         : "로그인 후 이용 가능"}
                     </Text>
                   </div>
@@ -376,6 +381,7 @@ export function RightSidebar({
                             type="button"
                             className="w-full"
                             size="medium"
+                            disabled={isJoinChallengeDisabled}
                             onClick={onJoinChallenge}
                           >
                             {joinChallengeButtonLabel}

@@ -57,7 +57,7 @@ export const IndividualParticipant: Story = {
     challengeIcon: <Flame />,
     imageUrl: '',
     currentUserCount: 1,
-    maxUserCount: 50,
+    maxUserCount: 1,
     startDate: '2025.04.01',
     endDate: '2025.04.30',
     isOngoing: true,

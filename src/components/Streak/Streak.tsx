@@ -69,7 +69,7 @@ export function Streak({
               </TooltipTrigger>
               <TooltipContent side="top">
                 <p className="text-xs">
-                  {item.count} contributions on {item.date}
+                  {item.date} · {item.count}회 활동
                 </p>
               </TooltipContent>
             </Tooltip>

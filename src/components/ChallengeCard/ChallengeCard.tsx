@@ -42,7 +42,7 @@ export function ChallengeCard({
 }: ChallengeCardProps): React.ReactElement {
   const hasImage = Boolean(imageUrl && imageUrl.trim().length > 0);
   const participantLabel =
-    currentUserCount <= 1 ? "개인" : `${currentUserCount} / ${maxUserCount}`;
+    maxUserCount <= 1 ? "개인" : `${currentUserCount} / ${maxUserCount}`;
 
   const statusLabel = isEnded ? "종료됨" : isOngoing ? "진행중" : "모집중";
   const statusClassName = isEnded
