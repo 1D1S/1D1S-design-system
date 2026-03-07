@@ -54,14 +54,14 @@ export function ChallengeCard({
   return (
     <div
       className={cn(
-        "@container min-w-60 w-full overflow-hidden rounded-[12px] border border-gray-200 bg-white",
+        "min-w-60 w-full overflow-hidden rounded-[12px] border border-gray-200 bg-white",
         onClick && "cursor-pointer",
         "transition-all duration-200 ease-in-out hover:-translate-y-1 hover:shadow-default",
         className,
       )}
       onClick={onClick}
     >
-      <div className="relative h-40 w-full overflow-hidden bg-gray-100 @[280px]:h-52">
+      <div className="relative h-40 w-full overflow-hidden bg-gray-100 sm:h-52">
         {hasImage ? (
           <div className="absolute inset-0">
             <Image
@@ -89,32 +89,32 @@ export function ChallengeCard({
         </div>
       </div>
 
-      <div className="w-full bg-white px-4 py-4 @[280px]:px-5 @[280px]:py-5">
+      <div className="w-full bg-white px-4 py-4 sm:px-5 sm:py-5">
         <Text
           size="body1"
           weight="bold"
-          className="line-clamp-2 min-h-8 text-gray-900 @[280px]:text-2xl @[280px]:min-h-10"
+          className="line-clamp-2 min-h-8 text-gray-900 sm:text-2xl sm:min-h-10"
         >
           {challengeTitle}
         </Text>
 
-        <div className="mt-3 flex w-full items-center justify-between @[280px]:mt-4">
+        <div className="mt-3 flex w-full items-center justify-between sm:mt-4">
           <div className="flex items-center gap-1.5">
-            <Person className="h-3 w-3 text-gray-600 @[280px]:h-3.5 @[280px]:w-3.5" />
-            <Text size="caption2" weight="medium" className="text-gray-600 @[280px]:text-base">
+            <Person className="h-3 w-3 text-gray-600 sm:h-3.5 sm:w-3.5" />
+            <Text size="caption2" weight="medium" className="text-gray-600 sm:text-base">
               {challengeType}
             </Text>
           </div>
 
           <div className="flex items-center gap-1.5">
-            <People className="h-3 w-3 text-gray-600 @[280px]:h-3.5 @[280px]:w-3.5" />
-            <Text size="caption2" weight="medium" className="text-gray-600 @[280px]:text-base">
+            <People className="h-3 w-3 text-gray-600 sm:h-3.5 sm:w-3.5" />
+            <Text size="caption2" weight="medium" className="text-gray-600 sm:text-base">
               {participantLabel}
             </Text>
           </div>
         </div>
 
-        <Text size="caption2" weight="regular" className="mt-2 text-gray-500 @[280px]:mt-3 @[280px]:text-base">
+        <Text size="caption2" weight="regular" className="mt-2 text-gray-500 sm:mt-3 sm:text-base">
           {startDate} - {endDate}
         </Text>
       </div>

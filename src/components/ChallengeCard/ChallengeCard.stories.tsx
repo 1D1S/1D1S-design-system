@@ -13,13 +13,7 @@ const meta: Meta<typeof ChallengeCard> = {
   title: 'ChallengeCard',
   component: ChallengeCard,
   tags: ['autodocs'],
-  decorators: [
-    (Story) => (
-      <div className="@container w-[350px] bg-gray-100 p-4">
-        <Story />
-      </div>
-    ),
-  ],
+
 };
 
 export default meta;
@@ -47,7 +41,7 @@ export const Mobile: Story = {
   },
   decorators: [
     (Story) => (
-      <div className="@container w-[220px] bg-gray-100 p-4">
+      <div className="bg-gray-100 p-4">
         <Story />
       </div>
     ),

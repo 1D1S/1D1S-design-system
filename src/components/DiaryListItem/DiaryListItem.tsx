@@ -90,14 +90,14 @@ export function DiaryListItem({
   return (
     <div
       className={cn(
-        "@container flex min-w-[320px] gap-3 rounded-4 border border-gray-200 bg-white p-3 transition-all duration-200 ease-in-out hover:-translate-y-1 hover:shadow-default @[480px]:min-w-[560px]",
+        "flex min-w-[320px] gap-3 rounded-4 border border-gray-200 bg-white p-3 transition-all duration-200 ease-in-out hover:-translate-y-1 hover:shadow-default sm:min-w-[560px]",
         onClick && "cursor-pointer",
         className,
       )}
       onClick={onClick}
     >
       {/* Thumbnail */}
-      <div className="relative -mb-3 -ml-3 -mt-3 w-[100px] shrink-0 self-stretch overflow-hidden rounded-l-3 bg-gray-100 @[480px]:w-[140px]">
+      <div className="relative -mb-3 -ml-3 -mt-3 w-[100px] shrink-0 self-stretch overflow-hidden rounded-l-3 bg-gray-100 sm:w-[140px]">
         {hasImage ? (
           <Image src={imageUrl as string} alt={title} width={128} height={128} className="h-full w-full object-cover" />
         ) : (

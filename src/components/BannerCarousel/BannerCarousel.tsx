@@ -214,7 +214,7 @@ export function BannerCarousel({
   }
 
   return (
-    <div className={cn("@container w-full", className)} {...props}>
+    <div className={cn("w-full", className)} {...props}>
       <div className="relative overflow-hidden rounded-4">
         <div
           className={cn("flex", isTransitionOn && "transition-transform duration-500 ease-out")}
@@ -243,7 +243,7 @@ export function BannerCarousel({
                 data-banner-title={banner.title}
                 data-banner-image-url={resolvedBackgroundImageUrl ?? ""}
                 className={cn(
-                  "relative w-full shrink-0 overflow-hidden p-4 text-left text-white transition hover:brightness-105 @[480px]:p-6",
+                  "relative w-full shrink-0 overflow-hidden p-4 text-left text-white transition hover:brightness-105 sm:p-6",
                   "cursor-pointer",
                   aspectRatioClassName,
                 )}
@@ -272,15 +272,15 @@ export function BannerCarousel({
 
                   <div className="flex items-end justify-between gap-4">
                     <div className="flex flex-col gap-2">
-                      <Text size="heading2" weight="bold" className="line-clamp-1 text-white @[480px]:text-3xl">
+                      <Text size="heading2" weight="bold" className="line-clamp-1 text-white sm:text-3xl">
                         {banner.title}
                       </Text>
-                      <Text size="caption1" weight="medium" className="line-clamp-1 text-white/90 @[480px]:text-lg">
+                      <Text size="caption1" weight="medium" className="line-clamp-1 text-white/90 sm:text-lg">
                         {banner.subtitle}
                       </Text>
                     </div>
 
-                    <Text size="heading2" weight="bold" className="text-white @[480px]:text-3xl">
+                    <Text size="heading2" weight="bold" className="text-white sm:text-3xl">
                       →
                     </Text>
                   </div>

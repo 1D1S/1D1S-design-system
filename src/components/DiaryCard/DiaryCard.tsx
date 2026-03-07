@@ -56,7 +56,7 @@ function ImageSection({
       ) : null}
 
       <div className="absolute top-3 left-3 z-20">
-        <div className="relative flex h-10 w-10 items-center justify-center rounded-full bg-white shadow-[0_6px_14px_rgba(34,34,34,0.2)] @[280px]:h-12 @[280px]:w-12">
+        <div className="relative flex h-10 w-10 items-center justify-center rounded-full bg-white shadow-[0_6px_14px_rgba(34,34,34,0.2)] sm:h-12 sm:w-12">
           <CircularProgress
             value={clampedPercent}
             size="sm"
@@ -65,7 +65,7 @@ function ImageSection({
         </div>
       </div>
 
-      <div className="absolute top-3 right-3 z-20 text-2xl leading-none @[280px]:text-3xl">
+      <div className="absolute top-3 right-3 z-20 text-2xl leading-none sm:text-3xl">
         <span role="img" aria-label={emotion}>
           {emotionEmojiMap[emotion]}
         </span>
@@ -112,12 +112,12 @@ function TextSection({
   date,
 }: TextSectionProps): React.ReactElement {
   return (
-    <div className="flex w-full flex-col gap-2 p-3 @[280px]:gap-3 @[280px]:p-4">
+    <div className="flex w-full flex-col gap-2 p-3 sm:gap-3 sm:p-4">
       <Text
         as="p"
         size="body2"
         weight="bold"
-        className="line-clamp-2 min-h-8 leading-tight text-gray-900 @[280px]:text-xl @[280px]:min-h-10"
+        className="line-clamp-2 min-h-8 leading-tight text-gray-900 sm:text-xl sm:min-h-10"
       >
         {title}
       </Text>
@@ -136,7 +136,7 @@ function TextSection({
         <Text
           size="caption1"
           weight="medium"
-          className="block w-full truncate text-blue-500 @[280px]:text-lg"
+          className="block w-full truncate text-blue-500 sm:text-lg"
         >
           {challengeLabel}
         </Text>
@@ -144,13 +144,13 @@ function TextSection({
 
       <div className="h-px w-full bg-gray-200" />
 
-      <div className="flex items-center gap-2 @[280px]:gap-3">
+      <div className="flex items-center gap-2 sm:gap-3">
         <CircleAvatar imageUrl={userImage} size="sm" />
-        <div className="flex flex-col gap-0.5 @[280px]:gap-1">
-          <Text size="caption1" weight="bold" className="text-gray-900 @[280px]:text-lg">
+        <div className="flex flex-col gap-0.5 sm:gap-1">
+          <Text size="caption1" weight="bold" className="text-gray-900 sm:text-lg">
             {user}
           </Text>
-          <Text size="caption3" weight="regular" className="text-gray-500 @[280px]:text-sm">
+          <Text size="caption3" weight="regular" className="text-gray-500 sm:text-sm">
             {date}
           </Text>
         </div>
@@ -225,7 +225,7 @@ export function DiaryCard({
 
   return (
     <div
-      className={cn("@container block w-full", onClick && "cursor-pointer")}
+      className={cn("block w-full", onClick && "cursor-pointer")}
       onClick={onClick}
     >
       <div className="overflow-hidden rounded-4 border border-gray-200 bg-white transition-transform duration-200 hover:-translate-y-1 hover:shadow-lg">
