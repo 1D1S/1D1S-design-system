@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.11](https://github.com/1D1S/1D1S-design-system/compare/v0.2.10...v0.2.11) (2026-03-07)
+
+
+### Features
+
+* 롤백 ([a672dc3](https://github.com/1D1S/1D1S-design-system/commit/a672dc3466c139a533d6a071ee07658eebf3baab))
+
 ### [0.2.10](https://github.com/1D1S/1D1S-design-system/compare/v0.2.9...v0.2.10) (2026-03-07)
 
 
