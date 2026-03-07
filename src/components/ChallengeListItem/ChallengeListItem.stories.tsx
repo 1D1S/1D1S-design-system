@@ -92,6 +92,80 @@ export const WithImage: Story = {
   },
 };
 
+export const Mobile: Story = {
+  parameters: {
+    viewport: { defaultViewport: 'mobile1' },
+  },
+  decorators: [
+    (Story) => (
+      <div className="w-full bg-gray-100 p-4">
+        <Story />
+      </div>
+    ),
+  ],
+  args: {
+    challengeTitle: '새벽 러닝 챌린지',
+    challengeCategory: '운동',
+    challengeType: '인증형',
+    challengeIcon: <Dumbbell />,
+    currentUserCount: 92,
+    maxUserCount: 100,
+    startDate: '2025.03.01',
+    endDate: '2025.04.01',
+    isOngoing: true,
+  },
+};
+
+export const MobileList: Story = {
+  parameters: {
+    viewport: { defaultViewport: 'mobile1' },
+  },
+  decorators: [
+    (Story) => (
+      <div className="w-full bg-gray-100 p-4">
+        <Story />
+      </div>
+    ),
+  ],
+  render: () => (
+    <div className="flex flex-col gap-3">
+      <ChallengeListItem
+        challengeTitle="새벽 러닝 챌린지"
+        challengeCategory="운동"
+        challengeType="인증형"
+        challengeIcon={<Dumbbell />}
+        currentUserCount={92}
+        maxUserCount={100}
+        startDate="2025.03.01"
+        endDate="2025.04.01"
+        isOngoing={true}
+      />
+      <ChallengeListItem
+        challengeTitle="아침 코딩 챌린지"
+        challengeCategory="개발"
+        challengeType="자율형"
+        challengeIcon={<Laptop />}
+        currentUserCount={5}
+        maxUserCount={15}
+        startDate="2025.04.10"
+        endDate="2025.05.10"
+        isOngoing={false}
+      />
+      <ChallengeListItem
+        challengeTitle="개인 독서 챌린지"
+        challengeCategory="자기계발"
+        challengeType="인증형"
+        challengeIcon={<Flame />}
+        currentUserCount={1}
+        maxUserCount={1}
+        startDate="2025.04.01"
+        endDate="2025.04.30"
+        isOngoing={true}
+      />
+    </div>
+  ),
+};
+
 export const List: Story = {
   render: () => (
     <div className="flex flex-col gap-3">

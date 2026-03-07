@@ -90,6 +90,76 @@ export const ControlledLike: Story = {
   },
 };
 
+export const Mobile: Story = {
+  parameters: {
+    viewport: { defaultViewport: 'mobile1' },
+  },
+  decorators: [
+    (Story) => (
+      <div className="w-full bg-gray-100 p-4">
+        <Story />
+      </div>
+    ),
+  ],
+  args: {
+    imageUrl:
+      'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80',
+    title: '오늘 알고리즘 문제 3개 풀기 완료! 역시 꾸준함이 답이다.',
+    user: '라니',
+    userImage:
+      'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&q=80',
+    challengeLabel: '1D1S 챌린지',
+    totalMemberCount: 3,
+    date: '5분 전',
+    percent: 80,
+    likes: 10,
+    emotion: 'happy',
+  },
+};
+
+export const MobileList: Story = {
+  parameters: {
+    viewport: { defaultViewport: 'mobile1' },
+  },
+  decorators: [
+    (Story) => (
+      <div className="w-full bg-gray-100 p-4">
+        <Story />
+      </div>
+    ),
+  ],
+  render: () => (
+    <div className="flex flex-col gap-3">
+      {[
+        {
+          title: '고라니 밥준 일지',
+          user: '고라니',
+          date: '2시간 전',
+          percent: 60,
+          likes: 10,
+          emotion: 'happy' as const,
+          challengeLabel: '1D1S 챌린지',
+          totalMemberCount: 1,
+        },
+        {
+          title: '오늘 알고리즘 문제 3개 풀기 완료! 역시 꾸준함이 답이다.',
+          imageUrl:
+            'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80',
+          user: '라니',
+          date: '5분 전',
+          percent: 80,
+          likes: 42,
+          emotion: 'soso' as const,
+          challengeLabel: '알고리즘 스터디',
+          totalMemberCount: 5,
+        },
+      ].map((item, i) => (
+        <DiaryListItem key={i} {...item} />
+      ))}
+    </div>
+  ),
+};
+
 export const List: Story = {
   render: () => (
     <div className="flex flex-col gap-3">

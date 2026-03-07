@@ -61,7 +61,7 @@ export function ChallengeCard({
       )}
       onClick={onClick}
     >
-      <div className="relative h-52 w-full overflow-hidden bg-gray-100">
+      <div className="relative h-40 w-full overflow-hidden bg-gray-100 sm:h-52">
         {hasImage ? (
           <div className="absolute inset-0">
             <Image
@@ -89,32 +89,32 @@ export function ChallengeCard({
         </div>
       </div>
 
-      <div className="w-full bg-white px-5 py-5">
+      <div className="w-full bg-white px-4 py-4 sm:px-5 sm:py-5">
         <Text
-          size="heading2"
+          size="body1"
           weight="bold"
-          className="line-clamp-2 min-h-10 text-gray-900"
+          className="line-clamp-2 min-h-8 text-gray-900 sm:text-2xl sm:min-h-10"
         >
           {challengeTitle}
         </Text>
 
-        <div className="mt-4 flex w-full items-center justify-between">
+        <div className="mt-3 flex w-full items-center justify-between sm:mt-4">
           <div className="flex items-center gap-1.5">
-            <Person className="h-3.5 w-3.5 text-gray-600" />
-            <Text size="caption1" weight="medium" className="text-gray-600">
+            <Person className="h-3 w-3 text-gray-600 sm:h-3.5 sm:w-3.5" />
+            <Text size="caption2" weight="medium" className="text-gray-600 sm:text-base">
               {challengeType}
             </Text>
           </div>
 
           <div className="flex items-center gap-1.5">
-            <People className="h-3.5 w-3.5 text-gray-600" />
-            <Text size="caption1" weight="medium" className="text-gray-600">
+            <People className="h-3 w-3 text-gray-600 sm:h-3.5 sm:w-3.5" />
+            <Text size="caption2" weight="medium" className="text-gray-600 sm:text-base">
               {participantLabel}
             </Text>
           </div>
         </div>
 
-        <Text size="caption1" weight="regular" className="mt-3 text-gray-500">
+        <Text size="caption2" weight="regular" className="mt-2 text-gray-500 sm:mt-3 sm:text-base">
           {startDate} - {endDate}
         </Text>
       </div>

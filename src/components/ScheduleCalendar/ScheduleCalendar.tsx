@@ -70,12 +70,12 @@ export function ScheduleCalendar({
               <th
                 key={`${label}-${index}`}
                 className={cn(
-                  "h-12 border-b border-r border-gray-300 bg-gray-100 px-2.5 text-center align-middle",
+                  "h-8 border-b border-r border-gray-300 bg-gray-100 px-1 text-center align-middle sm:h-12 sm:px-2.5",
                   index === weekLabels.length - 1 && "border-r-0"
                 )}
                 scope="col"
               >
-                <Text size="body2" weight="bold" className="text-gray-600">
+                <Text size="caption3" weight="bold" className="text-gray-600 sm:text-lg">
                   {label}
                 </Text>
               </th>
@@ -104,7 +104,7 @@ export function ScheduleCalendar({
                   >
                     <div
                       className={cn(
-                        "flex h-full min-h-[110px] flex-col gap-2 p-2",
+                        "flex h-full flex-col gap-1 p-1 sm:gap-2 sm:p-2",
                         cell.muted && "bg-gray-300",
                         cell.highlighted && "bg-main-200 ring-1 ring-inset ring-main-400"
                       )}
@@ -116,27 +116,27 @@ export function ScheduleCalendar({
                         <>
                           {cell.day !== undefined ? (
                             <Text
-                              size="body2"
+                              size="caption3"
                               weight="medium"
-                              className={cn("leading-tight", getDayToneClass(cell.dayTone))}
+                              className={cn("leading-tight sm:text-lg", getDayToneClass(cell.dayTone))}
                             >
                               {cell.day}
                             </Text>
                           ) : null}
 
                           {cell.title !== undefined ? (
-                            <Text size="body2" weight="bold" className="line-clamp-1 text-gray-900">
+                            <Text size="caption3" weight="bold" className="line-clamp-1 text-gray-900 sm:text-lg">
                               {cell.title}
                             </Text>
                           ) : null}
 
                           {cell.bars && cell.bars.length > 0 ? (
-                            <div className="mt-0.5 flex flex-col gap-1.5">
+                            <div className="mt-0.5 flex flex-col gap-1">
                               {cell.bars.map((bar, barIndex) => (
                                 <span
                                   key={`${key}-bar-${barIndex}`}
                                   className={cn(
-                                    "block h-1.5 rounded-full transition-all duration-200",
+                                    "block h-1 rounded-full transition-all duration-200 sm:h-1.5",
                                     getBarToneClass(bar.tone)
                                   )}
                                   style={{ width: resolveWidth(bar.width) }}
@@ -146,7 +146,7 @@ export function ScheduleCalendar({
                           ) : null}
 
                           {cell.subtitle !== undefined ? (
-                            <Text size="caption2" weight="medium" className="text-gray-600">
+                            <Text size="caption3" weight="medium" className="hidden text-gray-600 sm:block">
                               {cell.subtitle}
                             </Text>
                           ) : null}

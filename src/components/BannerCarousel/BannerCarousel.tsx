@@ -58,7 +58,7 @@ export function BannerCarousel({
   enableLoop = true,
   showIndicators = true,
   aspectRatioClassName = "aspect-[4/1]",
-  minHeightPx = 120,
+  minHeightPx = 180,
   componentId,
   enableDataLayerTracking = false,
   impressionMode = "once",
@@ -272,15 +272,15 @@ export function BannerCarousel({
 
                   <div className="flex items-end justify-between gap-4">
                     <div className="flex flex-col gap-2">
-                      <Text size="heading1" weight="bold" className="line-clamp-1 text-white">
+                      <Text size="heading2" weight="bold" className="line-clamp-1 text-white sm:text-3xl">
                         {banner.title}
                       </Text>
-                      <Text size="body2" weight="medium" className="line-clamp-1 text-white/90">
+                      <Text size="caption1" weight="medium" className="line-clamp-1 text-white/90 sm:text-lg">
                         {banner.subtitle}
                       </Text>
                     </div>
 
-                    <Text size="heading1" weight="bold" className="text-white">
+                    <Text size="heading2" weight="bold" className="text-white sm:text-3xl">
                       →
                     </Text>
                   </div>

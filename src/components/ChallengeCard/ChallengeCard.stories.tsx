@@ -34,6 +34,31 @@ export const Default: Story = {
   },
 };
 
+export const Mobile: Story = {
+  parameters: {
+    viewport: { defaultViewport: 'mobile1' },
+  },
+  decorators: [
+    (Story) => (
+      <div className="w-full bg-gray-100 p-4">
+        <Story />
+      </div>
+    ),
+  ],
+  args: {
+    challengeTitle: '새벽 러닝 챌린지',
+    challengeCategory: '운동',
+    challengeType: '인증형',
+    imageUrl:
+      'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=1200&q=80',
+    currentUserCount: 92,
+    maxUserCount: 100,
+    startDate: '2025.03.01',
+    endDate: '2025.04.01',
+    isOngoing: true,
+  },
+};
+
 export const Recruiting: Story = {
   args: {
     challengeTitle: '아침 코딩 챌린지',

@@ -76,6 +76,23 @@ export const ImageBackground: Story = {
   },
 };
 
+export const Mobile: Story = {
+  parameters: {
+    viewport: { defaultViewport: 'mobile1' },
+  },
+  decorators: [
+    (Story) => (
+      <div className="w-full bg-gray-100 p-4">
+        <Story />
+      </div>
+    ),
+  ],
+  args: {
+    items: demoItems,
+    componentId: 'home-main-banner-mobile',
+  },
+};
+
 export const NoAutoSlide: Story = {
   args: {
     items: demoItems,

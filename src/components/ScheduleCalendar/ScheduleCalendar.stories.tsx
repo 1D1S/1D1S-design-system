@@ -169,3 +169,33 @@ export const TwoWeeks: Story = {
 export const ThreeWeeks: Story = {
   render: () => <ScheduleCalendarPager preset="threeWeeks" />,
 };
+
+export const MobileOneMonth: Story = {
+  parameters: {
+    viewport: { defaultViewport: 'mobile1' },
+  },
+  render: () => (
+    <div className="flex w-full flex-col gap-4">
+      <Text size="body1" weight="bold" className="text-gray-900">2026.02</Text>
+      <ScheduleCalendar
+        rows={getCalendarRows(new Date("2026-02-01"), "month").rows}
+        cellMinHeight={56}
+      />
+    </div>
+  ),
+};
+
+export const MobileTwoWeeks: Story = {
+  parameters: {
+    viewport: { defaultViewport: 'mobile1' },
+  },
+  render: () => (
+    <div className="flex w-full flex-col gap-4">
+      <Text size="body1" weight="bold" className="text-gray-900">2026.02.01 - 02.14</Text>
+      <ScheduleCalendar
+        rows={getCalendarRows(new Date("2026-02-01"), "twoWeeks").rows}
+        cellMinHeight={72}
+      />
+    </div>
+  ),
+};
