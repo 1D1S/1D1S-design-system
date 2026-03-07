@@ -1,10 +1,10 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { cn } from '../../lib/utils';
 import { Button } from '../Button';
 import { CircleAvatar } from '../CircleAvatar';
-import { Bell } from '../Icons';
+import { Bell, HamburgerMenu } from '../Icons';
 import { Logo } from '../Icons/Logo';
 import { Text } from '../Text';
 
@@ -52,9 +52,45 @@ export function AppHeader({
   onNotificationClick,
   onProfileClick,
 }: AppHeaderProps): React.ReactElement {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const logoNode = logo ?? <Logo className="h-5 w-3.5 text-white" aria-hidden />;
 
+  const navList = (
+    <>
+      {navItems.map((item) => {
+        const isActive = item.key === activeKey;
+        return (
+          <li key={item.key}>
+            <button
+              type="button"
+              disabled={item.disabled}
+              aria-current={isActive ? 'page' : undefined}
+              onClick={() => {
+                onNavChange?.(item.key);
+                setIsMenuOpen(false);
+              }}
+              className={cn(
+                'cursor-pointer transition-colors',
+                item.disabled && 'cursor-not-allowed opacity-50',
+                !item.disabled && 'hover:text-main-700',
+              )}
+            >
+              <Text
+                size="body2"
+                weight={isActive ? 'bold' : 'medium'}
+                className={cn(isActive ? 'text-main-800' : 'text-gray-600')}
+              >
+                {item.label}
+              </Text>
+            </button>
+          </li>
+        );
+      })}
+    </>
+  );
+
   return (
+    <div className="relative">
     <header className={cn('w-full rounded-4 border border-gray-200 bg-white px-6 py-4', className)}>
       <div className="flex items-center justify-between gap-5">
         <div className="flex min-w-0 items-center gap-8">
@@ -72,35 +108,9 @@ export function AppHeader({
             </Text>
           </button>
 
-          <nav className="min-w-0 overflow-x-auto" aria-label="주요 메뉴">
+          <nav className="hidden min-w-0 overflow-x-auto lg:block" aria-label="주요 메뉴">
             <ul className="flex items-center gap-6 whitespace-nowrap">
-              {navItems.map((item) => {
-                const isActive = item.key === activeKey;
-
-                return (
-                  <li key={item.key}>
-                    <button
-                      type="button"
-                      disabled={item.disabled}
-                      aria-current={isActive ? 'page' : undefined}
-                      onClick={() => onNavChange?.(item.key)}
-                      className={cn(
-                        'cursor-pointer transition-colors',
-                        item.disabled && 'cursor-not-allowed opacity-50',
-                        !item.disabled && 'hover:text-main-700',
-                      )}
-                    >
-                      <Text
-                        size="body2"
-                        weight={isActive ? 'bold' : 'medium'}
-                        className={cn(isActive ? 'text-main-800' : 'text-gray-600')}
-                      >
-                        {item.label}
-                      </Text>
-                    </button>
-                  </li>
-                );
-              })}
+              {navList}
             </ul>
           </nav>
         </div>
@@ -117,6 +127,17 @@ export function AppHeader({
             <Bell className="h-4 w-4" />
           </Button>
 
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon"
+            aria-label="메뉴"
+            onClick={() => setIsMenuOpen((prev) => !prev)}
+            className="cursor-pointer text-gray-700 hover:text-gray-900 lg:hidden"
+          >
+            <HamburgerMenu className="h-4 w-4" />
+          </Button>
+
           {showProfile ? (
             <button
               type="button"
@@ -129,6 +150,29 @@ export function AppHeader({
           ) : null}
         </div>
       </div>
+
     </header>
+
+      {/* 바탕 클릭 시 닫기 */}
+      {isMenuOpen && (
+        <div
+          className="fixed inset-0 z-40 lg:hidden"
+          onClick={() => setIsMenuOpen(false)}
+          aria-hidden
+        />
+      )}
+
+      {/* 모바일 햄버거 메뉴 오버레이 */}
+      {isMenuOpen && (
+        <nav
+          className="absolute left-0 right-0 top-full z-50 mt-1 rounded-4 border border-gray-200 bg-white px-6 py-4 shadow-lg lg:hidden"
+          aria-label="모바일 메뉴"
+        >
+          <ul className="flex flex-col gap-1">
+            {navList}
+          </ul>
+        </nav>
+      )}
+    </div>
   );
 }

@@ -61,6 +61,24 @@ export const EmptyChallenges: Story = {
   },
 };
 
+export const NotCollapsible: Story = {
+  args: {
+    fixed: false,
+    isLoggedIn: true,
+    userName: '고라니',
+    userSubtitle: '목표 11개 남음!',
+    streakDays: 12,
+    collapsible: false,
+    diaryButtonLabel: '일지 작성하기',
+    myPageButtonLabel: '마이페이지',
+    challengeTitle: '참여중인 챌린지',
+    challenges: [
+      { id: '1', title: '알고리즘 부시기', progress: 45, tone: 'blue' },
+      { id: '2', title: '새벽 러닝', progress: 80, tone: 'green', hasDeadline: false },
+    ],
+  },
+};
+
 export const EmptyChallengesJoinDisabled: Story = {
   args: {
     fixed: false,

@@ -90,7 +90,7 @@ export function DiaryListItem({
   return (
     <div
       className={cn(
-        "flex min-w-[560px] gap-3 rounded-4 border border-gray-200 bg-white p-3 transition-shadow duration-200 hover:shadow-md",
+        "flex min-w-[560px] gap-3 rounded-4 border border-gray-200 bg-white p-3 transition-all duration-200 ease-in-out hover:-translate-y-1 hover:shadow-default",
         onClick && "cursor-pointer",
         className,
       )}

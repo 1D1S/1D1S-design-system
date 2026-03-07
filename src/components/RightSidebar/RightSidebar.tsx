@@ -44,6 +44,7 @@ export interface RightSidebarProps {
   joinChallengeButtonLabel?: string;
   joinChallengeMaxUserCount?: number;
   createChallengeButtonLabel?: string;
+  collapsible?: boolean;
   onCollapseClick?(): void;
   onOpenSettings?(): void;
   onWriteDiary?(): void;
@@ -71,6 +72,7 @@ export function RightSidebar({
   userImage,
   streakDays,
   fixed = true,
+  collapsible = true,
   className,
   diaryButtonLabel = "일지 작성하기",
   myPageButtonLabel = "마이페이지",
@@ -199,22 +201,24 @@ export function RightSidebar({
         className,
       )}
     >
-      <Button
-        type="button"
-        variant="outlined"
-        size="icon"
-        aria-label="사이드바 접기"
-        onClick={handleToggleCollapse}
-        disabled={isAnimating}
-        className="absolute top-6 -left-4 z-20 h-8 w-8 min-w-8 rounded-full p-0 text-gray-500 shadow-sm"
-      >
-        <ChevronRight
-          className={cn(
-            "h-4 w-4 transition-transform duration-200",
-            isCollapsed ? "rotate-180" : "rotate-0",
-          )}
-        />
-      </Button>
+      {collapsible && (
+        <Button
+          type="button"
+          variant="outlined"
+          size="icon"
+          aria-label="사이드바 접기"
+          onClick={handleToggleCollapse}
+          disabled={isAnimating}
+          className="absolute top-6 -left-4 z-20 h-8 w-8 min-w-8 rounded-full p-0 text-gray-500 shadow-sm"
+        >
+          <ChevronRight
+            className={cn(
+              "h-4 w-4 transition-transform duration-200",
+              isCollapsed ? "rotate-180" : "rotate-0",
+            )}
+          />
+        </Button>
+      )}
 
       <aside
         ref={asideRef}
@@ -321,6 +325,7 @@ export function RightSidebar({
                   <Button
                     className="mt-5 w-full"
                     size="medium"
+                    disabled={challenges.length === 0}
                     onClick={onWriteDiary}
                   >
                     <PencilLine className="h-4 w-4" />

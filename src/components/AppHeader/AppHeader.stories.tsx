@@ -42,3 +42,17 @@ export const WithoutProfile: Story = {
     showProfile: false,
   },
 };
+
+export const Mobile: Story = {
+  args: {
+    ...baseArgs,
+    showProfile: true,
+    profileImage: '/DefaultProfile.png',
+  },
+  parameters: {
+    viewport: {
+      defaultViewport: 'mobile1',
+    },
+  },
+};
+
