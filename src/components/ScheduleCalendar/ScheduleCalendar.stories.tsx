@@ -12,7 +12,7 @@ const meta: Meta<typeof ScheduleCalendar> = {
   tags: ["autodocs"],
   decorators: [
     (Story) => (
-      <div className="w-full bg-gray-100 p-4">
+      <div className="@container w-full bg-gray-100 p-4">
         <Story />
       </div>
     ),
@@ -171,9 +171,13 @@ export const ThreeWeeks: Story = {
 };
 
 export const MobileOneMonth: Story = {
-  parameters: {
-    viewport: { defaultViewport: 'mobile1' },
-  },
+  decorators: [
+    (Story) => (
+      <div className="@container w-[375px] bg-gray-100 p-4">
+        <Story />
+      </div>
+    ),
+  ],
   render: () => (
     <div className="flex w-full flex-col gap-4">
       <Text size="body1" weight="bold" className="text-gray-900">2026.02</Text>
@@ -186,9 +190,13 @@ export const MobileOneMonth: Story = {
 };
 
 export const MobileTwoWeeks: Story = {
-  parameters: {
-    viewport: { defaultViewport: 'mobile1' },
-  },
+  decorators: [
+    (Story) => (
+      <div className="@container w-[375px] bg-gray-100 p-4">
+        <Story />
+      </div>
+    ),
+  ],
   render: () => (
     <div className="flex w-full flex-col gap-4">
       <Text size="body1" weight="bold" className="text-gray-900">2026.02.01 - 02.14</Text>

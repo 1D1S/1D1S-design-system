@@ -8,7 +8,7 @@ const meta: Meta<typeof ChallengeListItem> = {
   tags: ['autodocs'],
   decorators: [
     (Story) => (
-      <div className="max-w-2xl bg-gray-100 p-6">
+      <div className="@container max-w-2xl bg-gray-100 p-6">
         <Story />
       </div>
     ),
@@ -98,7 +98,7 @@ export const Mobile: Story = {
   },
   decorators: [
     (Story) => (
-      <div className="w-full bg-gray-100 p-4">
+      <div className="@container w-[375px] bg-gray-100 p-4">
         <Story />
       </div>
     ),
@@ -122,7 +122,7 @@ export const MobileList: Story = {
   },
   decorators: [
     (Story) => (
-      <div className="w-full bg-gray-100 p-4">
+      <div className="@container w-[375px] bg-gray-100 p-4">
         <Story />
       </div>
     ),

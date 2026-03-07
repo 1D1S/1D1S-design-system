@@ -7,7 +7,7 @@ const meta: Meta<typeof BannerCarousel> = {
   tags: ["autodocs"],
   decorators: [
     (Story) => (
-      <div className="w-full bg-gray-100 p-4">
+      <div className="@container w-full bg-gray-100 p-4">
         <Story />
       </div>
     ),
@@ -82,7 +82,7 @@ export const Mobile: Story = {
   },
   decorators: [
     (Story) => (
-      <div className="w-full bg-gray-100 p-4">
+      <div className="@container w-[375px] bg-gray-100 p-4">
         <Story />
       </div>
     ),
@@ -90,6 +90,8 @@ export const Mobile: Story = {
   args: {
     items: demoItems,
     componentId: 'home-main-banner-mobile',
+    aspectRatioClassName: 'aspect-[2/1]',
+    minHeightPx: 160,
   },
 };
 

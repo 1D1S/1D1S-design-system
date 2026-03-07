@@ -8,7 +8,7 @@ const meta: Meta<typeof DiaryCard> = {
   tags: ['autodocs'],
   decorators: [
     (Story) => (
-      <div className="w-[350px] bg-gray-100 p-4">
+      <div className="@container w-[350px] bg-gray-100 p-4">
         <Story />
       </div>
     ),
@@ -51,7 +51,7 @@ export const Mobile: Story = {
   },
   decorators: [
     (Story) => (
-      <div className="w-full bg-gray-100 p-4">
+      <div className="@container w-[220px] bg-gray-100 p-4">
         <Story />
       </div>
     ),

@@ -50,14 +50,14 @@ export function ChallengeListItem({
   return (
     <div
       className={cn(
-        "flex gap-3 rounded-4 border border-gray-200 bg-white p-3 transition-all duration-200 ease-in-out hover:-translate-y-1 hover:shadow-default sm:gap-4 sm:p-4",
+        "@container flex gap-3 rounded-4 border border-gray-200 bg-white p-3 transition-all duration-200 ease-in-out hover:-translate-y-1 hover:shadow-default @[400px]:gap-4 @[400px]:p-4",
         onClick && "cursor-pointer",
         className,
       )}
       onClick={onClick}
     >
       {/* Thumbnail */}
-      <div className="relative -mb-3 -ml-3 -mt-3 w-[120px] shrink-0 self-stretch overflow-hidden rounded-l-3 bg-gray-100 sm:-mb-4 sm:-ml-4 sm:-mt-4 sm:w-[140px]">
+      <div className="relative -mb-3 -ml-3 -mt-3 w-[120px] shrink-0 self-stretch overflow-hidden rounded-l-3 bg-gray-100 @[400px]:-mb-4 @[400px]:-ml-4 @[400px]:-mt-4 @[400px]:w-[140px]">
         {hasImage ? (
           <Image
             src={imageUrl as string}
@@ -78,7 +78,7 @@ export function ChallengeListItem({
           as="p"
           size="caption1"
           weight="bold"
-          className="truncate text-gray-900 sm:text-lg"
+          className="truncate text-gray-900 @[400px]:text-lg"
         >
           {challengeTitle}
         </Text>
@@ -108,7 +108,7 @@ export function ChallengeListItem({
         </div>
 
         {/* Date */}
-        <Text size="caption3" weight="regular" className="hidden text-gray-400 sm:block">
+        <Text size="caption3" weight="regular" className="hidden text-gray-400 @[400px]:block">
           {startDate} – {endDate}
         </Text>
       </div>

@@ -85,7 +85,7 @@ export const Mobile: Story = {
   },
   decorators: [
     (Story) => (
-      <div className="w-full bg-gray-100 p-4">
+      <div className="bg-gray-100 p-4">
         <Story />
       </div>
     ),

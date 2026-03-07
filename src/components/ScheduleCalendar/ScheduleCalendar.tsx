@@ -62,7 +62,7 @@ export function ScheduleCalendar({
   className,
 }: ScheduleCalendarProps): React.ReactElement {
   return (
-    <div className={cn("w-full overflow-hidden rounded-4 border border-gray-300 bg-white", className)}>
+    <div className={cn("@container w-full overflow-hidden rounded-4 border border-gray-300 bg-white", className)}>
       <table className="w-full table-fixed border-collapse">
         <thead>
           <tr>
@@ -70,12 +70,12 @@ export function ScheduleCalendar({
               <th
                 key={`${label}-${index}`}
                 className={cn(
-                  "h-8 border-b border-r border-gray-300 bg-gray-100 px-1 text-center align-middle sm:h-12 sm:px-2.5",
+                  "h-8 border-b border-r border-gray-300 bg-gray-100 px-1 text-center align-middle @[480px]:h-12 @[480px]:px-2.5",
                   index === weekLabels.length - 1 && "border-r-0"
                 )}
                 scope="col"
               >
-                <Text size="caption3" weight="bold" className="text-gray-600 sm:text-lg">
+                <Text size="caption3" weight="bold" className="text-gray-600 @[480px]:text-lg">
                   {label}
                 </Text>
               </th>
@@ -104,7 +104,7 @@ export function ScheduleCalendar({
                   >
                     <div
                       className={cn(
-                        "flex h-full flex-col gap-1 p-1 sm:gap-2 sm:p-2",
+                        "flex h-full flex-col gap-1 p-1 @[480px]:gap-2 @[480px]:p-2",
                         cell.muted && "bg-gray-300",
                         cell.highlighted && "bg-main-200 ring-1 ring-inset ring-main-400"
                       )}
@@ -118,14 +118,14 @@ export function ScheduleCalendar({
                             <Text
                               size="caption3"
                               weight="medium"
-                              className={cn("leading-tight sm:text-lg", getDayToneClass(cell.dayTone))}
+                              className={cn("leading-tight @[480px]:text-lg", getDayToneClass(cell.dayTone))}
                             >
                               {cell.day}
                             </Text>
                           ) : null}
 
                           {cell.title !== undefined ? (
-                            <Text size="caption3" weight="bold" className="line-clamp-1 text-gray-900 sm:text-lg">
+                            <Text size="caption3" weight="bold" className="line-clamp-1 text-gray-900 @[480px]:text-lg">
                               {cell.title}
                             </Text>
                           ) : null}
@@ -136,7 +136,7 @@ export function ScheduleCalendar({
                                 <span
                                   key={`${key}-bar-${barIndex}`}
                                   className={cn(
-                                    "block h-1 rounded-full transition-all duration-200 sm:h-1.5",
+                                    "block h-1 rounded-full transition-all duration-200 @[480px]:h-1.5",
                                     getBarToneClass(bar.tone)
                                   )}
                                   style={{ width: resolveWidth(bar.width) }}
@@ -146,7 +146,7 @@ export function ScheduleCalendar({
                           ) : null}
 
                           {cell.subtitle !== undefined ? (
-                            <Text size="caption3" weight="medium" className="hidden text-gray-600 sm:block">
+                            <Text size="caption3" weight="medium" className="hidden text-gray-600 @[480px]:block">
                               {cell.subtitle}
                             </Text>
                           ) : null}
