@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { cn } from '../../lib/utils';
 import { Button } from '../Button';
 import { CircleAvatar } from '../CircleAvatar';
-import { Bell, HamburgerMenu } from '../Icons';
+import { Bell, ChevronLeft, HamburgerMenu } from '../Icons';
 import { Logo } from '../Icons/Logo';
 import { Text } from '../Text';
 
@@ -21,6 +21,8 @@ export interface AppHeaderProps {
   activeKey?: string;
   showProfile?: boolean;
   profileImage?: string;
+  showBackButton?: boolean;
+  onBackClick?(): void;
   className?: string;
   onLogoClick?(): void;
   onNavChange?(key: string): void;
@@ -46,6 +48,8 @@ export function AppHeader({
   activeKey = 'challenge',
   showProfile = true,
   profileImage,
+  showBackButton = false,
+  onBackClick,
   className,
   onLogoClick,
   onNavChange,
@@ -94,10 +98,26 @@ export function AppHeader({
     <header className={cn('w-full rounded-4 border border-gray-200 bg-white px-6 py-4', className)}>
       <div className="flex items-center justify-between gap-5">
         <div className="flex min-w-0 items-center gap-8">
+          {showBackButton && (
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon"
+              onClick={onBackClick}
+              aria-label="뒤로가기"
+              className="shrink-0 cursor-pointer text-gray-700 hover:text-gray-900 lg:hidden"
+            >
+              <ChevronLeft className="h-4 w-4" />
+            </Button>
+          )}
+
           <button
             type="button"
             onClick={onLogoClick}
-            className="inline-flex shrink-0 cursor-pointer items-center gap-2"
+            className={cn(
+              "inline-flex shrink-0 cursor-pointer items-center gap-2",
+              showBackButton && "hidden lg:inline-flex"
+            )}
             aria-label="홈으로 이동"
           >
             <span className="inline-flex h-10 w-10 items-center justify-center rounded-3 bg-main-800">

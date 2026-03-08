@@ -12,6 +12,14 @@ const meta: Meta<typeof AppHeader> = {
       </div>
     ),
   ],
+  argTypes: {
+    showBackButton: { control: 'boolean' },
+    onBackClick: { action: 'back clicked' },
+    onLogoClick: { action: 'logo clicked' },
+    onNavChange: { action: 'nav changed' },
+    onNotificationClick: { action: 'notification clicked' },
+    onProfileClick: { action: 'profile clicked' },
+  },
 };
 
 export default meta;
@@ -40,6 +48,19 @@ export const WithoutProfile: Story = {
   args: {
     ...baseArgs,
     showProfile: false,
+  },
+};
+
+export const WithBackButton: Story = {
+  args: {
+    ...baseArgs,
+    showProfile: true,
+    profileImage: '/DefaultProfile.png',
+    showBackButton: true,
+    onBackClick: () => alert('뒤로가기'),
+  },
+  parameters: {
+    viewport: { defaultViewport: 'mobile1' },
   },
 };
 
