@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.12](https://github.com/1D1S/1D1S-design-system/compare/v0.2.11...v0.2.12) (2026-03-08)
+
+
+### Features
+
+* 스텝 인디케이터 및 앱 헤더 수정 ([f24c8f6](https://github.com/1D1S/1D1S-design-system/commit/f24c8f64c4431ead15594aa30bdf8f6f96f0307e))
+
 ### [0.2.11](https://github.com/1D1S/1D1S-design-system/compare/v0.2.10...v0.2.11) (2026-03-07)
 
 
