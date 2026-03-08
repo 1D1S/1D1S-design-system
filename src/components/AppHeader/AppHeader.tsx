@@ -154,25 +154,27 @@ export function AppHeader({
     </header>
 
       {/* 바탕 클릭 시 닫기 */}
-      {isMenuOpen && (
-        <div
-          className="fixed inset-0 z-40 lg:hidden"
-          onClick={() => setIsMenuOpen(false)}
-          aria-hidden
-        />
-      )}
+      <div
+        className={cn(
+          "fixed inset-0 z-40 transition-opacity duration-200 lg:hidden",
+          isMenuOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
+        )}
+        onClick={() => setIsMenuOpen(false)}
+        aria-hidden
+      />
 
       {/* 모바일 햄버거 메뉴 오버레이 */}
-      {isMenuOpen && (
-        <nav
-          className="absolute left-0 right-0 top-full z-50 mt-1 rounded-4 border border-gray-200 bg-white px-6 py-4 shadow-lg lg:hidden"
-          aria-label="모바일 메뉴"
-        >
-          <ul className="flex flex-col gap-1">
-            {navList}
-          </ul>
-        </nav>
-      )}
+      <nav
+        className={cn(
+          "absolute left-0 right-0 top-full z-50 mt-1 rounded-4 border border-gray-200 bg-white px-6 py-4 shadow-lg transition-opacity duration-200 lg:hidden",
+          isMenuOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
+        )}
+        aria-label="모바일 메뉴"
+      >
+        <ul className="flex flex-col gap-1">
+          {navList}
+        </ul>
+      </nav>
     </div>
   );
 }

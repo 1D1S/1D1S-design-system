@@ -12,6 +12,12 @@ const meta: Meta<typeof StepIndicator> = {
       </div>
     ),
   ],
+  argTypes: {
+    size: {
+      control: "select",
+      options: ["sm", "md", "lg"],
+    },
+  },
 };
 
 export default meta;
@@ -44,6 +50,32 @@ export const Completed: Story = {
 export const FirstStep: Story = {
   args: {
     currentStep: 1,
+    steps: [
+      { id: "info", label: "Challenge Info" },
+      { id: "schedule", label: "Schedule" },
+      { id: "members", label: "Members" },
+      { id: "goal", label: "Goal" },
+    ],
+  },
+};
+
+export const Small: Story = {
+  args: {
+    size: "sm",
+    currentStep: 2,
+    steps: [
+      { id: "info", label: "Challenge Info" },
+      { id: "schedule", label: "Schedule" },
+      { id: "members", label: "Members" },
+      { id: "goal", label: "Goal" },
+    ],
+  },
+};
+
+export const Large: Story = {
+  args: {
+    size: "lg",
+    currentStep: 2,
     steps: [
       { id: "info", label: "Challenge Info" },
       { id: "schedule", label: "Schedule" },

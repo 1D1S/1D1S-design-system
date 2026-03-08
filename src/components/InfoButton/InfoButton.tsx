@@ -39,7 +39,7 @@ export function InfoButton({
       className={cn(
         "relative overflow-hidden rounded-2 text-white",
         "flex flex-col justify-between",
-        "p-2 sm:p-4 lg:p-6",
+        "p-4 sm:p-4 lg:p-6",
         "h-24 w-full sm:h-36 lg:h-47.5 lg:w-56",
         "hover:shadow-default hover:-translate-y-1 transition-all duration-300",
         onClick && "cursor-pointer",
@@ -54,7 +54,11 @@ export function InfoButton({
         <Text size="caption3" weight="medium" className="opacity-80">
           {mainText}
         </Text>
-        <Text size="caption2" weight="bold" className="mt-0.5 sm:text-xl sm:mt-1 lg:text-2xl">
+        <Text
+          size="caption2"
+          weight="bold"
+          className="mt-0.5 sm:text-xl sm:mt-1 lg:text-2xl"
+        >
           {subText}
         </Text>
       </div>

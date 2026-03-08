@@ -93,7 +93,7 @@ export function ChallengeCard({
         <Text
           size="body1"
           weight="bold"
-          className="line-clamp-2 min-h-8 text-gray-900 sm:text-2xl sm:min-h-10"
+          className="line-clamp-2 min-h-12 text-gray-900 sm:text-2xl sm:min-h-[4.5rem]"
         >
           {challengeTitle}
         </Text>

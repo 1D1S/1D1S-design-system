@@ -96,7 +96,9 @@ export function BannerCarousel({
   const [isTransitionOn, setIsTransitionOn] = React.useState<boolean>(true);
 
   React.useEffect(() => {
-    setBannerIndex(canLoop ? normalizedInitialIndex + 1 : normalizedInitialIndex);
+    setBannerIndex(
+      canLoop ? normalizedInitialIndex + 1 : normalizedInitialIndex,
+    );
   }, [canLoop, normalizedInitialIndex, itemCount]);
 
   React.useEffect(() => {
@@ -124,12 +126,21 @@ export function BannerCarousel({
   }, [isTransitionOn]);
 
   const activeIndex =
-    itemCount === 0 ? 0 : ((bannerIndex - (canLoop ? 1 : 0) + itemCount) % itemCount + itemCount) % itemCount;
+    itemCount === 0
+      ? 0
+      : (((bannerIndex - (canLoop ? 1 : 0) + itemCount) % itemCount) +
+          itemCount) %
+        itemCount;
   const seenImpressionKeysRef = React.useRef<Set<string>>(new Set());
 
   const emitTracking = React.useCallback(
-    (event: BannerTrackingPayload["event"], banner: BannerCarouselItem, index: number) => {
-      const resolvedBannerId = banner.id === undefined ? `${index}` : String(banner.id);
+    (
+      event: BannerTrackingPayload["event"],
+      banner: BannerCarouselItem,
+      index: number,
+    ) => {
+      const resolvedBannerId =
+        banner.id === undefined ? `${index}` : String(banner.id);
       const payload: BannerTrackingPayload = {
         event,
         componentId,
@@ -172,7 +183,13 @@ export function BannerCarousel({
         }
       }
     },
-    [componentId, enableDataLayerTracking, onBannerChange, onBannerClick, onBannerImpression],
+    [
+      componentId,
+      enableDataLayerTracking,
+      onBannerChange,
+      onBannerClick,
+      onBannerImpression,
+    ],
   );
 
   React.useEffect(() => {
@@ -217,17 +234,28 @@ export function BannerCarousel({
     <div className={cn("w-full", className)} {...props}>
       <div className="relative overflow-hidden rounded-4">
         <div
-          className={cn("flex", isTransitionOn && "transition-transform duration-500 ease-out")}
+          className={cn(
+            "flex",
+            isTransitionOn && "transition-transform duration-500 ease-out",
+          )}
           style={{ transform: `translateX(-${bannerIndex * 100}%)` }}
           onTransitionEnd={handleTransitionEnd}
         >
           {slides.map((banner, index) => {
-            const resolvedBackgroundImageUrl = banner.backgroundImageUrl ?? banner.backgroundImage;
+            const resolvedBackgroundImageUrl =
+              banner.backgroundImageUrl ?? banner.backgroundImage;
             const isImageEnabled = Boolean(
-              resolvedBackgroundImageUrl && resolvedBackgroundImageUrl.trim().length > 0,
+              resolvedBackgroundImageUrl &&
+              resolvedBackgroundImageUrl.trim().length > 0,
             );
-            const logicalIndex = itemCount === 0 ? 0 : ((index - (canLoop ? 1 : 0) + itemCount) % itemCount);
-            const keyId = banner.id === undefined ? `${logicalIndex}-${index}` : String(banner.id);
+            const logicalIndex =
+              itemCount === 0
+                ? 0
+                : (index - (canLoop ? 1 : 0) + itemCount) % itemCount;
+            const keyId =
+              banner.id === undefined
+                ? `${logicalIndex}-${index}`
+                : String(banner.id);
 
             return (
               <button
@@ -237,13 +265,17 @@ export function BannerCarousel({
                   emitTracking("click", banner, logicalIndex);
                   onItemClick?.(banner, logicalIndex);
                 }}
-                data-banner-id={banner.id === undefined ? `${logicalIndex}` : String(banner.id)}
+                data-banner-id={
+                  banner.id === undefined
+                    ? `${logicalIndex}`
+                    : String(banner.id)
+                }
                 data-banner-index={logicalIndex}
                 data-banner-type={banner.type}
                 data-banner-title={banner.title}
                 data-banner-image-url={resolvedBackgroundImageUrl ?? ""}
                 className={cn(
-                  "relative w-full shrink-0 overflow-hidden p-4 text-left text-white transition hover:brightness-105 sm:p-6",
+                  "relative w-full shrink-0 overflow-hidden p-4 text-left text-white transition hover:brightness-105 sm:p-8",
                   "cursor-pointer",
                   aspectRatioClassName,
                 )}
@@ -257,7 +289,9 @@ export function BannerCarousel({
                     <div
                       aria-hidden
                       className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-                      style={{ backgroundImage: `url(${resolvedBackgroundImageUrl})` }}
+                      style={{
+                        backgroundImage: `url(${resolvedBackgroundImageUrl})`,
+                      }}
                     />
                     <div className="absolute inset-0 bg-black/28" />
                   </>
@@ -266,21 +300,37 @@ export function BannerCarousel({
                 <div className="pointer-events-none absolute -top-10 -right-8 h-36 w-36 rounded-full bg-white/15 blur-2xl" />
 
                 <div className="relative flex h-full flex-col justify-between">
-                  <Text size="caption3" weight="medium" className="text-white/85">
+                  <Text
+                    size="caption3"
+                    weight="medium"
+                    className="text-white/85"
+                  >
                     {banner.type}
                   </Text>
 
                   <div className="flex items-end justify-between gap-4">
                     <div className="flex flex-col gap-2">
-                      <Text size="heading2" weight="bold" className="line-clamp-1 text-white sm:text-3xl">
+                      <Text
+                        size="heading2"
+                        weight="bold"
+                        className="line-clamp-1 text-white sm:text-3xl"
+                      >
                         {banner.title}
                       </Text>
-                      <Text size="caption1" weight="medium" className="line-clamp-1 text-white/90 sm:text-lg">
+                      <Text
+                        size="caption1"
+                        weight="medium"
+                        className="line-clamp-1 text-white/90 sm:text-lg"
+                      >
                         {banner.subtitle}
                       </Text>
                     </div>
 
-                    <Text size="heading2" weight="bold" className="text-white sm:text-3xl">
+                    <Text
+                      size="heading2"
+                      weight="bold"
+                      className="text-white sm:text-3xl"
+                    >
                       →
                     </Text>
                   </div>
@@ -303,7 +353,9 @@ export function BannerCarousel({
                   }}
                   className={cn(
                     "h-2 cursor-pointer rounded-full transition-all",
-                    activeIndex === index ? "w-5 bg-white" : "w-2 bg-white/50 hover:bg-white/80",
+                    activeIndex === index
+                      ? "w-5 bg-white"
+                      : "w-2 bg-white/50 hover:bg-white/80",
                   )}
                   aria-label={`${index + 1}번째 배너로 이동`}
                 />
