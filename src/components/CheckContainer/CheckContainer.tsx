@@ -78,7 +78,7 @@ export function CheckContainer({
         isChecked
           ? "border-main-800 bg-main-200 text-main-800"
           : "border-gray-300 bg-white text-gray-500",
-        !disabled && (isChecked ? "hover:bg-main-300" : "hover:bg-gray-100"),
+        !disabled && "hover:cursor-pointer" && (isChecked ? "hover:bg-main-300" : "hover:bg-gray-100"),
         disabled && "cursor-not-allowed opacity-60",
         className,
       )}

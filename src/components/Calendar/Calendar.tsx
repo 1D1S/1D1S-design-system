@@ -27,7 +27,7 @@ function Calendar({
         caption_label: 'text-base font-bold text-gray-800',
         nav: 'absolute inset-x-0 top-1/2 flex -translate-y-1/2 items-center justify-between px-1',
         nav_button:
-          'inline-flex h-8 w-8 items-center justify-center rounded-2 border border-gray-300 bg-white p-0 text-gray-700 transition-colors hover:bg-gray-100 hover:text-gray-900 disabled:opacity-40',
+          'inline-flex h-8 w-8 items-center justify-center rounded-2 border border-gray-300 bg-white p-0 text-gray-700 transition-colors hover:bg-gray-100 hover:text-gray-900 hover:cursor-pointer disabled:opacity-40',
         nav_button_previous: '',
         nav_button_next: '',
         table: 'w-full border-collapse',
@@ -41,7 +41,7 @@ function Calendar({
             ? '[&:has(.day-range-middle)]:bg-main-200/70 [&:has(.day-range-start)]:bg-main-200/70 [&:has(.day-range-end)]:bg-main-200/70 [&:has(.day-range-start)]:rounded-l-2 [&:has(.day-range-end)]:rounded-r-2'
             : '[&:has([aria-selected])]:rounded-2'
         ),
-        day: 'inline-flex h-9 w-9 items-center justify-center rounded-2 border border-transparent p-0 text-sm font-medium text-gray-700 transition-colors aria-selected:opacity-100 hover:bg-gray-100 hover:text-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-main-300/70',
+        day: 'inline-flex h-9 w-9 items-center justify-center rounded-2 border border-transparent p-0 text-sm font-medium text-gray-700 transition-colors aria-selected:opacity-100 hover:bg-gray-100 hover:text-gray-900 hover:cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-main-300/70',
         day_range_start:
           'day-range-start aria-selected:rounded-2 aria-selected:bg-main-800 aria-selected:text-white',
         day_range_end:
