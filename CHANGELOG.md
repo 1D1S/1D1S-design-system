@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.15](https://github.com/1D1S/1D1S-design-system/compare/v0.2.14...v0.2.15) (2026-03-10)
+
+
+### Bug Fixes
+
+* Calendar hover 커서 변경 추가 ([dc54243](https://github.com/1D1S/1D1S-design-system/commit/dc542439c33d11543a0ff3e091853705d2796ded))
+* CheckContainer hover 커서 변경 추가 ([40e6ee4](https://github.com/1D1S/1D1S-design-system/commit/40e6ee4256c5a5be52910b64cd65b647fcf2a4bd))
+* GoalAddList 삭제 버튼 hover 커서 변경 추가 ([5531d5e](https://github.com/1D1S/1D1S-design-system/commit/5531d5e731e8aa8562aec6e48fe7148380fc2cce))
+
 ### [0.2.14](https://github.com/1D1S/1D1S-design-system/compare/v0.2.13...v0.2.14) (2026-03-10)
 
 
