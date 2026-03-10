@@ -52,6 +52,50 @@ export interface RightSidebarProps {
   onLogin?(): void;
   onJoinChallenge?(): void;
   onCreateChallenge?(): void;
+  onChallengeClick?(challenge: RightSidebarChallenge): void;
+}
+
+function AnimatedDigit({ digit }: { digit: number }): React.ReactElement {
+  const [offset, setOffset] = useState(0);
+  const rafRef = useRef<number>(0);
+
+  useEffect(() => {
+    cancelAnimationFrame(rafRef.current);
+    rafRef.current = requestAnimationFrame(() => {
+      setOffset(digit);
+    });
+    return () => cancelAnimationFrame(rafRef.current);
+  }, [digit]);
+
+  return (
+    <span className="inline-block overflow-hidden" style={{ height: "1.2em" }}>
+      <span
+        className="flex flex-col"
+        style={{
+          transform: `translateY(calc(-${offset} * 1.2em))`,
+          transition: "transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)",
+          lineHeight: "1.2em",
+        }}
+      >
+        {Array.from({ length: 10 }, (_, n) => (
+          <span key={n} className="flex items-center" style={{ height: "1.2em" }}>
+            {n}
+          </span>
+        ))}
+      </span>
+    </span>
+  );
+}
+
+function AnimatedNumber({ value }: { value: number }): React.ReactElement {
+  const digits = String(Math.max(0, Math.floor(value))).split("").map(Number);
+  return (
+    <>
+      {digits.map((digit, i) => (
+        <AnimatedDigit key={i} digit={digit} />
+      ))}
+    </>
+  );
 }
 
 const defaultChallenges: RightSidebarChallenge[] = [
@@ -92,6 +136,7 @@ export function RightSidebar({
   onLogin,
   onJoinChallenge,
   onCreateChallenge,
+  onChallengeClick,
 }: RightSidebarProps): React.ReactElement {
   const CONTENT_FADE_OUT_MS = 140;
   const CONTENT_FADE_IN_MS = 220;
@@ -302,7 +347,7 @@ export function RightSidebar({
                       weight="bold"
                       className="text-main-800"
                     >
-                      {streakDays}
+                      <AnimatedNumber value={streakDays} />
                     </Text>
                     <Text size="body1" weight="bold" className="text-gray-800">
                       Days
@@ -356,17 +401,28 @@ export function RightSidebar({
                     </Text>
 
                     {challenges.length > 0 ? (
-                      <div className="mt-4 flex flex-col gap-5">
+                      <div className="mt-4 flex flex-col gap-1">
                         {challenges.map((challenge) => {
                           const tone = challenge.tone ?? "blue";
                           return (
-                            <ProgressBar
+                            <div
                               key={challenge.id}
-                              label={challenge.title}
-                              value={challenge.progress}
-                              infinite={challenge.hasDeadline === false}
-                              fillColor={toneColorMap[tone]}
-                            />
+                              role={onChallengeClick ? "button" : undefined}
+                              tabIndex={onChallengeClick ? 0 : undefined}
+                              onClick={onChallengeClick ? () => onChallengeClick(challenge) : undefined}
+                              onKeyDown={onChallengeClick ? (e) => { if (e.key === "Enter" || e.key === " ") onChallengeClick(challenge); } : undefined}
+                              className={cn(
+                                "-mx-2 rounded-2 px-2 py-2 transition-colors duration-150",
+                                onChallengeClick && "cursor-pointer hover:bg-gray-100 active:bg-gray-200",
+                              )}
+                            >
+                              <ProgressBar
+                                label={challenge.title}
+                                value={challenge.progress}
+                                infinite={challenge.hasDeadline === false}
+                                fillColor={toneColorMap[tone]}
+                              />
+                            </div>
                           );
                         })}
                       </div>

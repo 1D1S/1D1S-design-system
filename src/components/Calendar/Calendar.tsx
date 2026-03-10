@@ -50,7 +50,7 @@ function Calendar({
           'bg-main-800 text-white hover:bg-main-700 hover:text-white focus:bg-main-700 focus:text-white',
         day_today: 'border-main-500 text-main-800',
         day_outside: 'day-outside text-gray-400 aria-selected:text-gray-500',
-        day_disabled: 'text-gray-400 opacity-50',
+        day_disabled: 'cursor-not-allowed text-gray-300 opacity-40 hover:bg-transparent hover:text-gray-300',
         day_range_middle:
           'day-range-middle aria-selected:rounded-none aria-selected:bg-main-200 aria-selected:text-main-800',
         day_hidden: 'invisible',

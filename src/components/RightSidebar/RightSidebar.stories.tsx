@@ -31,6 +31,7 @@ export const Default: Story = {
       { id: '1', title: '알고리즘 부시기', progress: 45, tone: 'blue' },
       { id: '2', title: '새벽 러닝', progress: 80, tone: 'green', hasDeadline: false },
     ],
+    onChallengeClick: (challenge) => alert(`챌린지 클릭: ${challenge.title}`),
   },
 };
 
