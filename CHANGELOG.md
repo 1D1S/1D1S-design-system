@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.14](https://github.com/1D1S/1D1S-design-system/compare/v0.2.13...v0.2.14) (2026-03-10)
+
+
+### Features
+
+* 캘린더 및 사이드바 수정 ([9f743ed](https://github.com/1D1S/1D1S-design-system/commit/9f743edda56bad06f5e2e2aff11bded2241f1cc6))
+
 ### [0.2.13](https://github.com/1D1S/1D1S-design-system/compare/v0.2.12...v0.2.13) (2026-03-08)
 
 
