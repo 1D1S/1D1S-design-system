@@ -16,6 +16,8 @@ export interface ChallengeListItemProps {
   maxUserCount: number;
   startDate: string;
   endDate: string;
+  isInfiniteChallenge?: boolean;
+  isEarlyEnded?: boolean;
   isOngoing: boolean;
   isEnded?: boolean;
   className?: string;
@@ -26,12 +28,13 @@ export function ChallengeListItem({
   challengeTitle,
   challengeType,
   challengeCategory,
-  challengeIcon,
   imageUrl,
   currentUserCount,
   maxUserCount,
   startDate,
   endDate,
+  isInfiniteChallenge = false,
+  isEarlyEnded = false,
   isOngoing,
   isEnded = false,
   className,
@@ -40,12 +43,16 @@ export function ChallengeListItem({
   const hasImage = Boolean(imageUrl && imageUrl.trim().length > 0);
   const isIndividual = maxUserCount <= 1;
 
-  const statusLabel = isEnded ? "종료됨" : isOngoing ? "진행중" : "모집중";
-  const statusClassName = isEnded
+  const hasEnded = isInfiniteChallenge ? isEarlyEnded : isEnded;
+  const statusLabel = hasEnded ? "종료됨" : isOngoing ? "진행중" : "모집중";
+  const statusClassName = hasEnded
     ? "bg-gray-500"
     : isOngoing
       ? "bg-green-500"
       : "bg-blue-500";
+  const dateLabel = isInfiniteChallenge
+    ? `${startDate} - 무한!`
+    : `${startDate} - ${endDate}`;
 
   return (
     <div
@@ -85,11 +92,9 @@ export function ChallengeListItem({
 
         {/* Category + Status tags */}
         <div className="flex flex-wrap items-center gap-1.5">
-          {challengeCategory ? (
-            <Tag size="caption3" weight="medium">
-              {challengeCategory}
-            </Tag>
-          ) : null}
+          <Tag size="caption3" weight="medium">
+            {challengeCategory ?? challengeType}
+          </Tag>
           <Tag size="caption3" weight="bold" className={statusClassName}>
             {statusLabel}
           </Tag>
@@ -109,7 +114,7 @@ export function ChallengeListItem({
 
         {/* Date */}
         <Text size="caption3" weight="regular" className="hidden text-gray-400 sm:block">
-          {startDate} – {endDate}
+          {dateLabel}
         </Text>
       </div>
     </div>

@@ -16,6 +16,8 @@ export interface ChallengeCardProps {
   maxUserCount: number;
   startDate: string;
   endDate: string;
+  isInfiniteChallenge?: boolean;
+  isEarlyEnded?: boolean;
   isOngoing: boolean;
   isEnded?: boolean;
   className?: string;
@@ -35,6 +37,8 @@ export function ChallengeCard({
   maxUserCount,
   startDate,
   endDate,
+  isInfiniteChallenge = false,
+  isEarlyEnded = false,
   isOngoing = false,
   isEnded = false,
   className,
@@ -44,12 +48,16 @@ export function ChallengeCard({
   const participantLabel =
     maxUserCount <= 1 ? "개인" : `${currentUserCount} / ${maxUserCount}`;
 
-  const statusLabel = isEnded ? "종료됨" : isOngoing ? "진행중" : "모집중";
-  const statusClassName = isEnded
+  const hasEnded = isInfiniteChallenge ? isEarlyEnded : isEnded;
+  const statusLabel = hasEnded ? "종료됨" : isOngoing ? "진행중" : "모집중";
+  const statusClassName = hasEnded
     ? "bg-gray-500"
     : isOngoing
       ? "bg-green-500"
       : "bg-blue-500";
+  const dateLabel = isInfiniteChallenge
+    ? `${startDate} - 무한!`
+    : `${startDate} - ${endDate}`;
 
   return (
     <div
@@ -91,6 +99,7 @@ export function ChallengeCard({
 
       <div className="w-full bg-white px-4 py-4 sm:px-5 sm:py-5">
         <Text
+          as="p"
           size="body1"
           weight="bold"
           className="line-clamp-2 min-h-12 text-gray-900 sm:text-2xl sm:min-h-[4.5rem]"
@@ -115,7 +124,7 @@ export function ChallengeCard({
         </div>
 
         <Text size="caption2" weight="regular" className="mt-2 text-gray-500 sm:mt-3 sm:text-base">
-          {startDate} - {endDate}
+          {dateLabel}
         </Text>
       </div>
     </div>

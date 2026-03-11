@@ -122,6 +122,22 @@ export const Ended: Story = {
   },
 };
 
+export const InfiniteChallenge: Story = {
+  args: {
+    challengeTitle: '매일 글쓰기 챌린지',
+    challengeCategory: '자기계발',
+    challengeType: '루틴형',
+    challengeIcon: <Flame />,
+    imageUrl: '',
+    currentUserCount: 41,
+    maxUserCount: 100,
+    startDate: '2025.03.01',
+    endDate: '2025.12.31',
+    isInfiniteChallenge: true,
+    isOngoing: true,
+  },
+};
+
 export const Grid3x2: Story = {
   render: () => {
     const cards = [

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Dumbbell, Flag, Flame, Laptop, Target, Trophy } from '../Icons';
+import { Dumbbell, Flag, Flame, Laptop, Target } from '../Icons';
 import { ChallengeListItem } from './ChallengeListItem';
 
 const meta: Meta<typeof ChallengeListItem> = {
@@ -60,6 +60,21 @@ export const Ended: Story = {
     endDate: '2025.01.31',
     isOngoing: false,
     isEnded: true,
+  },
+};
+
+export const InfiniteChallenge: Story = {
+  args: {
+    challengeTitle: '매일 글쓰기 챌린지',
+    challengeCategory: '자기계발',
+    challengeType: '루틴형',
+    challengeIcon: <Flame />,
+    currentUserCount: 41,
+    maxUserCount: 100,
+    startDate: '2025.03.01',
+    endDate: '2025.12.31',
+    isInfiniteChallenge: true,
+    isOngoing: true,
   },
 };
 
