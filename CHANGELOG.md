@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.16](https://github.com/1D1S/1D1S-design-system/compare/v0.2.15...v0.2.16) (2026-03-11)
+
+
+### Features
+
+* rightsidebar 에 스켈레톤 뷰 추가 ([b9ee057](https://github.com/1D1S/1D1S-design-system/commit/b9ee057148cfab03a799f8ceb14ae32dedc34f09))
+
 ### [0.2.15](https://github.com/1D1S/1D1S-design-system/compare/v0.2.14...v0.2.15) (2026-03-10)
 
 
