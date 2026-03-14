@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.19](https://github.com/1D1S/1D1S-design-system/compare/v0.2.18...v0.2.19) (2026-03-14)
+
+
+### Features
+
+* 배너 버그 수정 ([51e1343](https://github.com/1D1S/1D1S-design-system/commit/51e134334c034ad51523cc2fa49ed22ba561d480))
+
 ### [0.2.18](https://github.com/1D1S/1D1S-design-system/compare/v0.2.17...v0.2.18) (2026-03-14)
 
 
