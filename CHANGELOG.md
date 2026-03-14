@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.20](https://github.com/1D1S/1D1S-design-system/compare/v0.2.19...v0.2.20) (2026-03-14)
+
+
+### Features
+
+* Streak에 모바일 행동 대응 추가 ([e77a7c7](https://github.com/1D1S/1D1S-design-system/commit/e77a7c7aa0dcc2edbfbf55fef5a88e64a7c9297c))
+
 ### [0.2.19](https://github.com/1D1S/1D1S-design-system/compare/v0.2.18...v0.2.19) (2026-03-14)
 
 
