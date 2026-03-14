@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.17](https://github.com/1D1S/1D1S-design-system/compare/v0.2.16...v0.2.17) (2026-03-11)
+
+
+### Features
+
+* 챌린지 카드 무한 모드 추가 ([c706bda](https://github.com/1D1S/1D1S-design-system/commit/c706bda93f63ad67669e96ae2e947564851c84b9))
+
 ### [0.2.16](https://github.com/1D1S/1D1S-design-system/compare/v0.2.15...v0.2.16) (2026-03-11)
 
 
