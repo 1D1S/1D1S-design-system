@@ -122,6 +122,21 @@ export const Ended: Story = {
   },
 };
 
+export const LongTitle: Story = {
+  args: {
+    challengeTitle: '엄청나게 긴 제목엄청나게 긴 제목엄청나게 긴 제목엄청나게 긴 제목엄청나게 긴 제목엄청나게긴',
+    challengeCategory: '개발',
+    challengeType: '고정 목표',
+    challengeIcon: <Laptop />,
+    imageUrl: '',
+    currentUserCount: 1,
+    maxUserCount: 2,
+    startDate: '2026-03-14',
+    endDate: '2026-03-20',
+    isOngoing: true,
+  },
+};
+
 export const InfiniteChallenge: Story = {
   args: {
     challengeTitle: '매일 글쓰기 챌린지',
