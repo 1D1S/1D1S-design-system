@@ -106,12 +106,37 @@ export function BannerCarousel({
       return undefined;
     }
 
-    const autoSlideTimer = window.setInterval(() => {
-      setBannerIndex((prev) => prev + 1);
-    }, autoSlideIntervalMs);
+    let autoSlideTimer: number;
 
-    return () => window.clearInterval(autoSlideTimer);
-  }, [autoSlideIntervalMs, itemCount]);
+    const start = (): void => {
+      autoSlideTimer = window.setInterval(() => {
+        setBannerIndex((prev) => prev + 1);
+      }, autoSlideIntervalMs);
+    };
+
+    const stop = (): void => window.clearInterval(autoSlideTimer);
+
+    const handleVisibilityChange = (): void => {
+      if (document.hidden) {
+        stop();
+      } else {
+        setIsTransitionOn(false);
+        setBannerIndex((prev) => {
+          const logical = ((prev - (canLoop ? 1 : 0) + itemCount) % itemCount + itemCount) % itemCount;
+          return canLoop ? logical + 1 : logical;
+        });
+        start();
+      }
+    };
+
+    start();
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
+      stop();
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, [autoSlideIntervalMs, canLoop, itemCount]);
 
   React.useEffect(() => {
     if (isTransitionOn) {
@@ -211,6 +236,16 @@ export function BannerCarousel({
     emitTracking("impression", banner, activeIndex);
   }, [activeIndex, emitTracking, impressionMode, itemCount, items]);
 
+  const handlePrev = (): void => {
+    setIsTransitionOn(true);
+    setBannerIndex((prev) => prev - 1);
+  };
+
+  const handleNext = (): void => {
+    setIsTransitionOn(true);
+    setBannerIndex((prev) => prev + 1);
+  };
+
   const handleTransitionEnd = (): void => {
     if (!canLoop) return;
 
@@ -275,7 +310,7 @@ export function BannerCarousel({
                 data-banner-title={banner.title}
                 data-banner-image-url={resolvedBackgroundImageUrl ?? ""}
                 className={cn(
-                  "relative w-full shrink-0 overflow-hidden p-4 text-left text-white transition hover:brightness-105 sm:p-8",
+                  "relative w-full shrink-0 overflow-hidden p-4 pb-10 text-left text-white transition hover:brightness-105 sm:p-8 sm:pb-8",
                   "cursor-pointer",
                   aspectRatioClassName,
                 )}
@@ -339,6 +374,31 @@ export function BannerCarousel({
             );
           })}
         </div>
+
+        {itemCount > 1 ? (
+          <>
+            <button
+              type="button"
+              onClick={handlePrev}
+              className="absolute top-1/2 left-2 z-10 -translate-y-1/2 cursor-pointer rounded-full bg-black/25 p-1.5 text-white transition hover:bg-black/40"
+              aria-label="이전 배너"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+            <button
+              type="button"
+              onClick={handleNext}
+              className="absolute top-1/2 right-2 z-10 -translate-y-1/2 cursor-pointer rounded-full bg-black/25 p-1.5 text-white transition hover:bg-black/40"
+              aria-label="다음 배너"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </>
+        ) : null}
 
         {showIndicators ? (
           <div className="pointer-events-none absolute right-4 bottom-3 left-4 flex justify-center">
