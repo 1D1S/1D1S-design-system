@@ -108,7 +108,8 @@ export function ChallengeListItem({
             <People className="h-3.5 w-3.5 text-gray-400" />
           )}
           <Text size="caption3" weight="medium" className="text-gray-500">
-            {isIndividual ? "개인 목표" : `고정 목표 · ${currentUserCount} / ${maxUserCount}`}
+            {`${challengeType}`}
+            {isIndividual ? "" : ` · ${currentUserCount} / ${maxUserCount}`}
           </Text>
         </div>
 
