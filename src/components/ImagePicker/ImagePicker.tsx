@@ -127,7 +127,7 @@ export function ImagePicker({
         )}
       >
         <PencilLine className="h-3.5 w-3.5 text-gray-700" />
-        <Text size="caption1" weight="medium" className="text-gray-700">
+        <Text size="caption1" weight="medium" className="text-gray-700 whitespace-nowrap">
           {changeLabel}
         </Text>
       </button>
