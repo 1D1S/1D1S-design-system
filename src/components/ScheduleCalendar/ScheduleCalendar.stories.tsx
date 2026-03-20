@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { addDays, addMonths, endOfMonth, endOfWeek, format, isSameMonth, startOfMonth, startOfWeek, subMonths } from "date-fns";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Button } from "../Button";
 import { ChevronLeft, ChevronRight } from "../Icons";
 import { Text } from "../Text";

@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Dumbbell, Plane } from "../Icons";
 import { CheckContainer } from "./CheckContainer";
 import { Text } from "../Text";
