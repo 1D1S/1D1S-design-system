@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.21](https://github.com/1D1S/1D1S-design-system/compare/v0.2.20...v0.2.21) (2026-03-21)
+
+
+### Bug Fixes
+
+* ChallengeListItem에 고정 목표로 잘못 출력되던 부분 수정 ([fc06f19](https://github.com/1D1S/1D1S-design-system/commit/fc06f197b236040772f9483bec51ea0bd520516c))
+
 ### [0.2.20](https://github.com/1D1S/1D1S-design-system/compare/v0.2.19...v0.2.20) (2026-03-14)
 
 
