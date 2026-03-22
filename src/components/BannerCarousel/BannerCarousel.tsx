@@ -236,17 +236,24 @@ export function BannerCarousel({
     emitTracking("impression", banner, activeIndex);
   }, [activeIndex, emitTracking, impressionMode, itemCount, items]);
 
+  const isAnimatingRef = React.useRef(false);
+
   const handlePrev = (): void => {
+    if (isAnimatingRef.current) return;
+    isAnimatingRef.current = true;
     setIsTransitionOn(true);
     setBannerIndex((prev) => prev - 1);
   };
 
   const handleNext = (): void => {
+    if (isAnimatingRef.current) return;
+    isAnimatingRef.current = true;
     setIsTransitionOn(true);
     setBannerIndex((prev) => prev + 1);
   };
 
   const handleTransitionEnd = (): void => {
+    isAnimatingRef.current = false;
     if (!canLoop) return;
 
     if (bannerIndex === itemCount + 1) {
