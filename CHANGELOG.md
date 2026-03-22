@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.22](https://github.com/1D1S/1D1S-design-system/compare/v0.2.21...v0.2.22) (2026-03-22)
+
+
+### Bug Fixes
+
+* `ImagePicker`의 button에 줄바꿈이 생기던 현상 수정 ([f3675d6](https://github.com/1D1S/1D1S-design-system/commit/f3675d6f005448838401e568ede1911608b67f26))
+* storybook 잘못된 import 수정 ([f3e6cfd](https://github.com/1D1S/1D1S-design-system/commit/f3e6cfd05561485bf3549c60828de7d8a97195d7))
+
 ### [0.2.21](https://github.com/1D1S/1D1S-design-system/compare/v0.2.20...v0.2.21) (2026-03-21)
 
 
