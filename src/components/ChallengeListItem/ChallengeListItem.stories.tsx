@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Dumbbell, Flag, Flame, Laptop, Target } from '../Icons';
 import { ChallengeListItem } from './ChallengeListItem';
 
