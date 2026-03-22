@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.23](https://github.com/1D1S/1D1S-design-system/compare/v0.2.21...v0.2.23) (2026-03-22)
+
+
+### Features
+
+* 버튼을 눌러서 캐러셀 순서 이동 시 타이머 초기화 ([b17b16c](https://github.com/1D1S/1D1S-design-system/commit/b17b16c0d0b2e52fae6603bff3e89e68a2501e0f))
+
+
+### Bug Fixes
+
+* `ImagePicker`의 button에 줄바꿈이 생기던 현상 수정 ([f3675d6](https://github.com/1D1S/1D1S-design-system/commit/f3675d6f005448838401e568ede1911608b67f26))
+* storybook 잘못된 import 수정 ([f3e6cfd](https://github.com/1D1S/1D1S-design-system/commit/f3e6cfd05561485bf3549c60828de7d8a97195d7))
+* 배너 캐러셀의 다음 버튼을 연타할 수 없게 수정 ([a096d60](https://github.com/1D1S/1D1S-design-system/commit/a096d608261aafc21b4ec934949f92624bb8a8dc))
+
 ### [0.2.22](https://github.com/1D1S/1D1S-design-system/compare/v0.2.21...v0.2.22) (2026-03-22)
 
 
