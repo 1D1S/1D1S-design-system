@@ -94,6 +94,7 @@ export function BannerCarousel({
     canLoop ? normalizedInitialIndex + 1 : normalizedInitialIndex,
   );
   const [isTransitionOn, setIsTransitionOn] = React.useState<boolean>(true);
+  const [timerResetKey, setTimerResetKey] = React.useState<number>(0);
 
   React.useEffect(() => {
     setBannerIndex(
@@ -136,7 +137,7 @@ export function BannerCarousel({
       stop();
       document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
-  }, [autoSlideIntervalMs, canLoop, itemCount]);
+  }, [autoSlideIntervalMs, canLoop, itemCount, timerResetKey]);
 
   React.useEffect(() => {
     if (isTransitionOn) {
@@ -236,17 +237,26 @@ export function BannerCarousel({
     emitTracking("impression", banner, activeIndex);
   }, [activeIndex, emitTracking, impressionMode, itemCount, items]);
 
+  const isAnimatingRef = React.useRef(false);
+
   const handlePrev = (): void => {
+    if (isAnimatingRef.current) return;
+    isAnimatingRef.current = true;
     setIsTransitionOn(true);
     setBannerIndex((prev) => prev - 1);
+    setTimerResetKey((prev) => prev + 1);
   };
 
   const handleNext = (): void => {
+    if (isAnimatingRef.current) return;
+    isAnimatingRef.current = true;
     setIsTransitionOn(true);
     setBannerIndex((prev) => prev + 1);
+    setTimerResetKey((prev) => prev + 1);
   };
 
   const handleTransitionEnd = (): void => {
+    isAnimatingRef.current = false;
     if (!canLoop) return;
 
     if (bannerIndex === itemCount + 1) {
