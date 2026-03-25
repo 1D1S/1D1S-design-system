@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.24](https://github.com/1D1S/1D1S-design-system/compare/v0.2.23...v0.2.24) (2026-03-25)
+
+
+### Features
+
+* 다이어리 카드 사용자 클릭 가능 ([8426037](https://github.com/1D1S/1D1S-design-system/commit/8426037371a1c43f11b8f73715c3d5f4d551ed67))
+
 ### [0.2.23](https://github.com/1D1S/1D1S-design-system/compare/v0.2.21...v0.2.23) (2026-03-22)
 
 
