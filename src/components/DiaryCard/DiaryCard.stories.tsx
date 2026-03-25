@@ -22,6 +22,7 @@ const meta: Meta<typeof DiaryCard> = {
       control: 'number',
     },
     onChallengeClick: { action: 'challenge clicked' },
+    onUserClick: { action: 'user clicked' },
   },
 };
 
@@ -69,6 +70,24 @@ export const Mobile: Story = {
     percent: 80,
     likes: 10,
     emotion: 'happy',
+  },
+};
+
+export const WithUserClick: Story = {
+  args: {
+    imageUrl:
+      'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80',
+    title: '오늘 알고리즘 문제 3개 풀기 완료! 역시 꾸준함이 답이다.',
+    user: '라니',
+    userImage:
+      'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&q=80',
+    challengeLabel: '1D1S 챌린지',
+    totalMemberCount: 3,
+    date: '5분 전',
+    percent: 80,
+    likes: 10,
+    emotion: 'happy',
+    onUserClick: () => alert('프로필 클릭'),
   },
 };
 

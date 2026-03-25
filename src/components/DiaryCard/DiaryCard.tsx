@@ -100,6 +100,7 @@ interface TextSectionProps {
   userImage?: string;
   challengeLabel: string;
   onChallengeClick?(): void;
+  onUserClick?(): void;
   date: string;
 }
 
@@ -109,6 +110,7 @@ function TextSection({
   userImage,
   challengeLabel,
   onChallengeClick,
+  onUserClick,
   date,
 }: TextSectionProps): React.ReactElement {
   return (
@@ -144,7 +146,16 @@ function TextSection({
 
       <div className="h-px w-full bg-gray-200" />
 
-      <div className="flex items-center gap-2 sm:gap-3">
+      <div
+        className={cn(
+          "flex items-center gap-2 sm:gap-3",
+          onUserClick && "cursor-pointer rounded-1 px-1 py-0.5 transition-colors hover:bg-gray-100",
+        )}
+        role={onUserClick ? "button" : undefined}
+        tabIndex={onUserClick ? 0 : undefined}
+        onClick={onUserClick ? (e) => { e.stopPropagation(); onUserClick(); } : undefined}
+        onKeyDown={onUserClick ? (e) => { if (e.key === "Enter" || e.key === " ") { e.stopPropagation(); onUserClick(); } } : undefined}
+      >
         <CircleAvatar imageUrl={userImage} size="sm" />
         <div className="flex flex-col gap-0.5 sm:gap-1">
           <Text size="caption1" weight="bold" className="text-gray-900 sm:text-lg">
@@ -172,6 +183,8 @@ export interface DiaryCardProps {
   challengeLabel: string;
   totalMemberCount?: number;
   onChallengeClick?(): void;
+  /** 프로필(아바타 + 이름) 클릭 시 호출되는 콜백. 지정하면 프로필 영역이 클릭 가능해집니다. */
+  onUserClick?(): void;
   date: string;
   emotion: Emotion;
   onClick?(): void;
@@ -190,6 +203,7 @@ export function DiaryCard({
   challengeLabel,
   totalMemberCount,
   onChallengeClick,
+  onUserClick,
   date,
   emotion = "happy",
   onClick,
@@ -245,6 +259,7 @@ export function DiaryCard({
           userImage={userImage}
           challengeLabel={challengeTypeLabel}
           onChallengeClick={onChallengeClick}
+          onUserClick={onUserClick}
           date={date}
         />
       </div>
