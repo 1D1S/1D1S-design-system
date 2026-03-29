@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.26](https://github.com/1D1S/1D1S-design-system/compare/v0.2.25...v0.2.26) (2026-03-29)
+
+
+### Features
+
+* 최대 목표 수 추가 ([068111b](https://github.com/1D1S/1D1S-design-system/commit/068111bb7841cbc6da938ff3844de26225f91aa5))
+
 ### [0.2.25](https://github.com/1D1S/1D1S-design-system/compare/v0.2.24...v0.2.25) (2026-03-29)
 
 
