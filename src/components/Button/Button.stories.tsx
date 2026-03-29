@@ -3,7 +3,7 @@ import { ChevronLeft } from '../Icons';
 import { Button } from './Button';
 
 const meta: Meta<typeof Button> = {
-  title: 'Button',
+  title: 'Form/Button',
   component: Button,
   tags: ['autodocs'],
   argTypes: {

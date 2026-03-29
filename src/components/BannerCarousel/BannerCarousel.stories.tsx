@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { BannerCarousel } from "./BannerCarousel";
 
 const meta: Meta<typeof BannerCarousel> = {
-  title: "BannerCarousel",
+  title: "Display/BannerCarousel",
   component: BannerCarousel,
   tags: ["autodocs"],
   decorators: [

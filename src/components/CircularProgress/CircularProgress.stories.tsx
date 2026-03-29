@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { CircularProgress } from './CircularProgress';
 
 const meta: Meta<typeof CircularProgress> = {
-  title: 'CircularProgress',
+  title: 'Display/CircularProgress',
   component: CircularProgress,
   tags: ['autodocs'],
   argTypes: {

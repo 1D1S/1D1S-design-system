@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { CircleAvatar } from './CircleAvatar';
 
 const meta: Meta<typeof CircleAvatar> = {
-  title: 'CircleAvatar',
+  title: 'Display/CircleAvatar',
   component: CircleAvatar,
   tags: ['autodocs'],
   argTypes: {

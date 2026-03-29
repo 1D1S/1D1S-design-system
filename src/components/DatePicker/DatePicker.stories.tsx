@@ -4,7 +4,7 @@ import type { DateRange } from "react-day-picker";
 import { DatePicker, RangeDatePicker } from "./DatePicker";
 
 const meta: Meta<typeof DatePicker> = {
-  title: "DatePicker",
+  title: "Form/DatePicker",
   component: DatePicker,
   tags: ["autodocs"],
   decorators: [

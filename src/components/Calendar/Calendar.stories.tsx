@@ -5,7 +5,7 @@ import type { DateRange } from 'react-day-picker';
 import { subDays, startOfDay } from 'date-fns';
 
 const meta: Meta<typeof Calendar> = {
-  title: 'Calendar',
+  title: 'Calendar/Calendar',
   component: Calendar,
   tags: ['autodocs'],
   decorators: [

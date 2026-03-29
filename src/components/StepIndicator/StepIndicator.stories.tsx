@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { StepIndicator } from "./StepIndicator";
 
 const meta: Meta<typeof StepIndicator> = {
-  title: "StepIndicator",
+  title: "Navigation/StepIndicator",
   component: StepIndicator,
   tags: ["autodocs"],
   decorators: [

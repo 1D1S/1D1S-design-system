@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { RightSidebar } from './RightSidebar';
 
 const meta: Meta<typeof RightSidebar> = {
-  title: 'RightSidebar',
+  title: 'Layout/RightSidebar',
   component: RightSidebar,
   tags: ['autodocs'],
   decorators: [

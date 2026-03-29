@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { TextArea, TextField } from './TextField';
 
 const meta: Meta<typeof TextField> = {
-  title: 'TextField',
+  title: 'Form/TextField',
   component: TextField,
   tags: ['autodocs'],
   decorators: [
