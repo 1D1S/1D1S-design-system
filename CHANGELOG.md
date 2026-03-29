@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.25](https://github.com/1D1S/1D1S-design-system/compare/v0.2.24...v0.2.25) (2026-03-29)
+
+
+### Features
+
+* 전반적인 모션 추가 및 컴포넌트 수정 ([ca94b81](https://github.com/1D1S/1D1S-design-system/commit/ca94b81a94f46b29cf441ce6a8c4a5e96ea42a81))
+
 ### [0.2.24](https://github.com/1D1S/1D1S-design-system/compare/v0.2.23...v0.2.24) (2026-03-25)
 
 
