@@ -6,8 +6,10 @@ import { Close } from "../Icons";
 import { Text } from "../Text";
 import { TextField } from "../TextField";
 
-export interface GoalAddListProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange"> {
+export interface GoalAddListProps extends Omit<
+  React.HTMLAttributes<HTMLDivElement>,
+  "onChange"
+> {
   goals?: string[];
   defaultGoals?: string[];
   onGoalsChange?(goals: string[]): void;
@@ -15,6 +17,7 @@ export interface GoalAddListProps
   disabled?: boolean;
   addOnBlur?: boolean;
   inputAriaLabel?: string;
+  maxGoals?: number;
 }
 
 /**
@@ -29,15 +32,18 @@ export function GoalAddList({
   disabled = false,
   addOnBlur = false,
   inputAriaLabel = "목표 입력",
+  maxGoals,
   className,
   ...props
 }: GoalAddListProps): React.ReactElement {
   const isControlled = goals !== undefined;
-  const [internalGoals, setInternalGoals] = React.useState<string[]>(defaultGoals);
+  const [internalGoals, setInternalGoals] =
+    React.useState<string[]>(defaultGoals);
   const [draft, setDraft] = React.useState("");
   const isComposingRef = React.useRef(false);
 
   const goalList = isControlled ? goals : internalGoals;
+  const isAtMax = maxGoals !== undefined && goalList.length >= maxGoals;
 
   const updateGoals = (nextGoals: string[]): void => {
     if (!isControlled) {
@@ -68,7 +74,11 @@ export function GoalAddList({
           key={`${goal}-${index}`}
           className="flex h-10 w-full items-center justify-between rounded-3 border border-gray-300 bg-white px-5"
         >
-          <Text size="body2" weight="regular" className="line-clamp-1 text-gray-900">
+          <Text
+            size="body2"
+            weight="regular"
+            className="line-clamp-1 text-gray-900"
+          >
             {goal}
           </Text>
 
@@ -80,7 +90,7 @@ export function GoalAddList({
             className={cn(
               "inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-2 text-gray-500 transition-colors hover:cursor-pointer",
               !disabled && "hover:bg-gray-100 hover:text-gray-700",
-              disabled && "cursor-not-allowed text-gray-400"
+              disabled && "cursor-not-allowed text-gray-400",
             )}
           >
             <Close className="h-4 w-4" />
@@ -90,9 +100,11 @@ export function GoalAddList({
 
       <TextField
         value={draft}
-        disabled={disabled}
+        disabled={disabled || isAtMax}
         aria-label={inputAriaLabel}
-        placeholder={placeholder}
+        placeholder={
+          isAtMax ? `최대 ${maxGoals}개까지 입력할 수 있습니다` : placeholder
+        }
         onChange={(event) => setDraft(event.target.value)}
         onCompositionStart={() => {
           isComposingRef.current = true;
