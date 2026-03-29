@@ -4,6 +4,7 @@ import React from "react";
 import { cn } from "../../lib/utils";
 import { Close } from "../Icons";
 import { Text } from "../Text";
+import { TextField } from "../TextField";
 
 export interface GoalAddListProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange"> {
@@ -61,13 +62,13 @@ export function GoalAddList({
   };
 
   return (
-    <div className={cn("flex w-full flex-col gap-4", className)} {...props}>
+    <div className={cn("flex w-full flex-col gap-2", className)} {...props}>
       {goalList.map((goal, index) => (
         <div
           key={`${goal}-${index}`}
-          className="flex h-16 w-full items-center justify-between rounded-4 border border-gray-300 bg-white px-5"
+          className="flex h-10 w-full items-center justify-between rounded-3 border border-gray-300 bg-white px-5"
         >
-          <Text size="body1" weight="bold" className="line-clamp-1 text-gray-900">
+          <Text size="body2" weight="regular" className="line-clamp-1 text-gray-900">
             {goal}
           </Text>
 
@@ -77,18 +78,17 @@ export function GoalAddList({
             disabled={disabled}
             onClick={() => removeGoal(index)}
             className={cn(
-              "inline-flex h-8 w-8 items-center justify-center rounded-2 text-gray-600 transition-colors hover:cursor-pointer",
+              "inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-2 text-gray-500 transition-colors hover:cursor-pointer",
               !disabled && "hover:bg-gray-100 hover:text-gray-700",
               disabled && "cursor-not-allowed text-gray-400"
             )}
           >
-            <Close className="h-5 w-5" />
+            <Close className="h-4 w-4" />
           </button>
         </div>
       ))}
 
-      <input
-        type="text"
+      <TextField
         value={draft}
         disabled={disabled}
         aria-label={inputAriaLabel}
@@ -116,13 +116,6 @@ export function GoalAddList({
           if (!addOnBlur) return;
           commitDraft();
         }}
-        className={cn(
-          "h-16 w-full rounded-4 border border-gray-300 bg-white px-5",
-          "text-xl font-medium text-gray-900 placeholder:text-gray-500",
-          "outline-none transition-all duration-200",
-          "focus-visible:border-main-500 focus-visible:ring-3 focus-visible:ring-main-300/60",
-          disabled && "cursor-not-allowed opacity-60"
-        )}
       />
     </div>
   );

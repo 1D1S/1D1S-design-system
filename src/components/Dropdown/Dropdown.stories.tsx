@@ -11,7 +11,7 @@ import {
 } from './Dropdown';
 
 const meta: Meta<typeof Select> = {
-  title: 'Dropdown',
+  title: 'Form/Dropdown',
   component: Select,
   tags: ['autodocs'],
   decorators: [

@@ -1,8 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { useState } from 'react';
 import { ImagePicker } from './ImagePicker';
 
 const meta: Meta<typeof ImagePicker> = {
-  title: 'ImagePicker',
+  title: 'Form/ImagePicker',
   component: ImagePicker,
   tags: ['autodocs'],
   decorators: [
@@ -18,17 +19,42 @@ export default meta;
 type Story = StoryObj<typeof ImagePicker>;
 
 export const Default: Story = {
-  args: {
-    size: 300,
-    changeLabel: 'Change',
+  render: () => {
+    const [previewUrl, setPreviewUrl] = useState<string | undefined>(undefined);
+
+    const handleSelectFile = (file: File): void => {
+      const url = URL.createObjectURL(file);
+      setPreviewUrl(url);
+    };
+
+    const handleClear = (): void => {
+      if (previewUrl) URL.revokeObjectURL(previewUrl);
+      setPreviewUrl(undefined);
+    };
+
+    return (
+      <ImagePicker
+        previewUrl={previewUrl}
+        onSelectFile={handleSelectFile}
+        onClear={handleClear}
+      />
+    );
   },
 };
 
 export const WithImage: Story = {
   args: {
-    size: 300,
-    changeLabel: 'Change',
-    defaultImageUrl:
-      'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=900&q=80',
+    previewUrl:
+      'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1200&q=80',
+    onSelectFile: () => {},
+    onClear: () => {},
+  },
+};
+
+export const WithoutClear: Story = {
+  args: {
+    previewUrl:
+      'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1200&q=80',
+    onSelectFile: () => {},
   },
 };

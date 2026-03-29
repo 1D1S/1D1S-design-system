@@ -4,7 +4,7 @@ import { CheckContainer } from "./CheckContainer";
 import { Text } from "../Text";
 
 const meta: Meta<typeof CheckContainer> = {
-  title: "CheckContainer",
+  title: "Form/CheckContainer",
   component: CheckContainer,
   tags: ["autodocs"],
   decorators: [

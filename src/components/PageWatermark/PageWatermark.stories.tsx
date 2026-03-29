@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { PageWatermark } from './PageWatermark';
 
 const meta: Meta<typeof PageWatermark> = {
-  title: 'PageWatermark',
+  title: 'Layout/PageWatermark',
   component: PageWatermark,
   tags: ['autodocs'],
 };

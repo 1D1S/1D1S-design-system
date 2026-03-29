@@ -39,12 +39,12 @@ function SelectTrigger({
       data-slot="select-trigger"
       data-size={size}
       className={cn(
-        "group flex w-full items-center justify-between whitespace-nowrap border-2 bg-white outline-none transition-all duration-200",
+        "group flex w-full items-center justify-between whitespace-nowrap border bg-white outline-none transition-all duration-200",
         "disabled:cursor-not-allowed disabled:opacity-50",
         "data-[placeholder]:text-gray-500 focus-visible:ring-3 focus-visible:ring-main-300/60",
         isSmall
           ? "h-10 min-w-[150px] rounded-3 border-gray-300 px-3.5"
-          : "h-10 min-w-[150px] rounded-3 border-gray-300 px-4 shadow-[0_4px_10px_rgba(34,34,34,0.06)]",
+          : "h-10 min-w-[150px] rounded-3 border-gray-300 px-4",
         className,
       )}
       {...props}
@@ -198,7 +198,7 @@ function SelectContent({
           "data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
           position === "popper" &&
             "data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1",
-          "rounded-[24px] border-2 border-gray-300 bg-white shadow-[0_10px_20px_rgba(34,34,34,0.1)]",
+          "rounded-[24px] border border-gray-300 bg-white",
           className,
         )}
         position={position}

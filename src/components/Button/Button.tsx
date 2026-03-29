@@ -4,7 +4,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { Text } from "../Text";
 
 const allButtonVariants =
-  "inline-flex cursor-pointer items-center justify-center gap-2 rounded-3 border border-transparent transition-colors duration-200 disabled:cursor-not-allowed";
+  "inline-flex cursor-pointer items-center justify-center gap-2 rounded-3 border border-transparent transition-all duration-200 ease-out active:scale-95 disabled:cursor-not-allowed disabled:active:scale-100";
 
 const customButtonVariants = cva(allButtonVariants, {
   variants: {

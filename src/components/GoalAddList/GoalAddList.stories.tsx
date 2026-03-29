@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { GoalAddList } from "./GoalAddList";
 
 const meta: Meta<typeof GoalAddList> = {
-  title: "GoalAddList",
+  title: "Form/GoalAddList",
   component: GoalAddList,
   tags: ["autodocs"],
   decorators: [

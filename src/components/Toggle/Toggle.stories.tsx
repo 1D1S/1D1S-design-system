@@ -3,7 +3,7 @@ import { BookOpen, Code2, Dumbbell, Palette, Salad } from '../Icons';
 import { Toggle } from './Toggle';
 
 const meta: Meta<typeof Toggle> = {
-  title: 'Toggle',
+  title: 'Form/Toggle',
   component: Toggle,
   tags: ['autodocs'],
   argTypes: {

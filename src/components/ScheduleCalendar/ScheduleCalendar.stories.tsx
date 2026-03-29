@@ -7,7 +7,7 @@ import { Text } from "../Text";
 import { ScheduleCalendar, type ScheduleCalendarCell } from "./ScheduleCalendar";
 
 const meta: Meta<typeof ScheduleCalendar> = {
-  title: "ScheduleCalendar",
+  title: "Calendar/ScheduleCalendar",
   component: ScheduleCalendar,
   tags: ["autodocs"],
   decorators: [

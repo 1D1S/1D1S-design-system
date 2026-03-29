@@ -3,7 +3,7 @@ import { CheckList } from "./CheckList";
 import { useState } from "react";
 
 const meta: Meta<typeof CheckList> = {
-  title: "CheckList",
+  title: "Form/CheckList",
   component: CheckList,
   tags: ["autodocs"],
   decorators: [

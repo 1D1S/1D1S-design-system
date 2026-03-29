@@ -1,136 +1,184 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { cn } from "../../lib/utils";
-import { Logo, PencilLine } from "../Icons";
+import { Button } from "../Button";
 import { Text } from "../Text";
 
-export interface ImagePickerProps extends Omit<React.ComponentPropsWithoutRef<"input">, "size"> {
-  /** 원형 이미지 영역 지름(px) */
-  size?: number;
-  /** 초기 이미지 URL */
-  defaultImageUrl?: string;
-  /** 하단 변경 버튼 텍스트 */
-  changeLabel?: string;
+export interface ImagePickerProps {
+  /** 현재 미리보기 이미지 URL (blob: / data: / https: 모두 가능) */
+  previewUrl?: string;
+  /** 파일 선택 시 호출되는 콜백 */
+  onSelectFile: (file: File) => void;
+  /** 선택 해제 버튼 클릭 시 호출되는 콜백 */
+  onClear?: () => void;
+  /** 이미지 미선택 시 안내 텍스트 (기본값: "썸네일 영역을 클릭해 이미지를 선택하세요.") */
+  placeholderTitle?: string;
+  /** 이미지 미선택 시 보조 안내 텍스트 (기본값: "또는 이미지를 드래그해서 놓아주세요.") */
+  placeholderSubtitle?: string;
+  /** 하단 도움말 텍스트 (기본값: "JPG, PNG, GIF 파일을 업로드할 수 있습니다.") */
+  helperText?: string;
+  /** 선택 해제 버튼 텍스트 (기본값: "선택 해제") */
+  clearLabel?: string;
+  /** 추가 className */
+  className?: string;
 }
 
 /**
  * ImagePicker
- * 이미지 업로드 및 미리보기를 위한 컴포넌트
+ * 일지 썸네일 이미지 선택 컴포넌트
  *
- * @param onChange 파일 선택 시 호출되는 콜백 함수(optional)
- * @param size 원형 이미지 영역 지름(px), 기본값 300
- * @param defaultImageUrl 초기 이미지 URL
- * @param changeLabel 하단 변경 버튼 텍스트(기본값: Change)
+ * 클릭 또는 드래그 앤 드롭으로 이미지를 선택할 수 있습니다.
  *
- * @example 기본 사용
+ * @param previewUrl 현재 미리보기 이미지 URL
+ * @param onSelectFile 파일 선택 시 호출되는 콜백
+ * @param onClear 선택 해제 버튼 클릭 시 호출되는 콜백
+ * @param placeholderTitle 이미지 미선택 시 안내 텍스트
+ * @param placeholderSubtitle 이미지 미선택 시 보조 안내 텍스트
+ * @param helperText 하단 도움말 텍스트
+ * @param clearLabel 선택 해제 버튼 텍스트
+ * @param className 추가 className
+ *
+ * @example
  * ```tsx
- * <ImagePicker onChange={(e) => console.log(e.target.files)} />
+ * <ImagePicker
+ *   previewUrl={previewUrl}
+ *   onSelectFile={(file) => setFile(file)}
+ *   onClear={() => setFile(null)}
+ * />
  * ```
  */
 export function ImagePicker({
-  onChange,
-  size = 300,
-  defaultImageUrl,
-  changeLabel = "Change",
-  ...props
+  previewUrl,
+  onSelectFile,
+  onClear,
+  placeholderTitle = "썸네일 영역을 클릭해 이미지를 선택하세요.",
+  placeholderSubtitle = "또는 이미지를 드래그해서 놓아주세요.",
+  helperText = "JPG, PNG, GIF 파일을 업로드할 수 있습니다.",
+  clearLabel = "선택 해제",
+  className,
 }: ImagePickerProps): React.ReactElement {
-  const normalizedSize = Math.max(size, 120);
-  const fallbackLogoHeight = Math.max(Math.round(normalizedSize * 0.3), 28);
-  const fallbackLogoWidth = Math.max(Math.round(fallbackLogoHeight * 0.6), 18);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [failedPreviewUrl, setFailedPreviewUrl] = useState<string | null>(null);
 
-  const inputRef = useRef<HTMLInputElement>(null);
-  const objectUrlRef = useRef<string | null>(null);
-  const [preview, setPreview] = useState<string | null>(defaultImageUrl ?? null);
+  const hasPreviewImage =
+    Boolean(previewUrl) && failedPreviewUrl !== previewUrl;
+  const hasThumbnail = Boolean(previewUrl);
 
-  const handleClick = (): void => {
-    inputRef.current?.click();
+  const handlePickClick = (): void => {
+    fileInputRef.current?.click();
   };
 
-  useEffect(() => {
-    setPreview(defaultImageUrl ?? null);
-  }, [defaultImageUrl]);
+  const handleFileSelect = (file: File | null): void => {
+    if (!file || !file.type.startsWith("image/")) return;
+    setFailedPreviewUrl(null);
+    onSelectFile(file);
+  };
 
-  useEffect(() => {
-    return () => {
-      if (objectUrlRef.current) {
-        URL.revokeObjectURL(objectUrlRef.current);
-      }
-    };
-  }, []);
+  const handleInputChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ): void => {
+    const file = event.target.files?.[0] ?? null;
+    handleFileSelect(file);
+    event.target.value = "";
+  };
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    const file = event.target.files?.[0];
-    if (file) {
-      if (objectUrlRef.current) {
-        URL.revokeObjectURL(objectUrlRef.current);
-      }
-      const url = URL.createObjectURL(file);
-      objectUrlRef.current = url;
-      setPreview(url);
+  const handleDragEnter = (event: React.DragEvent<HTMLDivElement>): void => {
+    event.preventDefault();
+    setIsDragging(true);
+  };
+
+  const handleDragOver = (event: React.DragEvent<HTMLDivElement>): void => {
+    event.preventDefault();
+    if (!isDragging) setIsDragging(true);
+  };
+
+  const handleDragLeave = (event: React.DragEvent<HTMLDivElement>): void => {
+    event.preventDefault();
+    setIsDragging(false);
+  };
+
+  const handleDrop = (event: React.DragEvent<HTMLDivElement>): void => {
+    event.preventDefault();
+    setIsDragging(false);
+    const file = event.dataTransfer.files?.[0] ?? null;
+    handleFileSelect(file);
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>): void => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      handlePickClick();
     }
   };
 
   return (
     <div
-      className="relative inline-flex"
-      style={{ width: normalizedSize, height: normalizedSize }}
+      className={cn(
+        "flex h-full flex-col rounded-2xl border border-gray-200 bg-white p-4",
+        className
+      )}
     >
-      <input
-        type="file"
-        accept="image/*"
-        ref={inputRef}
-        className="hidden"
-        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-          if (onChange !== undefined) {
-            onChange(event);
-          }
-          handleChange(event);
-        }}
-        {...props}
-      />
-      <button
-        type="button"
-        onClick={handleClick}
-        aria-label="이미지 선택"
+      <div
+        role="button"
+        tabIndex={0}
+        aria-label="썸네일 이미지 선택"
         className={cn(
-          "relative h-full w-full overflow-hidden rounded-full",
-          "cursor-pointer",
-          preview
-            ? "bg-main-300"
-            : "border-2 border-dashed border-gray-400 bg-white",
+          "relative flex min-h-[220px] flex-1 cursor-pointer items-center justify-center overflow-hidden rounded-xl border bg-gray-100 transition outline-none lg:min-h-[440px]",
+          isDragging
+            ? "border-main-700 ring-3 ring-main-300"
+            : "border-gray-200 hover:border-gray-300"
         )}
+        onClick={handlePickClick}
+        onKeyDown={handleKeyDown}
+        onDragEnter={handleDragEnter}
+        onDragOver={handleDragOver}
+        onDragLeave={handleDragLeave}
+        onDrop={handleDrop}
       >
-        {preview ? (
+        {hasPreviewImage ? (
           <img
-            src={preview}
-            alt="이미지 미리보기"
-            className="h-full w-full object-cover"
-            loading="lazy"
+            src={previewUrl}
+            alt="썸네일 미리보기"
+            className="absolute inset-0 h-full w-full object-cover"
+            onError={() => setFailedPreviewUrl(previewUrl ?? null)}
           />
         ) : (
-          <div className="flex h-full w-full items-center justify-center">
-            <Logo
-              width={fallbackLogoWidth}
-              height={fallbackLogoHeight}
-              className="text-gray-300"
-            />
+          <div className="flex flex-col items-center gap-2 px-4 text-center">
+            <Text size="body2" weight="medium" className="text-gray-700">
+              {placeholderTitle}
+            </Text>
+            <Text size="caption1" weight="regular" className="text-gray-500">
+              {placeholderSubtitle}
+            </Text>
           </div>
         )}
-      </button>
 
-      <button
-        type="button"
-        onClick={handleClick}
-        className={cn(
-          "absolute bottom-0 left-1/2 z-10 inline-flex h-9 -translate-x-1/2 translate-y-1/2 items-center gap-1.5 rounded-full border border-gray-200 bg-white px-5",
-          "cursor-pointer shadow-[0_6px_16px_rgba(34,34,34,0.16)]",
-        )}
-      >
-        <PencilLine className="h-3.5 w-3.5 text-gray-700" />
-        <Text size="caption1" weight="medium" className="text-gray-700 whitespace-nowrap">
-          {changeLabel}
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept="image/*"
+          onChange={handleInputChange}
+          className="hidden"
+        />
+      </div>
+
+      <div className="mt-4 flex items-center justify-between gap-3">
+        <Text size="caption1" weight="regular" className="text-gray-500">
+          {helperText}
         </Text>
-      </button>
+        {hasThumbnail && onClear ? (
+          <Button
+            type="button"
+            variant="outlined"
+            size="small"
+            className="shrink-0"
+            onClick={onClear}
+          >
+            {clearLabel}
+          </Button>
+        ) : null}
+      </div>
     </div>
   );
 }
