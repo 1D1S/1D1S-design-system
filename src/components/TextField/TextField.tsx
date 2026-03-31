@@ -18,10 +18,12 @@ const fieldVariants = cva(
       variant: {
         default: [
           'rounded-3 border border-gray-300 bg-white px-5 text-gray-900 shadow-none',
+          'hover:border-gray-400',
           'focus-visible:border-main-500 focus-visible:ring-3 focus-visible:ring-main-300/60',
         ],
         search: [
           'rounded-3 !h-10 border border-gray-300 bg-white pl-11 pr-4 text-gray-700 placeholder:text-gray-500',
+          'hover:border-gray-400',
           'focus-visible:border-main-500 focus-visible:ring-3 focus-visible:ring-main-300/60',
         ],
       },

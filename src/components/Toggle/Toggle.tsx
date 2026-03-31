@@ -11,8 +11,9 @@ const toggleVariants = cva(
     'text-gray-700 transition-all duration-200 ease-out active:scale-95',
     'cursor-pointer disabled:pointer-events-none disabled:opacity-50 disabled:active:scale-100',
     'focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-main-300/60',
-    'hover:bg-gray-100',
+    'hover:border-gray-400 hover:bg-gray-100',
     'data-[state=on]:border-main-800 data-[state=on]:bg-main-800 data-[state=on]:text-white',
+    'data-[state=on]:hover:bg-main-600 data-[state=on]:hover:border-main-600',
     'data-[state=on]:shadow-[0_4px_10px_rgba(255,87,34,0.22)]',
   ],
   {

@@ -72,14 +72,14 @@ export function CheckContainer({
       disabled={disabled}
       onClick={handleClick}
       className={cn(
-        "relative overflow-hidden rounded-[28px] border-2 transition-colors duration-200",
+        "relative overflow-hidden rounded-[28px] border-2 transition-all duration-200 ease-out active:scale-95",
         "flex flex-col items-center justify-center",
         !hasCustomChildren && "gap-4",
         isChecked
           ? "border-main-800 bg-main-200 text-main-800"
           : "border-gray-300 bg-white text-gray-500",
         !disabled && "hover:cursor-pointer" && (isChecked ? "hover:bg-main-300" : "hover:bg-gray-100"),
-        disabled && "cursor-not-allowed opacity-60",
+        disabled && "cursor-not-allowed opacity-60 active:scale-100",
         className,
       )}
       style={{
