@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.28](https://github.com/1D1S/1D1S-design-system/compare/v0.2.27...v0.2.28) (2026-03-31)
+
+
+### Features
+
+* 호버 및 클릭 애니메이션 추가 ([a4717ab](https://github.com/1D1S/1D1S-design-system/commit/a4717ab9bb1eb9471da2ab888e8aef23587566eb))
+
 ### [0.2.27](https://github.com/1D1S/1D1S-design-system/compare/v0.2.26...v0.2.27) (2026-03-31)
 
 
