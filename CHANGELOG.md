@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.29](https://github.com/1D1S/1D1S-design-system/compare/v0.2.28...v0.2.29) (2026-03-31)
+
+
+### Features
+
+* 드랍다운 호버 효과 추가 ([180ed92](https://github.com/1D1S/1D1S-design-system/commit/180ed92924331b7db766d526888eb5564f68185a))
+
 ### [0.2.28](https://github.com/1D1S/1D1S-design-system/compare/v0.2.27...v0.2.28) (2026-03-31)
 
 
