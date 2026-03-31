@@ -27,7 +27,7 @@ const fieldVariants = cva(
       },
       multiline: {
         false: 'h-10 py-0',
-        true: 'min-h-[320px] resize-none py-8 align-top leading-relaxed',
+        true: 'min-h-[120px] resize-none py-3 align-top leading-relaxed',
       },
     },
     defaultVariants: {

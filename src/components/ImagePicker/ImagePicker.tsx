@@ -19,6 +19,12 @@ export interface ImagePickerProps {
   helperText?: string;
   /** 선택 해제 버튼 텍스트 (기본값: "선택 해제") */
   clearLabel?: string;
+  /**
+   * 드롭존 영역의 크기·비율을 지정하는 className.
+   * 기본값: `aspect-video`
+   * @example "aspect-[4/1]", "aspect-square", "h-64"
+   */
+  dropZoneClassName?: string;
   /** 추가 className */
   className?: string;
 }
@@ -55,6 +61,7 @@ export function ImagePicker({
   placeholderSubtitle = "또는 이미지를 드래그해서 놓아주세요.",
   helperText = "JPG, PNG, GIF 파일을 업로드할 수 있습니다.",
   clearLabel = "선택 해제",
+  dropZoneClassName = "min-h-[220px] flex-1 lg:min-h-[440px]",
   className,
 }: ImagePickerProps): React.ReactElement {
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -124,7 +131,8 @@ export function ImagePicker({
         tabIndex={0}
         aria-label="썸네일 이미지 선택"
         className={cn(
-          "relative flex min-h-[220px] flex-1 cursor-pointer items-center justify-center overflow-hidden rounded-xl border bg-gray-100 transition outline-none lg:min-h-[440px]",
+          "relative flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-xl border bg-gray-100 transition outline-none",
+          dropZoneClassName,
           isDragging
             ? "border-main-700 ring-3 ring-main-300"
             : "border-gray-200 hover:border-gray-300"
