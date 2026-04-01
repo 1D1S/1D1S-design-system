@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.30](https://github.com/1D1S/1D1S-design-system/compare/v0.2.29...v0.2.30) (2026-04-01)
+
+
+### Bug Fixes
+
+* `RightSideBar`에 불필요한 스크롤바가 생기는 현상 수정 ([09d92ac](https://github.com/1D1S/1D1S-design-system/commit/09d92acce3cf9898528a112917475fba7c60dc45))
+
 ### [0.2.29](https://github.com/1D1S/1D1S-design-system/compare/v0.2.28...v0.2.29) (2026-03-31)
 
 
