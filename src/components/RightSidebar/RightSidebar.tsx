@@ -146,7 +146,7 @@ function LoadingTransition({
       </div>
       <div
         className={cn(
-          "pointer-events-none absolute inset-0 transition-opacity ease-out",
+          "pointer-events-none absolute inset-0 overflow-hidden transition-opacity ease-out",
           loading ? "opacity-100" : "opacity-0",
         )}
         style={{ transitionDuration: `${durationMs}ms` }}
