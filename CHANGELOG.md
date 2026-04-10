@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.31](https://github.com/1D1S/1D1S-design-system/compare/v0.2.29...v0.2.31) (2026-04-10)
+
+
+### Features
+
+* 댓글, 대댓글 컴포넌트 추가 ([3fc67f4](https://github.com/1D1S/1D1S-design-system/commit/3fc67f4fece497f2fb17f916f9969f60961e94c2))
+
+
+### Bug Fixes
+
+* `RightSideBar`에 불필요한 스크롤바가 생기는 현상 수정 ([09d92ac](https://github.com/1D1S/1D1S-design-system/commit/09d92acce3cf9898528a112917475fba7c60dc45))
+* 체크박스 체크 표시 기본 색상을 흰색으로 변경 ([05eae07](https://github.com/1D1S/1D1S-design-system/commit/05eae071153c17e20978941d5f4ae91770d7d2d5))
+
 ### [0.2.30](https://github.com/1D1S/1D1S-design-system/compare/v0.2.29...v0.2.30) (2026-04-01)
 
 
