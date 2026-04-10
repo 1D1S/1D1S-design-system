@@ -9,6 +9,7 @@ export * from "./CheckList";
 export * from "./Checkbox";
 export * from "./CircleAvatar";
 export * from "./CircularProgress";
+export * from "./CommentThread";
 export * from "./DatePicker";
 export * from "./Dialog";
 export * from "./Dropdown";
