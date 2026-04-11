@@ -5,8 +5,7 @@ import React from "react";
 import { cn } from "../../lib/utils";
 import { CircleAvatar } from "../CircleAvatar";
 import { Text } from "../Text";
-
-const MAX_VISIBLE_REPLIES = 5;
+import { TextArea } from "../TextField";
 
 export interface CommentAuthor {
   id: string;
@@ -21,6 +20,9 @@ export interface CommentNode {
   author: CommentAuthor;
   replies?: CommentNode[];
   isAuthor?: boolean;
+  hasMoreReplies?: boolean;
+  remainingReplyCount?: number;
+  isLoadingReplies?: boolean;
 }
 
 export interface CommentThreadProps {
@@ -30,16 +32,16 @@ export interface CommentThreadProps {
   replyPlaceholder?: string;
   replySubmitLabel?: string;
   replyCancelLabel?: string;
-  onEdit?(comment: CommentNode): void;
+  loadMoreRepliesLabel?: string;
   onDelete?(comment: CommentNode): void;
   onReport?(comment: CommentNode): void;
   onReplySubmit?(comment: CommentNode, content: string): void;
+  onLoadMoreReplies?(comment: CommentNode): void;
 }
 
 interface CommentActionsMenuProps {
   comment: CommentNode;
   isAuthor: boolean;
-  onEdit?(comment: CommentNode): void;
   onDelete?(comment: CommentNode): void;
   onReport?(comment: CommentNode): void;
 }
@@ -47,7 +49,6 @@ interface CommentActionsMenuProps {
 function CommentActionsMenu({
   comment,
   isAuthor,
-  onEdit,
   onDelete,
   onReport,
 }: CommentActionsMenuProps): React.ReactElement {
@@ -55,12 +56,6 @@ function CommentActionsMenu({
 
   const actionItems = isAuthor
     ? [
-        {
-          key: "edit",
-          label: "수정",
-          onClick: () => onEdit?.(comment),
-          className: "text-gray-700",
-        },
         {
           key: "delete",
           label: "삭제",
@@ -143,11 +138,12 @@ function CommentItem({
   replyPlaceholder,
   replySubmitLabel,
   replyCancelLabel,
+  loadMoreRepliesLabel,
   onReplyOpen,
   onReplyChange,
   onReplySubmit,
   onReplyCancel,
-  onEdit,
+  onLoadMoreReplies,
   onDelete,
   onReport,
 }: {
@@ -159,11 +155,12 @@ function CommentItem({
   replyPlaceholder: string;
   replySubmitLabel: string;
   replyCancelLabel: string;
+  loadMoreRepliesLabel: string;
   onReplyOpen(comment: CommentNode): void;
   onReplyChange(content: string): void;
   onReplySubmit(comment: CommentNode): void;
   onReplyCancel(): void;
-  onEdit?(comment: CommentNode): void;
+  onLoadMoreReplies?(comment: CommentNode): void;
   onDelete?(comment: CommentNode): void;
   onReport?(comment: CommentNode): void;
 }): React.ReactElement {
@@ -173,14 +170,8 @@ function CommentItem({
       : Boolean(currentUserId && comment.author.id === currentUserId);
 
   const hasReplies = Boolean(comment.replies?.length);
-  const replyCount = comment.replies?.length ?? 0;
-  const hasHiddenReplies = replyCount > MAX_VISIBLE_REPLIES;
-  const [isReplyExpanded, setIsReplyExpanded] = React.useState(false);
   const isReplyComposerOpen = activeReplyTargetId === comment.id;
-  const visibleReplies =
-    hasHiddenReplies && !isReplyExpanded
-      ? comment.replies?.slice(0, MAX_VISIBLE_REPLIES)
-      : comment.replies;
+  const hasMoreReplies = Boolean(comment.hasMoreReplies);
 
   return (
     <li>
@@ -212,7 +203,6 @@ function CommentItem({
               <CommentActionsMenu
                 comment={comment}
                 isAuthor={isAuthor}
-                onEdit={onEdit}
                 onDelete={onDelete}
                 onReport={onReport}
               />
@@ -228,7 +218,7 @@ function CommentItem({
           </div>
           {hasReplies ? (
             <ul className="mt-3 space-y-2.5">
-              {visibleReplies?.map((reply) => (
+              {comment.replies?.map((reply) => (
                 <CommentItem
                   key={reply.id}
                   comment={reply}
@@ -239,11 +229,12 @@ function CommentItem({
                   replyPlaceholder={replyPlaceholder}
                   replySubmitLabel={replySubmitLabel}
                   replyCancelLabel={replyCancelLabel}
+                  loadMoreRepliesLabel={loadMoreRepliesLabel}
                   onReplyOpen={onReplyOpen}
                   onReplyChange={onReplyChange}
                   onReplySubmit={onReplySubmit}
                   onReplyCancel={onReplyCancel}
-                  onEdit={onEdit}
+                  onLoadMoreReplies={onLoadMoreReplies}
                   onDelete={onDelete}
                   onReport={onReport}
                 />
@@ -261,15 +252,12 @@ function CommentItem({
             onClick={(event) => event.stopPropagation()}
           >
             <div className="rounded-2 border border-gray-200 bg-white p-2.5">
-              <textarea
+              <TextArea
                 value={draftReplyContent}
                 onChange={(event) => onReplyChange(event.target.value)}
                 placeholder={replyPlaceholder}
-                className={cn(
-                  "min-h-[84px] w-full resize-y rounded-2 border border-gray-200 px-3 py-2 outline-none",
-                  "text-sm leading-relaxed text-gray-900 placeholder:text-gray-400",
-                  "focus-visible:ring-3 focus-visible:ring-main-300/60",
-                )}
+                rows={4}
+                className="min-h-[84px]"
               />
               <div className="mt-2 flex items-center justify-end gap-2">
                 <button
@@ -297,16 +285,24 @@ function CommentItem({
               </div>
             </div>
           </div>
-          {hasHiddenReplies ? (
+          {hasMoreReplies ? (
             <button
               type="button"
               className="mt-2.5 inline-flex rounded-2 px-2 py-1 text-gray-600 transition-colors hover:bg-gray-100 hover:text-gray-800"
-              onClick={() => setIsReplyExpanded((prev) => !prev)}
+              onClick={(event) => {
+                event.stopPropagation();
+                onLoadMoreReplies?.(comment);
+              }}
+              disabled={comment.isLoadingReplies}
             >
               <Text size="caption2" weight="medium">
-                {isReplyExpanded
-                  ? "접기"
-                  : `대댓글 더보기 (${replyCount - MAX_VISIBLE_REPLIES})`}
+                {comment.isLoadingReplies
+                  ? "불러오는 중..."
+                  : `${loadMoreRepliesLabel}${
+                      typeof comment.remainingReplyCount === "number"
+                        ? ` (${comment.remainingReplyCount})`
+                        : ""
+                    }`}
               </Text>
             </button>
           ) : null}
@@ -323,8 +319,9 @@ export function CommentThread({
   replyPlaceholder = "댓글을 입력하세요.",
   replySubmitLabel = "등록",
   replyCancelLabel = "취소",
+  loadMoreRepliesLabel = "대댓글 더보기",
   onReplySubmit,
-  onEdit,
+  onLoadMoreReplies,
   onDelete,
   onReport,
 }: CommentThreadProps): React.ReactElement {
@@ -375,11 +372,12 @@ export function CommentThread({
           replyPlaceholder={replyPlaceholder}
           replySubmitLabel={replySubmitLabel}
           replyCancelLabel={replyCancelLabel}
+          loadMoreRepliesLabel={loadMoreRepliesLabel}
           onReplyOpen={handleReplyOpen}
           onReplyChange={setDraftReplyContent}
           onReplySubmit={handleReplySubmit}
           onReplyCancel={handleReplyCancel}
-          onEdit={onEdit}
+          onLoadMoreReplies={onLoadMoreReplies}
           onDelete={onDelete}
           onReport={onReport}
         />

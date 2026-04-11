@@ -62,10 +62,10 @@ const meta: Meta<typeof CommentThread> = {
     ),
   ],
   argTypes: {
-    onEdit: { action: "edit clicked" },
     onDelete: { action: "delete clicked" },
     onReport: { action: "report clicked" },
     onReplySubmit: { action: "reply submitted" },
+    onLoadMoreReplies: { action: "load more replies clicked" },
   },
 };
 
@@ -133,7 +133,9 @@ export const ManyReplies: Story = {
             "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=200&q=80",
         },
         content: "대댓글이 많은 케이스 테스트입니다.",
-        replies: Array.from({ length: 8 }).map((_, index) => ({
+        hasMoreReplies: true,
+        remainingReplyCount: 3,
+        replies: Array.from({ length: 5 }).map((_, index) => ({
           id: `many-1-r-${index + 1}`,
           createdAt: "2026.04.10",
           author: {
