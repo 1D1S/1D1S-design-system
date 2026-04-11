@@ -209,7 +209,7 @@ function CommentItem({
             </div>
             <Text
               as="p"
-              size="caption1"
+              size="body2"
               weight="regular"
               className="mt-0.5 leading-relaxed break-words whitespace-pre-wrap text-gray-800"
             >
