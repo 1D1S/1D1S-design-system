@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.34](https://github.com/1D1S/1D1S-design-system/compare/v0.2.33...v0.2.34) (2026-05-09)
+
+
+### Features
+
+* 리뉴얼 ([5dbbd43](https://github.com/1D1S/1D1S-design-system/commit/5dbbd43635120f9c2a4946244007a7e58e880415))
+* 토큰과 버튼 ([9007cde](https://github.com/1D1S/1D1S-design-system/commit/9007cde2a6cbf4a23d4f531e9b03ca3283e2fccf))
+
+
+### Bug Fixes
+
+* sync pnpm-lock.yaml with package.json [major] ([a1d7190](https://github.com/1D1S/1D1S-design-system/commit/a1d7190e5021dff2a1831ca6d4327d778b00b5dc)), closes [#12](https://github.com/1D1S/1D1S-design-system/issues/12) [#12](https://github.com/1D1S/1D1S-design-system/issues/12)
+
 ### [0.2.33](https://github.com/1D1S/1D1S-design-system/compare/v0.2.32...v0.2.33) (2026-04-11)
 
 
