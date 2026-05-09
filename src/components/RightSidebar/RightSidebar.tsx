@@ -310,7 +310,7 @@ export function RightSidebar({
       {collapsible && (
         <Button
           type="button"
-          variant="outlined"
+          variant="secondary"
           size="icon"
           aria-label="사이드바 접기"
           onClick={handleToggleCollapse}
@@ -486,7 +486,7 @@ export function RightSidebar({
                   <>
                   <Button
                     className="mt-5 w-full"
-                    size="medium"
+                    size="md"
                     disabled={challenges.length === 0}
                     onClick={onWriteDiary}
                   >
@@ -497,9 +497,9 @@ export function RightSidebar({
                   </Button>
 
                   <Button
-                    variant="outlined"
+                    variant="secondary"
                     className="mt-3 w-full"
-                    size="medium"
+                    size="md"
                     onClick={onGoMyPage}
                   >
                     <Person className="h-4 w-4" />
@@ -558,7 +558,7 @@ export function RightSidebar({
                           <Button
                             type="button"
                             className="w-full"
-                            size="medium"
+                            size="md"
                             disabled={isJoinChallengeDisabled}
                             onClick={onJoinChallenge}
                           >
@@ -566,9 +566,9 @@ export function RightSidebar({
                           </Button>
                           <Button
                             type="button"
-                            variant="outlined"
+                            variant="secondary"
                             className="w-full"
-                            size="medium"
+                            size="md"
                             onClick={onCreateChallenge}
                           >
                             {createChallengeButtonLabel}
@@ -579,7 +579,7 @@ export function RightSidebar({
                   </div>
                 </>
                 ) : (
-                  <Button className="mt-5 w-full" size="medium" onClick={onLogin}>
+                  <Button className="mt-5 w-full" size="md" onClick={onLogin}>
                     <LogIn className="h-4 w-4" />
                     <Text size="body2" weight="bold" className="text-inherit">
                       {loginButtonLabel}
@@ -625,7 +625,7 @@ export function RightSidebar({
 
                         <Button
                           type="button"
-                          variant="outlined"
+                          variant="secondary"
                           size="icon"
                           aria-label={myPageButtonLabel}
                           onClick={onGoMyPage}
@@ -635,7 +635,7 @@ export function RightSidebar({
 
                         <Button
                           type="button"
-                          variant="outlined"
+                          variant="secondary"
                           size="icon"
                           aria-label={settingButtonLabel}
                           onClick={onOpenSettings}

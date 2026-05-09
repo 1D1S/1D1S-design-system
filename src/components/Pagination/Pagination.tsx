@@ -115,7 +115,7 @@ export function Pagination({
       <Button
         onClick={onPrevious}
         disabled={currentPage === 1}
-        variant="outlined"
+        variant="secondary"
         size="icon"
         className="rounded-3 border-gray-300 bg-white text-gray-600 hover:bg-gray-100 disabled:bg-gray-100 disabled:text-gray-400"
         aria-label="Go to previous page"
@@ -143,7 +143,7 @@ export function Pagination({
           <Button
             key={pageNumber}
             onClick={() => onPageChange(pageNumber as number)}
-            variant={isCurrent ? "default" : "secondary"}
+            variant={isCurrent ? "primary" : "ghost"}
             size="icon"
             className={cn(
               "rounded-3",
@@ -168,7 +168,7 @@ export function Pagination({
       <Button
         onClick={onNext}
         disabled={currentPage === totalPages}
-        variant="outlined"
+        variant="secondary"
         size="icon"
         className="rounded-3 border-gray-300 bg-white text-gray-600 hover:bg-gray-100 disabled:bg-gray-100 disabled:text-gray-400"
         aria-label="Go to next page"

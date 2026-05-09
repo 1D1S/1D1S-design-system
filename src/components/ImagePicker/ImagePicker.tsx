@@ -178,8 +178,8 @@ export function ImagePicker({
         {hasThumbnail && onClear ? (
           <Button
             type="button"
-            variant="outlined"
-            size="small"
+            variant="secondary"
+            size="sm"
             className="shrink-0"
             onClick={onClear}
           >

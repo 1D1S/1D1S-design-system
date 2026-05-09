@@ -134,7 +134,7 @@ function ScheduleCalendarPager({ preset }: { preset: CalendarPreset }) {
         <div className="flex items-center gap-2">
           <Button
             type="button"
-            variant="outlined"
+            variant="secondary"
             size="icon"
             aria-label="이전 기간"
             onClick={handlePrev}
@@ -143,7 +143,7 @@ function ScheduleCalendarPager({ preset }: { preset: CalendarPreset }) {
           </Button>
           <Button
             type="button"
-            variant="outlined"
+            variant="secondary"
             size="icon"
             aria-label="다음 기간"
             onClick={handleNext}

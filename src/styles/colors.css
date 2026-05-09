@@ -25,9 +25,14 @@
   /* Default Colors */
   --color-white: var(--white);
   --color-black: var(--black);
-  --color-dark-shadow-70: var(--dark-shadow-70);
+  --color-gray-shadow-70: var(--gray-shadow-70);
   --color-warning: var(--warning);
   --color-accent: var(--accent);
+
+  /* Brand semantic aliases (v3) */
+  --color-brand: var(--brand);
+  --color-brand-soft: var(--brand-soft);
+  --color-brand-softer: var(--brand-softer);
 
   /* Green Colors */
   --color-green-400: var(--green-400);
@@ -44,7 +49,6 @@
   --color-blue-600: var(--blue-600);
 
   /* Red Colors */
-
   --color-red-300: var(--red-300);
   --color-red-400: var(--red-400);
   --color-red-500: var(--red-500);
@@ -61,6 +65,11 @@
   --color-mint-700: var(--mint-700);
   --color-mint-800: var(--mint-800);
   --color-mint-900: var(--mint-900);
+
+  /* Sky Colors (v3) */
+  --color-sky-100: var(--sky-100);
+  --color-sky-200: var(--sky-200);
+  --color-sky-700: var(--sky-700);
 }
 
 :root {
@@ -94,6 +103,11 @@
   --warning: #ff2020;
   --accent: #ff5722;
 
+  /* Brand semantic aliases (v3) */
+  --brand: var(--main-800);
+  --brand-soft: var(--main-200);
+  --brand-softer: var(--main-100);
+
   /* Green Colors */
   --green-400: #b8d530;
   --green-500: #8dc71e;
@@ -125,4 +139,9 @@
   --mint-700: #5ec69d;
   --mint-800: #3eb489;
   --mint-900: #1d9c6d;
+
+  /* Sky Colors (v3) */
+  --sky-100: #e0f2fe;
+  --sky-200: #bae6fd;
+  --sky-700: #0369a1;
 }
