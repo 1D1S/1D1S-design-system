@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.0.0](https://github.com/1D1S/1D1S-design-system/compare/v0.2.34...v1.0.0) (2026-05-09)
+
+
+### Bug Fixes
+
+* invoke standard-version directly to preserve release args [major] ([41f2f83](https://github.com/1D1S/1D1S-design-system/commit/41f2f8355eb7334876788a98b0b78c5df68202c7)), closes [#13](https://github.com/1D1S/1D1S-design-system/issues/13)
+
 ### [0.2.34](https://github.com/1D1S/1D1S-design-system/compare/v0.2.33...v0.2.34) (2026-05-09)
 
 
