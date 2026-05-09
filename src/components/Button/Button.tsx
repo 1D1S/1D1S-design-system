@@ -21,6 +21,12 @@ const buttonVariants = cva(baseClasses, {
         "bg-transparent text-gray-700 border-transparent hover:bg-gray-100",
       danger:
         "bg-red-500 text-white border-transparent hover:brightness-105 hover:-translate-y-px",
+      // ── v0.2 호환 alias ──
+      // 기존 호출부(`outlined`/`default`) 호환 유지. 신규 코드는 위 5종 사용 권장.
+      outlined:
+        "bg-white text-gray-800 border-gray-200 hover:bg-gray-50 hover:border-gray-300",
+      default:
+        "bg-brand text-white border-transparent hover:brightness-105 hover:-translate-y-px",
     },
     size: {
       xs: "h-6 px-2 gap-1",
@@ -29,6 +35,10 @@ const buttonVariants = cva(baseClasses, {
       lg: "h-[46px] px-5",
       xl: "h-[54px] px-6",
       icon: "h-[38px] w-[38px] p-0",
+      // ── v0.2 호환 alias ──
+      small: "h-[30px] px-3 gap-1",
+      medium: "h-[38px] px-4",
+      large: "h-[46px] px-5",
     },
     pill: {
       true: "rounded-full",
@@ -54,6 +64,10 @@ const labelStyleMap = {
   lg: { size: "caption1", weight: "extrabold" },
   xl: { size: "body2", weight: "extrabold" },
   icon: { size: "caption2", weight: "extrabold" },
+  // v0.2 호환 alias
+  small: { size: "caption3", weight: "extrabold" },
+  medium: { size: "caption2", weight: "extrabold" },
+  large: { size: "caption1", weight: "extrabold" },
 } as const;
 
 export interface ButtonProps

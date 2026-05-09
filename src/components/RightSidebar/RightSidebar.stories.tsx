@@ -1,0 +1,182 @@
+import React from 'react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { RightSidebar } from './RightSidebar';
+
+const meta: Meta<typeof RightSidebar> = {
+  title: 'Layout/RightSidebar',
+  component: RightSidebar,
+  tags: ['autodocs'],
+  decorators: [
+    (Story) => (
+      <div className="bg-gray-100 p-6">
+        <Story />
+      </div>
+    ),
+  ],
+};
+
+export default meta;
+type Story = StoryObj<typeof RightSidebar>;
+
+export const Default: Story = {
+  args: {
+    fixed: false,
+    isLoggedIn: true,
+    userName: '고라니',
+    userSubtitle: '목표 11개 남음!',
+    streakDays: 12,
+    diaryButtonLabel: '일지 작성하기',
+    myPageButtonLabel: '마이페이지',
+    challengeTitle: '참여중인 챌린지',
+    challenges: [
+      { id: '1', title: '알고리즘 부시기', progress: 45, tone: 'blue' },
+      { id: '2', title: '새벽 러닝', progress: 80, tone: 'green', hasDeadline: false },
+    ],
+    onChallengeClick: (challenge) => alert(`챌린지 클릭: ${challenge.title}`),
+  },
+};
+
+export const LoggedOut: Story = {
+  args: {
+    fixed: false,
+    isLoggedIn: false,
+    streakDays: 0,
+    loginButtonLabel: '로그인',
+    loginPromptMessage: '로그인하고 연속 기록을 시작해보세요',
+  },
+};
+
+export const EmptyChallenges: Story = {
+  args: {
+    fixed: false,
+    isLoggedIn: true,
+    userName: '고라니',
+    userSubtitle: '목표 11개 남음!',
+    streakDays: 12,
+    diaryButtonLabel: '일지 작성하기',
+    myPageButtonLabel: '마이페이지',
+    challengeTitle: '참여중인 챌린지',
+    challenges: [],
+    emptyChallengeMessage: '챌린지가 없어요.',
+    joinChallengeButtonLabel: '챌린지 참여하기',
+    createChallengeButtonLabel: '챌린지 생성하기',
+  },
+};
+
+export const NotCollapsible: Story = {
+  args: {
+    fixed: false,
+    isLoggedIn: true,
+    userName: '고라니',
+    userSubtitle: '목표 11개 남음!',
+    streakDays: 12,
+    collapsible: false,
+    diaryButtonLabel: '일지 작성하기',
+    myPageButtonLabel: '마이페이지',
+    challengeTitle: '참여중인 챌린지',
+    challenges: [
+      { id: '1', title: '알고리즘 부시기', progress: 45, tone: 'blue' },
+      { id: '2', title: '새벽 러닝', progress: 80, tone: 'green', hasDeadline: false },
+    ],
+  },
+};
+
+export const Mobile: Story = {
+  parameters: {
+    viewport: { defaultViewport: 'mobile1' },
+  },
+  decorators: [
+    (Story) => (
+      <div className="bg-gray-100 p-4">
+        <Story />
+      </div>
+    ),
+  ],
+  args: {
+    fixed: false,
+    isLoggedIn: true,
+    userName: '고라니',
+    userSubtitle: '목표 11개 남음!',
+    streakDays: 12,
+    collapsible: false,
+    diaryButtonLabel: '일지 작성하기',
+    myPageButtonLabel: '마이페이지',
+    challengeTitle: '참여중인 챌린지',
+    challenges: [
+      { id: '1', title: '알고리즘 부시기', progress: 45, tone: 'blue' },
+      { id: '2', title: '새벽 러닝', progress: 80, tone: 'green', hasDeadline: false },
+    ],
+  },
+};
+
+export const EmptyChallengesJoinEnabled: Story = {
+  args: {
+    fixed: false,
+    isLoggedIn: true,
+    userName: '고라니',
+    userSubtitle: '목표 11개 남음!',
+    streakDays: 12,
+    diaryButtonLabel: '일지 작성하기',
+    myPageButtonLabel: '마이페이지',
+    challengeTitle: '참여중인 챌린지',
+    challenges: [],
+    emptyChallengeMessage: '챌린지가 없어요.',
+    joinChallengeButtonLabel: '챌린지 참여하기',
+    joinChallengeMaxUserCount: 1,
+    createChallengeButtonLabel: '챌린지 생성하기',
+  },
+};
+
+export const Loading: Story = {
+  args: {
+    fixed: false,
+    isLoggedIn: true,
+    isLoading: true,
+    streakDays: 12,
+    challenges: [
+      { id: '1', title: '알고리즘 부시기', progress: 45, tone: 'blue' },
+      { id: '2', title: '새벽 러닝', progress: 80, tone: 'green', hasDeadline: false },
+    ],
+  },
+};
+
+export const LoadingLoggedOut: Story = {
+  args: {
+    fixed: false,
+    isLoggedIn: false,
+    isLoading: true,
+    streakDays: 0,
+  },
+};
+
+export const LoadingToLoadedTransition: Story = {
+  render: (args) => {
+    const [isLoading, setIsLoading] = React.useState(true);
+
+    React.useEffect(() => {
+      const timerId = setTimeout(() => {
+        setIsLoading(false);
+      }, 1400);
+
+      return () => {
+        clearTimeout(timerId);
+      };
+    }, []);
+
+    return <RightSidebar {...args} isLoading={isLoading} />;
+  },
+  args: {
+    fixed: false,
+    isLoggedIn: true,
+    userName: '고라니',
+    userSubtitle: '목표 11개 남음!',
+    streakDays: 12,
+    diaryButtonLabel: '일지 작성하기',
+    myPageButtonLabel: '마이페이지',
+    challengeTitle: '참여중인 챌린지',
+    challenges: [
+      { id: '1', title: '알고리즘 부시기', progress: 45, tone: 'blue' },
+      { id: '2', title: '새벽 러닝', progress: 80, tone: 'green', hasDeadline: false },
+    ],
+  },
+};

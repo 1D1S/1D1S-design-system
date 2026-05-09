@@ -1,0 +1,13 @@
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { PageWatermark } from './PageWatermark';
+
+const meta: Meta<typeof PageWatermark> = {
+  title: 'Layout/PageWatermark',
+  component: PageWatermark,
+  tags: ['autodocs'],
+};
+
+export default meta;
+type Story = StoryObj<typeof PageWatermark>;
+
+export const Default: Story = {};
