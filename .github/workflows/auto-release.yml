@@ -159,11 +159,18 @@ jobs:
             echo "Using conventional-commits auto bump"
           fi
 
+          # NOTE: pnpm preserves the `--` separator when forwarding script args
+          # (unlike npm which strips it). Calling `pnpm release -- $ARGS` ends up
+          # invoking `standard-version -- $ARGS`, and standard-version treats
+          # everything after `--` as positional args, silently ignoring our
+          # --release-as flag → falls back to conventional-commits.
+          # Fix: bypass the npm script and exec standard-version directly.
           if [ -n "$ARGS" ]; then
-            echo "Running: pnpm release -- $ARGS"
-            pnpm release -- $ARGS
+            echo "Running: pnpm exec standard-version $ARGS"
+            pnpm exec standard-version $ARGS
           else
-            pnpm release
+            echo "Running: pnpm exec standard-version"
+            pnpm exec standard-version
           fi
 
       - name: Push changes
