@@ -1,59 +1,77 @@
-import { cn } from '../../lib/utils';
-import { cva, type VariantProps } from 'class-variance-authority';
-import { Text, textVariants } from '../Text';
+import { cn } from "../../lib/utils";
+import { cva, type VariantProps } from "class-variance-authority";
 
 const tagVariants = cva(
-  'inline-flex items-center rounded-2 px-2.5 py-1 bg-main-800 text-white',
+  "inline-flex items-center justify-center font-bold whitespace-nowrap",
   {
     variants: {
-      hasIcon: {
-        true: 'gap-1.5',
-        false: '',
+      tone: {
+        gray: "bg-gray-100 text-gray-700",
+        brand: "bg-main-200 text-brand",
+        mint: "bg-mint-200 text-mint-900",
+        blue: "bg-blue-200 text-blue-600",
+        red: "bg-red-300 text-red-700",
+        green: "bg-green-200 text-green-700",
+      },
+      size: {
+        xs: "text-[9px] py-0.5 px-1.5 gap-0.5",
+        sm: "text-[10px] py-[3px] px-2 gap-1",
+        md: "text-[11px] py-1 px-2.5 gap-1",
+        lg: "text-xs py-[5px] px-3 gap-1",
+      },
+      pill: {
+        true: "rounded-full",
+        false: "rounded-1",
       },
     },
     defaultVariants: {
-      hasIcon: false,
+      tone: "brand",
+      size: "md",
+      pill: true,
     },
-  }
+  },
 );
 
-type TagProps = {
+export interface TagProps
+  extends Omit<React.ComponentProps<"span">, "color">,
+    VariantProps<typeof tagVariants> {
+  /** 라벨 좌측 아이콘/이모지 */
   icon?: React.ReactNode;
   children: React.ReactNode;
-  className?: string;
-  size?: VariantProps<typeof textVariants>['size'];
-  weight?: 'bold' | 'medium' | 'regular' | 'light';
-} & VariantProps<typeof tagVariants>;
+}
 
 /**
- * Tag
- * 간단한 태그 스타일을 위한 컴포넌트 (텍스트 + 아이콘 구성)
+ * Tag (a.k.a. Chip)
+ * 카테고리 / 상태 / 메타데이터 표시용 작은 라벨.
  *
- * @param icon 선택적 아이콘 이모지 텍스트
- * @param weight 텍스트 굵기 (기본값: bold) : bold, medium, regular, light
+ * @param tone `gray` · `brand` (default) · `mint` · `blue` · `red` · `green`
+ * @param size `xs` · `sm` · `md` (default) · `lg`
+ * @param pill 알약형 라운딩 (default `true`)
+ * @param icon 라벨 좌측 아이콘 또는 이모지
  *
- * @example 기본 사용
+ * @example
  * ```tsx
- * <Tag icon="🔥">인기</Tag>
+ * <Tag tone="brand">운동</Tag>
+ * <Tag tone="mint" size="sm" icon="🔥">14일</Tag>
  * ```
  */
 export function Tag({
+  className,
+  tone,
+  size,
+  pill,
   icon,
   children,
-  size = 'caption2',
-  weight = 'bold',
-  className,
+  ...props
 }: TagProps): React.ReactElement {
   return (
-    <span className={cn(tagVariants({ hasIcon: Boolean(icon) }), className)}>
-      {icon && (
-        <Text size={size} weight="medium">
-          {icon}
-        </Text>
-      )}
-      <Text size={size} weight={weight}>
-        {children}
-      </Text>
+    <span
+      data-slot="tag"
+      className={cn(tagVariants({ tone, size, pill, className }))}
+      {...props}
+    >
+      {icon}
+      {children}
     </span>
   );
 }

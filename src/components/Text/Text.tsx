@@ -16,7 +16,9 @@ export const textVariants = cva('leading-none', {
       pageTitle: 'text-3xl',
     },
     weight: {
+      extrabold: 'font-extrabold',
       bold: 'font-bold',
+      semibold: 'font-semibold',
       medium: 'font-medium',
       regular: 'font-normal',
       light: 'font-light',
@@ -34,7 +36,7 @@ export const textVariants = cva('leading-none', {
  *
  * @param size 텍스트 크기 : heading1, heading2, body1, body2, caption1, caption2, caption3, pageTitle
  * @default size body2
- * @param weight 텍스트 굵기 : bold, medium, regular, light
+ * @param weight 텍스트 굵기 : extrabold, bold, semibold, medium, regular, light
  * @param as HTML 태그 또는 커스텀 컴포넌트로 렌더링 (기본값: span)
  *
  * @example 기본 사용

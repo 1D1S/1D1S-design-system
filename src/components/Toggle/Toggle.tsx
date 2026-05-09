@@ -1,63 +1,77 @@
-'use client';
+"use client";
 
-import * as TogglePrimitive from '@radix-ui/react-toggle';
-import { cva, type VariantProps } from 'class-variance-authority';
-import { Text } from '../Text';
-import { cn } from '../../lib/utils';
+import * as React from "react";
+import { cn } from "../../lib/utils";
+import { Text } from "../Text";
 
-const toggleVariants = cva(
-  [
-    'inline-flex w-fit items-center justify-center gap-2.5 border bg-white whitespace-nowrap',
-    'text-gray-700 transition-all duration-200 ease-out active:scale-95',
-    'cursor-pointer disabled:pointer-events-none disabled:opacity-50 disabled:active:scale-100',
-    'focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-main-300/60',
-    'hover:border-gray-400 hover:bg-gray-100',
-    'data-[state=on]:border-main-800 data-[state=on]:bg-main-800 data-[state=on]:text-white',
-    'data-[state=on]:hover:bg-main-600 data-[state=on]:hover:border-main-600',
-    'data-[state=on]:shadow-[0_4px_10px_rgba(255,87,34,0.22)]',
-  ],
-  {
-    variants: {
-      shape: {
-        rounded: 'h-10 rounded-full px-5',
-        square: 'h-10 rounded-3 px-4',
-      },
-    },
-    defaultVariants: {
-      shape: 'rounded',
-    },
-  }
-);
-
-interface ToggleProps
-  extends React.ComponentProps<typeof TogglePrimitive.Root>,
-    VariantProps<typeof toggleVariants> {
-  icon?: React.ReactNode;
-  children: React.ReactNode;
-  className?: string;
+export interface ToggleProps
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size" | "type"> {
+  label?: React.ReactNode;
+  /** 라벨 위치 */
+  labelPosition?: "left" | "right";
 }
 
 /**
- * Toggle
- * 카테고리 선택형 토글 버튼 컴포넌트. `shape`로 둥근/사각 스타일을 선택할 수 있습니다.
+ * Toggle v3
+ * 38×22 알약형 스위치. on=brand bg, off=gray-300, 흰색 노브.
+ *
+ * @example
+ * ```tsx
+ * <Toggle defaultChecked label="알림 켜짐" />
+ * <Toggle label="공개" labelPosition="left" />
+ * ```
  */
-export function Toggle({
-  icon,
-  shape = 'rounded',
-  children,
-  className,
-  ...props
-}: ToggleProps): React.ReactElement {
-  return (
-    <TogglePrimitive.Root className={cn(toggleVariants({ shape }), className)} {...props}>
-      {icon ? (
-        <span className="inline-flex items-center justify-center text-[18px] leading-none text-inherit [&>svg]:h-5 [&>svg]:w-5">
-          {icon}
-        </span>
-      ) : null}
-      <Text size="body2" weight="bold" className="text-inherit">
-        {children}
-      </Text>
-    </TogglePrimitive.Root>
-  );
-}
+export const Toggle = React.forwardRef<HTMLInputElement, ToggleProps>(
+  (
+    {
+      className,
+      label,
+      labelPosition = "right",
+      id,
+      disabled,
+      ...props
+    },
+    ref,
+  ) => {
+    const generatedId = React.useId();
+    const inputId = id || generatedId;
+    const switchEl = (
+      <span className="relative inline-flex h-[22px] w-[38px] shrink-0 items-center">
+        <input
+          ref={ref}
+          id={inputId}
+          type="checkbox"
+          disabled={disabled}
+          className="peer absolute inset-0 m-0 h-full w-full cursor-pointer appearance-none rounded-full bg-gray-300 outline-none transition-colors duration-150 focus-visible:ring-2 focus-visible:ring-brand/30 focus-visible:ring-offset-2 checked:bg-brand disabled:cursor-not-allowed"
+          {...props}
+        />
+        <span className="pointer-events-none absolute top-[2px] left-[2px] h-[18px] w-[18px] rounded-full bg-white shadow-[0_1px_3px_rgba(0,0,0,0.15)] transition-transform duration-150 ease-out peer-checked:translate-x-4" />
+      </span>
+    );
+
+    return (
+      <label
+        htmlFor={inputId}
+        className={cn(
+          "inline-flex cursor-pointer items-center gap-2 select-none",
+          disabled && "cursor-not-allowed opacity-[0.45]",
+          className,
+        )}
+      >
+        {label && labelPosition === "left" ? (
+          <Text size="caption2" weight="medium" className="text-gray-800">
+            {label}
+          </Text>
+        ) : null}
+        {switchEl}
+        {label && labelPosition === "right" ? (
+          <Text size="caption2" weight="medium" className="text-gray-800">
+            {label}
+          </Text>
+        ) : null}
+      </label>
+    );
+  },
+);
+
+Toggle.displayName = "Toggle";

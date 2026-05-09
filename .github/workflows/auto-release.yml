@@ -1,5 +1,18 @@
 name: Auto Release and Publish
 
+# ─────────────────────────────────────────────────────────────────────
+# 릴리스 트리거 우선순위 (높음 → 낮음):
+#   1. workflow_dispatch 의 release_as 입력값  (예: "3.0.0-alpha.0")
+#   2. 커밋 메시지 / PR 제목·본문의 [major] / [minor] / [patch] 토큰
+#      - 마지막 v태그 이후 모든 커밋을 스캔, 가장 큰 단계가 우선 (major > minor > patch)
+#      - 토큰은 대소문자 무시 (e.g. [Major], [PATCH])
+#   3. 토큰이 없으면 conventional-commits (feat: / fix: / BREAKING CHANGE) 기반 자동 bump
+#
+# 참고:
+#   - 마지막 커밋이 `chore(release):` 으로 시작하면 push 트리거는 무한루프 방지로 스킵
+#   - prerelease 발행은 workflow_dispatch 로 명시 (npm_tag = next/alpha/beta)
+# ─────────────────────────────────────────────────────────────────────
+
 on:
   push:
     branches:
@@ -8,12 +21,33 @@ on:
       - 'CHANGELOG.md'
       - 'package.json'
       - '.github/**'
+  workflow_dispatch:
+    inputs:
+      release_as:
+        description: '명시 버전 (예: 3.0.0, 3.0.0-alpha.0). 비우면 토큰/conventional-commits 자동 판정'
+        required: false
+        type: string
+      prerelease:
+        description: 'prerelease tag (alpha / beta / rc). release_as 와 함께 사용'
+        required: false
+        type: string
+      npm_tag:
+        description: 'NPM dist-tag'
+        required: false
+        default: 'latest'
+        type: choice
+        options:
+          - latest
+          - next
+          - beta
+          - alpha
 
 jobs:
   check-commits:
     runs-on: ubuntu-latest
     outputs:
       should-release: ${{ steps.check.outputs.should-release }}
+      bump: ${{ steps.scan.outputs.bump }}
 
     steps:
       - name: Checkout code
@@ -21,10 +55,15 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Check commit messages
+      - name: Decide whether to release
         id: check
         run: |
-          # 마지막 커밋이 release 커밋이 아닌지 확인
+          # 수동 트리거(workflow_dispatch)는 항상 릴리스
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "should-release=true" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          # push 트리거: chore(release): 자기 자신 커밋이면 스킵
           LAST_COMMIT=$(git log -1 --pretty=%B)
           if [[ "$LAST_COMMIT" =~ ^chore\(release\): ]]; then
             echo "should-release=false" >> $GITHUB_OUTPUT
@@ -32,9 +71,43 @@ jobs:
             echo "should-release=true" >> $GITHUB_OUTPUT
           fi
 
+      - name: Scan commits for [patch] / [minor] / [major] tokens
+        id: scan
+        if: github.event_name == 'push'
+        run: |
+          # 마지막 v* 태그 찾기 (없으면 전체 히스토리 스캔)
+          LAST_TAG=$(git describe --tags --abbrev=0 --match 'v*' 2>/dev/null || echo "")
+          if [ -z "$LAST_TAG" ]; then
+            RANGE=""
+            echo "No prior v* tag — scanning all commits."
+          else
+            RANGE="${LAST_TAG}..HEAD"
+            echo "Scanning commits in: $RANGE"
+          fi
+
+          # 커밋 제목+본문 전부 합쳐 소문자 변환
+          MSGS=$(git log $RANGE --pretty=format:'%B%n---%n' | tr '[:upper:]' '[:lower:]')
+
+          BUMP=""
+          # 우선순위: major > minor > patch
+          if echo "$MSGS" | grep -qE '\[major\]'; then
+            BUMP="major"
+          elif echo "$MSGS" | grep -qE '\[minor\]'; then
+            BUMP="minor"
+          elif echo "$MSGS" | grep -qE '\[patch\]'; then
+            BUMP="patch"
+          fi
+
+          if [ -n "$BUMP" ]; then
+            echo "Detected bump token: [$BUMP]"
+          else
+            echo "No token found — will fall back to conventional-commits."
+          fi
+          echo "bump=$BUMP" >> $GITHUB_OUTPUT
+
   release:
     needs: check-commits
-    if: needs.check-commits.outputs.should-release == 'true'
+    if: needs.check-commits.outputs.should-release == 'true' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -70,7 +143,28 @@ jobs:
         run: pnpm build
 
       - name: Bump version and generate changelog
-        run: pnpm release
+        run: |
+          ARGS=""
+          # 우선순위: workflow_dispatch input > 토큰 > 기본(conventional)
+          if [ -n "${{ github.event.inputs.release_as }}" ]; then
+            ARGS="--release-as ${{ github.event.inputs.release_as }}"
+            if [ -n "${{ github.event.inputs.prerelease }}" ]; then
+              ARGS="$ARGS --prerelease ${{ github.event.inputs.prerelease }}"
+            fi
+            echo "Using workflow_dispatch input — release-as: ${{ github.event.inputs.release_as }}"
+          elif [ -n "${{ needs.check-commits.outputs.bump }}" ]; then
+            ARGS="--release-as ${{ needs.check-commits.outputs.bump }}"
+            echo "Using token-detected bump: ${{ needs.check-commits.outputs.bump }}"
+          else
+            echo "Using conventional-commits auto bump"
+          fi
+
+          if [ -n "$ARGS" ]; then
+            echo "Running: pnpm release -- $ARGS"
+            pnpm release -- $ARGS
+          else
+            pnpm release
+          fi
 
       - name: Push changes
         run: |
@@ -81,7 +175,11 @@ jobs:
         run: echo "version=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
 
       - name: Publish to NPM
-        run: npm publish --provenance --access public
+        run: |
+          NPM_TAG="${{ github.event.inputs.npm_tag }}"
+          if [ -z "$NPM_TAG" ]; then NPM_TAG="latest"; fi
+          echo "Publishing with --tag $NPM_TAG"
+          npm publish --provenance --access public --tag "$NPM_TAG"
 
       - name: Create GitHub Release
         uses: actions/create-release@v1
@@ -95,4 +193,4 @@ jobs:
 
             자세한 변경 사항은 [CHANGELOG.md](https://github.com/${{ github.repository }}/blob/main/CHANGELOG.md)를 참고하세요.
           draft: false
-          prerelease: false
+          prerelease: ${{ contains(steps.version.outputs.version, '-') }}

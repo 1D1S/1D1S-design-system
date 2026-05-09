@@ -3,98 +3,126 @@ import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 import { Text } from "../Text";
 
-const allButtonVariants =
-  "inline-flex cursor-pointer items-center justify-center gap-2 rounded-3 border border-transparent transition-all duration-200 ease-out active:scale-95 disabled:cursor-not-allowed disabled:active:scale-100";
+const baseClasses =
+  "inline-flex items-center justify-center gap-1.5 border transition-[transform,filter,background-color,box-shadow,border-color,color] duration-150 ease-out " +
+  "active:scale-[0.97] disabled:cursor-not-allowed disabled:opacity-[0.45] disabled:active:scale-100 " +
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/30 focus-visible:ring-offset-2";
 
-const customButtonVariants = cva(allButtonVariants, {
+const buttonVariants = cva(baseClasses, {
   variants: {
     variant: {
-      default:
-        "bg-main-800 text-white hover:bg-main-600 disabled:bg-main-400 disabled:text-white",
-      outlined:
-        "bg-white text-gray-800 border-gray-300 hover:bg-gray-100 disabled:bg-gray-200 disabled:text-gray-400",
+      primary:
+        "bg-brand text-white border-transparent hover:brightness-105 hover:-translate-y-px",
       secondary:
-        "bg-white text-gray-800 hover:bg-gray-100 disabled:bg-gray-100 disabled:text-gray-400",
+        "bg-white text-gray-800 border-gray-200 hover:bg-gray-50 hover:border-gray-300",
+      soft:
+        "bg-main-200 text-brand border-main-300 hover:bg-main-300/70",
       ghost:
-        "bg-transparent text-gray-800 hover:bg-gray-100 disabled:text-gray-400",
+        "bg-transparent text-gray-700 border-transparent hover:bg-gray-100",
+      danger:
+        "bg-red-500 text-white border-transparent hover:brightness-105 hover:-translate-y-px",
     },
     size: {
-      small: "h-9 px-3.5",
-      medium: "h-11 px-3.5",
-      large: "h-13 px-5",
-      icon: "h-9 w-9 p-0",
+      xs: "h-6 px-2 gap-1",
+      sm: "h-[30px] px-3 gap-1",
+      md: "h-[38px] px-4",
+      lg: "h-[46px] px-5",
+      xl: "h-[54px] px-6",
+      icon: "h-[38px] w-[38px] p-0",
+    },
+    pill: {
+      true: "rounded-full",
+      false: "rounded-2.5",
+    },
+    fullWidth: {
+      true: "w-full",
+      false: "",
     },
   },
   defaultVariants: {
-    variant: "default",
-    size: "large",
+    variant: "primary",
+    size: "md",
+    pill: false,
+    fullWidth: false,
   },
 });
 
+const labelStyleMap = {
+  xs: { size: "caption3", weight: "extrabold" },
+  sm: { size: "caption3", weight: "extrabold" },
+  md: { size: "caption2", weight: "extrabold" },
+  lg: { size: "caption1", weight: "extrabold" },
+  xl: { size: "body2", weight: "extrabold" },
+  icon: { size: "caption2", weight: "extrabold" },
+} as const;
+
 export interface ButtonProps
-  extends
-    React.ComponentProps<"button">,
-    VariantProps<typeof customButtonVariants> {
+  extends Omit<React.ComponentProps<"button">, "size">,
+    VariantProps<typeof buttonVariants> {
+  /** asChild로 렌더링하면 자식 엘리먼트에 버튼 props를 머지 (Radix Slot) */
   asChild?: boolean;
+  /** 라벨 좌측 아이콘 */
+  iconLeft?: React.ReactNode;
+  /** 라벨 우측 아이콘 */
+  iconRight?: React.ReactNode;
 }
 
 /**
- * Button
- * 커스텀 버튼 컴포넌트
- * @param variant 버튼스타일 : default, outlined, secondary, ghost
- * @param size 버튼 크기 : small, medium, large, icon
+ * Button v3
  *
- * @example 기본 버튼
+ * @param variant `primary` (default) · `secondary` · `soft` · `ghost` · `danger`
+ * @param size `xs` · `sm` · `md` (default) · `lg` · `xl` · `icon`
+ * @param pill 둥근 알약형 (rounded-full)
+ * @param fullWidth 부모 너비 100%
+ * @param iconLeft / iconRight 라벨 양옆 아이콘
+ *
+ * @example
  * ```tsx
- * <Button variant="default" size="large">Large Button</Button>
+ * <Button variant="primary" size="lg" iconLeft={<Plus />}>
+ *   새 챌린지
+ * </Button>
  * ```
  */
 export function Button({
   className,
-  variant = "default",
-  size = "large",
+  variant,
+  size,
+  pill,
+  fullWidth,
   asChild = false,
   disabled = false,
+  iconLeft,
+  iconRight,
+  children,
   ...props
 }: ButtonProps): React.ReactElement {
   const Comp = asChild ? Slot : "button";
-  const currentVariant = variant ?? "default";
-  const currentSize = size ?? "large";
-
-  const labelStyleMap = {
-    small: { size: "caption2", weight: "bold" },
-    medium: { size: "caption1", weight: "bold" },
-    large: { size: "body2", weight: "bold" },
-    icon: { size: "caption1", weight: "bold" },
-  } as const;
-
-  const shouldWrapWithText =
-    currentSize !== "icon" &&
-    (typeof props.children === "string" || typeof props.children === "number");
+  const resolvedSize = size ?? "md";
+  const isStringChild =
+    typeof children === "string" || typeof children === "number";
+  const showText = resolvedSize !== "icon" && isStringChild;
 
   return (
     <Comp
       data-slot="button"
       className={cn(
-        customButtonVariants({
-          variant: currentVariant,
-          size: currentSize,
-          className,
-        }),
+        buttonVariants({ variant, size, pill, fullWidth, className }),
       )}
       disabled={disabled}
       {...props}
     >
-      {shouldWrapWithText ? (
+      {iconLeft}
+      {showText ? (
         <Text
-          size={labelStyleMap[currentSize].size}
-          weight={labelStyleMap[currentSize].weight}
+          size={labelStyleMap[resolvedSize].size}
+          weight={labelStyleMap[resolvedSize].weight}
         >
-          {props.children}
+          {children}
         </Text>
       ) : (
-        props.children
+        children
       )}
+      {iconRight}
     </Comp>
   );
 }

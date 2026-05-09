@@ -4,16 +4,32 @@ import React from "react";
 import { cn } from "../../lib/utils";
 import { Text } from "../Text";
 
+export type ProgressBarSize = "xs" | "sm" | "md" | "lg";
+
+const heightBySize: Record<ProgressBarSize, number> = {
+  xs: 4,
+  sm: 6,
+  md: 8,
+  lg: 12,
+};
+
 export interface ProgressBarProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, "children"> {
+  /** 진행률 0~100 */
   value: number;
   label?: React.ReactNode;
   showLabel?: boolean;
   showValueText?: boolean;
   valueText?: React.ReactNode;
+  /** 마감 없음 — 100%로 채운 채 ∞ 표시 */
   infinite?: boolean;
+  /** 굵기 프리셋 (xs=4 · sm=6 · md=8 · lg=12). `thickness` 우선 적용 */
+  size?: ProgressBarSize;
+  /** 픽셀 단위 굵기 (size 무시) */
   thickness?: number;
+  /** 채움 색 (CSS color) — 미지정 시 brand */
   fillColor?: string;
+  /** 트랙 색 (CSS color) — 미지정 시 gray-100 */
   trackColor?: string;
   labelClassName?: string;
   valueClassName?: string;
@@ -22,8 +38,17 @@ export interface ProgressBarProps
 }
 
 /**
- * ProgressBar
- * 라벨/퍼센트 텍스트/두께/색상을 유연하게 제어할 수 있는 진행률 바 컴포넌트.
+ * ProgressBar v3
+ * 진행률 바 — 라벨 / 퍼센트 / 굵기 / 색상 제어 가능.
+ *
+ * @param size `xs` (4px) · `sm` (6px) · `md` (8px, default) · `lg` (12px)
+ * @param thickness 픽셀 단위 직접 지정 (size를 덮어씀)
+ *
+ * @example
+ * ```tsx
+ * <ProgressBar value={62} size="md" />
+ * <ProgressBar label="아침 30분 러닝" value={45} size="lg" />
+ * ```
  */
 export function ProgressBar({
   value,
@@ -32,7 +57,8 @@ export function ProgressBar({
   showValueText = true,
   valueText,
   infinite = false,
-  thickness = 6,
+  size = "md",
+  thickness,
   fillColor,
   trackColor,
   className,
@@ -47,6 +73,7 @@ export function ProgressBar({
   const resolvedValueText =
     valueText ?? (infinite ? "∞" : `${clampedValue}%`);
   const shouldShowLabel = showLabel ?? label !== undefined;
+  const resolvedThickness = thickness ?? heightBySize[size];
 
   return (
     <div className={cn("w-full", className)} {...props}>
@@ -65,7 +92,7 @@ export function ProgressBar({
           )}
           {showValueText ? (
             <Text
-              size="caption1"
+              size="caption2"
               weight="medium"
               className={cn("shrink-0 text-gray-600", valueClassName)}
             >
@@ -76,15 +103,18 @@ export function ProgressBar({
       )}
 
       <div
-        className={cn("mt-2.5 overflow-hidden rounded-full bg-gray-200", trackClassName)}
+        className={cn(
+          "mt-2 overflow-hidden rounded-full bg-gray-100",
+          trackClassName,
+        )}
         style={{
-          height: `${thickness}px`,
+          height: `${resolvedThickness}px`,
           ...(trackColor ? { backgroundColor: trackColor } : {}),
         }}
       >
         <div
           className={cn(
-            "h-full rounded-full bg-main-800 transition-all duration-200",
+            "h-full rounded-full bg-brand transition-[width] duration-300 ease-out",
             fillClassName,
           )}
           style={{

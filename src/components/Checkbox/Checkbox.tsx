@@ -9,15 +9,20 @@ import { Text } from "../Text";
 export interface CheckboxProps
   extends React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root> {
   label?: string;
+  /** 읽기 전용 — 클릭/포커스 비활성, 시각은 유지 */
   readOnly?: boolean;
 }
 
 /**
- * Checkbox
- * 왼쪽의 네모 박스 안에 체크 표시가 들어가는 전형적인 체크박스 컴포넌트
+ * Checkbox v3
+ * 18×18 박스, 체크 시 brand 컬러로 채움.
+ * 체크되면 라벨이 자동으로 회색 + 취소선 처리됨 (체크리스트 스타일).
  *
- * @param label 선택적 텍스트 라벨
- * @param readOnly 읽기 전용 여부 (클릭 불가, 시각적 변경 없음)
+ * @example
+ * ```tsx
+ * <Checkbox label="아침 30분 러닝" defaultChecked />
+ * <Checkbox label="물 2L 마시기" />
+ * ```
  */
 export const Checkbox = React.forwardRef<
   React.ElementRef<typeof CheckboxPrimitive.Root>,
@@ -27,39 +32,43 @@ export const Checkbox = React.forwardRef<
   const checkboxId = id || generatedId;
 
   return (
-    <div className={cn("flex items-center gap-2.5", readOnly && "pointer-events-none")}>
+    <div
+      className={cn(
+        "flex items-center gap-2",
+        readOnly && "pointer-events-none",
+      )}
+    >
       <CheckboxPrimitive.Root
         ref={ref}
         id={checkboxId}
         className={cn(
-          "peer h-5 w-5 shrink-0 rounded-1.5 border border-gray-300 bg-white transition-all duration-200 text-white",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-main-900 focus-visible:ring-offset-2",
-          "disabled:cursor-not-allowed disabled:opacity-50",
-          "data-[state=checked]:bg-main-900 data-[state=checked]:border-main-900 data-[state=checked]:text-white",
-          "cursor-pointer",
-          className
+          "peer h-[18px] w-[18px] shrink-0 cursor-pointer rounded-1.5 border-[1.5px] border-gray-300 bg-white text-white",
+          "transition-[background-color,border-color] duration-150 ease-out",
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/30 focus-visible:ring-offset-2",
+          "disabled:cursor-not-allowed disabled:opacity-[0.45]",
+          "data-[state=checked]:border-brand data-[state=checked]:bg-brand data-[state=checked]:text-white",
+          className,
         )}
         {...props}
       >
-        <CheckboxPrimitive.Indicator
-          className={cn("flex items-center justify-center text-current")}
-        >
-          <Check className="h-3 w-3" strokeWidth={13} />
+        <CheckboxPrimitive.Indicator className="flex items-center justify-center text-current">
+          <Check className="h-2.5 w-2.5" strokeWidth={8} />
         </CheckboxPrimitive.Indicator>
       </CheckboxPrimitive.Root>
-      {label && (
+      {label ? (
         <label
           htmlFor={checkboxId}
           className={cn(
-            "text-gray-900 select-none cursor-pointer",
-            "peer-disabled:cursor-not-allowed peer-disabled:opacity-50"
+            "cursor-pointer select-none text-gray-800 transition-colors",
+            "peer-disabled:cursor-not-allowed peer-disabled:opacity-[0.45]",
+            "peer-data-[state=checked]:text-gray-500 peer-data-[state=checked]:line-through",
           )}
         >
-          <Text size="body2" weight="medium">
+          <Text size="caption2" weight="medium">
             {label}
           </Text>
         </label>
-      )}
+      ) : null}
     </div>
   );
 });

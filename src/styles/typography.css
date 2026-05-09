@@ -2,6 +2,8 @@
   /* font family */
   --font-pretendard: var(--font-pretendard);
   --font-suite: var(--font-suite);
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
 
   /* font size */
   --text-xs: var(--text-xs);
@@ -14,7 +16,7 @@
   --text-4xl: var(--text-4xl);
   --text-5xl: var(--text-5xl);
 
-  /* line height */
+  /* line height (paired with font-size in Tailwind v4) */
   --text-xs--line-height: var(--text-xs--line-height);
   --text-sm--line-height: var(--text-sm--line-height);
   --text-base--line-height: var(--text-base--line-height);
@@ -23,6 +25,14 @@
   --text-2xl--line-height: var(--text-2xl--line-height);
   --text-3xl--line-height: var(--text-3xl--line-height);
   --text-4xl--line-height: var(--text-4xl--line-height);
+  --text-5xl--line-height: var(--text-5xl--line-height);
+
+  /* font weight (v3) */
+  --font-weight-regular: var(--font-weight-regular);
+  --font-weight-medium: var(--font-weight-medium);
+  --font-weight-semibold: var(--font-weight-semibold);
+  --font-weight-bold: var(--font-weight-bold);
+  --font-weight-extrabold: var(--font-weight-extrabold);
 }
 
 :root {
@@ -41,6 +51,9 @@
     BlinkMacSystemFont,
     "Segoe UI",
     sans-serif;
+  /* Semantic aliases (v3) — both default to Pretendard */
+  --font-display: var(--font-pretendard);
+  --font-body: var(--font-pretendard);
 
   /* font size */
   --text-xs: 0.75rem; /* 12px */
@@ -53,14 +66,21 @@
   --text-4xl: 1.75rem; /* 28px */
   --text-5xl: 2rem; /* 32px */
 
-  /* line height */
-  --text-xs--line-height: 1;
-  --text-sm--line-height: 1;
-  --text-base--line-height: 1;
-  --text-lg--line-height: calc(24 / 16);
-  --text-xl--line-height: calc(27 / 18);
-  --text-2xl--line-height: 1;
-  --text-3xl--line-height: 1;
-  --text-4xl--line-height: 1;
-  --text-5xl--line-height: 1;
+  /* line height — body sizes get breathing room, display sizes tighten */
+  --text-xs--line-height: 1.5;
+  --text-sm--line-height: 1.55;
+  --text-base--line-height: 1.6;
+  --text-lg--line-height: 1.55;
+  --text-xl--line-height: 1.45;
+  --text-2xl--line-height: 1.4;
+  --text-3xl--line-height: 1.35;
+  --text-4xl--line-height: 1.3;
+  --text-5xl--line-height: 1.25;
+
+  /* font weight (v3) */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
 }

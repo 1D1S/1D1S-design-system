@@ -1,47 +1,105 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import Image from 'next/image';
-import { cn } from '../../lib/utils';
+import React, { useEffect, useState } from "react";
+import Image from "next/image";
+import { cn } from "../../lib/utils";
+import { Stripe, type StripeTone } from "../Stripe";
+
+export type CircleAvatarSize = "xs" | "sm" | "md" | "lg" | "xl";
+export type CircleAvatarTone = StripeTone;
+
+const sizePx: Record<CircleAvatarSize, number> = {
+  xs: 24,
+  sm: 32,
+  md: 40,
+  lg: 56,
+  xl: 76,
+};
 
 interface CircleAvatarProps {
+  /** 사이즈 — 프리셋 또는 px 숫자 (default `"md"` = 40) */
+  size?: CircleAvatarSize | number;
+  /** 이미지가 없을 때 보여줄 줄무늬 톤 — 프리셋 또는 CSS color 문자열 */
+  tone?: CircleAvatarTone | string;
+  /** 외곽선 (main-200 컬러). size>40일 때 3px, 아니면 2px */
+  ring?: boolean;
+  /** 이미지 URL — 비어있거나 로드 실패 시 톤 Stripe 패턴으로 fallback */
   imageUrl?: string;
-  size?: 'sm' | 'md' | 'lg' | 'xl';
+  /** Stripe 대신 보여줄 커스텀 fallback (이니셜·이모지 등) */
+  fallback?: React.ReactNode;
+  /** alt 텍스트 */
+  alt?: string;
   className?: string;
 }
 
-// circle-avatar.tsx
-
+/**
+ * CircleAvatar
+ * 원형 아바타 — 이미지 또는 톤 Stripe 패턴.
+ *
+ * @param size `xs`(24)·`sm`(32)·`md`(40, default)·`lg`(56)·`xl`(76)·또는 px 숫자
+ * @param tone Stripe 컬러 — `peach`(default)·`cream`·`mint`·`blue`·`sky`·`rose`·`gray`·또는 CSS color
+ * @param ring main-200 외곽선 (size>40 → 3px, 이하 → 2px)
+ *
+ * @example
+ * ```tsx
+ * <CircleAvatar size="lg" tone="mint" ring />
+ * <CircleAvatar imageUrl="/me.jpg" size="md" />
+ * <CircleAvatar size={48} tone="#ffbaba" ring />
+ * ```
+ */
 export function CircleAvatar({
+  size = "md",
+  tone = "peach",
+  ring = false,
   imageUrl,
-  size = 'md',
+  fallback,
+  alt = "avatar",
   className,
 }: CircleAvatarProps): React.ReactElement {
-  const sizeClasses: Record<'sm' | 'md' | 'lg' | 'xl', string> = {
-    sm: 'w-10 h-10',
-    md: 'w-12 h-12',
-    lg: 'w-16 h-16',
-    xl: 'w-20 h-20',
-  };
+  const px = typeof size === "number" ? size : sizePx[size];
+  const ringWidth = px > 40 ? 3 : 2;
 
-  const defaultProfileSrc = '/DefaultProfile.png';
-  const [isValidImage, setIsValidImage] = useState(true);
-
+  const [hasErrored, setHasErrored] = useState(false);
   useEffect(() => {
-    setIsValidImage(true);
+    setHasErrored(false);
   }, [imageUrl]);
 
-  const isUrlValid = typeof imageUrl === 'string' && /^(\/|https?:\/\/)/.test(imageUrl);
+  const isUrlValid =
+    typeof imageUrl === "string" && /^(\/|https?:\/\/)/.test(imageUrl);
+  const showImage = isUrlValid && !hasErrored;
 
   return (
-    <div className={cn('relative overflow-hidden rounded-full', sizeClasses[size], className)}>
-      <Image
-        src={!imageUrl || !isUrlValid || !isValidImage ? defaultProfileSrc : imageUrl}
-        alt="avatar"
-        fill
-        className="object-cover"
-        onError={() => setIsValidImage(false)}
-      />
+    <div
+      data-slot="circle-avatar"
+      className={cn(
+        "relative shrink-0 overflow-hidden rounded-full",
+        className,
+      )}
+      style={{
+        width: px,
+        height: px,
+        ...(ring ? { border: `${ringWidth}px solid var(--main-200)` } : null),
+      }}
+    >
+      {showImage ? (
+        <Image
+          src={imageUrl as string}
+          alt={alt}
+          fill
+          sizes="76px"
+          className="object-cover"
+          onError={() => setHasErrored(true)}
+        />
+      ) : (
+        <>
+          <Stripe tone={tone} className="absolute inset-0 h-full" />
+          {fallback !== undefined ? (
+            <div className="absolute inset-0 flex items-center justify-center text-gray-700">
+              {fallback}
+            </div>
+          ) : null}
+        </>
+      )}
     </div>
   );
 }
