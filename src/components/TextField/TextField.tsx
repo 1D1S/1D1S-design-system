@@ -1,61 +1,113 @@
-'use client';
+"use client";
 
-import * as React from 'react';
-import { cva, type VariantProps } from 'class-variance-authority';
-import { cn } from '../../lib/utils';
-import { Search } from '../Icons/Search';
-import { Text, textVariants } from '../Text';
+import * as React from "react";
+import { cva, type VariantProps } from "class-variance-authority";
+import { cn } from "../../lib/utils";
+import { Text } from "../Text";
+
+export type TextFieldState =
+  | "default"
+  | "focus"
+  | "filled"
+  | "error"
+  | "disabled";
 
 const fieldVariants = cva(
   [
-    'w-full transition-all duration-200 outline-none',
-    'disabled:cursor-not-allowed disabled:opacity-50',
-    'placeholder:text-gray-500',
-    'focus-visible:outline-none',
+    "w-full transition-[border-color,box-shadow,background-color] duration-150 ease-out outline-none",
+    "rounded-2 border border-gray-200 bg-gray-50 text-gray-900",
+    "placeholder:text-gray-500",
+    // automatic states (used when `state` prop omitted)
+    "hover:border-gray-300",
+    "focus-visible:border-brand focus-visible:bg-white focus-visible:shadow-[0_0_0_3px_rgba(255,87,34,0.12)]",
+    "disabled:cursor-not-allowed disabled:bg-gray-100 disabled:text-gray-400",
+    "aria-[invalid=true]:border-red-500 aria-[invalid=true]:bg-white aria-[invalid=true]:shadow-[0_0_0_3px_rgba(255,82,82,0.12)]",
   ],
   {
     variants: {
-      variant: {
-        default: [
-          'rounded-3 border border-gray-300 bg-white px-5 text-gray-900 shadow-none',
-          'hover:border-gray-400',
-          'focus-visible:border-main-500 focus-visible:ring-3 focus-visible:ring-main-300/60',
-        ],
-        search: [
-          'rounded-3 !h-10 border border-gray-300 bg-white pl-11 pr-4 text-gray-700 placeholder:text-gray-500',
-          'hover:border-gray-400',
-          'focus-visible:border-main-500 focus-visible:ring-3 focus-visible:ring-main-300/60',
-        ],
+      size: {
+        xs: "h-[26px] text-[11px]",
+        sm: "h-8 text-xs",
+        md: "h-[38px] text-sm",
+        lg: "h-[46px] text-base",
+        xl: "h-[54px] text-[15px]",
       },
+      hasIconLeft: { true: "", false: "" },
+      hasSuffix: { true: "", false: "" },
       multiline: {
-        false: 'h-10 py-0',
-        true: 'min-h-[120px] resize-none py-3 align-top leading-relaxed',
+        false: "",
+        true: "h-auto min-h-[80px] resize-y align-top leading-[1.6] rounded-[10px]",
+      },
+      // controlled visual state — overrides automatic states
+      state: {
+        default: "",
+        focus:
+          "border-brand bg-white shadow-[0_0_0_3px_rgba(255,87,34,0.12)]",
+        filled: "border-gray-300 bg-white",
+        error:
+          "border-red-500 bg-white shadow-[0_0_0_3px_rgba(255,82,82,0.12)]",
+        disabled:
+          "cursor-not-allowed bg-gray-100 text-gray-400",
       },
     },
+    compoundVariants: [
+      // — single-line, no slot — symmetric padding by size
+      { multiline: false, hasIconLeft: false, hasSuffix: false, size: "xs", class: "px-2.5" },
+      { multiline: false, hasIconLeft: false, hasSuffix: false, size: "sm", class: "px-3" },
+      { multiline: false, hasIconLeft: false, hasSuffix: false, size: "md", class: "px-3.5" },
+      { multiline: false, hasIconLeft: false, hasSuffix: false, size: "lg", class: "px-4" },
+      { multiline: false, hasIconLeft: false, hasSuffix: false, size: "xl", class: "px-[18px]" },
+
+      // — iconLeft only — fixed 36px left gutter + size-specific right
+      { multiline: false, hasIconLeft: true, hasSuffix: false, size: "xs", class: "pl-9 pr-2.5" },
+      { multiline: false, hasIconLeft: true, hasSuffix: false, size: "sm", class: "pl-9 pr-3" },
+      { multiline: false, hasIconLeft: true, hasSuffix: false, size: "md", class: "pl-9 pr-3.5" },
+      { multiline: false, hasIconLeft: true, hasSuffix: false, size: "lg", class: "pl-9 pr-4" },
+      { multiline: false, hasIconLeft: true, hasSuffix: false, size: "xl", class: "pl-9 pr-[18px]" },
+
+      // — suffix only — size-specific left + fixed 36px right gutter
+      { multiline: false, hasIconLeft: false, hasSuffix: true, size: "xs", class: "pl-2.5 pr-9" },
+      { multiline: false, hasIconLeft: false, hasSuffix: true, size: "sm", class: "pl-3 pr-9" },
+      { multiline: false, hasIconLeft: false, hasSuffix: true, size: "md", class: "pl-3.5 pr-9" },
+      { multiline: false, hasIconLeft: false, hasSuffix: true, size: "lg", class: "pl-4 pr-9" },
+      { multiline: false, hasIconLeft: false, hasSuffix: true, size: "xl", class: "pl-[18px] pr-9" },
+
+      // — both — both gutters fixed
+      { multiline: false, hasIconLeft: true, hasSuffix: true, class: "pl-9 pr-9" },
+
+      // — multiline — symmetric padding all around
+      { multiline: true, size: "xs", class: "p-2.5" },
+      { multiline: true, size: "sm", class: "p-3" },
+      { multiline: true, size: "md", class: "p-3.5" },
+      { multiline: true, size: "lg", class: "p-4" },
+      { multiline: true, size: "xl", class: "p-[18px]" },
+    ],
     defaultVariants: {
-      variant: 'default',
+      size: "md",
+      hasIconLeft: false,
+      hasSuffix: false,
       multiline: false,
+      state: "default",
     },
-  }
+  },
 );
 
 export interface TextFieldProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'>,
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size">,
     VariantProps<typeof fieldVariants> {
   label?: React.ReactNode;
   labelHint?: React.ReactNode;
-  error?: string;
+  helper?: React.ReactNode;
+  error?: React.ReactNode;
+  /** prefix 아이콘 (왼쪽) */
+  iconLeft?: React.ReactNode;
+  /** suffix 텍스트/노드 (오른쪽 — 글자수, 단위 등) */
+  suffix?: React.ReactNode;
+  /** suffix 대신 자유 노드 — iconRight (suffix와 동일 자리) */
+  iconRight?: React.ReactNode;
   multiline?: boolean;
   rows?: number;
   cols?: number;
-}
-
-type TextTagSize = VariantProps<typeof textVariants>['size'];
-
-function getTextSize(variant: TextFieldProps['variant'], multiline: boolean): TextTagSize {
-  if (variant === 'search') return 'body2';
-  if (multiline) return 'body2';
-  return 'body2';
 }
 
 function FieldLabel({
@@ -70,19 +122,18 @@ function FieldLabel({
   htmlFor?: string;
 }): React.ReactElement | null {
   if (!label) return null;
-
   return (
-    <label htmlFor={htmlFor} className="mb-2 inline-flex items-center gap-2">
-      <Text size="body1" weight="bold" className="text-gray-900">
+    <label htmlFor={htmlFor} className="mb-1.5 inline-flex items-center gap-1.5">
+      <Text size="caption3" weight="bold" className="text-gray-700">
         {label}
       </Text>
       {required ? (
-        <Text size="body1" weight="bold" className="text-main-800">
+        <Text size="caption3" weight="bold" className="text-brand">
           *
         </Text>
       ) : null}
       {labelHint ? (
-        <Text size="body1" weight="regular" className="text-gray-500">
+        <Text size="caption3" weight="regular" className="text-gray-500">
           {labelHint}
         </Text>
       ) : null}
@@ -91,93 +142,135 @@ function FieldLabel({
 }
 
 /**
- * TextField
- * 시안형 입력 필드 컴포넌트. `multiline` 사용 시 TextArea 스타일로 렌더링합니다.
+ * TextField v3.1
+ * 입력 필드 — 라벨 / 아이콘 / suffix / 헬퍼·에러 / 5단 사이즈 / 5 visual state.
+ *
+ * @param size `xs`(26)·`sm`(32)·`md`(38, default)·`lg`(46)·`xl`(54)
+ * @param state 비주얼 강제 — `default`·`focus`·`filled`·`error`·`disabled` (스토리북 데모/디자인 토큰용)
+ * @param suffix 우측 텍스트 (글자수/단위 등)
+ * @param helper / `error` 하단 안내 — error가 있으면 helper 무시
+ *
+ * @example
+ * ```tsx
+ * <TextField label="이메일" iconLeft={<Mail />} placeholder="email@..." helper="가입 메일" />
+ * <TextField label="목표" defaultValue="아침 30분" suffix="6/20" />
+ * <TextField label="기간" defaultValue="14" suffix="일" size="sm" />
+ * ```
  */
-export const TextField = React.forwardRef<HTMLInputElement | HTMLTextAreaElement, TextFieldProps>(
+export const TextField = React.forwardRef<
+  HTMLInputElement | HTMLTextAreaElement,
+  TextFieldProps
+>(
   (
     {
       className,
-      variant = 'default',
+      size,
+      state,
       label,
       labelHint,
+      helper,
       error,
       type,
+      iconLeft,
+      iconRight,
+      suffix,
       multiline = false,
       rows = 8,
       cols,
       required,
+      disabled,
       id,
       ...props
     },
-    ref
+    ref,
   ) => {
-    const isSearch = variant === 'search';
-    const textSize = getTextSize(variant, multiline);
+    const hasIconLeft = Boolean(iconLeft) && !multiline;
+    const rightSlot = suffix ?? iconRight;
+    const hasSuffix = Boolean(rightSlot) && !multiline;
+    const resolvedState = error ? "error" : disabled ? "disabled" : state;
+
+    const fieldClass = cn(
+      fieldVariants({
+        size,
+        hasIconLeft,
+        hasSuffix,
+        multiline,
+        state: resolvedState,
+      }),
+      className,
+    );
 
     return (
       <div className="flex w-full flex-col">
-        <FieldLabel label={label} labelHint={labelHint} required={required} htmlFor={id} />
+        <FieldLabel
+          label={label}
+          labelHint={labelHint}
+          required={required}
+          htmlFor={id}
+        />
 
         <div className="relative w-full">
+          {hasIconLeft && (
+            <span
+              aria-hidden
+              className={cn(
+                "pointer-events-none absolute top-1/2 left-3 flex -translate-y-1/2 items-center",
+                resolvedState === "focus" ? "text-brand" : "text-gray-400",
+              )}
+            >
+              {iconLeft}
+            </span>
+          )}
+          {hasSuffix && (
+            <span
+              aria-hidden
+              className="pointer-events-none absolute top-1/2 right-3 flex -translate-y-1/2 items-center gap-1 text-gray-500 text-xs font-semibold"
+            >
+              {rightSlot}
+            </span>
+          )}
+
           {multiline ? (
             <textarea
               id={id}
               rows={rows}
               cols={cols}
               required={required}
-              className={cn(
-                textVariants({ size: textSize, weight: 'regular' }),
-                fieldVariants({ variant, multiline: true }),
-                className
-              )}
+              disabled={disabled}
+              aria-invalid={error ? true : undefined}
+              className={fieldClass}
               ref={ref as React.Ref<HTMLTextAreaElement>}
-              {...(props as Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>, 'size'>)}
+              {...(props as Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>, "size">)}
             />
           ) : (
             <input
               id={id}
               type={type}
               required={required}
-              className={cn(
-                textVariants({ size: textSize, weight: isSearch ? 'light' : 'regular' }),
-                fieldVariants({ variant, multiline: false }),
-                className
-              )}
+              disabled={disabled}
+              aria-invalid={error ? true : undefined}
+              className={fieldClass}
               ref={ref as React.Ref<HTMLInputElement>}
               {...props}
             />
           )}
-
-          {isSearch && !multiline ? (
-            <Search
-              width={20}
-              height={20}
-              className="pointer-events-none absolute top-1/2 left-3.5 -translate-y-1/2 text-gray-500"
-            />
-          ) : null}
         </div>
 
-        {error ? (
-          <Text size="caption1" weight="regular" className="mt-2 text-warning">
-            {error}
+        {error || helper ? (
+          <Text
+            size="caption3"
+            weight="regular"
+            className={cn(
+              "mt-1.5",
+              error ? "text-red-500" : "text-gray-500",
+            )}
+          >
+            {error || helper}
           </Text>
         ) : null}
       </div>
     );
-  }
+  },
 );
 
-TextField.displayName = 'TextField';
-
-export type TextAreaProps = Omit<TextFieldProps, 'multiline' | 'type'>;
-
-/**
- * TextArea
- * TextField의 multiline 전용 래퍼 컴포넌트.
- */
-export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>((props, ref) => {
-  return <TextField {...props} ref={ref} multiline />;
-});
-
-TextArea.displayName = 'TextArea';
+TextField.displayName = "TextField";

@@ -1,100 +1,35 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import { BookOpen, Code2, Dumbbell, Palette, Salad } from '../Icons';
-import { Toggle } from './Toggle';
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import { Toggle } from "./Toggle";
 
 const meta: Meta<typeof Toggle> = {
-  title: 'Form/Toggle',
+  title: "Form/Toggle",
   component: Toggle,
-  tags: ['autodocs'],
-  argTypes: {
-    pressed: { control: 'boolean' },
-    onPressedChange: { action: 'pressed changed' },
-  },
-  decorators: [
-    (Story) => (
-      <div className="bg-gray-100 p-6">
-        <Story />
-      </div>
-    ),
-  ],
+  tags: ["autodocs"],
 };
 
 export default meta;
 type Story = StoryObj<typeof Toggle>;
 
-export const RoundedSelected: Story = {
-  args: {
-    shape: 'rounded',
-    pressed: true,
-    icon: <Code2 />,
-    children: 'Development',
-  },
-};
+export const Default: Story = { args: { label: "알림 켜짐", defaultChecked: true } };
 
-export const SquareSelected: Story = {
-  args: {
-    shape: 'square',
-    pressed: true,
-    children: '전체',
-  },
-};
+export const Off: Story = { args: { label: "공개" } };
 
-export const RowPreview: Story = {
+export const NoLabel: Story = { args: {} };
+
+export const Disabled: Story = {
   render: () => (
-    <div className="flex flex-wrap gap-4">
-      <Toggle shape="square" pressed>
-        전체
-      </Toggle>
-      <Toggle shape="square" icon="💻">
-        개발
-      </Toggle>
-      <Toggle shape="square" icon="💪">
-        운동
-      </Toggle>
-      <Toggle shape="square" icon="📚">
-        독서
-      </Toggle>
-      <Toggle shape="square" icon="🎨">
-        디자인
-      </Toggle>
-      <Toggle shape="square" icon="🥗">
-        식단
-      </Toggle>
+    <div className="flex flex-col gap-2">
+      <Toggle defaultChecked disabled label="비활성 (켜짐)" />
+      <Toggle disabled label="비활성 (꺼짐)" />
     </div>
   ),
 };
 
-export const RoundedRowPreview: Story = {
+export const LabelPosition: Story = {
   render: () => (
-    <div className="flex flex-wrap gap-4">
-      <Toggle shape="rounded" icon={<Code2 />} pressed>
-        Development
-      </Toggle>
-      <Toggle shape="rounded" icon={<Dumbbell />}>
-        Exercise
-      </Toggle>
-      <Toggle shape="rounded" icon={<BookOpen />}>
-        Reading
-      </Toggle>
-      <Toggle shape="rounded" icon={<Palette />}>
-        Design
-      </Toggle>
-      <Toggle shape="rounded" icon={<Salad />}>
-        Lifestyle
-      </Toggle>
-    </div>
-  ),
-};
-
-export const CustomSizeByClassName: Story = {
-  render: () => (
-    <div className="flex flex-wrap gap-4">
-      <Toggle shape="rounded" className="h-12 w-52" icon={<Code2 />} pressed>
-        Custom Rounded
-      </Toggle>
-      <Toggle shape="square" className="h-14 w-40" icon="💪">
-        Custom Square
-      </Toggle>
+    <div className="flex flex-col gap-2">
+      <Toggle defaultChecked label="알림 켜짐" labelPosition="right" />
+      <Toggle defaultChecked label="알림 켜짐" labelPosition="left" />
     </div>
   ),
 };

@@ -35,6 +35,8 @@
   --color-brand-softer: var(--brand-softer);
 
   /* Green Colors */
+  --color-green-200: var(--green-200);
+  --color-green-300: var(--green-300);
   --color-green-400: var(--green-400);
   --color-green-500: var(--green-500);
   --color-green-600: var(--green-600);
@@ -109,6 +111,8 @@
   --brand-softer: var(--main-100);
 
   /* Green Colors */
+  --green-200: #dff5b8;
+  --green-300: #c9eb87;
   --green-400: #b8d530;
   --green-500: #8dc71e;
   --green-600: #69b41e;

@@ -30,6 +30,8 @@ export * from "./EyeOff";
 export * from "./HamburgerMenu";
 export * from "./Heart";
 export * from "./HeartFilled";
+export * from "./Home";
+export * from "./LayoutGrid";
 export * from "./Logo";
 export * from "./Minus";
 export * from "./People";

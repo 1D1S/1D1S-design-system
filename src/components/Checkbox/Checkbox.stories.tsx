@@ -10,41 +10,29 @@ const meta: Meta<typeof Checkbox> = {
 export default meta;
 type Story = StoryObj<typeof Checkbox>;
 
-export const Default: Story = {
-  args: {
-    label: "Check me",
-  },
+export const Default: Story = { args: { label: "아침 30분 러닝" } };
+
+export const Checked: Story = {
+  args: { label: "아침 30분 러닝", defaultChecked: true },
 };
 
-export const WithoutLabel: Story = {
-  args: {},
-};
+export const WithoutLabel: Story = { args: {} };
 
 export const Disabled: Story = {
-  args: {
-    label: "Disabled checkbox",
-    disabled: true,
-  },
+  args: { label: "비활성", disabled: true },
 };
 
 export const ReadOnly: Story = {
-  args: {
-    label: "Read-only checkbox (Checked)",
-    checked: true,
-    readOnly: true,
-  },
+  args: { label: "읽기 전용 (Checked)", checked: true, readOnly: true },
 };
 
-export const List: Story = {
-  render: () => {
-    return (
-      <div className="flex flex-col gap-4">
-        <Checkbox label="Morning Workout" />
-        <Checkbox label="Read a Book" defaultChecked />
-        <Checkbox label="Write Code" />
-        <Checkbox label="Disabled Item" disabled />
-        <Checkbox label="Read Only Item" checked readOnly />
-      </div>
-    );
-  },
+export const TodoList: Story = {
+  render: () => (
+    <div className="flex flex-col gap-3">
+      <Checkbox label="아침 30분 러닝" defaultChecked />
+      <Checkbox label="하루 한 권 책 읽기" defaultChecked />
+      <Checkbox label="물 2L 마시기" />
+      <Checkbox label="코딩테스트 1문제" />
+    </div>
+  ),
 };

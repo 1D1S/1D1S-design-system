@@ -16,15 +16,12 @@ const meta: Meta<typeof ProgressBar> = {
     value: {
       control: { type: "range", min: 0, max: 100, step: 1 },
     },
+    size: { control: "select", options: ["xs", "sm", "md", "lg"] },
     thickness: {
       control: { type: "range", min: 2, max: 16, step: 1 },
     },
-    fillColor: {
-      control: "color",
-    },
-    trackColor: {
-      control: "color",
-    },
+    fillColor: { control: "color" },
+    trackColor: { control: "color" },
   },
 };
 
@@ -38,6 +35,19 @@ export const Default: Story = {
     showLabel: true,
     showValueText: true,
   },
+};
+
+export const Sizes: Story = {
+  render: () => (
+    <div className="flex flex-col gap-4">
+      {(["xs", "sm", "md", "lg"] as const).map((sz) => (
+        <div key={sz}>
+          <div className="text-xs text-gray-500 mb-1">size: {sz}</div>
+          <ProgressBar value={62} size={sz} showValueText={false} />
+        </div>
+      ))}
+    </div>
+  ),
 };
 
 export const WithoutLabel: Story = {
