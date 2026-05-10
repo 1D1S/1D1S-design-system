@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Heatmap } from "./Heatmap";
+import { Button } from "../Button";
 
 const meta: Meta<typeof Heatmap> = {
   title: "Display/Heatmap",
@@ -51,4 +52,60 @@ export const Tones: Story = {
       </div>
     );
   },
+};
+
+const dateForIndex = (index: number, cols: number, rows: number): string => {
+  // 가장 최근 셀이 우측 하단(=마지막 column 마지막 row)이라고 가정
+  const total = cols * rows;
+  const daysAgo = total - 1 - index;
+  const d = new Date();
+  d.setDate(d.getDate() - daysAgo);
+  return d.toISOString().slice(0, 10);
+};
+
+export const Interactive: Story = {
+  args: {
+    cols: 20,
+    cells: randomCells(7, 20),
+  },
+  render: (args) => (
+    <Heatmap
+      {...args}
+      renderCellTooltip={({ index, level }) =>
+        `${dateForIndex(index, args.cols ?? 20, 7)} · ${level}회 활동`
+      }
+    />
+  ),
+};
+
+export const InteractiveWithActions: Story = {
+  args: {
+    cols: 20,
+    cells: randomCells(7, 20),
+  },
+  render: (args) => (
+    <Heatmap
+      {...args}
+      renderCellTooltip={({ index, level }) =>
+        `${dateForIndex(index, args.cols ?? 20, 7)} · ${level}회 활동`
+      }
+      renderCellActions={({ index }) => (
+        <div className="flex gap-1.5">
+          <Button
+            size="xs"
+            variant="primary"
+            onClick={() => alert(`일지 보기: ${dateForIndex(index, args.cols ?? 20, 7)}`)}
+          >
+            일지 보기
+          </Button>
+          <Button size="xs" variant="ghost" className="text-white">
+            공유
+          </Button>
+        </div>
+      )}
+      onCellClick={({ index, level }) =>
+        console.log("cell clicked", { index, level })
+      }
+    />
+  ),
 };

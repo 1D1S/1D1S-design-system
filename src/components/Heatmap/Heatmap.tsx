@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import * as Popover from "@radix-ui/react-popover";
 import { cn } from "../../lib/utils";
 
 export type HeatmapTone = "main" | "mint" | "blue" | "green" | "gray";
@@ -43,8 +44,15 @@ const tonePalettes: Record<HeatmapTone, [string, string, string, string, string]
   ],
 };
 
+export interface HeatmapCellInfo {
+  /** 셀 인덱스 (0-based, column-first) */
+  index: number;
+  /** 셀 레벨 (0~4) */
+  level: number;
+}
+
 export interface HeatmapProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, "children"> {
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "children" | "onClick"> {
   /** 셀 값 배열 (각 0~4 레벨). 길이는 rows×cols 권장 */
   cells?: number[];
   /** 컬럼 수 (default 20) */
@@ -59,13 +67,29 @@ export interface HeatmapProps
   gap?: number;
   /** 셀 모서리 둥글기 px */
   cellRadius?: number;
-  /** 호버 시 툴팁 라벨 생성 함수 (셀 인덱스 → 텍스트). 미지정 시 툴팁 비활성 */
+  /** 셀 a11y 라벨 생성 함수 (셀 인덱스/레벨 → 텍스트). */
   ariaLabel?: (index: number, level: number) => string;
+  /**
+   * Hover/포커스 시 popover로 보여줄 컨텐츠 생성 함수.
+   * 지정하면 셀이 인터랙티브해지고 hover/click으로 popover가 열려요.
+   */
+  renderCellTooltip?: (info: HeatmapCellInfo) => React.ReactNode;
+  /**
+   * 셀 클릭 시 popover 하단에 추가로 렌더링할 액션 영역.
+   * 클릭으로 선택된 상태에서만 표시되며, 인터랙션을 위해 `renderCellTooltip`이 함께 필요해요.
+   */
+  renderCellActions?: (info: HeatmapCellInfo) => React.ReactNode;
+  /** 셀 클릭 콜백 */
+  onCellClick?: (info: HeatmapCellInfo) => void;
+  /** 셀 hover 콜백 */
+  onCellHover?: (info: HeatmapCellInfo | null) => void;
 }
 
 /**
  * Heatmap
  * GitHub-style 활동 잔디. 7행 × N열 그리드, 각 셀 0~4 레벨.
+ *
+ * `renderCellTooltip`을 넘기면 각 셀에 hover popover + 클릭 선택 인터랙션이 활성화돼요.
  *
  * @param tone `main` (default) · `mint` · `blue` · `green` · `gray`
  * @param cells 길이 rows×cols 의 number[] 0~4
@@ -73,8 +97,21 @@ export interface HeatmapProps
  *
  * @example
  * ```tsx
+ * // 정적 (인터랙션 없음)
  * <Heatmap cols={20} cells={data} tone="main" />
- * <Heatmap cols={12} tone="mint" />  {/* 빈 그리드 *\/}
+ *
+ * // hover/click 인터랙션
+ * <Heatmap
+ *   cols={20}
+ *   cells={data}
+ *   renderCellTooltip={({ index, level }) =>
+ *     `${dates[index]} · ${level}회 활동`
+ *   }
+ *   renderCellActions={({ index }) => (
+ *     <Button size="xs" onClick={() => openDay(dates[index])}>일지 보기</Button>
+ *   )}
+ *   onCellClick={({ index, level }) => track(index, level)}
+ * />
  * ```
  */
 export function Heatmap({
@@ -86,17 +123,22 @@ export function Heatmap({
   gap = 3,
   cellRadius = 3,
   ariaLabel,
+  renderCellTooltip,
+  renderCellActions,
+  onCellClick,
+  onCellHover,
   className,
   ...props
 }: HeatmapProps): React.ReactElement {
   const colors = palette ?? tonePalettes[tone];
   const total = rows * cols;
   const data = cells ?? Array.from({ length: total }, () => 0);
+  const interactive = Boolean(renderCellTooltip);
 
   return (
     <div
       data-slot="heatmap"
-      role="img"
+      role={interactive ? undefined : "img"}
       className={cn("w-full", className)}
       style={{
         display: "grid",
@@ -109,18 +151,165 @@ export function Heatmap({
     >
       {data.slice(0, total).map((raw, i) => {
         const level = Math.max(0, Math.min(4, Math.round(raw)));
+        if (!interactive) {
+          return (
+            <div
+              key={i}
+              aria-label={ariaLabel?.(i, level)}
+              style={{
+                aspectRatio: "1",
+                borderRadius: cellRadius,
+                background: colors[level],
+              }}
+            />
+          );
+        }
         return (
-          <div
+          <HeatmapCell
             key={i}
-            aria-label={ariaLabel?.(i, level)}
-            style={{
-              aspectRatio: "1",
-              borderRadius: cellRadius,
-              background: colors[level],
-            }}
+            index={i}
+            level={level}
+            color={colors[level]}
+            cellRadius={cellRadius}
+            ariaLabel={ariaLabel?.(i, level)}
+            renderCellTooltip={renderCellTooltip}
+            renderCellActions={renderCellActions}
+            onCellClick={onCellClick}
+            onCellHover={onCellHover}
           />
         );
       })}
     </div>
+  );
+}
+
+interface HeatmapCellProps {
+  index: number;
+  level: number;
+  color: string;
+  cellRadius: number;
+  ariaLabel?: string;
+  renderCellTooltip?: (info: HeatmapCellInfo) => React.ReactNode;
+  renderCellActions?: (info: HeatmapCellInfo) => React.ReactNode;
+  onCellClick?: (info: HeatmapCellInfo) => void;
+  onCellHover?: (info: HeatmapCellInfo | null) => void;
+}
+
+function HeatmapCell({
+  index,
+  level,
+  color,
+  cellRadius,
+  ariaLabel,
+  renderCellTooltip,
+  renderCellActions,
+  onCellClick,
+  onCellHover,
+}: HeatmapCellProps): React.ReactElement {
+  const [open, setOpen] = React.useState(false);
+  const [selected, setSelected] = React.useState(false);
+  const hoverTimeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+  const justClickedRef = React.useRef(false);
+  const closingRef = React.useRef(false);
+
+  const info: HeatmapCellInfo = { index, level };
+
+  const clearHoverTimeout = (): void => {
+    if (hoverTimeoutRef.current !== null) {
+      clearTimeout(hoverTimeoutRef.current);
+      hoverTimeoutRef.current = null;
+    }
+  };
+
+  return (
+    <Popover.Root
+      open={open}
+      onOpenChange={(next) => {
+        if (!next) {
+          if (justClickedRef.current) {
+            justClickedRef.current = false;
+            return;
+          }
+          setOpen(false);
+          setSelected(false);
+          closingRef.current = true;
+          setTimeout(() => {
+            closingRef.current = false;
+          }, 200);
+        }
+      }}
+    >
+      <Popover.Trigger asChild>
+        <button
+          type="button"
+          aria-label={ariaLabel}
+          className={cn(
+            "cursor-pointer transition-[box-shadow,transform] duration-150 ease-out",
+            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-800 focus-visible:ring-offset-1",
+            selected && "ring-2 ring-gray-800 ring-offset-1",
+          )}
+          style={{
+            aspectRatio: "1",
+            borderRadius: cellRadius,
+            background: color,
+            border: "none",
+            padding: 0,
+          }}
+          onMouseEnter={() => {
+            clearHoverTimeout();
+            onCellHover?.(info);
+            if (!selected && !closingRef.current) setOpen(true);
+          }}
+          onMouseLeave={() => {
+            onCellHover?.(null);
+            if (!selected) {
+              hoverTimeoutRef.current = setTimeout(() => setOpen(false), 80);
+            }
+          }}
+          onClick={() => {
+            clearHoverTimeout();
+            if (selected) {
+              setSelected(false);
+              setOpen(false);
+              closingRef.current = true;
+              setTimeout(() => {
+                closingRef.current = false;
+              }, 200);
+            } else {
+              justClickedRef.current = true;
+              setSelected(true);
+              setOpen(true);
+              onCellClick?.(info);
+            }
+          }}
+        />
+      </Popover.Trigger>
+      <Popover.Portal>
+        <Popover.Content
+          side="top"
+          sideOffset={4}
+          onOpenAutoFocus={(e) => e.preventDefault()}
+          onMouseEnter={clearHoverTimeout}
+          onMouseLeave={() => {
+            if (!selected) setOpen(false);
+          }}
+          className={cn(
+            "z-50 min-w-[120px] rounded-xl bg-gray-900 px-3 py-2 text-white shadow-md",
+            "animate-in fade-in-0 zoom-in-95",
+            "data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95",
+            "data-[side=top]:slide-in-from-bottom-2 data-[side=bottom]:slide-in-from-top-2",
+          )}
+        >
+          {renderCellTooltip ? (
+            <div className="whitespace-nowrap text-xs">
+              {renderCellTooltip(info)}
+            </div>
+          ) : null}
+          {selected && renderCellActions ? (
+            <div className="mt-2">{renderCellActions(info)}</div>
+          ) : null}
+        </Popover.Content>
+      </Popover.Portal>
+    </Popover.Root>
   );
 }
