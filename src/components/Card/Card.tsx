@@ -5,7 +5,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../../lib/utils";
 
 const cardVariants = cva(
-  "relative overflow-hidden bg-white border border-gray-200 transition-[transform,box-shadow] duration-200 ease-out",
+  "relative overflow-hidden bg-white border border-gray-200 will-change-transform transition-[transform,box-shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]",
   {
     variants: {
       radius: {
@@ -15,7 +15,7 @@ const cardVariants = cva(
         xl: "rounded-4",
       },
       interactive: {
-        true: "cursor-pointer hover:-translate-y-1 hover:shadow-default",
+        true: "cursor-pointer hover:-translate-y-1.5 hover:shadow-warm",
         false: "",
       },
     },

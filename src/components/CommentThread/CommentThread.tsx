@@ -80,15 +80,15 @@ function CommentActionsMenu({
           aria-label="댓글 더보기 메뉴"
           onClick={(event) => event.stopPropagation()}
           className={cn(
-            "inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full",
-            "text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-700",
+            "inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full",
+            "text-gray-400 transition-colors hover:bg-gray-100 hover:text-gray-700",
           )}
         >
           <span className="sr-only">더보기</span>
           <span className="flex items-center gap-0.5">
-            <span className="h-1 w-1 rounded-full bg-current" />
-            <span className="h-1 w-1 rounded-full bg-current" />
-            <span className="h-1 w-1 rounded-full bg-current" />
+            <span className="h-[3px] w-[3px] rounded-full bg-current" />
+            <span className="h-[3px] w-[3px] rounded-full bg-current" />
+            <span className="h-[3px] w-[3px] rounded-full bg-current" />
           </span>
         </button>
       </Popover.Trigger>
@@ -132,6 +132,7 @@ function CommentActionsMenu({
 function CommentItem({
   comment,
   depth,
+  isLast,
   currentUserId,
   activeReplyTargetId,
   draftReplyContent,
@@ -149,6 +150,7 @@ function CommentItem({
 }: {
   comment: CommentNode;
   depth: number;
+  isLast: boolean;
   currentUserId?: string;
   activeReplyTargetId: string | null;
   draftReplyContent: string;
@@ -172,34 +174,39 @@ function CommentItem({
   const hasReplies = Boolean(comment.replies?.length);
   const isReplyComposerOpen = activeReplyTargetId === comment.id;
   const hasMoreReplies = Boolean(comment.hasMoreReplies);
+  const replies = comment.replies ?? [];
 
   return (
     <li>
-      <article
+      <div
         onClick={() => onReplyOpen(comment)}
         className={cn(
-          "flex cursor-text gap-3 rounded-3 border px-3.5 py-3",
-          depth === 0 ? "border-gray-200 bg-white" : "border-gray-100 bg-gray-50/70",
+          "flex cursor-text items-start gap-2.5 py-3",
+          !isLast && depth === 0 && "border-b border-gray-100",
         )}
       >
         <CircleAvatar
           imageUrl={comment.author.profileImageUrl}
-          size={depth > 0 ? "sm" : "md"}
+          size="sm"
           className="shrink-0"
         />
         <div className="min-w-0 flex-1">
-          <div className="relative pr-10">
-            <div className="flex items-start gap-2">
-              <div className="flex min-w-0 flex-wrap items-center gap-x-2 gap-y-1">
-                <Text size="caption1" weight="bold" className="text-gray-900">
-                  {comment.author.nickname}
-                </Text>
-                <Text size="caption2" weight="regular" className="text-gray-500">
-                  {comment.createdAt}
-                </Text>
-              </div>
-            </div>
-            <div className="absolute top-0 right-0">
+          <div className="flex items-baseline justify-between gap-2">
+            <Text
+              size="caption1"
+              weight="bold"
+              className="truncate text-gray-900"
+            >
+              {comment.author.nickname}
+            </Text>
+            <div className="flex shrink-0 items-center gap-1">
+              <Text
+                size="caption2"
+                weight="regular"
+                className="text-gray-500"
+              >
+                {comment.createdAt}
+              </Text>
               <CommentActionsMenu
                 comment={comment}
                 isAuthor={isAuthor}
@@ -207,22 +214,24 @@ function CommentItem({
                 onReport={onReport}
               />
             </div>
-            <Text
-              as="p"
-              size="body2"
-              weight="regular"
-              className="mt-0.5 leading-relaxed break-words whitespace-pre-wrap text-gray-800"
-            >
-              {comment.content}
-            </Text>
           </div>
+          <Text
+            as="p"
+            size="caption1"
+            weight="regular"
+            className="mt-1 leading-[1.5] break-words whitespace-pre-wrap text-gray-700"
+          >
+            {comment.content}
+          </Text>
+
           {hasReplies ? (
-            <ul className="mt-3 space-y-2.5">
-              {comment.replies?.map((reply) => (
+            <ul className="mt-2 space-y-0 border-l border-gray-100 pl-3">
+              {replies.map((reply, replyIndex) => (
                 <CommentItem
                   key={reply.id}
                   comment={reply}
                   depth={depth + 1}
+                  isLast={replyIndex === replies.length - 1}
                   currentUserId={currentUserId}
                   activeReplyTargetId={activeReplyTargetId}
                   draftReplyContent={draftReplyContent}
@@ -241,54 +250,55 @@ function CommentItem({
               ))}
             </ul>
           ) : null}
+
           <div
             aria-hidden={!isReplyComposerOpen}
             className={cn(
-              "overflow-hidden transition-all duration-250 ease-out",
+              "overflow-hidden transition-all duration-200 ease-out",
               isReplyComposerOpen
-                ? "mt-2.5 max-h-[260px] opacity-100"
+                ? "mt-2 max-h-[260px] opacity-100"
                 : "mt-0 max-h-0 opacity-0 pointer-events-none",
             )}
             onClick={(event) => event.stopPropagation()}
           >
-            <div className="rounded-2 border border-gray-200 bg-white p-2.5">
+            <div className="flex items-center gap-1.5">
               <TextArea
                 value={draftReplyContent}
                 onChange={(event) => onReplyChange(event.target.value)}
                 placeholder={replyPlaceholder}
-                rows={4}
-                className="min-h-[84px]"
+                rows={1}
+                className="min-h-[36px] flex-1 text-[12px]"
               />
-              <div className="mt-2 flex items-center justify-end gap-2">
-                <button
-                  type="button"
-                  className="rounded-2 px-2.5 py-1.5 text-gray-600 transition-colors hover:bg-gray-100 hover:text-gray-800"
-                  onClick={onReplyCancel}
-                >
-                  <Text size="caption2" weight="medium">
-                    {replyCancelLabel}
-                  </Text>
-                </button>
-                <button
-                  type="button"
-                  className={cn(
-                    "rounded-2 bg-main-800 px-2.5 py-1.5 text-white transition-colors hover:bg-main-700",
-                    !draftReplyContent.trim() && "cursor-not-allowed bg-main-400 hover:bg-main-400",
-                  )}
-                  onClick={() => onReplySubmit(comment)}
-                  disabled={!draftReplyContent.trim()}
-                >
-                  <Text size="caption2" weight="bold">
-                    {replySubmitLabel}
-                  </Text>
-                </button>
-              </div>
+              <button
+                type="button"
+                className="rounded-2 px-2 py-1.5 text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-700"
+                onClick={onReplyCancel}
+              >
+                <Text size="caption2" weight="medium">
+                  {replyCancelLabel}
+                </Text>
+              </button>
+              <button
+                type="button"
+                className={cn(
+                  "rounded-2 bg-main-800 px-2.5 py-1.5 text-white transition-colors hover:bg-main-700",
+                  !draftReplyContent.trim() &&
+                    "cursor-not-allowed bg-main-400 hover:bg-main-400",
+                )}
+                onClick={() => onReplySubmit(comment)}
+                disabled={!draftReplyContent.trim()}
+              >
+                <Text size="caption2" weight="bold">
+                  {replySubmitLabel}
+                </Text>
+              </button>
             </div>
           </div>
+
           {hasMoreReplies ? (
             <button
               type="button"
-              className="mt-2.5 inline-flex rounded-2 px-2 py-1 text-gray-600 transition-colors hover:bg-gray-100 hover:text-gray-800"
+              className="mt-1.5 inline-flex rounded-2 px-1.5 py-0.5 text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-700"
               onClick={(event) => {
                 event.stopPropagation();
                 onLoadMoreReplies?.(comment);
@@ -307,7 +317,7 @@ function CommentItem({
             </button>
           ) : null}
         </div>
-      </article>
+      </div>
     </li>
   );
 }
@@ -325,7 +335,9 @@ export function CommentThread({
   onDelete,
   onReport,
 }: CommentThreadProps): React.ReactElement {
-  const [activeReplyTargetId, setActiveReplyTargetId] = React.useState<string | null>(null);
+  const [activeReplyTargetId, setActiveReplyTargetId] = React.useState<
+    string | null
+  >(null);
   const [draftReplyContent, setDraftReplyContent] = React.useState("");
 
   const handleReplyOpen = (comment: CommentNode): void => {
@@ -351,21 +363,24 @@ export function CommentThread({
 
   if (!comments.length) {
     return (
-      <div className={cn("rounded-3 border border-gray-200 bg-white px-4 py-5", className)}>
-        <Text size="caption1" weight="regular" className="text-gray-500">
-          아직 댓글이 없습니다.
-        </Text>
-      </div>
+      <Text
+        size="caption1"
+        weight="regular"
+        className={cn("block py-2 text-gray-500", className)}
+      >
+        아직 댓글이 없습니다.
+      </Text>
     );
   }
 
   return (
-    <ul className={cn("space-y-4", className)}>
-      {comments.map((comment) => (
+    <ul className={cn("flex flex-col", className)}>
+      {comments.map((comment, index) => (
         <CommentItem
           key={comment.id}
           comment={comment}
           depth={0}
+          isLast={index === comments.length - 1}
           currentUserId={currentUserId}
           activeReplyTargetId={activeReplyTargetId}
           draftReplyContent={draftReplyContent}
