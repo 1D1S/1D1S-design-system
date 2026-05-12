@@ -225,7 +225,7 @@ function CommentItem({
           </Text>
 
           {hasReplies ? (
-            <ul className="mt-2 space-y-0 border-l border-gray-100 pl-3">
+            <ul className="mt-2 -ml-5 space-y-0 border-l border-gray-100 pl-3">
               {replies.map((reply, replyIndex) => (
                 <CommentItem
                   key={reply.id}
