@@ -9,9 +9,9 @@ const filterChipVariants = cva(
   {
     variants: {
       size: {
-        sm: "text-[11px] py-1.5 px-3",
-        md: "text-xs py-[7px] px-3.5",
-        lg: "text-sm py-2 px-4",
+        sm: "text-[11px] py-1.5 px-3 gap-1",
+        md: "text-xs py-[7px] px-3.5 gap-1",
+        lg: "text-sm py-2 px-4 gap-1.5",
       },
       active: {
         true: "bg-brand text-white border-brand",
@@ -28,6 +28,8 @@ const filterChipVariants = cva(
 export interface FilterChipProps
   extends Omit<React.ComponentProps<"button">, "size">,
     VariantProps<typeof filterChipVariants> {
+  /** 라벨 좌측 아이콘/이모지 */
+  icon?: React.ReactNode;
   children: React.ReactNode;
 }
 
@@ -37,6 +39,7 @@ export interface FilterChipProps
  *
  * @param active 선택 상태 (default `false`)
  * @param size `sm` · `md` (default) · `lg`
+ * @param icon 라벨 좌측 아이콘 또는 이모지
  *
  * @example
  * ```tsx
@@ -50,6 +53,7 @@ export function FilterChip({
   className,
   size,
   active,
+  icon,
   children,
   type = "button",
   ...props
@@ -63,6 +67,7 @@ export function FilterChip({
       className={cn(filterChipVariants({ size, active, className }))}
       {...props}
     >
+      {icon}
       {children}
     </button>
   );

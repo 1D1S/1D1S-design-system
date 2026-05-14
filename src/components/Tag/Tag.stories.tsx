@@ -1,6 +1,16 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
-import { Flame, Flag } from '../Icons';
+import {
+  BookOpen,
+  Code2,
+  Dumbbell,
+  Flame,
+  Flag,
+  Gamepad2,
+  GraduationCap,
+  Music,
+  Wallet,
+} from '../Icons';
 import { Tag } from './Tag';
 import { FilterChip } from './FilterChip';
 
@@ -73,13 +83,26 @@ export const Square: Story = {
 
 export const FilterChips: StoryObj<typeof FilterChip> = {
   render: () => {
-    const [active, setActive] = useState('전체');
-    const cats = ['전체', '운동', '독서', '건강', '학습', '취미'];
+    const [active, setActive] = useState('운동');
+    const cats: { label: string; icon: React.ReactNode }[] = [
+      { label: '운동', icon: <Dumbbell className="h-3.5 w-3.5" /> },
+      { label: '독서', icon: <BookOpen className="h-3.5 w-3.5" /> },
+      { label: '공부', icon: <GraduationCap className="h-3.5 w-3.5" /> },
+      { label: '개발', icon: <Code2 className="h-3.5 w-3.5" /> },
+      { label: '음악', icon: <Music className="h-3.5 w-3.5" /> },
+      { label: '여가', icon: <Gamepad2 className="h-3.5 w-3.5" /> },
+      { label: '경제', icon: <Wallet className="h-3.5 w-3.5" /> },
+    ];
     return (
       <div className="flex items-center gap-2 flex-wrap">
         {cats.map((c) => (
-          <FilterChip key={c} active={active === c} onClick={() => setActive(c)}>
-            {c}
+          <FilterChip
+            key={c.label}
+            active={active === c.label}
+            icon={c.icon}
+            onClick={() => setActive(c.label)}
+          >
+            {c.label}
           </FilterChip>
         ))}
       </div>
