@@ -2,6 +2,7 @@
 
 import React from "react";
 import { cn } from "../../lib/utils";
+import { Person } from "../Icons";
 import { Text } from "../Text";
 
 const DEFAULT_WEEK_LABELS = ["일", "월", "화", "수", "목", "금", "토"] as const;
@@ -21,6 +22,8 @@ export interface ScheduleCalendarCell {
   title?: React.ReactNode;
   subtitle?: React.ReactNode;
   bars?: ScheduleCalendarBar[];
+  /** 해당 날짜에 일지를 작성한 사용자 수. 2 이상일 때 셀 하단에 카운트 pill로 표시됨. */
+  participantCount?: number;
   highlighted?: boolean;
   muted?: boolean;
   colSpan?: number;
@@ -149,6 +152,18 @@ export function ScheduleCalendar({
                             <Text size="caption3" weight="medium" className="hidden text-gray-600 sm:block">
                               {cell.subtitle}
                             </Text>
+                          ) : null}
+
+                          {typeof cell.participantCount === "number" && cell.participantCount >= 2 ? (
+                            <div
+                              className="mt-auto inline-flex w-fit items-center gap-0.5 rounded-full bg-main-200 px-1.5 py-0.5 text-main-800 sm:gap-1 sm:px-2"
+                              aria-label={`${cell.participantCount}명 작성`}
+                            >
+                              <Person className="size-2.5 sm:size-3" strokeWidth={2.4} />
+                              <Text size="caption3" weight="bold" className="leading-none tabular-nums">
+                                {cell.participantCount}
+                              </Text>
+                            </div>
                           ) : null}
                         </>
                       )}

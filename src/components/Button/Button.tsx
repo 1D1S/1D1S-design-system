@@ -4,7 +4,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { Text } from "../Text";
 
 const baseClasses =
-  "inline-flex items-center justify-center gap-1.5 border transition-[transform,filter,background-color,box-shadow,border-color,color] duration-150 ease-out " +
+  "inline-flex items-center justify-center gap-1.5 border transition-[scale,translate,filter,background-color,box-shadow,border-color,color] duration-150 ease-out " +
   "active:scale-[0.97] disabled:cursor-not-allowed disabled:opacity-[0.45] disabled:active:scale-100 " +
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/30 focus-visible:ring-offset-2";
 

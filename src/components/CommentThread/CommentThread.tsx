@@ -260,12 +260,12 @@ function CommentItem({
             className={cn(
               "overflow-hidden transition-all duration-200 ease-out",
               isReplyComposerOpen
-                ? "mt-2 max-h-[260px] opacity-100"
+                ? "mt-1 max-h-[260px] opacity-100"
                 : "mt-0 max-h-0 opacity-0 pointer-events-none",
             )}
             onClick={(event) => event.stopPropagation()}
           >
-            <div className="flex items-center gap-1.5">
+            <div className="flex items-center gap-1.5 p-1">
               <TextArea
                 value={draftReplyContent}
                 onChange={(event) => onReplyChange(event.target.value)}

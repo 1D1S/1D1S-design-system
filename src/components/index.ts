@@ -2,7 +2,6 @@
 // v1.0.0 (renewal) + v0.2.x compatibility layer
 export * from "./Accordion";
 export * from "./AchievementBadge";
-export * from "./AppHeader";
 export * from "./AvatarImagePicker";
 export * from "./Banner";
 export * from "./BannerCarousel";
@@ -30,7 +29,6 @@ export * from "./ImagePlaceholder";
 export * from "./PageWatermark";
 export * from "./ProgressBar";
 export * from "./Radio";
-export * from "./RightSidebar";
 export * from "./ScheduleCalendar";
 export * from "./SectionHeader";
 export * from "./Select";

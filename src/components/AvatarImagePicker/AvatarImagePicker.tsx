@@ -1,8 +1,8 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import { cn } from "../../lib/utils";
+import { Button } from "../Button";
 import { Logo, PencilLine } from "../Icons";
-import { Text } from "../Text";
 
 export interface AvatarImagePickerProps extends Omit<React.ComponentPropsWithoutRef<"input">, "size"> {
   /** 원형 이미지 영역 지름(px) */
@@ -93,11 +93,9 @@ export function AvatarImagePicker({
         onClick={handleClick}
         aria-label="이미지 선택"
         className={cn(
-          "relative h-full w-full overflow-hidden rounded-full",
-          "cursor-pointer",
-          preview
-            ? "bg-main-300"
-            : "border-2 border-dashed border-gray-400 bg-white",
+          "group relative h-full w-full cursor-pointer overflow-hidden rounded-full bg-gray-100 outline-none transition-[border-color,box-shadow,background-color] duration-200",
+          "focus-visible:ring-3 focus-visible:ring-main-300/60",
+          !preview && "border-2 border-dashed border-gray-200 bg-white hover:border-gray-300",
         )}
       >
         {preview ? (
@@ -112,25 +110,23 @@ export function AvatarImagePicker({
             <Logo
               width={fallbackLogoWidth}
               height={fallbackLogoHeight}
-              className="text-gray-300"
+              className="text-gray-400"
             />
           </div>
         )}
       </button>
 
-      <button
+      <Button
         type="button"
+        variant="secondary"
+        size="sm"
+        pill
         onClick={handleClick}
-        className={cn(
-          "absolute bottom-0 left-1/2 z-10 inline-flex h-9 -translate-x-1/2 translate-y-1/2 items-center gap-1.5 rounded-full border border-gray-200 bg-white px-5",
-          "cursor-pointer shadow-[0_6px_16px_rgba(34,34,34,0.16)]",
-        )}
+        iconLeft={<PencilLine className="h-3.5 w-3.5 text-gray-700" />}
+        className="absolute bottom-0 left-1/2 z-10 -translate-x-1/2 translate-y-1/2 px-4 text-gray-700 shadow-lg"
       >
-        <PencilLine className="h-3.5 w-3.5 text-gray-700" />
-        <Text size="caption1" weight="medium" className="text-gray-700 whitespace-nowrap">
-          {changeLabel}
-        </Text>
-      </button>
+        {changeLabel}
+      </Button>
     </div>
   );
 }

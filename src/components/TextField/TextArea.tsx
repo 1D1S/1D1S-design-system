@@ -98,12 +98,12 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
             disabled={disabled}
             aria-invalid={error ? true : undefined}
             className={cn(
-              "w-full resize-y rounded-[10px] border border-gray-200 bg-gray-50 px-3.5 py-3 text-sm leading-[1.6] text-gray-900",
+              "w-full resize-y rounded-[10px] border border-gray-200 bg-white px-3.5 py-3 text-sm leading-[1.6] text-gray-900",
               "outline-none transition-[border-color,box-shadow,background-color] duration-150",
               "placeholder:text-gray-500 hover:border-gray-300",
-              "focus-visible:border-brand focus-visible:bg-white focus-visible:shadow-[0_0_0_3px_rgba(255,87,34,0.12)]",
-              "disabled:cursor-not-allowed disabled:bg-gray-100 disabled:text-gray-400",
-              "aria-[invalid=true]:border-red-500 aria-[invalid=true]:bg-white aria-[invalid=true]:shadow-[0_0_0_3px_rgba(255,82,82,0.12)]",
+              "focus-visible:border-brand focus-visible:shadow-[0_0_0_3px_rgba(255,87,34,0.12)]",
+              "disabled:cursor-not-allowed disabled:border-gray-200 disabled:bg-gray-100 disabled:text-gray-400",
+              "aria-[invalid=true]:border-red-500 aria-[invalid=true]:shadow-[0_0_0_3px_rgba(255,82,82,0.12)]",
               count && "pb-7",
               className,
             )}

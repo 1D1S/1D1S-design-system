@@ -51,11 +51,14 @@ function buildCell(date: Date, isVisible: boolean): ScheduleCalendarCell {
     bars.push({ width: 72, tone: "main" });
   }
 
+  const participantCount = seed % 4 === 0 ? (seed % 11) + 2 : seed % 6 === 0 ? 3 : undefined;
+
   return {
     day,
     dayTone: date.getDay() === 5 ? "accent" : seed % 3 === 0 ? "strong" : "default",
     highlighted: seed % 11 === 0,
     bars: bars.length > 0 ? bars : undefined,
+    participantCount,
   };
 }
 
