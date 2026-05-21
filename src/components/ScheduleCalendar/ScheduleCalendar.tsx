@@ -4,7 +4,7 @@ import React from "react";
 import { cn } from "../../lib/utils";
 import { Text } from "../Text";
 
-const DEFAULT_WEEK_LABELS = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"] as const;
+const DEFAULT_WEEK_LABELS = ["일", "월", "화", "수", "목", "금", "토"] as const;
 
 type DayTone = "default" | "strong" | "accent" | "muted";
 type BarTone = "main" | "soft";
@@ -41,10 +41,10 @@ function resolveWidth(width?: number | string): string {
 }
 
 function getDayToneClass(dayTone: DayTone = "default"): string {
-  if (dayTone === "strong") return "text-gray-900 font-bold";
-  if (dayTone === "accent") return "text-main-800 font-bold";
-  if (dayTone === "muted") return "text-gray-500 font-medium";
-  return "text-gray-600 font-medium";
+  if (dayTone === "strong") return "text-gray-900 font-extrabold";
+  if (dayTone === "accent") return "text-main-800 font-extrabold";
+  if (dayTone === "muted") return "text-gray-400 font-medium";
+  return "text-gray-700 font-medium";
 }
 
 function getBarToneClass(barTone: BarTone = "main"): string {
@@ -62,7 +62,7 @@ export function ScheduleCalendar({
   className,
 }: ScheduleCalendarProps): React.ReactElement {
   return (
-    <div className={cn("w-full overflow-hidden rounded-4 border border-gray-300 bg-white", className)}>
+    <div className={cn("w-full overflow-hidden rounded-3 border border-gray-200 bg-white", className)}>
       <table className="w-full table-fixed border-collapse">
         <thead>
           <tr>
@@ -70,12 +70,12 @@ export function ScheduleCalendar({
               <th
                 key={`${label}-${index}`}
                 className={cn(
-                  "h-8 border-b border-r border-gray-300 bg-gray-100 px-1 text-center align-middle sm:h-12 sm:px-2.5",
+                  "h-8 border-b border-r border-gray-200 bg-gray-50 px-1 text-center align-middle sm:h-11 sm:px-2.5",
                   index === weekLabels.length - 1 && "border-r-0"
                 )}
                 scope="col"
               >
-                <Text size="caption3" weight="bold" className="text-gray-600 sm:text-lg">
+                <Text size="caption3" weight="medium" className="text-gray-500 sm:text-sm">
                   {label}
                 </Text>
               </th>
@@ -98,15 +98,15 @@ export function ScheduleCalendar({
                     key={key}
                     colSpan={span}
                     className={cn(
-                      "border-r border-b border-gray-300 align-top",
+                      "border-r border-b border-gray-200 align-top",
                       isLastColumn && "border-r-0"
                     )}
                   >
                     <div
                       className={cn(
-                        "flex h-full flex-col gap-1 p-1 sm:gap-2 sm:p-2",
-                        cell.muted && "bg-gray-300",
-                        cell.highlighted && "bg-main-200 ring-1 ring-inset ring-main-400"
+                        "flex h-full flex-col gap-1 p-1 transition-colors duration-200 sm:gap-2 sm:p-2",
+                        cell.muted && "bg-gray-50",
+                        cell.highlighted && "bg-main-200/70 ring-1 ring-inset ring-main-400"
                       )}
                       style={{ minHeight: `${cellMinHeight}px` }}
                     >
@@ -118,14 +118,14 @@ export function ScheduleCalendar({
                             <Text
                               size="caption3"
                               weight="medium"
-                              className={cn("leading-tight sm:text-lg", getDayToneClass(cell.dayTone))}
+                              className={cn("leading-tight sm:text-base", getDayToneClass(cell.dayTone))}
                             >
                               {cell.day}
                             </Text>
                           ) : null}
 
                           {cell.title !== undefined ? (
-                            <Text size="caption3" weight="bold" className="line-clamp-1 text-gray-900 sm:text-lg">
+                            <Text size="caption3" weight="bold" className="line-clamp-1 text-gray-900 sm:text-sm">
                               {cell.title}
                             </Text>
                           ) : null}

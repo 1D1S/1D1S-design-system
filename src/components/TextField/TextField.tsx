@@ -15,13 +15,13 @@ export type TextFieldState =
 const fieldVariants = cva(
   [
     "w-full transition-[border-color,box-shadow,background-color] duration-150 ease-out outline-none",
-    "rounded-2 border border-gray-200 bg-gray-50 text-gray-900",
+    "rounded-2 border border-gray-200 bg-white text-gray-900",
     "placeholder:text-gray-500",
     // automatic states (used when `state` prop omitted)
     "hover:border-gray-300",
-    "focus-visible:border-brand focus-visible:bg-white focus-visible:shadow-[0_0_0_3px_rgba(255,87,34,0.12)]",
-    "disabled:cursor-not-allowed disabled:bg-gray-100 disabled:text-gray-400",
-    "aria-[invalid=true]:border-red-500 aria-[invalid=true]:bg-white aria-[invalid=true]:shadow-[0_0_0_3px_rgba(255,82,82,0.12)]",
+    "focus-visible:border-brand focus-visible:shadow-[0_0_0_3px_rgba(255,87,34,0.12)]",
+    "disabled:cursor-not-allowed disabled:border-gray-200 disabled:bg-gray-100 disabled:text-gray-400",
+    "aria-[invalid=true]:border-red-500 aria-[invalid=true]:shadow-[0_0_0_3px_rgba(255,82,82,0.12)]",
   ],
   {
     variants: {
@@ -42,12 +42,12 @@ const fieldVariants = cva(
       state: {
         default: "",
         focus:
-          "border-brand bg-white shadow-[0_0_0_3px_rgba(255,87,34,0.12)]",
-        filled: "border-gray-300 bg-white",
+          "border-brand shadow-[0_0_0_3px_rgba(255,87,34,0.12)]",
+        filled: "border-gray-300",
         error:
-          "border-red-500 bg-white shadow-[0_0_0_3px_rgba(255,82,82,0.12)]",
+          "border-red-500 shadow-[0_0_0_3px_rgba(255,82,82,0.12)]",
         disabled:
-          "cursor-not-allowed bg-gray-100 text-gray-400",
+          "cursor-not-allowed border-gray-200 bg-gray-100 text-gray-400",
       },
     },
     compoundVariants: [

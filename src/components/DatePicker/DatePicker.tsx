@@ -38,9 +38,9 @@ const PickerTrigger = React.forwardRef<HTMLButtonElement, PickerTriggerProps>(
         ref={ref}
         type={type}
         className={cn(
-          "group flex h-10 w-full items-center justify-between gap-3 rounded-3 border border-gray-300 bg-white px-5",
-          "transition-colors duration-200",
-          "data-[state=open]:border-main-500 hover:border-gray-400 focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-main-300/60",
+          "group flex h-10 w-full items-center justify-between gap-3 rounded-3 border border-gray-300 bg-white px-4",
+          "outline-none transition-all duration-200",
+          "data-[state=open]:border-main-500 hover:border-gray-400 focus-visible:ring-3 focus-visible:ring-main-300/60",
           className
         )}
         {...props}
@@ -48,7 +48,7 @@ const PickerTrigger = React.forwardRef<HTMLButtonElement, PickerTriggerProps>(
         <Text size="body2" weight="medium" className={cn(label ? "text-gray-900" : "text-gray-500")}>
           {label ?? placeholder}
         </Text>
-        <CalendarIcon className="h-6 w-6 text-gray-600" strokeWidth={2.2} />
+        <CalendarIcon className="size-4 text-gray-600" strokeWidth={2.2} />
       </button>
     );
   }
@@ -89,8 +89,8 @@ export function DatePicker({
       <PopoverPrimitive.Portal>
         <PopoverPrimitive.Content
           className={cn(
-            "z-50 w-auto rounded-4 border border-gray-300 bg-white p-2 text-gray-900",
-            "shadow-[0_10px_20px_rgba(34,34,34,0.12)] outline-none",
+            "z-50 w-auto rounded-3 border border-gray-200 bg-white p-2 text-gray-900",
+            "shadow-lg outline-none",
             "data-[state=open]:animate-in data-[state=closed]:animate-out",
             "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
             "data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",
@@ -156,8 +156,8 @@ export function RangeDatePicker({
       <PopoverPrimitive.Portal>
         <PopoverPrimitive.Content
           className={cn(
-            "z-50 w-auto rounded-4 border border-gray-300 bg-white p-2 text-gray-900",
-            "shadow-[0_10px_20px_rgba(34,34,34,0.12)] outline-none",
+            "z-50 w-auto rounded-3 border border-gray-200 bg-white p-2 text-gray-900",
+            "shadow-lg outline-none",
             "data-[state=open]:animate-in data-[state=closed]:animate-out",
             "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
             "data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",

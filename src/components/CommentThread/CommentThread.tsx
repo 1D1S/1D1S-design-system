@@ -32,6 +32,7 @@ export interface CommentThreadProps {
   replyPlaceholder?: string;
   replySubmitLabel?: string;
   replyCancelLabel?: string;
+  replyButtonLabel?: string;
   loadMoreRepliesLabel?: string;
   onDelete?(comment: CommentNode): void;
   onReport?(comment: CommentNode): void;
@@ -139,6 +140,7 @@ function CommentItem({
   replyPlaceholder,
   replySubmitLabel,
   replyCancelLabel,
+  replyButtonLabel,
   loadMoreRepliesLabel,
   onReplyOpen,
   onReplyChange,
@@ -157,6 +159,7 @@ function CommentItem({
   replyPlaceholder: string;
   replySubmitLabel: string;
   replyCancelLabel: string;
+  replyButtonLabel: string;
   loadMoreRepliesLabel: string;
   onReplyOpen(comment: CommentNode): void;
   onReplyChange(content: string): void;
@@ -175,13 +178,13 @@ function CommentItem({
   const isReplyComposerOpen = activeReplyTargetId === comment.id;
   const hasMoreReplies = Boolean(comment.hasMoreReplies);
   const replies = comment.replies ?? [];
+  const showReplyButton = depth === 0 ? !hasReplies : isLast;
 
   return (
     <li>
       <div
-        onClick={() => onReplyOpen(comment)}
         className={cn(
-          "flex cursor-text items-start gap-2.5 py-3",
+          "flex items-start gap-2.5 py-3",
           !isLast && depth === 0 && "border-b border-gray-100",
         )}
       >
@@ -238,6 +241,7 @@ function CommentItem({
                   replyPlaceholder={replyPlaceholder}
                   replySubmitLabel={replySubmitLabel}
                   replyCancelLabel={replyCancelLabel}
+                  replyButtonLabel={replyButtonLabel}
                   loadMoreRepliesLabel={loadMoreRepliesLabel}
                   onReplyOpen={onReplyOpen}
                   onReplyChange={onReplyChange}
@@ -295,26 +299,38 @@ function CommentItem({
             </div>
           </div>
 
-          {hasMoreReplies ? (
-            <button
-              type="button"
-              className="mt-1.5 inline-flex rounded-2 px-1.5 py-0.5 text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-700"
-              onClick={(event) => {
-                event.stopPropagation();
-                onLoadMoreReplies?.(comment);
-              }}
-              disabled={comment.isLoadingReplies}
-            >
-              <Text size="caption2" weight="medium">
-                {comment.isLoadingReplies
-                  ? "불러오는 중..."
-                  : `${loadMoreRepliesLabel}${
-                      typeof comment.remainingReplyCount === "number"
-                        ? ` (${comment.remainingReplyCount})`
-                        : ""
-                    }`}
-              </Text>
-            </button>
+          {(showReplyButton && !isReplyComposerOpen) || hasMoreReplies ? (
+            <div className="mt-1.5 flex items-center gap-1">
+              {showReplyButton && !isReplyComposerOpen ? (
+                <button
+                  type="button"
+                  className="inline-flex rounded-2 px-1.5 py-0.5 text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-700"
+                  onClick={() => onReplyOpen(comment)}
+                >
+                  <Text size="caption2" weight="medium">
+                    {replyButtonLabel}
+                  </Text>
+                </button>
+              ) : null}
+              {hasMoreReplies ? (
+                <button
+                  type="button"
+                  className="inline-flex rounded-2 px-1.5 py-0.5 text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-700"
+                  onClick={() => onLoadMoreReplies?.(comment)}
+                  disabled={comment.isLoadingReplies}
+                >
+                  <Text size="caption2" weight="medium">
+                    {comment.isLoadingReplies
+                      ? "불러오는 중..."
+                      : `${loadMoreRepliesLabel}${
+                          typeof comment.remainingReplyCount === "number"
+                            ? ` (${comment.remainingReplyCount})`
+                            : ""
+                        }`}
+                  </Text>
+                </button>
+              ) : null}
+            </div>
           ) : null}
         </div>
       </div>
@@ -329,6 +345,7 @@ export function CommentThread({
   replyPlaceholder = "댓글을 입력하세요.",
   replySubmitLabel = "등록",
   replyCancelLabel = "취소",
+  replyButtonLabel = "답글 달기",
   loadMoreRepliesLabel = "대댓글 더보기",
   onReplySubmit,
   onLoadMoreReplies,
@@ -387,6 +404,7 @@ export function CommentThread({
           replyPlaceholder={replyPlaceholder}
           replySubmitLabel={replySubmitLabel}
           replyCancelLabel={replyCancelLabel}
+          replyButtonLabel={replyButtonLabel}
           loadMoreRepliesLabel={loadMoreRepliesLabel}
           onReplyOpen={handleReplyOpen}
           onReplyChange={setDraftReplyContent}

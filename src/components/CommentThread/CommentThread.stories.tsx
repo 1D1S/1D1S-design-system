@@ -79,6 +79,25 @@ export const Default: Story = {
   },
 };
 
+export const SingleComment: Story = {
+  args: {
+    currentUserId: "user-1",
+    comments: [
+      {
+        id: "single-1",
+        content: "단일 댓글입니다. 답글이 없어요.",
+        createdAt: "2026.04.10",
+        author: {
+          id: "user-1",
+          nickname: "러닝하는지민",
+          profileImageUrl:
+            "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=200&q=80",
+        },
+      },
+    ],
+  },
+};
+
 export const Empty: Story = {
   args: {
     comments: [],
