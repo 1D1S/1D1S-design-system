@@ -1,6 +1,6 @@
 {
   "name": "@1d1s/design-system",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "type": "module",
   "main": "dist/index.es.js",
   "module": "dist/index.es.js",
