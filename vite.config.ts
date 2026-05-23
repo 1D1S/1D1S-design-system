@@ -6,39 +6,59 @@ import dts from 'vite-plugin-dts'
 
 export default defineConfig({
   plugins: [
-    react(), 
+    react(),
     tailwindcss(),
-    dts({ 
+    dts({
       insertTypesEntry: true,
       include: ['src'],
+      exclude: [
+        'src/**/*.stories.*',
+        'src/**/*.test.*',
+        'src/**/*.spec.*',
+      ],
     })
   ],
+  esbuild: {
+    legalComments: 'none',
+  },
   build: {
+    sourcemap: false,
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        passes: 3,
+        ecma: 2020,
+        pure_getters: true,
+        unsafe_arrows: true,
+        unsafe_methods: true,
+        booleans_as_integers: false,
+        drop_console: false,
+      },
+      mangle: {
+        toplevel: true,
+      },
+      format: {
+        comments: false,
+      },
+    },
+    cssCodeSplit: false,
+    reportCompressedSize: true,
     lib: {
       entry: path.resolve(__dirname, 'src/index.ts'),
       name: 'OdosDesignSystem',
-      formats: ['es', 'umd'],
-      fileName: (format) => `index.${format}.js`,
+      formats: ['es'],
+      fileName: () => 'index.es.js',
     },
     rollupOptions: {
       external: [
-        'react', 
-        'react-dom', 
+        'react',
+        'react-dom',
         'react/jsx-runtime',
-        /^next/,
-        'lucide-react'
+        /^next($|\/)/,
+        'lucide-react',
       ],
       output: {
-        globals: {
-          react: 'React',
-          'react-dom': 'ReactDOM',
-          'react/jsx-runtime': 'jsxRuntime',
-          next: 'Next',
-          'next/navigation': 'nextNavigation',
-          'next/image': 'nextImage',
-          'next/link': 'nextLink',
-          'lucide-react': 'LucideReact',
-        },
+        compact: true,
       },
     },
   },
