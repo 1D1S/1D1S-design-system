@@ -45,13 +45,13 @@ function resolveWidth(width?: number | string): string {
 
 function getDayToneClass(dayTone: DayTone = "default"): string {
   if (dayTone === "strong") return "text-gray-900 font-extrabold";
-  if (dayTone === "accent") return "text-main-800 font-extrabold";
+  if (dayTone === "accent") return "text-brand font-extrabold";
   if (dayTone === "muted") return "text-gray-400 font-medium";
   return "text-gray-700 font-medium";
 }
 
 function getBarToneClass(barTone: BarTone = "main"): string {
-  return barTone === "soft" ? "bg-main-600/50" : "bg-main-800";
+  return barTone === "soft" ? "bg-main-600/50" : "bg-brand";
 }
 
 /**
@@ -109,7 +109,7 @@ export function ScheduleCalendar({
                       className={cn(
                         "flex h-full flex-col gap-1 p-1 transition-colors duration-200 sm:gap-2 sm:p-2",
                         cell.muted && "bg-gray-50",
-                        cell.highlighted && "bg-main-200/70 ring-1 ring-inset ring-main-400"
+                        cell.highlighted && "bg-brand-soft/70 ring-1 ring-inset ring-main-400"
                       )}
                       style={{ minHeight: `${cellMinHeight}px` }}
                     >
@@ -156,7 +156,7 @@ export function ScheduleCalendar({
 
                           {typeof cell.participantCount === "number" && cell.participantCount >= 2 ? (
                             <div
-                              className="mt-auto inline-flex w-fit items-center gap-0.5 rounded-full bg-main-200 px-1.5 py-0.5 text-main-800 sm:gap-1 sm:px-2"
+                              className="mt-auto inline-flex w-fit items-center gap-0.5 rounded-full bg-brand-soft px-1.5 py-0.5 text-brand sm:gap-1 sm:px-2"
                               aria-label={`${cell.participantCount}명 작성`}
                             >
                               <Person className="size-2.5 sm:size-3" strokeWidth={2.4} />

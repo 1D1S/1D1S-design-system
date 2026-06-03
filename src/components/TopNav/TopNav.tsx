@@ -82,7 +82,7 @@ export function TopNav({
                   "rounded-2 px-3.5 py-2 text-sm transition-colors",
                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/30",
                   active
-                    ? "bg-main-100 font-bold text-brand"
+                    ? "bg-brand-softer font-bold text-brand"
                     : "font-medium text-gray-700 hover:bg-gray-100",
                   compact && "px-2.5 py-1.5",
                 )}
@@ -131,7 +131,7 @@ export function TopNavBrand({
       <div
         onClick={onLogoClick}
         className={cn(
-          "flex h-[30px] w-[30px] shrink-0 items-center justify-center rounded-[9px]",
+          "flex h-[30px] w-[30px] shrink-0 items-center justify-center rounded-2",
           "bg-[linear-gradient(135deg,#ff7043,#ff5722)] text-xs font-extrabold text-white",
           "shadow-warm",
           onLogoClick && "cursor-pointer",

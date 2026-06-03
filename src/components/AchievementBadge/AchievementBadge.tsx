@@ -10,7 +10,7 @@ const badgeVariants = cva(
     variants: {
       tone: {
         main: "bg-main-300",
-        peach: "bg-main-200",
+        peach: "bg-brand-soft",
         mint: "bg-mint-200",
         blue: "bg-blue-200",
         green: "bg-green-200",
@@ -28,13 +28,13 @@ const badgeVariants = cva(
     },
     compoundVariants: [
       // vertical: square-ish padded card
-      { layout: "vertical", size: "sm", class: "min-w-[72px] rounded-[10px] px-3 py-3 gap-1" },
+      { layout: "vertical", size: "sm", class: "min-w-[72px] rounded-2.5 px-3 py-3 gap-1" },
       { layout: "vertical", size: "md", class: "min-w-[88px] rounded-3 px-3 py-3.5 gap-1.5" },
-      { layout: "vertical", size: "lg", class: "min-w-[112px] rounded-[14px] px-4 py-5 gap-2" },
+      { layout: "vertical", size: "lg", class: "min-w-[112px] rounded-4 px-4 py-5 gap-2" },
       // horizontal: pill-ish
-      { layout: "horizontal", size: "sm", class: "rounded-[10px] px-3.5 py-2.5" },
+      { layout: "horizontal", size: "sm", class: "rounded-2.5 px-3.5 py-2.5" },
       { layout: "horizontal", size: "md", class: "rounded-3 px-4 py-3" },
-      { layout: "horizontal", size: "lg", class: "rounded-[14px] px-5 py-3.5" },
+      { layout: "horizontal", size: "lg", class: "rounded-4 px-5 py-3.5" },
     ],
     defaultVariants: {
       tone: "main",

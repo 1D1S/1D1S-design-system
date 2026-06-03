@@ -72,10 +72,10 @@ export function GoalAddList({
       {goalList.map((goal, index) => (
         <div
           key={`${goal}-${index}`}
-          className="flex h-10 w-full items-center justify-between rounded-3 border border-gray-300 bg-white px-5"
+          className="flex h-10 w-full items-center justify-between rounded-3 border border-gray-200 bg-white px-5"
         >
           <Text
-            size="body2"
+            size="caption2"
             weight="regular"
             className="line-clamp-1 text-gray-900"
           >

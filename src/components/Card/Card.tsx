@@ -11,7 +11,7 @@ const cardVariants = cva(
       radius: {
         sm: "rounded-2",
         md: "rounded-3",
-        lg: "rounded-[14px]",
+        lg: "rounded-4",
         xl: "rounded-4",
       },
       interactive: {

@@ -39,7 +39,7 @@ export function StreakHero({
     <div
       data-slot="streak-hero"
       className={cn(
-        "min-w-[200px] rounded-4 border border-main-200 p-4",
+        "min-w-[200px] rounded-4 border border-brand-soft p-4",
         "bg-[linear-gradient(135deg,#fff8f5,#ffe9e0)]",
         className,
       )}

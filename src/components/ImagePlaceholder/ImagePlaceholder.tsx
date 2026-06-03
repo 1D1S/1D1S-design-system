@@ -26,7 +26,7 @@ export function ImagePlaceholder({
   return (
     <div
       className={cn(
-        'flex items-center justify-center bg-main-200',
+        'flex items-center justify-center bg-brand-soft',
         className
       )}
     >

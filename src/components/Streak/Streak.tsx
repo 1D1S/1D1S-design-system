@@ -60,7 +60,7 @@ export function Streak({
     if (count === 1) return "bg-main-300";
     if (count === 2) return "bg-main-500";
     if (count === 3) return "bg-main-700";
-    return "bg-main-800";
+    return "bg-brand";
   };
 
   return (

@@ -12,7 +12,7 @@ const tonePalettes: Record<HeatmapTone, [string, string, string, string, string]
     "var(--main-300)",
     "var(--main-500)",
     "var(--main-700)",
-    "var(--main-800)",
+    "var(--brand)",
   ],
   mint: [
     "var(--gray-100)",

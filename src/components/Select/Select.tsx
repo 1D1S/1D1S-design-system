@@ -44,8 +44,8 @@ function SelectTrigger({
         "hover:border-gray-400",
         "data-[placeholder]:text-gray-500 focus-visible:ring-3 focus-visible:ring-main-300/60",
         isSmall
-          ? "h-10 min-w-[150px] rounded-3 border-gray-300 px-3.5"
-          : "h-10 min-w-[150px] rounded-3 border-gray-300 px-4",
+          ? "h-10 min-w-[150px] rounded-3 border-gray-200 px-3.5"
+          : "h-10 min-w-[150px] rounded-3 border-gray-200 px-4",
         className,
       )}
       {...props}
@@ -94,7 +94,7 @@ function SelectItem({
     >
       <span className="absolute right-3 flex size-4 items-center justify-center">
         <SelectPrimitive.ItemIndicator>
-          <Check className="size-4 text-main-800" />
+          <Check className="size-4 text-brand" />
         </SelectPrimitive.ItemIndicator>
       </span>
       <SelectPrimitive.ItemText>
@@ -199,7 +199,7 @@ function SelectContent({
           "data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
           position === "popper" &&
             "data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1",
-          "rounded-[24px] border border-gray-300 bg-white",
+          "rounded-4 border border-gray-200 bg-white",
           className,
         )}
         position={position}

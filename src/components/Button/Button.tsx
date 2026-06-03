@@ -16,7 +16,7 @@ const buttonVariants = cva(baseClasses, {
       secondary:
         "bg-white text-gray-800 border-gray-200 hover:bg-gray-50 hover:border-gray-300",
       soft:
-        "bg-main-200 text-brand border-main-300 hover:bg-main-300/70",
+        "bg-brand-soft text-brand border-main-300 hover:bg-main-300/70",
       ghost:
         "bg-transparent text-gray-700 border-transparent hover:bg-gray-100",
       danger:

@@ -4,12 +4,16 @@ import * as React from "react";
 import { cn } from "../../lib/utils";
 import { Text } from "../Text";
 
+export type TextAreaSize = "sm" | "md" | "lg";
+
 export interface TextAreaProps
   extends Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>, "size"> {
   label?: React.ReactNode;
   labelHint?: React.ReactNode;
   helper?: React.ReactNode;
   error?: React.ReactNode;
+  /** 사이즈 — `sm`·`md`(default)·`lg`. 글자 크기·패딩·최소 높이 조절 */
+  size?: TextAreaSize;
   /** 우하단 글자수 카운터 표시 */
   count?: boolean;
   /** maxLength — count와 함께 쓰면 `n/max` 표시 */
@@ -17,6 +21,13 @@ export interface TextAreaProps
   /** 부모 너비 100% (default `true`). false면 380px */
   full?: boolean;
 }
+
+/** 사이즈별 글자 크기·패딩·최소 높이 (TextField 사이즈 스케일과 정렬) */
+const SIZE_CLASS: Record<TextAreaSize, string> = {
+  sm: "min-h-[64px] px-3 py-2.5 text-xs",
+  md: "min-h-[80px] px-3.5 py-3 text-sm",
+  lg: "min-h-[96px] px-4 py-3.5 text-base",
+};
 
 /**
  * TextArea
@@ -37,6 +48,7 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
       error,
       count,
       max,
+      size = "md",
       full = true,
       rows = 4,
       defaultValue,
@@ -98,7 +110,8 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
             disabled={disabled}
             aria-invalid={error ? true : undefined}
             className={cn(
-              "w-full resize-y rounded-[10px] border border-gray-200 bg-white px-3.5 py-3 text-sm leading-[1.6] text-gray-900",
+              "w-full resize-y rounded-2.5 border border-gray-200 bg-white leading-[1.6] text-gray-900",
+              SIZE_CLASS[size],
               "outline-none transition-[border-color,box-shadow,background-color] duration-150",
               "placeholder:text-gray-500 hover:border-gray-300",
               "focus-visible:border-brand focus-visible:shadow-[0_0_0_3px_rgba(255,87,34,0.12)]",

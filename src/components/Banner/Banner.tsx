@@ -6,7 +6,7 @@ import { cn } from "../../lib/utils";
 import { StatusBadge, type StatusBadgeKind } from "../StatusBadge";
 
 const bannerVariants = cva(
-  "relative overflow-hidden rounded-[18px] p-6 text-white",
+  "relative overflow-hidden rounded-4 p-6 text-white",
   {
     variants: {
       tone: {
@@ -19,7 +19,7 @@ const bannerVariants = cva(
       },
       size: {
         sm: "p-4 rounded-3",
-        md: "p-6 rounded-[18px]",
+        md: "p-6 rounded-4",
         lg: "p-8 rounded-4",
       },
     },

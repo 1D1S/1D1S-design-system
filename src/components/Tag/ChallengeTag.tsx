@@ -16,7 +16,7 @@ export interface ChallengeTagProps
 /**
  * ChallengeTag
  * 일지 / 상세 화면에서 챌린지 출처를 표시하는 알약형 태그.
- * Flag 아이콘 + brand-soft 컬러 (main-100 bg + main-200 border + brand text).
+ * Flag 아이콘 + brand-soft 컬러 (brand-softer bg + brand-soft border + brand text).
  *
  * @example
  * ```tsx
@@ -41,7 +41,7 @@ export function ChallengeTag({
     <span
       data-slot="challenge-tag"
       className={cn(
-        "inline-flex items-center rounded-full border border-main-200 bg-main-100 font-bold text-brand",
+        "inline-flex items-center rounded-full border border-brand-soft bg-brand-softer font-bold text-brand",
         sizeClass,
         className,
       )}

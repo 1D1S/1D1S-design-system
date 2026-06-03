@@ -285,7 +285,7 @@ function CommentItem({
               <button
                 type="button"
                 className={cn(
-                  "rounded-2 bg-main-800 px-2.5 py-1.5 text-white transition-colors hover:bg-main-700",
+                  "rounded-2 bg-brand px-2.5 py-1.5 text-white transition-colors hover:bg-main-700",
                   !draftReplyContent.trim() &&
                     "cursor-not-allowed bg-main-400 hover:bg-main-400",
                 )}

@@ -49,7 +49,7 @@ function BottomSheetContent({
       <DialogPrimitive.Content
         className={cn(
           "fixed z-50 bg-white",
-          "rounded-[18px] shadow-[0_-8px_32px_rgba(0,0,0,0.14)]",
+          "rounded-4 shadow-[0_-8px_32px_rgba(0,0,0,0.14)]",
           "px-[18px] pt-2.5 pb-4",
           "max-h-[85dvh] overflow-y-auto",
           "data-[state=open]:animate-in data-[state=closed]:animate-out",

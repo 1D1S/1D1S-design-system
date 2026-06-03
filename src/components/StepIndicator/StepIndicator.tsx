@@ -87,7 +87,7 @@ export function StepIndicator({
           >
             <div className="h-0.5 w-full bg-gray-200" />
             <div
-              className="absolute top-0 left-0 h-0.5 bg-main-800 transition-all duration-300 ease-in-out"
+              className="absolute top-0 left-0 h-0.5 bg-brand transition-all duration-300 ease-in-out"
               style={{ width: `${progressPercent}%` }}
             />
           </div>
@@ -105,8 +105,8 @@ export function StepIndicator({
                   className={cn(
                     "flex items-center justify-center rounded-full border-2 bg-white transition-colors duration-200",
                     config.circle,
-                    isCompleted && "border-main-800 bg-main-800 text-white",
-                    isCurrent && "border-main-800 bg-main-800 text-white ring-4 ring-main-300",
+                    isCompleted && "border-brand bg-brand text-white",
+                    isCurrent && "border-brand bg-brand text-white ring-4 ring-main-300",
                     !isCompleted && !isCurrent && "border-gray-300 text-gray-600"
                   )}
                   aria-current={isCurrent ? "step" : undefined}
@@ -131,7 +131,7 @@ export function StepIndicator({
                     "text-center leading-tight",
                     config.labelMargin,
                     isCompleted && "text-gray-900",
-                    isCurrent && "text-main-800",
+                    isCurrent && "text-brand",
                     !isCompleted && !isCurrent && "text-gray-600"
                   )}
                 >

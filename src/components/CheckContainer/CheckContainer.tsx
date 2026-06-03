@@ -72,13 +72,14 @@ export function CheckContainer({
       disabled={disabled}
       onClick={handleClick}
       className={cn(
-        "relative overflow-hidden rounded-[28px] border-2 transition-all duration-200 ease-out active:scale-95",
+        "relative overflow-hidden rounded-4 border-2 transition-all duration-200 ease-out active:scale-95",
         "flex flex-col items-center justify-center",
         !hasCustomChildren && "gap-4",
         isChecked
-          ? "border-main-800 bg-main-200 text-main-800"
-          : "border-gray-300 bg-white text-gray-500",
-        !disabled && "hover:cursor-pointer" && (isChecked ? "hover:bg-main-300" : "hover:bg-gray-100"),
+          ? "border-brand bg-brand-soft text-brand"
+          : "border-gray-200 bg-white text-gray-500",
+        !disabled && "hover:cursor-pointer",
+        !disabled && (isChecked ? "hover:bg-main-300" : "hover:bg-gray-100"),
         disabled && "cursor-not-allowed opacity-60 active:scale-100",
         className,
       )}
@@ -94,8 +95,8 @@ export function CheckContainer({
           className={cn(
             "absolute top-4 right-4 flex w-[clamp(18px,8%,32px)] aspect-square shrink-0 items-center justify-center rounded-full border-2 transition-colors",
             isChecked
-              ? "border-main-800 bg-main-800 text-white"
-              : "border-gray-300 bg-white text-transparent",
+              ? "border-brand bg-brand text-white"
+              : "border-gray-200 bg-white text-transparent",
           )}
         >
           <Check className="h-[46%] w-[46%]" strokeWidth={4.4} />
@@ -117,7 +118,7 @@ export function CheckContainer({
               weight="bold"
               className={cn(
                 "text-inherit",
-                isChecked ? "text-main-800" : "text-gray-600",
+                isChecked ? "text-brand" : "text-gray-600",
               )}
             >
               {label}

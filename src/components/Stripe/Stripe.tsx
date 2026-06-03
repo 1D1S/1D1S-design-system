@@ -14,7 +14,7 @@ export type StripeTone =
 
 const toneColor: Record<StripeTone, string> = {
   peach: "var(--main-300)",
-  cream: "var(--main-200)",
+  cream: "var(--brand-soft)",
   mint: "var(--mint-200)",
   blue: "var(--blue-200)",
   sky: "var(--blue-300)",
@@ -35,7 +35,7 @@ export function stripeBackground(color: string): string {
 
 export interface StripeProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, "children"> {
-  /** 줄무늬 컬러 — 프리셋 또는 CSS color (default `cream` = main-200) */
+  /** 줄무늬 컬러 — 프리셋 또는 CSS color (default `cream` = brand-soft) */
   tone?: StripeTone | string;
   /** 가운데 라벨 — 작은 흰색 알약형 박스에 표시. 비우면 패턴만 */
   label?: React.ReactNode;
@@ -86,7 +86,7 @@ export function Stripe({
       {...props}
     >
       {label !== undefined && label !== "" ? (
-        <span className="rounded-[3px] bg-white/70 px-1.5 py-0.5">{label}</span>
+        <span className="rounded-0.5 bg-white/70 px-1.5 py-0.5">{label}</span>
       ) : null}
     </div>
   );

@@ -28,7 +28,7 @@ export function ProgressRing({
         cy={baseSize / 2}
         r={radius}
         fill="none"
-        className="stroke-main-800"
+        className="stroke-brand"
         strokeWidth={strokeWidth}
         strokeDasharray={circumference}
         strokeDashoffset={dashOffset}

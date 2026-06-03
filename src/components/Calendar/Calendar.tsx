@@ -38,21 +38,21 @@ function Calendar({
           'relative h-9 w-9 p-0 text-center text-sm',
           'focus-within:relative focus-within:z-20',
           isRangeMode
-            ? '[&:has(.day-range-middle)]:bg-main-200/70 [&:has(.day-range-start)]:bg-main-200/70 [&:has(.day-range-end)]:bg-main-200/70 [&:has(.day-range-start)]:rounded-l-2 [&:has(.day-range-end)]:rounded-r-2'
+            ? '[&:has(.day-range-middle)]:bg-brand-soft/70 [&:has(.day-range-start)]:bg-brand-soft/70 [&:has(.day-range-end)]:bg-brand-soft/70 [&:has(.day-range-start)]:rounded-l-2 [&:has(.day-range-end)]:rounded-r-2'
             : '[&:has([aria-selected])]:rounded-2'
         ),
         day: 'inline-flex h-9 w-9 items-center justify-center rounded-2 border border-transparent p-0 text-sm font-medium text-gray-800 transition-colors duration-200 aria-selected:opacity-100 hover:bg-gray-100 hover:text-gray-900 hover:cursor-pointer focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-main-300/60',
         day_range_start:
-          'day-range-start aria-selected:rounded-2 aria-selected:bg-main-800 aria-selected:text-white',
+          'day-range-start aria-selected:rounded-2 aria-selected:bg-brand aria-selected:text-white',
         day_range_end:
-          'day-range-end aria-selected:rounded-2 aria-selected:bg-main-800 aria-selected:text-white',
+          'day-range-end aria-selected:rounded-2 aria-selected:bg-brand aria-selected:text-white',
         day_selected:
-          'bg-main-800 text-white hover:bg-main-700 hover:text-white focus:bg-main-700 focus:text-white',
-        day_today: 'text-main-800 font-extrabold',
+          'bg-brand text-white hover:bg-main-700 hover:text-white focus:bg-main-700 focus:text-white',
+        day_today: 'text-brand font-extrabold',
         day_outside: 'day-outside text-gray-400 aria-selected:text-gray-500',
         day_disabled: 'cursor-not-allowed text-gray-300 opacity-40 hover:bg-transparent hover:text-gray-300',
         day_range_middle:
-          'day-range-middle aria-selected:rounded-none aria-selected:bg-main-200 aria-selected:text-main-800',
+          'day-range-middle aria-selected:rounded-none aria-selected:bg-brand-soft aria-selected:text-brand',
         day_hidden: 'invisible',
         ...classNames,
       }}

@@ -7,7 +7,7 @@ const tagVariants = cva(
     variants: {
       tone: {
         gray: "bg-gray-100 text-gray-700",
-        brand: "bg-main-200 text-brand",
+        brand: "bg-brand-soft text-brand",
         mint: "bg-mint-200 text-mint-900",
         blue: "bg-blue-200 text-blue-600",
         red: "bg-red-300 text-red-700",

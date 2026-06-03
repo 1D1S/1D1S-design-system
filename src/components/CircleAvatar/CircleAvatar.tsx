@@ -21,7 +21,7 @@ interface CircleAvatarProps {
   size?: CircleAvatarSize | number;
   /** 이미지가 없을 때 보여줄 줄무늬 톤 — 프리셋 또는 CSS color 문자열 */
   tone?: CircleAvatarTone | string;
-  /** 외곽선 (main-200 컬러). size>40일 때 3px, 아니면 2px */
+  /** 외곽선 (brand-soft 컬러). size>40일 때 3px, 아니면 2px */
   ring?: boolean;
   /** 이미지 URL — 비어있거나 로드 실패 시 톤 Stripe 패턴으로 fallback */
   imageUrl?: string;
@@ -38,7 +38,7 @@ interface CircleAvatarProps {
  *
  * @param size `xs`(24)·`sm`(32)·`md`(40, default)·`lg`(56)·`xl`(76)·또는 px 숫자
  * @param tone Stripe 컬러 — `peach`(default)·`cream`·`mint`·`blue`·`sky`·`rose`·`gray`·또는 CSS color
- * @param ring main-200 외곽선 (size>40 → 3px, 이하 → 2px)
+ * @param ring brand-soft 외곽선 (size>40 → 3px, 이하 → 2px)
  *
  * @example
  * ```tsx
@@ -78,7 +78,7 @@ export function CircleAvatar({
       style={{
         width: px,
         height: px,
-        ...(ring ? { border: `${ringWidth}px solid var(--main-200)` } : null),
+        ...(ring ? { border: `${ringWidth}px solid var(--brand-soft)` } : null),
       }}
     >
       {showImage ? (

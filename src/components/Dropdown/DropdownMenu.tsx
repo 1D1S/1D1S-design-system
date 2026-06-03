@@ -51,7 +51,7 @@ export function DropdownMenu({
       data-slot="dropdown-menu"
       role="listbox"
       className={cn(
-        "rounded-[10px] border border-gray-200 bg-white p-1.5 shadow-lg",
+        "rounded-2.5 border border-gray-200 bg-white p-1.5 shadow-lg",
         className,
       )}
       style={{ width, ...style }}
@@ -67,9 +67,9 @@ export function DropdownMenu({
             aria-disabled={it.disabled || undefined}
             onClick={() => !it.disabled && onSelect?.(it.value)}
             className={cn(
-              "flex cursor-pointer items-center justify-between rounded-[6px] px-3 py-2 text-sm transition-colors",
+              "flex cursor-pointer items-center justify-between rounded-1.5 px-3 py-2 text-sm transition-colors",
               selected
-                ? "bg-main-100 font-bold text-brand"
+                ? "bg-brand-softer font-bold text-brand"
                 : "font-medium text-gray-800 hover:bg-gray-50",
               it.disabled && "cursor-not-allowed opacity-[0.45]",
             )}

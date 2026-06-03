@@ -7,7 +7,7 @@ import { Icon, type IconName } from "../Icons/Icon";
 import { Text } from "../Text";
 
 const toastIconStyles = {
-  brand: { bg: "bg-main-200", color: "text-brand" },
+  brand: { bg: "bg-brand-soft", color: "text-brand" },
   success: { bg: "bg-mint-200", color: "text-mint-900" },
   danger: { bg: "bg-red-300", color: "text-red-700" },
   info: { bg: "bg-blue-200", color: "text-blue-600" },

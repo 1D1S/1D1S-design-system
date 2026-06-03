@@ -38,7 +38,7 @@ const PickerTrigger = React.forwardRef<HTMLButtonElement, PickerTriggerProps>(
         ref={ref}
         type={type}
         className={cn(
-          "group flex h-10 w-full items-center justify-between gap-3 rounded-3 border border-gray-300 bg-white px-4",
+          "group flex h-10 w-full items-center justify-between gap-3 rounded-3 border border-gray-200 bg-white px-4",
           "outline-none transition-all duration-200",
           "data-[state=open]:border-main-500 hover:border-gray-400 focus-visible:ring-3 focus-visible:ring-main-300/60",
           className

@@ -34,7 +34,7 @@ export function StreakChip({
     <span
       data-slot="streak-chip"
       className={cn(
-        "inline-flex items-center gap-1 rounded-full border border-main-200 bg-main-100",
+        "inline-flex items-center gap-1 rounded-full border border-brand-soft bg-brand-softer",
         "px-3 py-1.5 text-sm font-extrabold text-brand tabular-nums",
         className,
       )}

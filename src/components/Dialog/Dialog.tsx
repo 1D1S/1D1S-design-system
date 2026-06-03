@@ -176,7 +176,7 @@ function DialogDescription({
 // ─── Confirm Dialog ──────────────────────────────────────────────────
 
 const confirmToneStyles = {
-  brand: { iconBg: "bg-main-200", iconColor: "text-brand", buttonVariant: "primary" as const },
+  brand: { iconBg: "bg-brand-soft", iconColor: "text-brand", buttonVariant: "primary" as const },
   danger: { iconBg: "bg-red-300/40", iconColor: "text-red-600", buttonVariant: "danger" as const },
   mint: { iconBg: "bg-mint-200", iconColor: "text-mint-900", buttonVariant: "primary" as const },
 };
@@ -244,7 +244,7 @@ function ConfirmDialog({
         <DialogPrimitive.Content
           className={cn(
             "fixed top-1/2 left-1/2 z-50 -translate-x-1/2 -translate-y-1/2",
-            "w-[360px] max-w-[92vw] rounded-[18px] bg-white px-[22px] pt-6 pb-[18px] text-center",
+            "w-[360px] max-w-[92vw] rounded-4 bg-white px-[22px] pt-6 pb-[18px] text-center",
             "shadow-[0_24px_64px_rgba(0,0,0,0.18)]",
             "data-[state=open]:animate-in data-[state=closed]:animate-out",
             "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
@@ -280,7 +280,7 @@ function ConfirmDialog({
             <DialogClose asChild>
               <Button
                 variant="secondary"
-                className="h-11 flex-1 rounded-[10px]"
+                className="h-11 flex-1 rounded-2.5"
                 onClick={onCancel}
               >
                 {cancelLabel}
@@ -289,7 +289,7 @@ function ConfirmDialog({
             <DialogClose asChild>
               <Button
                 variant={t.buttonVariant}
-                className="h-11 flex-1 rounded-[10px]"
+                className="h-11 flex-1 rounded-2.5"
                 onClick={onConfirm}
               >
                 {confirmLabel}

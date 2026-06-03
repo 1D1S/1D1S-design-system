@@ -50,6 +50,57 @@ export const Empty: Story = {
   },
 };
 
+export const Sizes: Story = {
+  render: () => {
+    const [small, setSmall] = useState<string[]>(["wake-up"]);
+    const [medium, setMedium] = useState<string[]>(["wake-up"]);
+    const [large, setLarge] = useState<string[]>(["wake-up"]);
+
+    const labelStyle = {
+      fontSize: 12,
+      fontWeight: 600,
+      color: "#6b7280",
+    } as const;
+    const colStyle = {
+      display: "flex",
+      flexDirection: "column",
+      gap: "0.375rem",
+    } as const;
+
+    return (
+      <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+        <div style={colStyle}>
+          <span style={labelStyle}>sm</span>
+          <CheckList
+            size="sm"
+            options={options}
+            value={small}
+            onValueChange={setSmall}
+          />
+        </div>
+        <div style={colStyle}>
+          <span style={labelStyle}>md (default)</span>
+          <CheckList
+            size="md"
+            options={options}
+            value={medium}
+            onValueChange={setMedium}
+          />
+        </div>
+        <div style={colStyle}>
+          <span style={labelStyle}>lg</span>
+          <CheckList
+            size="lg"
+            options={options}
+            value={large}
+            onValueChange={setLarge}
+          />
+        </div>
+      </div>
+    );
+  },
+};
+
 export const Disabled: Story = {
   args: {
     options: options,

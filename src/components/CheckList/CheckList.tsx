@@ -5,6 +5,8 @@ import { cn } from "../../lib/utils";
 import { Text } from "../Text";
 import { Checkbox } from "../Checkbox";
 
+export type CheckListSize = "sm" | "md" | "lg";
+
 export interface CheckListOption {
   id: string;
   label: React.ReactNode;
@@ -18,6 +20,8 @@ export interface CheckListProps {
   value: string[];
   /** 선택 변경 시 호출되는 콜백 */
   onValueChange: (value: string[]) => void;
+  /** 사이즈 — `sm`·`md`(default)·`lg` */
+  size?: CheckListSize;
   /** 추가 클래스 */
   className?: string;
   /** 읽기 전용 여부 (시각 변화 없이 토글만 비활성화) */
@@ -25,6 +29,16 @@ export interface CheckListProps {
   /** 전체 비활성화 여부 */
   disabled?: boolean;
 }
+
+/** 사이즈별 행 패딩·간격 / 체크박스 크기 / 라벨 텍스트 사이즈 */
+const SIZE_CONFIG: Record<
+  CheckListSize,
+  { row: string; checkbox: string; label: "caption1" | "body2" | "body1" }
+> = {
+  sm: { row: "gap-3 px-3 py-2.5", checkbox: "h-4 w-4", label: "caption1" },
+  md: { row: "gap-3.5 px-4 py-3.5", checkbox: "h-[18px] w-[18px]", label: "body2" },
+  lg: { row: "gap-4 px-4 py-4", checkbox: "h-5 w-5", label: "body1" },
+};
 
 /**
  * CheckList
@@ -46,11 +60,13 @@ export function CheckList({
   options,
   value,
   onValueChange,
+  size = "md",
   className,
   readOnly = false,
   disabled = false,
 }: CheckListProps): React.ReactElement {
   const baseId = React.useId();
+  const sizeConfig = SIZE_CONFIG[size];
 
   const handleToggle = (id: string, nextChecked: boolean): void => {
     if (nextChecked) {
@@ -85,7 +101,8 @@ export function CheckList({
               event.preventDefault();
             }}
             className={cn(
-              "flex w-full items-center gap-4 px-4 py-4 text-left transition-colors",
+              "flex w-full items-center text-left transition-colors",
+              sizeConfig.row,
               index > 0 && "border-t border-gray-200",
               !isInteractionBlocked && "cursor-pointer hover:bg-gray-100/70",
               isDisabled && "cursor-not-allowed",
@@ -101,15 +118,16 @@ export function CheckList({
                 handleToggle(option.id, checkedState === true);
               }}
               className={cn(
-                "h-5 w-5 rounded-1.5",
-                "data-[state=checked]:border-main-800 data-[state=checked]:bg-main-800",
+                sizeConfig.checkbox,
+                "rounded-1.5",
+                "data-[state=checked]:border-brand data-[state=checked]:bg-brand",
                 isReadOnly && "cursor-default hover:cursor-not-allowed"
               )}
             />
 
             {typeof option.label === "string" || typeof option.label === "number" ? (
               <Text
-                size="body1"
+                size={sizeConfig.label}
                 weight="medium"
                 className={cn(
                   "flex-1 transition-colors",

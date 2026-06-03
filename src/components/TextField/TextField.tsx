@@ -36,7 +36,7 @@ const fieldVariants = cva(
       hasSuffix: { true: "", false: "" },
       multiline: {
         false: "",
-        true: "h-auto min-h-[80px] resize-y align-top leading-[1.6] rounded-[10px]",
+        true: "h-auto min-h-[80px] resize-y align-top leading-[1.6] rounded-2.5",
       },
       // controlled visual state — overrides automatic states
       state: {

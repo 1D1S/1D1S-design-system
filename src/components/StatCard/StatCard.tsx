@@ -10,7 +10,7 @@ const statCardVariants = cva(
     variants: {
       tone: {
         white: "bg-white",
-        brand: "bg-main-100 border-main-200",
+        brand: "bg-brand-softer border-brand-soft",
         mint: "bg-mint-200/40 border-mint-200",
         blue: "bg-blue-200/40 border-blue-200",
         gray: "bg-gray-50",
