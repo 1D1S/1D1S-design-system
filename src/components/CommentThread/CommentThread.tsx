@@ -196,7 +196,7 @@ function CommentItem({
         <div className="min-w-0 flex-1">
           <div className="flex items-baseline justify-between gap-2">
             <Text
-              size="caption1"
+              size="caption3"
               weight="bold"
               className="truncate text-gray-900"
             >
@@ -204,7 +204,7 @@ function CommentItem({
             </Text>
             <div className="flex shrink-0 items-center gap-1">
               <Text
-                size="caption2"
+                size="caption5"
                 weight="regular"
                 className="text-gray-500"
               >
@@ -220,7 +220,7 @@ function CommentItem({
           </div>
           <Text
             as="p"
-            size="caption1"
+            size="caption3"
             weight="regular"
             className="mt-1 leading-[1.5] break-words whitespace-pre-wrap text-gray-700"
           >
@@ -271,7 +271,7 @@ function CommentItem({
                 onChange={(event) => onReplyChange(event.target.value)}
                 placeholder={replyPlaceholder}
                 rows={1}
-                className="min-h-[36px] flex-1 text-[12px]"
+                className="min-h-[36px] flex-1 text-xs"
               />
               <button
                 type="button"

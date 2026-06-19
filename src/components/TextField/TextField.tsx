@@ -19,18 +19,18 @@ const fieldVariants = cva(
     "placeholder:text-gray-500",
     // automatic states (used when `state` prop omitted)
     "hover:border-gray-300",
-    "focus-visible:border-brand focus-visible:shadow-[0_0_0_3px_rgba(255,87,34,0.12)]",
+    "focus-visible:border-brand focus-visible:shadow-focus",
     "disabled:cursor-not-allowed disabled:border-gray-200 disabled:bg-gray-100 disabled:text-gray-400",
-    "aria-[invalid=true]:border-red-500 aria-[invalid=true]:shadow-[0_0_0_3px_rgba(255,82,82,0.12)]",
+    "aria-[invalid=true]:border-red-500 aria-[invalid=true]:shadow-focus-error",
   ],
   {
     variants: {
       size: {
-        xs: "h-[26px] text-[11px]",
+        xs: "h-[26px] text-2xs",
         sm: "h-8 text-xs",
         md: "h-[38px] text-sm",
         lg: "h-[46px] text-base",
-        xl: "h-[54px] text-[15px]",
+        xl: "h-[54px] text-lg",
       },
       hasIconLeft: { true: "", false: "" },
       hasSuffix: { true: "", false: "" },
@@ -42,10 +42,10 @@ const fieldVariants = cva(
       state: {
         default: "",
         focus:
-          "border-brand shadow-[0_0_0_3px_rgba(255,87,34,0.12)]",
+          "border-brand shadow-focus",
         filled: "border-gray-300",
         error:
-          "border-red-500 shadow-[0_0_0_3px_rgba(255,82,82,0.12)]",
+          "border-red-500 shadow-focus-error",
         disabled:
           "cursor-not-allowed border-gray-200 bg-gray-100 text-gray-400",
       },
@@ -56,21 +56,21 @@ const fieldVariants = cva(
       { multiline: false, hasIconLeft: false, hasSuffix: false, size: "sm", class: "px-3" },
       { multiline: false, hasIconLeft: false, hasSuffix: false, size: "md", class: "px-3.5" },
       { multiline: false, hasIconLeft: false, hasSuffix: false, size: "lg", class: "px-4" },
-      { multiline: false, hasIconLeft: false, hasSuffix: false, size: "xl", class: "px-[18px]" },
+      { multiline: false, hasIconLeft: false, hasSuffix: false, size: "xl", class: "px-5" },
 
       // — iconLeft only — fixed 36px left gutter + size-specific right
       { multiline: false, hasIconLeft: true, hasSuffix: false, size: "xs", class: "pl-9 pr-2.5" },
       { multiline: false, hasIconLeft: true, hasSuffix: false, size: "sm", class: "pl-9 pr-3" },
       { multiline: false, hasIconLeft: true, hasSuffix: false, size: "md", class: "pl-9 pr-3.5" },
       { multiline: false, hasIconLeft: true, hasSuffix: false, size: "lg", class: "pl-9 pr-4" },
-      { multiline: false, hasIconLeft: true, hasSuffix: false, size: "xl", class: "pl-9 pr-[18px]" },
+      { multiline: false, hasIconLeft: true, hasSuffix: false, size: "xl", class: "pl-9 pr-5" },
 
       // — suffix only — size-specific left + fixed 36px right gutter
       { multiline: false, hasIconLeft: false, hasSuffix: true, size: "xs", class: "pl-2.5 pr-9" },
       { multiline: false, hasIconLeft: false, hasSuffix: true, size: "sm", class: "pl-3 pr-9" },
       { multiline: false, hasIconLeft: false, hasSuffix: true, size: "md", class: "pl-3.5 pr-9" },
       { multiline: false, hasIconLeft: false, hasSuffix: true, size: "lg", class: "pl-4 pr-9" },
-      { multiline: false, hasIconLeft: false, hasSuffix: true, size: "xl", class: "pl-[18px] pr-9" },
+      { multiline: false, hasIconLeft: false, hasSuffix: true, size: "xl", class: "pl-5 pr-9" },
 
       // — both — both gutters fixed
       { multiline: false, hasIconLeft: true, hasSuffix: true, class: "pl-9 pr-9" },
@@ -80,7 +80,7 @@ const fieldVariants = cva(
       { multiline: true, size: "sm", class: "p-3" },
       { multiline: true, size: "md", class: "p-3.5" },
       { multiline: true, size: "lg", class: "p-4" },
-      { multiline: true, size: "xl", class: "p-[18px]" },
+      { multiline: true, size: "xl", class: "p-5" },
     ],
     defaultVariants: {
       size: "md",

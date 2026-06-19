@@ -114,16 +114,16 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
               SIZE_CLASS[size],
               "outline-none transition-[border-color,box-shadow,background-color] duration-150",
               "placeholder:text-gray-500 hover:border-gray-300",
-              "focus-visible:border-brand focus-visible:shadow-[0_0_0_3px_rgba(255,87,34,0.12)]",
+              "focus-visible:border-brand focus-visible:shadow-focus",
               "disabled:cursor-not-allowed disabled:border-gray-200 disabled:bg-gray-100 disabled:text-gray-400",
-              "aria-[invalid=true]:border-red-500 aria-[invalid=true]:shadow-[0_0_0_3px_rgba(255,82,82,0.12)]",
+              "aria-[invalid=true]:border-red-500 aria-[invalid=true]:shadow-focus-error",
               count && "pb-7",
               className,
             )}
             {...props}
           />
           {count ? (
-            <div className="pointer-events-none absolute right-3 bottom-2.5 text-[11px] font-semibold tabular-nums text-gray-500">
+            <div className="pointer-events-none absolute right-3 bottom-2.5 text-2xs font-semibold tabular-nums text-gray-500">
               {len}
               {max ? `/${max}` : ""}
             </div>

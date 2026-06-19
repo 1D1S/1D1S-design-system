@@ -72,6 +72,14 @@
   --color-sky-100: var(--sky-100);
   --color-sky-200: var(--sky-200);
   --color-sky-700: var(--sky-700);
+
+  /* Purple Colors (v3) */
+  --color-purple-200: var(--purple-200);
+  --color-purple-300: var(--purple-300);
+  --color-purple-400: var(--purple-400);
+  --color-purple-500: var(--purple-500);
+  --color-purple-600: var(--purple-600);
+  --color-purple-700: var(--purple-700);
 }
 
 :root {
@@ -148,4 +156,12 @@
   --sky-100: #e0f2fe;
   --sky-200: #bae6fd;
   --sky-700: #0369a1;
+
+  /* Purple Colors (v3) */
+  --purple-200: #ddd6fe;
+  --purple-300: #c4b5fd;
+  --purple-400: #a78bfa;
+  --purple-500: #8b5cf6;
+  --purple-600: #7c3aed;
+  --purple-700: #6d28d9;
 }

@@ -43,8 +43,8 @@ export interface BannerCarouselProps extends React.HTMLAttributes<HTMLDivElement
 }
 
 const DATA_LAYER_EVENT_PREFIX = "banner";
-const DEFAULT_GRADIENT_FROM = "#FF6D2D";
-const DEFAULT_GRADIENT_TO = "#FF9A3E";
+const DEFAULT_GRADIENT_FROM = "var(--main-700)";
+const DEFAULT_GRADIENT_TO = "var(--main-500)";
 
 /**
  * BannerCarousel

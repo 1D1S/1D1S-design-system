@@ -134,6 +134,8 @@ export function Heatmap({
   const total = rows * cols;
   const data = cells ?? Array.from({ length: total }, () => 0);
   const interactive = Boolean(renderCellTooltip);
+  // 단일 선택 — 한 번에 한 셀만 선택 상태를 가질 수 있도록 부모에서 관리
+  const [selectedIndex, setSelectedIndex] = React.useState<number | null>(null);
 
   return (
     <div
@@ -172,6 +174,8 @@ export function Heatmap({
             color={colors[level]}
             cellRadius={cellRadius}
             ariaLabel={ariaLabel?.(i, level)}
+            selected={selectedIndex === i}
+            onSelect={setSelectedIndex}
             renderCellTooltip={renderCellTooltip}
             renderCellActions={renderCellActions}
             onCellClick={onCellClick}
@@ -189,6 +193,10 @@ interface HeatmapCellProps {
   color: string;
   cellRadius: number;
   ariaLabel?: string;
+  /** 부모가 관리하는 단일 선택 상태 */
+  selected: boolean;
+  /** 선택 변경 요청 — 선택 시 index, 해제 시 null */
+  onSelect: (index: number | null) => void;
   renderCellTooltip?: (info: HeatmapCellInfo) => React.ReactNode;
   renderCellActions?: (info: HeatmapCellInfo) => React.ReactNode;
   onCellClick?: (info: HeatmapCellInfo) => void;
@@ -201,18 +209,24 @@ function HeatmapCell({
   color,
   cellRadius,
   ariaLabel,
+  selected,
+  onSelect,
   renderCellTooltip,
   renderCellActions,
   onCellClick,
   onCellHover,
 }: HeatmapCellProps): React.ReactElement {
   const [open, setOpen] = React.useState(false);
-  const [selected, setSelected] = React.useState(false);
   const hoverTimeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
   const justClickedRef = React.useRef(false);
   const closingRef = React.useRef(false);
 
   const info: HeatmapCellInfo = { index, level };
+
+  // 다른 셀이 선택되어 이 셀이 해제되면 열려있던 popover도 닫는다
+  React.useEffect(() => {
+    if (!selected) setOpen(false);
+  }, [selected]);
 
   const clearHoverTimeout = (): void => {
     if (hoverTimeoutRef.current !== null) {
@@ -231,7 +245,7 @@ function HeatmapCell({
             return;
           }
           setOpen(false);
-          setSelected(false);
+          if (selected) onSelect(null);
           closingRef.current = true;
           setTimeout(() => {
             closingRef.current = false;
@@ -269,7 +283,7 @@ function HeatmapCell({
           onClick={() => {
             clearHoverTimeout();
             if (selected) {
-              setSelected(false);
+              onSelect(null);
               setOpen(false);
               closingRef.current = true;
               setTimeout(() => {
@@ -277,7 +291,7 @@ function HeatmapCell({
               }, 200);
             } else {
               justClickedRef.current = true;
-              setSelected(true);
+              onSelect(index);
               setOpen(true);
               onCellClick?.(info);
             }
@@ -294,7 +308,7 @@ function HeatmapCell({
             if (!selected) setOpen(false);
           }}
           className={cn(
-            "z-50 min-w-[120px] rounded-xl bg-gray-900 px-3 py-2 text-white shadow-md",
+            "z-50 min-w-[120px] rounded-2 bg-gray-900 px-3 py-2 text-xs text-white shadow-default",
             "animate-in fade-in-0 zoom-in-95",
             "data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95",
             "data-[side=top]:slide-in-from-bottom-2 data-[side=bottom]:slide-in-from-top-2",

@@ -31,8 +31,8 @@ export function ChallengeTag({
   ...props
 }: ChallengeTagProps): React.ReactElement {
   const sizeClass = {
-    sm: "text-[10px] px-2 py-1 gap-1",
-    md: "text-[11px] px-2.5 py-[5px] gap-1.5",
+    sm: "text-3xs px-2 py-1 gap-1",
+    md: "text-2xs px-2.5 py-1.5 gap-1.5",
   }[size];
 
   const iconSize = size === "sm" ? 10 : 11;

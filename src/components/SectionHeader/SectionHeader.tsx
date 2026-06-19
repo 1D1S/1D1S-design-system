@@ -51,8 +51,8 @@ export function SectionHeader({
   }[size];
 
   const subClass = {
-    sm: "text-[10px]",
-    md: "text-[11px]",
+    sm: "text-3xs",
+    md: "text-2xs",
     lg: "text-xs",
   }[size];
 

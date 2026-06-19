@@ -71,7 +71,7 @@ export function StatusBadge({
         data-variant="inline"
         className={cn(
           "inline-flex items-center justify-center rounded-full bg-white/25 px-2.5 py-0.5",
-          "text-[10px] font-extrabold uppercase tracking-[0.4px] text-white",
+          "text-3xs font-extrabold uppercase tracking-[0.4px] text-white",
           className,
         )}
         {...props}
@@ -92,7 +92,7 @@ export function StatusBadge({
       )}
       {...props}
     >
-      <span className="rounded-full bg-white/25 px-2.5 py-0.5 text-[10px] font-extrabold uppercase tracking-[0.4px] text-white">
+      <span className="rounded-full bg-white/25 px-2.5 py-0.5 text-3xs font-extrabold uppercase tracking-[0.4px] text-white">
         {label}
       </span>
     </span>

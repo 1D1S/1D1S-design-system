@@ -31,7 +31,7 @@ export interface CardProps
  * Card
  * 흰 배경 + 얇은 보더 + 라운드 컨테이너. 챌린지/일지/스탯 카드의 베이스.
  *
- * @param radius `sm`(8) · `md`(12) · `lg`(14, default) · `xl`(16)
+ * @param radius `sm`(8) · `md`(12) · `lg`(16, default) · `xl`(16)
  * @param interactive hover lift + shadow
  */
 export function Card({
@@ -125,7 +125,7 @@ export function CardMeta({
     <div
       data-slot="card-meta"
       className={cn(
-        "flex items-center justify-between text-[11px] text-gray-500",
+        "flex items-center justify-between text-2xs text-gray-500",
         className,
       )}
       {...props}

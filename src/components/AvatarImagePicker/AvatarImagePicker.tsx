@@ -93,9 +93,9 @@ export function AvatarImagePicker({
         onClick={handleClick}
         aria-label="이미지 선택"
         className={cn(
-          "group relative h-full w-full cursor-pointer overflow-hidden rounded-full bg-gray-100 outline-none transition-[border-color,box-shadow,background-color] duration-200",
-          "focus-visible:ring-3 focus-visible:ring-main-300/60",
-          !preview && "border-2 border-dashed border-gray-200 bg-white hover:border-gray-300",
+          "group relative h-full w-full cursor-pointer overflow-hidden rounded-full border border-gray-200 bg-gray-100 outline-none transition-[border-color,box-shadow,background-color] duration-200",
+          "focus-visible:ring-2 focus-visible:ring-brand/30 focus-visible:ring-offset-2",
+          !preview && "hover:border-gray-300",
         )}
       >
         {preview ? (

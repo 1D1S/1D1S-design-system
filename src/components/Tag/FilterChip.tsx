@@ -9,8 +9,8 @@ const filterChipVariants = cva(
   {
     variants: {
       size: {
-        sm: "text-[11px] py-1.5 px-3 gap-1",
-        md: "text-xs py-[7px] px-3.5 gap-1",
+        sm: "text-2xs py-1.5 px-3 gap-1",
+        md: "text-xs py-2 px-3.5 gap-1",
         lg: "text-sm py-2 px-4 gap-1.5",
       },
       active: {

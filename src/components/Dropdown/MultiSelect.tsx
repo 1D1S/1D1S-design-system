@@ -51,7 +51,7 @@ export function MultiSelect({
       {selected.map((s) => (
         <span
           key={s}
-          className="inline-flex items-center gap-1 rounded-1.5 bg-brand-soft px-2 py-0.5 text-[11px] font-bold text-brand"
+          className="inline-flex items-center gap-1 rounded-1.5 bg-brand-soft px-2 py-0.5 text-2xs font-bold text-brand"
         >
           {s}
           {onRemove ? (

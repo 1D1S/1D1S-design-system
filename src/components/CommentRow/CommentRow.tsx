@@ -61,7 +61,7 @@ export function CommentRow({
         <div className="flex items-baseline justify-between gap-2">
           <span className="text-xs font-bold text-gray-900 truncate">{author}</span>
           {time ? (
-            <span className="shrink-0 text-[10px] text-gray-500">{time}</span>
+            <span className="shrink-0 text-3xs text-gray-500">{time}</span>
           ) : null}
         </div>
         <div className="mt-1 text-xs leading-[1.5] text-gray-700">{text}</div>

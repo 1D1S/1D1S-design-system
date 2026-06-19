@@ -14,10 +14,10 @@ const tagVariants = cva(
         green: "bg-green-200 text-green-700",
       },
       size: {
-        xs: "text-[9px] py-0.5 px-1.5 gap-0.5",
-        sm: "text-[10px] py-[3px] px-2 gap-1",
-        md: "text-[11px] py-1 px-2.5 gap-1",
-        lg: "text-xs py-[5px] px-3 gap-1",
+        xs: "text-3xs py-0.5 px-1.5 gap-0.5",
+        sm: "text-3xs py-0.5 px-2 gap-1",
+        md: "text-2xs py-1 px-2.5 gap-1",
+        lg: "text-xs py-1.5 px-3 gap-1",
       },
       pill: {
         true: "rounded-full",

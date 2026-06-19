@@ -74,7 +74,7 @@ export function Stripe({
       data-slot="stripe"
       className={cn(
         "relative flex w-full items-center justify-center overflow-hidden",
-        "font-mono text-[10px] tracking-[0.3px] text-black/45",
+        "font-mono text-3xs tracking-[0.3px] text-black/45",
         className,
       )}
       style={{

@@ -94,7 +94,7 @@ export function Tabs({
             {it.badge !== undefined ? (
               <span
                 className={cn(
-                  "text-[11px] font-semibold tabular-nums",
+                  "text-2xs font-semibold tabular-nums",
                   active ? "text-brand/70" : "text-gray-400",
                 )}
               >

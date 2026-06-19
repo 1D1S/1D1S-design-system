@@ -45,7 +45,7 @@ export const Toggle = React.forwardRef<HTMLInputElement, ToggleProps>(
           className="peer absolute inset-0 m-0 h-full w-full cursor-pointer appearance-none rounded-full bg-gray-300 outline-none transition-colors duration-150 focus-visible:ring-2 focus-visible:ring-brand/30 focus-visible:ring-offset-2 checked:bg-brand disabled:cursor-not-allowed"
           {...props}
         />
-        <span className="pointer-events-none absolute top-[2px] left-[2px] h-[18px] w-[18px] rounded-full bg-white shadow-[0_1px_3px_rgba(0,0,0,0.15)] transition-transform duration-150 ease-out peer-checked:translate-x-4" />
+        <span className="pointer-events-none absolute top-[2px] left-[2px] h-[18px] w-[18px] rounded-full bg-white shadow-knob transition-transform duration-150 ease-out peer-checked:translate-x-4" />
       </span>
     );
 

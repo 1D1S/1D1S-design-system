@@ -132,7 +132,7 @@ export function TopNavBrand({
         onClick={onLogoClick}
         className={cn(
           "flex h-[30px] w-[30px] shrink-0 items-center justify-center rounded-2",
-          "bg-[linear-gradient(135deg,#ff7043,#ff5722)] text-xs font-extrabold text-white",
+          "bg-[linear-gradient(135deg,var(--main-700),var(--main-800))] text-xs font-extrabold text-white",
           "shadow-warm",
           onLogoClick && "cursor-pointer",
         )}
@@ -140,7 +140,7 @@ export function TopNavBrand({
         {letters}
       </div>
       {name ? (
-        <div className="text-[15px] font-extrabold tracking-[-0.3px] text-gray-900">
+        <div className="text-lg font-extrabold tracking-[-0.3px] text-gray-900">
           {name}
         </div>
       ) : null}

@@ -39,26 +39,26 @@ export function StreakHero({
     <div
       data-slot="streak-hero"
       className={cn(
-        "min-w-[200px] rounded-4 border border-brand-soft p-4",
-        "bg-[linear-gradient(135deg,#fff8f5,#ffe9e0)]",
+        "min-w-[200px] rounded-4 border border-brand-soft p-4 shadow-warm",
+        "bg-[linear-gradient(135deg,var(--main-100),var(--main-300))]",
         className,
       )}
       {...props}
     >
       <div className="mb-2 flex items-center justify-between">
-        <span className="text-[11px] font-bold text-gray-600">{label}</span>
+        <span className="text-2xs font-bold text-gray-600">{label}</span>
         <span aria-hidden className="text-lg animate-flame-flicker leading-none">
           {icon}
         </span>
       </div>
       <div className="flex items-baseline gap-1">
-        <span className="text-[32px] font-extrabold leading-none tracking-[-0.6px] text-brand tabular-nums">
+        <span className="text-5xl font-extrabold leading-none tracking-[-0.6px] text-brand tabular-nums">
           {days}
         </span>
         <span className="text-sm font-bold text-gray-700">{unit}</span>
       </div>
       {meta ? (
-        <div className="mt-1.5 text-[10px] text-gray-600">{meta}</div>
+        <div className="mt-1.5 text-3xs text-gray-600">{meta}</div>
       ) : null}
     </div>
   );

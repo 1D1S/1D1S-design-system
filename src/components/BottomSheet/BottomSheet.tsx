@@ -49,8 +49,8 @@ function BottomSheetContent({
       <DialogPrimitive.Content
         className={cn(
           "fixed z-50 bg-white",
-          "rounded-4 shadow-[0_-8px_32px_rgba(0,0,0,0.14)]",
-          "px-[18px] pt-2.5 pb-4",
+          "rounded-4 shadow-up",
+          "px-5 pt-2.5 pb-4",
           "max-h-[85dvh] overflow-y-auto",
           "data-[state=open]:animate-in data-[state=closed]:animate-out",
           "data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom",

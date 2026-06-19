@@ -51,8 +51,8 @@ const emojiSize: Record<"sm" | "md" | "lg", string> = {
 };
 
 const labelSize: Record<"sm" | "md" | "lg", string> = {
-  sm: "text-[10px]",
-  md: "text-[11px]",
+  sm: "text-3xs",
+  md: "text-2xs",
   lg: "text-xs",
 };
 

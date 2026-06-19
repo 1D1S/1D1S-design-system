@@ -19,7 +19,10 @@ function Calendar({
     <DayPicker
       locale={ko}
       showOutsideDays={showOutsideDays}
-      className={cn('w-fit p-2', className)}
+      className={cn(
+        'w-fit rounded-3 border border-gray-200 bg-white p-3 shadow-default',
+        className,
+      )}
       classNames={{
         months: 'flex flex-col gap-3',
         month: 'flex flex-col gap-3',
@@ -41,7 +44,7 @@ function Calendar({
             ? '[&:has(.day-range-middle)]:bg-brand-soft/70 [&:has(.day-range-start)]:bg-brand-soft/70 [&:has(.day-range-end)]:bg-brand-soft/70 [&:has(.day-range-start)]:rounded-l-2 [&:has(.day-range-end)]:rounded-r-2'
             : '[&:has([aria-selected])]:rounded-2'
         ),
-        day: 'inline-flex h-9 w-9 items-center justify-center rounded-2 border border-transparent p-0 text-sm font-medium text-gray-800 transition-colors duration-200 aria-selected:opacity-100 hover:bg-gray-100 hover:text-gray-900 hover:cursor-pointer focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-main-300/60',
+        day: 'inline-flex h-9 w-9 items-center justify-center rounded-2 border border-transparent p-0 text-sm font-medium text-gray-800 transition-colors duration-200 aria-selected:opacity-100 hover:bg-gray-100 hover:text-gray-900 hover:cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/30 focus-visible:ring-offset-1',
         day_range_start:
           'day-range-start aria-selected:rounded-2 aria-selected:bg-brand aria-selected:text-white',
         day_range_end:

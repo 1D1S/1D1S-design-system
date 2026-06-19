@@ -20,7 +20,7 @@ const dropdownTriggerVariants = cva(
         lg: "h-[46px] px-4 text-base",
       },
       open: {
-        true: "border-brand shadow-[0_0_0_3px_rgba(255,87,34,0.12)]",
+        true: "border-brand shadow-focus",
         false: "border-gray-200 hover:border-gray-300",
       },
     },
@@ -77,7 +77,7 @@ export const Dropdown = React.forwardRef<HTMLButtonElement, DropdownProps>(
         {label ? (
           <label
             htmlFor={id}
-            className="mb-1.5 inline-block text-[11px] font-bold text-gray-700"
+            className="mb-1.5 inline-block text-2xs font-bold text-gray-700"
           >
             {label}
           </label>

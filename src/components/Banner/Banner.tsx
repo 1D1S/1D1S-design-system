@@ -11,11 +11,11 @@ const bannerVariants = cva(
     variants: {
       tone: {
         orange:
-          "bg-[linear-gradient(135deg,#ff8a65_0%,#ff5722_100%)] shadow-warm",
-        mint: "bg-[linear-gradient(135deg,#7dd8b5_0%,#3eb489_100%)]",
-        blue: "bg-[linear-gradient(135deg,#7ab3ef_0%,#1666ba_100%)]",
-        purple: "bg-[linear-gradient(135deg,#a78bfa_0%,#7c3aed_100%)]",
-        gray: "bg-[linear-gradient(135deg,#9e9e9e_0%,#424242_100%)]",
+          "bg-[linear-gradient(135deg,var(--main-600)_0%,var(--main-800)_100%)] shadow-warm",
+        mint: "bg-[linear-gradient(135deg,var(--mint-600)_0%,var(--mint-800)_100%)]",
+        blue: "bg-[linear-gradient(135deg,var(--blue-400)_0%,var(--blue-600)_100%)]",
+        purple: "bg-[linear-gradient(135deg,var(--purple-400)_0%,var(--purple-600)_100%)]",
+        gray: "bg-[linear-gradient(135deg,var(--gray-500)_0%,var(--gray-800)_100%)]",
       },
       size: {
         sm: "p-4 rounded-3",

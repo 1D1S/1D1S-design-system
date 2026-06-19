@@ -76,7 +76,7 @@ export function BottomNav({
             )}
           >
             <span className="leading-none">{iconNode}</span>
-            <span className="text-[10px] font-semibold leading-none">
+            <span className="text-3xs font-semibold leading-none">
               {it.label}
             </span>
           </button>

@@ -35,7 +35,7 @@ const dialogContentVariants = cva(
   cn(
     "fixed top-[50%] left-[50%] z-50 flex flex-col",
     "w-[calc(100%-2rem)] max-w-[92vw] -translate-x-1/2 -translate-y-1/2",
-    "rounded-4 bg-white shadow-[0_24px_64px_rgba(0,0,0,0.18)]",
+    "rounded-4 bg-white shadow-xl",
     "overflow-hidden",
     "data-[state=open]:animate-in data-[state=closed]:animate-out",
     "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
@@ -101,7 +101,7 @@ function DialogHeader({
   return (
     <div
       className={cn(
-        "flex items-center justify-between px-[22px] pt-[18px] pb-3",
+        "flex items-center justify-between px-5 pt-5 pb-3",
         className,
       )}
       {...props}
@@ -116,7 +116,7 @@ function DialogBody({
   return (
     <div
       className={cn(
-        "px-[22px] pt-1 pb-[18px] text-gray-700",
+        "px-5 pt-1 pb-5 text-gray-700",
         className,
       )}
       {...props}
@@ -131,7 +131,7 @@ function DialogFooter({
   return (
     <div
       className={cn(
-        "flex justify-end gap-2 border-t border-gray-100 bg-gray-50 px-[18px] py-[14px]",
+        "flex justify-end gap-2 border-t border-gray-100 bg-gray-50 px-5 py-3.5",
         className,
       )}
       {...props}
@@ -244,8 +244,8 @@ function ConfirmDialog({
         <DialogPrimitive.Content
           className={cn(
             "fixed top-1/2 left-1/2 z-50 -translate-x-1/2 -translate-y-1/2",
-            "w-[360px] max-w-[92vw] rounded-4 bg-white px-[22px] pt-6 pb-[18px] text-center",
-            "shadow-[0_24px_64px_rgba(0,0,0,0.18)]",
+            "w-[360px] max-w-[92vw] rounded-4 bg-white px-5 pt-6 pb-5 text-center",
+            "shadow-xl",
             "data-[state=open]:animate-in data-[state=closed]:animate-out",
             "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
             "data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",
@@ -276,7 +276,7 @@ function ConfirmDialog({
               </Text>
             </DialogPrimitive.Description>
           )}
-          <div className="mt-[18px] flex gap-2">
+          <div className="mt-5 flex gap-2">
             <DialogClose asChild>
               <Button
                 variant="secondary"

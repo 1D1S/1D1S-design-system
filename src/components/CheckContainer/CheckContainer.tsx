@@ -72,7 +72,7 @@ export function CheckContainer({
       disabled={disabled}
       onClick={handleClick}
       className={cn(
-        "relative overflow-hidden rounded-4 border-2 transition-all duration-200 ease-out active:scale-95",
+        "relative overflow-hidden rounded-4 border transition-all duration-200 ease-out active:scale-[0.97]",
         "flex flex-col items-center justify-center",
         !hasCustomChildren && "gap-4",
         isChecked

@@ -5,7 +5,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../../lib/utils";
 
 const statCardVariants = cva(
-  "rounded-3 border border-gray-200",
+  "rounded-3 border border-gray-200 shadow-sm",
   {
     variants: {
       tone: {
@@ -71,7 +71,7 @@ export function StatCard({
       className={cn(statCardVariants({ tone, size }), className)}
       {...props}
     >
-      <div className="text-[10px] font-semibold text-gray-500">{label}</div>
+      <div className="text-3xs font-semibold text-gray-500">{label}</div>
       <div
         className={cn(
           "mt-1.5 font-extrabold tracking-[-0.4px] leading-none text-gray-900 tabular-nums",
@@ -81,7 +81,7 @@ export function StatCard({
         {value}
       </div>
       {helper ? (
-        <div className="mt-1.5 text-[10px] text-gray-500">{helper}</div>
+        <div className="mt-1.5 text-3xs text-gray-500">{helper}</div>
       ) : null}
     </div>
   );

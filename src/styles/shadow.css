@@ -1,14 +1,31 @@
 @theme inline {
-  /* shadow */
+  /* shadow — elevation */
   --shadow-sm: var(--shadow-sm);
   --shadow-default: var(--shadow-default);
   --shadow-lg: var(--shadow-lg);
+  --shadow-xl: var(--shadow-xl);
+  --shadow-up: var(--shadow-up);
+  /* shadow — brand / interactive */
   --shadow-warm: var(--shadow-warm);
+  --shadow-brand-glow: var(--shadow-brand-glow);
+  --shadow-knob: var(--shadow-knob);
+  /* shadow — focus rings */
+  --shadow-focus: var(--shadow-focus);
+  --shadow-focus-error: var(--shadow-focus-error);
 }
 
 :root {
+  /* elevation */
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
   --shadow-default: 0 2px 10px 0 rgba(0, 0, 0, 0.08);
   --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.10);
+  --shadow-xl: 0 24px 64px rgba(0, 0, 0, 0.18);
+  --shadow-up: 0 -8px 32px rgba(0, 0, 0, 0.14);
+  /* brand / interactive */
   --shadow-warm: 0 4px 24px rgba(255, 87, 34, 0.10);
+  --shadow-brand-glow: 0 4px 10px rgba(255, 87, 34, 0.22);
+  --shadow-knob: 0 1px 3px rgba(0, 0, 0, 0.15);
+  /* focus rings */
+  --shadow-focus: 0 0 0 3px rgba(255, 87, 34, 0.12);
+  --shadow-focus-error: 0 0 0 3px rgba(255, 82, 82, 0.12);
 }

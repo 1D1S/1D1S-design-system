@@ -14,7 +14,7 @@ const toggleGroupItemVariants = cva(
     'hover:border-gray-400 hover:bg-gray-100',
     'data-[state=on]:border-brand data-[state=on]:bg-brand data-[state=on]:text-white',
     'data-[state=on]:hover:bg-main-600 data-[state=on]:hover:border-main-600',
-    'data-[state=on]:shadow-[0_4px_10px_rgba(255,87,34,0.22)]',
+    'data-[state=on]:shadow-brand-glow',
   ],
   {
     variants: {

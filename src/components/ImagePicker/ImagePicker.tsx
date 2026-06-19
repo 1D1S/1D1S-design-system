@@ -122,7 +122,7 @@ export function ImagePicker({
   return (
     <div
       className={cn(
-        "flex h-full flex-col rounded-2xl border border-gray-200 bg-white p-4",
+        "flex h-full flex-col rounded-4 border border-gray-200 bg-white p-4",
         className
       )}
     >
@@ -131,7 +131,7 @@ export function ImagePicker({
         tabIndex={0}
         aria-label="썸네일 이미지 선택"
         className={cn(
-          "relative flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-xl border bg-gray-100 transition outline-none",
+          "relative flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-3 border bg-gray-100 transition outline-none",
           dropZoneClassName,
           isDragging
             ? "border-main-700 ring-3 ring-main-300"
