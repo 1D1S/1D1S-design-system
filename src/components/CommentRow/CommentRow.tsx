@@ -48,7 +48,7 @@ export function CommentRow({
     <div
       data-slot="comment-row"
       className={cn(
-        "flex items-start gap-2.5 py-3",
+        "flex items-start gap-2.5 py-3 animate-fade-up",
         divider && "border-b border-gray-100 last:border-b-0",
         className,
       )}

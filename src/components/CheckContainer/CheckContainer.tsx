@@ -98,6 +98,7 @@ export function CheckContainer({
             isChecked
               ? "border-brand bg-brand text-white"
               : "border-gray-200 bg-white text-transparent",
+            isChecked && "animate-pop",
           )}
         >
           <Check className="h-[46%] w-[46%]" strokeWidth={4.4} />

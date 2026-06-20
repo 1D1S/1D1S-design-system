@@ -63,6 +63,8 @@ export interface AchievementBadgeProps
   emoji: React.ReactNode;
   /** 배지 라벨 */
   label: React.ReactNode;
+  /** 새로 해금된 순간 1회 pop 연출 (해금 모먼트용) */
+  justUnlocked?: boolean;
 }
 
 /**
@@ -85,6 +87,7 @@ export function AchievementBadge({
   tone,
   layout,
   size,
+  justUnlocked,
   className,
   ...props
 }: AchievementBadgeProps): React.ReactElement {
@@ -92,7 +95,11 @@ export function AchievementBadge({
   return (
     <div
       data-slot="achievement-badge"
-      className={cn(badgeVariants({ tone, layout, size }), className)}
+      className={cn(
+        badgeVariants({ tone, layout, size }),
+        justUnlocked && "animate-pop",
+        className,
+      )}
       {...props}
     >
       <span aria-hidden className={cn("leading-none", emojiSize[sz])}>

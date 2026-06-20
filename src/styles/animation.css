@@ -154,3 +154,33 @@
   from { height: var(--radix-accordion-content-height); }
   to { height: 0; }
 }
+
+/* ─────────────────────────────────────────────────────────────
+ * Reduced motion — 모든 모션 토큰을 즉시 표시로 폴백.
+ * 진입 애니메이션은 fill-mode(both) 때문에 animation:none 시
+ * 최종 상태(보임)로 렌더되어 안전하다.
+ * ───────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .animate-in,
+  .animate-out,
+  .animate-fade-up,
+  .animate-fade-in,
+  .animate-slide-right,
+  .animate-pop,
+  .animate-pulse-ring,
+  .animate-shimmer,
+  .animate-float,
+  .animate-flame-flicker,
+  .animate-heart-pop,
+  .animate-confetti,
+  .animate-marquee,
+  .animate-accordion-down,
+  .animate-accordion-up,
+  .fade-in,
+  .fade-out,
+  .animate-glow,
+  .marquee--forward,
+  .marquee--reverse {
+    animation: none !important;
+  }
+}

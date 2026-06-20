@@ -40,6 +40,8 @@ export interface StatCardProps
   value: React.ReactNode;
   /** 보조 텍스트 (값 아래 소형 메타) */
   helper?: React.ReactNode;
+  /** value가 바뀔 때 숫자에 pop 애니메이션 (최초 마운트 시엔 미동작) */
+  animateOnChange?: boolean;
 }
 
 /**
@@ -61,10 +63,19 @@ export function StatCard({
   helper,
   tone,
   size,
+  animateOnChange,
   className,
   ...props
 }: StatCardProps): React.ReactElement {
   const sz = size ?? "md";
+  const [popKey, setPopKey] = React.useState(0);
+  const prevValueRef = React.useRef(value);
+  React.useEffect(() => {
+    if (animateOnChange && prevValueRef.current !== value) {
+      setPopKey((k) => k + 1);
+    }
+    prevValueRef.current = value;
+  }, [value, animateOnChange]);
   return (
     <div
       data-slot="stat-card"
@@ -73,9 +84,11 @@ export function StatCard({
     >
       <div className="text-3xs font-semibold text-gray-500">{label}</div>
       <div
+        key={popKey}
         className={cn(
           "mt-1.5 font-extrabold tracking-[-0.4px] leading-none text-gray-900 tabular-nums",
           valueSize[sz],
+          animateOnChange && popKey > 0 && "animate-pop",
         )}
       >
         {value}

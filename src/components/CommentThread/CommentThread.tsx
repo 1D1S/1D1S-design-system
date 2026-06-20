@@ -184,7 +184,7 @@ function CommentItem({
     <li>
       <div
         className={cn(
-          "flex items-start gap-2.5 py-3",
+          "flex items-start gap-2.5 py-3 animate-fade-up",
           !isLast && depth === 0 && "border-b border-gray-100",
         )}
       >

@@ -70,17 +70,34 @@ export function ToastProvider({
   max = 5,
 }: ToastProviderProps): React.ReactElement {
   const [items, setItems] = React.useState<ToastItem[]>([]);
+  const [leaving, setLeaving] = React.useState<Set<number>>(new Set());
   const idRef = React.useRef(0);
   const timersRef = React.useRef(new Map<number, ReturnType<typeof setTimeout>>());
 
-  const dismiss = React.useCallback((id: number) => {
-    const timer = timersRef.current.get(id);
-    if (timer) {
-      clearTimeout(timer);
-      timersRef.current.delete(id);
-    }
+  // exit 애니메이션 길이(ms) — 아래 exitCls의 duration과 맞춤
+  const EXIT_MS = 220;
+
+  const remove = React.useCallback((id: number) => {
+    timersRef.current.delete(id);
     setItems((prev) => prev.filter((it) => it.id !== id));
+    setLeaving((prev) => {
+      if (!prev.has(id)) return prev;
+      const next = new Set(prev);
+      next.delete(id);
+      return next;
+    });
   }, []);
+
+  // dismiss = 즉시 제거가 아니라 exit 애니메이션 후 제거
+  const dismiss = React.useCallback(
+    (id: number) => {
+      const timer = timersRef.current.get(id);
+      if (timer) clearTimeout(timer);
+      setLeaving((prev) => (prev.has(id) ? prev : new Set(prev).add(id)));
+      timersRef.current.set(id, setTimeout(() => remove(id), EXIT_MS));
+    },
+    [remove],
+  );
 
   const show = React.useCallback(
     (options: ToastOptions) => {
@@ -115,6 +132,15 @@ export function ToastProvider({
   const [mounted, setMounted] = React.useState(false);
   React.useEffect(() => setMounted(true), []);
 
+  // 위치에 맞춰 진입/퇴장 방향을 결정 (full literal — Tailwind JIT 감지용)
+  const isBottom = position.startsWith("bottom");
+  const enterCls = isBottom
+    ? "animate-in fade-in-0 slide-in-from-bottom-2 duration-300"
+    : "animate-in fade-in-0 slide-in-from-top-2 duration-300";
+  const exitCls = isBottom
+    ? "animate-out fade-out-0 slide-out-to-bottom-2 duration-200"
+    : "animate-out fade-out-0 slide-out-to-top-2 duration-200";
+
   return (
     <ToastContext.Provider value={value}>
       {children}
@@ -131,7 +157,10 @@ export function ToastProvider({
             {items.map((it) => (
               <div
                 key={it.id}
-                className="pointer-events-auto animate-in fade-in-0 slide-in-from-top-2 duration-300"
+                className={cn(
+                  "pointer-events-auto",
+                  leaving.has(it.id) ? exitCls : enterCls,
+                )}
               >
                 <Toast
                   tone={it.tone}

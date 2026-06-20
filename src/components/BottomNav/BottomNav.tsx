@@ -75,7 +75,9 @@ export function BottomNav({
               active ? "text-brand" : "text-gray-400 hover:text-gray-600",
             )}
           >
-            <span className="leading-none">{iconNode}</span>
+            <span className={cn("leading-none", active && "animate-pop")}>
+              {iconNode}
+            </span>
             <span className="text-3xs font-semibold leading-none">
               {it.label}
             </span>

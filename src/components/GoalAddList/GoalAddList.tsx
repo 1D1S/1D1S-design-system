@@ -72,7 +72,7 @@ export function GoalAddList({
       {goalList.map((goal, index) => (
         <div
           key={`${goal}-${index}`}
-          className="flex h-10 w-full items-center justify-between rounded-3 border border-gray-200 bg-white px-5"
+          className="flex h-10 w-full items-center justify-between rounded-3 border border-gray-200 bg-white px-5 animate-fade-up"
         >
           <Text
             size="caption2"

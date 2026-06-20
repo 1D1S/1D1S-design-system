@@ -53,39 +53,71 @@ export function SnackbarProvider({
   position = "bottom",
 }: SnackbarProviderProps): React.ReactElement {
   const [item, setItem] = React.useState<SnackbarItem | null>(null);
+  const [leaving, setLeaving] = React.useState(false);
   const idRef = React.useRef(0);
+  const currentIdRef = React.useRef(0);
   const timerRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+  const exitRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const dismiss = React.useCallback((id: number) => {
+  // exit 애니메이션 길이(ms) — 아래 exitCls의 duration과 맞춤
+  const EXIT_MS = 220;
+
+  // 즉시 제거가 아니라 exit 애니메이션 후 unmount
+  const beginExit = React.useCallback((id: number) => {
+    if (currentIdRef.current !== id) return;
     if (timerRef.current) {
       clearTimeout(timerRef.current);
       timerRef.current = null;
     }
-    setItem((prev) => (prev?.id === id ? null : prev));
+    if (exitRef.current) return; // 이미 퇴장 중
+    setLeaving(true);
+    exitRef.current = setTimeout(() => {
+      setItem(null);
+      setLeaving(false);
+      exitRef.current = null;
+    }, EXIT_MS);
   }, []);
 
-  const show = React.useCallback((options: SnackbarOptions) => {
-    idRef.current += 1;
-    const id = idRef.current;
-    const duration = options.duration ?? 3000;
+  const dismiss = React.useCallback((id: number) => beginExit(id), [beginExit]);
 
-    if (timerRef.current) clearTimeout(timerRef.current);
-    setItem({ ...options, id });
+  const show = React.useCallback(
+    (options: SnackbarOptions) => {
+      idRef.current += 1;
+      const id = idRef.current;
+      currentIdRef.current = id;
+      const duration = options.duration ?? 3000;
 
-    if (duration > 0) {
-      timerRef.current = setTimeout(() => {
-        setItem((prev) => (prev?.id === id ? null : prev));
-        timerRef.current = null;
-      }, duration);
-    }
-    return id;
-  }, []);
+      if (timerRef.current) clearTimeout(timerRef.current);
+      if (exitRef.current) {
+        clearTimeout(exitRef.current);
+        exitRef.current = null;
+      }
+      setLeaving(false);
+      setItem({ ...options, id });
+
+      if (duration > 0) {
+        timerRef.current = setTimeout(() => beginExit(id), duration);
+      }
+      return id;
+    },
+    [beginExit],
+  );
 
   React.useEffect(() => {
     return () => {
       if (timerRef.current) clearTimeout(timerRef.current);
+      if (exitRef.current) clearTimeout(exitRef.current);
     };
   }, []);
+
+  // 위치에 맞춰 진입/퇴장 방향 결정 (full literal — Tailwind JIT 감지용)
+  const isBottom = position === "bottom";
+  const enterCls = isBottom
+    ? "animate-in fade-in-0 slide-in-from-bottom-2 duration-300"
+    : "animate-in fade-in-0 slide-in-from-top-2 duration-300";
+  const exitCls = isBottom
+    ? "animate-out fade-out-0 slide-out-to-bottom-2 duration-200"
+    : "animate-out fade-out-0 slide-out-to-top-2 duration-200";
 
   const value = React.useMemo(() => ({ show, dismiss }), [show, dismiss]);
 
@@ -106,7 +138,10 @@ export function SnackbarProvider({
             {item && (
               <div
                 key={item.id}
-                className="pointer-events-auto animate-in fade-in-0 slide-in-from-bottom-2 duration-300"
+                className={cn(
+                  "pointer-events-auto",
+                  leaving ? exitCls : enterCls,
+                )}
               >
                 <Snackbar
                   text={item.text}
