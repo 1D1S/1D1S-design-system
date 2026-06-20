@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/1D1S/1D1S-design-system/compare/v1.2.9...v1.3.0) (2026-06-20)
+
+
+### Features
+
+* P3 애니메이션 — 부정형 진행률·선택 pop·리스트 stagger·빈 상태 모션 ([56f5760](https://github.com/1D1S/1D1S-design-system/commit/56f5760a3eeba62a5c3afcefd16397b11ff482c2))
+* 컴포넌트 마이크로 인터랙션·진입/퇴장 애니메이션 추가 ([ae30bcc](https://github.com/1D1S/1D1S-design-system/commit/ae30bcc59e0588eecd0aaa31e6576e9d84cdb6b4))
+
+
+### Bug Fixes
+
+* **a11y:** 폼·선택 컨트롤 포커스 링 표준화 및 누락 보강 ([c7b36f7](https://github.com/1D1S/1D1S-design-system/commit/c7b36f754a05c72c9b807ce561860b1fd45cd448))
+* 댓글 폰트 크기 상향 및 위계 정리 ([0c5c0c0](https://github.com/1D1S/1D1S-design-system/commit/0c5c0c0445333e55e590c09975ad5169a13826bd))
+
 ### [1.2.9](https://github.com/1D1S/1D1S-design-system/compare/v1.2.8...v1.2.9) (2026-06-19)
 
 ### [1.2.8](https://github.com/1D1S/1D1S-design-system/compare/v1.2.7...v1.2.8) (2026-06-17)
