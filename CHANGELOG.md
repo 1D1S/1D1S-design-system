@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/1D1S/1D1S-design-system/compare/v1.3.0...v1.4.0) (2026-06-20)
+
+
+### Features
+
+* 폼 컨트롤 디자인 일관성 정비 및 SegmentedControl 추가 ([b2847e6](https://github.com/1D1S/1D1S-design-system/commit/b2847e652776b94ce49b1a8d0b0b36e501eb9760))
+
 ## [1.3.0](https://github.com/1D1S/1D1S-design-system/compare/v1.2.9...v1.3.0) (2026-06-20)
 
 
