@@ -21,6 +21,7 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.es.js"
     },
+    "./styles.css": "./dist/style.css",
     "./styles/globals.css": "./src/styles/globals.css"
   },
   "publishConfig": {
@@ -31,7 +32,8 @@
     "lint": "eslint .",
     "type-check": "tsc --noEmit",
     "build": "storybook build",
-    "build:lib": "vite build",
+    "build:lib": "vite build && npm run build:css",
+    "build:css": "vite build --config vite.config.css.ts && rm -f dist/_style-entry.js",
     "prepare": "npm run build:lib",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
