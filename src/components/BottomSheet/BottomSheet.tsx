@@ -4,6 +4,7 @@ import * as React from "react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { cn } from "../../lib/utils";
 import { Text } from "../Text";
+import { Close as CloseIcon } from "../Icons";
 
 const BottomSheet = DialogPrimitive.Root;
 const BottomSheetTrigger = DialogPrimitive.Trigger;
@@ -33,6 +34,8 @@ export interface BottomSheetContentProps
   inset?: number;
   /** 상단 그립 핸들 노출 (기본 true) */
   showHandle?: boolean;
+  /** 우측 상단 닫기 버튼 노출 (기본 false) */
+  showClose?: boolean;
 }
 
 function BottomSheetContent({
@@ -40,6 +43,7 @@ function BottomSheetContent({
   children,
   inset = 8,
   showHandle = true,
+  showClose = false,
   style,
   ...props
 }: BottomSheetContentProps): React.ReactElement {
@@ -71,6 +75,19 @@ function BottomSheetContent({
             aria-hidden="true"
             className="mx-auto mt-1 mb-3 h-1 w-9 rounded-full bg-gray-300"
           />
+        )}
+        {showClose && (
+          <BottomSheetClose
+            aria-label="닫기"
+            className={cn(
+              "absolute right-3 top-3 inline-flex size-8 items-center justify-center rounded-full",
+              "text-gray-500 transition-colors duration-200",
+              "hover:bg-gray-100 hover:text-gray-900",
+              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/30",
+            )}
+          >
+            <CloseIcon className="size-5" />
+          </BottomSheetClose>
         )}
         {children}
       </DialogPrimitive.Content>

@@ -44,6 +44,7 @@ export function GoalAddList({
 
   const goalList = isControlled ? goals : internalGoals;
   const isAtMax = maxGoals !== undefined && goalList.length >= maxGoals;
+  const canAdd = !disabled && !isAtMax && draft.trim().length > 0;
 
   const updateGoals = (nextGoals: string[]): void => {
     if (!isControlled) {
@@ -72,7 +73,7 @@ export function GoalAddList({
       {goalList.map((goal, index) => (
         <div
           key={`${goal}-${index}`}
-          className="flex h-10 w-full items-center justify-between rounded-3 border border-gray-200 bg-white px-5 animate-fade-up"
+          className="flex h-10 w-full items-center justify-between rounded-2 border border-gray-200 bg-white px-5 animate-fade-up"
         >
           <Text
             size="caption2"
@@ -104,6 +105,25 @@ export function GoalAddList({
         aria-label={inputAriaLabel}
         placeholder={
           isAtMax ? `최대 ${maxGoals}개까지 입력할 수 있습니다` : placeholder
+        }
+        className="pr-16"
+        iconRight={
+          <button
+            type="button"
+            aria-label="목표 추가"
+            // 클릭 시 input blur로 인한 부수효과 방지 (포커스 유지)
+            onMouseDown={(event) => event.preventDefault()}
+            onClick={commitDraft}
+            disabled={!canAdd}
+            className={cn(
+              "inline-flex h-7 items-center rounded-1.5 px-2.5 text-xs font-bold transition-colors",
+              canAdd
+                ? "bg-brand text-white hover:brightness-105 hover:cursor-pointer"
+                : "cursor-not-allowed bg-gray-100 text-gray-400",
+            )}
+          >
+            추가
+          </button>
         }
         onChange={(event) => setDraft(event.target.value)}
         onCompositionStart={() => {

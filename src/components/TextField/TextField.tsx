@@ -14,12 +14,12 @@ export type TextFieldState =
 
 const fieldVariants = cva(
   [
-    "w-full transition-[border-color,box-shadow,background-color] duration-150 ease-out outline-none",
-    "rounded-2 border border-gray-200 bg-white text-gray-900",
+    "w-full transition-[border-color,box-shadow,background-color] duration-200 ease-out outline-none",
+    "rounded-2.5 border border-gray-200 bg-white text-gray-900",
     "placeholder:text-gray-500",
     // automatic states (used when `state` prop omitted)
-    "hover:border-gray-300",
-    "focus-visible:border-brand focus-visible:shadow-focus",
+    "hover:border-gray-400",
+    "focus-visible:border-brand focus-visible:ring-2 focus-visible:ring-brand/30 focus-visible:ring-offset-2",
     "disabled:cursor-not-allowed disabled:border-gray-200 disabled:bg-gray-100 disabled:text-gray-400",
     "aria-[invalid=true]:border-red-500 aria-[invalid=true]:shadow-focus-error",
   ],
@@ -28,7 +28,7 @@ const fieldVariants = cva(
       size: {
         xs: "h-[26px] text-2xs",
         sm: "h-8 text-xs",
-        md: "h-[38px] text-sm",
+        md: "h-10 text-sm",
         lg: "h-[46px] text-base",
         xl: "h-[54px] text-lg",
       },
@@ -42,7 +42,7 @@ const fieldVariants = cva(
       state: {
         default: "",
         focus:
-          "border-brand shadow-focus",
+          "border-brand ring-2 ring-brand/30 ring-offset-2",
         filled: "border-gray-300",
         error:
           "border-red-500 shadow-focus-error",
@@ -103,7 +103,7 @@ export interface TextFieldProps
   iconLeft?: React.ReactNode;
   /** suffix 텍스트/노드 (오른쪽 — 글자수, 단위 등) */
   suffix?: React.ReactNode;
-  /** suffix 대신 자유 노드 — iconRight (suffix와 동일 자리) */
+  /** suffix 대신 자유 노드 — iconRight (suffix와 동일 자리, 버튼 등 클릭 가능) */
   iconRight?: React.ReactNode;
   multiline?: boolean;
   rows?: number;
@@ -187,6 +187,8 @@ export const TextField = React.forwardRef<
     const hasIconLeft = Boolean(iconLeft) && !multiline;
     const rightSlot = suffix ?? iconRight;
     const hasSuffix = Boolean(rightSlot) && !multiline;
+    // suffix는 글자수·단위 등 비상호작용 텍스트, iconRight는 버튼 등 상호작용 노드
+    const isRightInteractive = suffix == null && iconRight != null && !multiline;
     const resolvedState = error ? "error" : disabled ? "disabled" : state;
 
     const fieldClass = cn(
@@ -223,8 +225,13 @@ export const TextField = React.forwardRef<
           )}
           {hasSuffix && (
             <span
-              aria-hidden
-              className="pointer-events-none absolute top-1/2 right-3 flex -translate-y-1/2 items-center gap-1 text-gray-500 text-xs font-semibold"
+              aria-hidden={isRightInteractive ? undefined : true}
+              className={cn(
+                "absolute top-1/2 right-2 flex -translate-y-1/2 items-center gap-1",
+                isRightInteractive
+                  ? ""
+                  : "pointer-events-none right-3 text-gray-500 text-xs font-semibold",
+              )}
             >
               {rightSlot}
             </span>

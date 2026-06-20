@@ -65,6 +65,26 @@ export const RoundedSingle: Story = {
   ),
 };
 
+export const Sizes: Story = {
+  render: () => (
+    <div className="flex flex-col gap-4">
+      {(['sm', 'md', 'lg'] as const).map((size) => (
+        <ToggleGroup key={size} type="single" defaultValue="dev">
+          <ToggleGroupItem size={size} value="dev" icon={<Code2 />}>
+            Development
+          </ToggleGroupItem>
+          <ToggleGroupItem size={size} value="exercise" icon={<Dumbbell />}>
+            Exercise
+          </ToggleGroupItem>
+          <ToggleGroupItem size={size} value="reading" icon={<BookOpen />}>
+            Reading
+          </ToggleGroupItem>
+        </ToggleGroup>
+      ))}
+    </div>
+  ),
+};
+
 export const RoundedMultiple: Story = {
   render: () => (
     <ToggleGroup type="multiple" defaultValue={['dev', 'reading']}>

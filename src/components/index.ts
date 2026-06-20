@@ -31,6 +31,7 @@ export * from "./ProgressBar";
 export * from "./Radio";
 export * from "./ScheduleCalendar";
 export * from "./SectionHeader";
+export * from "./SegmentedControl";
 export * from "./Select";
 export * from "./Snackbar";
 export * from "./StatCard";

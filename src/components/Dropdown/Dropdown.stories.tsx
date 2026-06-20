@@ -62,19 +62,18 @@ export const Interactive: Story = {
           placeholder="카테고리 선택"
           onClick={() => setOpen((o) => !o)}
         />
-        {open ? (
-          <div className="absolute top-full left-0 z-10 mt-1.5 w-full">
-            <DropdownMenu
-              items={items}
-              value={val}
-              onSelect={(v) => {
-                setVal(v);
-                setOpen(false);
-              }}
-              width="100%"
-            />
-          </div>
-        ) : null}
+        <div className="absolute top-full left-0 z-10 mt-1.5 w-full">
+          <DropdownMenu
+            open={open}
+            items={items}
+            value={val}
+            onSelect={(v) => {
+              setVal(v);
+              setOpen(false);
+            }}
+            width="100%"
+          />
+        </div>
       </div>
     );
   },

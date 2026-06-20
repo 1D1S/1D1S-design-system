@@ -22,6 +22,12 @@ export interface DropdownMenuProps
   onSelect?: (value: string) => void;
   /** 메뉴 너비 (default 240) */
   width?: number | string;
+  /**
+   * 열림 상태. 지정하면 입·퇴장 애니메이션과 마운트/언마운트를 내부에서 관리한다.
+   * (소비처는 조건부 렌더 없이 항상 렌더하고 open만 토글)
+   * 미지정 시 기존처럼 항상 정적으로 표시한다.
+   */
+  open?: boolean;
 }
 
 /**
@@ -42,16 +48,42 @@ export function DropdownMenu({
   value,
   onSelect,
   width = 240,
+  open,
   className,
   style,
   ...props
-}: DropdownMenuProps): React.ReactElement {
+}: DropdownMenuProps): React.ReactElement | null {
+  const isControlled = open !== undefined;
+  // 퇴장 애니메이션이 끝날 때까지 DOM에 남겨두기 위한 presence 상태
+  const [present, setPresent] = React.useState(open ?? true);
+
+  React.useEffect(() => {
+    if (open) setPresent(true);
+  }, [open]);
+
+  if (isControlled && !present) return null;
+
+  const state = isControlled ? (open ? "open" : "closed") : "open";
+
   return (
     <div
       data-slot="dropdown-menu"
+      data-state={state}
       role="listbox"
+      onAnimationEnd={(e) => {
+        // 닫힘 애니메이션이 끝나면 언마운트 (자식 transition 이벤트는 무시)
+        if (e.target === e.currentTarget && isControlled && !open) {
+          setPresent(false);
+        }
+      }}
       className={cn(
         "rounded-2.5 border border-gray-200 bg-white p-1.5 shadow-lg",
+        "origin-top",
+        "data-[state=open]:animate-in data-[state=closed]:animate-out",
+        "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
+        "data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",
+        "data-[state=closed]:slide-out-to-top-1 data-[state=open]:slide-in-from-top-1",
+        "duration-150 ease-out",
         className,
       )}
       style={{ width, ...style }}
@@ -71,7 +103,7 @@ export function DropdownMenu({
               selected
                 ? "bg-brand-softer font-bold text-brand"
                 : "font-medium text-gray-800 hover:bg-gray-50",
-              it.disabled && "cursor-not-allowed opacity-[0.45]",
+              it.disabled && "cursor-not-allowed opacity-50",
             )}
           >
             <span className="truncate">{it.label}</span>

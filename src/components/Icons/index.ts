@@ -2,6 +2,7 @@ export * from "./AddCircle";
 export * from "./Bell";
 export * from "./BookOpen";
 export * from "./Calendar";
+export * from "./Challenge";
 export * from "./Dumbbell";
 export * from "./Flag";
 export * from "./Flame";

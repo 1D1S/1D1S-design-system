@@ -112,9 +112,9 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
             className={cn(
               "w-full resize-y rounded-2.5 border border-gray-200 bg-white leading-[1.6] text-gray-900",
               SIZE_CLASS[size],
-              "outline-none transition-[border-color,box-shadow,background-color] duration-150",
-              "placeholder:text-gray-500 hover:border-gray-300",
-              "focus-visible:border-brand focus-visible:shadow-focus",
+              "outline-none transition-[border-color,box-shadow,background-color] duration-200",
+              "placeholder:text-gray-500 hover:border-gray-400",
+              "focus-visible:border-brand focus-visible:ring-2 focus-visible:ring-brand/30 focus-visible:ring-offset-2",
               "disabled:cursor-not-allowed disabled:border-gray-200 disabled:bg-gray-100 disabled:text-gray-400",
               "aria-[invalid=true]:border-red-500 aria-[invalid=true]:shadow-focus-error",
               count && "pb-7",
