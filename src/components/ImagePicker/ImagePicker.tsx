@@ -132,6 +132,7 @@ export function ImagePicker({
         aria-label="썸네일 이미지 선택"
         className={cn(
           "relative flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-3 border bg-gray-100 transition outline-none",
+          "focus-visible:ring-2 focus-visible:ring-brand/30 focus-visible:ring-offset-2",
           dropZoneClassName,
           isDragging
             ? "border-main-700 ring-3 ring-main-300"

@@ -42,7 +42,7 @@ function SelectTrigger({
         "group flex w-full items-center justify-between whitespace-nowrap border bg-white outline-none transition-all duration-200",
         "disabled:cursor-not-allowed disabled:opacity-50",
         "hover:border-gray-400",
-        "data-[placeholder]:text-gray-500 focus-visible:ring-3 focus-visible:ring-main-300/60",
+        "data-[placeholder]:text-gray-500 focus-visible:ring-2 focus-visible:ring-brand/30 focus-visible:ring-offset-2",
         isSmall
           ? "h-10 min-w-[150px] rounded-3 border-gray-200 px-3.5"
           : "h-10 min-w-[150px] rounded-3 border-gray-200 px-4",

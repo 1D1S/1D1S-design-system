@@ -9,7 +9,7 @@ const dropdownTriggerVariants = cva(
   [
     "inline-flex w-full items-center justify-between rounded-2 border bg-white text-gray-900 font-medium",
     "transition-[border-color,box-shadow,background-color] duration-150 ease-out outline-none",
-    "focus-visible:outline-none",
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/30 focus-visible:ring-offset-2",
     "disabled:cursor-not-allowed disabled:bg-gray-100 disabled:text-gray-400",
   ],
   {
