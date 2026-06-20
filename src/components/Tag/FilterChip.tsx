@@ -14,7 +14,7 @@ const filterChipVariants = cva(
         lg: "text-sm py-2 px-4 gap-1.5",
       },
       active: {
-        true: "bg-brand text-white border-brand",
+        true: "bg-brand text-white border-brand animate-pop",
         false: "bg-white text-gray-700 border-gray-200 hover:bg-gray-50 hover:border-gray-300",
       },
     },

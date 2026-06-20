@@ -43,6 +43,8 @@ export interface StripeProps
   radius?: number | string;
   /** 높이 (default `100%` — 부모를 채움) */
   height?: number | string;
+  /** 사선 줄무늬가 흐르는 shimmer 애니메이션 (로딩 표시용, default false) */
+  animated?: boolean;
 }
 
 /**
@@ -64,6 +66,7 @@ export function Stripe({
   label,
   radius = 0,
   height = "100%",
+  animated = false,
   className,
   style,
   ...props
@@ -75,6 +78,7 @@ export function Stripe({
       className={cn(
         "relative flex w-full items-center justify-center overflow-hidden",
         "font-mono text-3xs tracking-[0.3px] text-black/45",
+        animated && "animate-shimmer",
         className,
       )}
       style={{

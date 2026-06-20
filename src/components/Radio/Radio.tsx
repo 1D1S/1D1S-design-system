@@ -41,7 +41,7 @@ export const Radio = React.forwardRef<HTMLInputElement, RadioProps>(
             className="peer absolute inset-0 m-0 h-full w-full cursor-pointer appearance-none rounded-full border-[1.5px] border-gray-300 bg-white outline-none transition-colors focus-visible:ring-2 focus-visible:ring-brand/30 focus-visible:ring-offset-2 checked:border-brand"
             {...props}
           />
-          <span className="pointer-events-none h-[9px] w-[9px] scale-0 rounded-full bg-brand transition-transform duration-150 ease-out peer-checked:scale-100" />
+          <span className="pointer-events-none h-[9px] w-[9px] scale-0 rounded-full bg-brand transition-transform duration-150 ease-out peer-checked:scale-100 peer-checked:animate-pop" />
         </span>
         {label ? (
           <Text size="caption2" weight="medium" className="text-gray-800">

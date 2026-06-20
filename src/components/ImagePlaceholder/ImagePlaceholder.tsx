@@ -30,7 +30,7 @@ export function ImagePlaceholder({
         className
       )}
     >
-      <Logo className={cn('text-main-500', logoSizeClasses[logoSize])} />
+      <Logo className={cn('text-main-500 animate-float', logoSizeClasses[logoSize])} />
     </div>
   );
 }

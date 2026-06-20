@@ -115,11 +115,19 @@ export function ProgressBar({
         <div
           className={cn(
             "h-full rounded-full bg-brand transition-[width] duration-300 ease-out",
+            infinite && "animate-shimmer",
             fillClassName,
           )}
           style={{
             width: progressWidth,
             ...(fillColor ? { backgroundColor: fillColor } : {}),
+            ...(infinite
+              ? {
+                  backgroundImage:
+                    "linear-gradient(90deg, var(--brand) 25%, var(--main-400) 50%, var(--brand) 75%)",
+                  backgroundSize: "200% 100%",
+                }
+              : {}),
           }}
         />
       </div>

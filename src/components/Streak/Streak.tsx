@@ -25,6 +25,8 @@ export interface StreakProps {
    * 버튼, 링크 등 인터랙티브 요소를 넣을 수 있습니다.
    */
   renderCellActions?: (item: StreakData) => React.ReactNode;
+  /** 마지막(오늘) 셀에 펄스 링으로 주의 환기 (default false) */
+  highlightLast?: boolean;
 }
 
 /**
@@ -41,6 +43,7 @@ export function Streak({
   gap = 8,
   className,
   renderCellActions,
+  highlightLast = false,
 }: StreakProps): React.ReactElement {
   const [openIndex, setOpenIndex] = React.useState<number | null>(null);
   const [selectedIndex, setSelectedIndex] = React.useState<number | null>(null);
@@ -99,6 +102,9 @@ export function Streak({
                   getLevelColor(item.count),
                   selectedIndex === index &&
                     "ring-2 ring-gray-800 ring-offset-1",
+                  highlightLast &&
+                    index === data.length - 1 &&
+                    "animate-pulse-ring",
                 )}
                 style={{
                   width: size,

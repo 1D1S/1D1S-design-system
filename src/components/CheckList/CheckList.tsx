@@ -80,7 +80,7 @@ export function CheckList({
   return (
     <div
       className={cn(
-        "overflow-hidden rounded-4 border border-gray-200 bg-white",
+        "stagger-in overflow-hidden rounded-4 border border-gray-200 bg-white",
         className
       )}
     >
