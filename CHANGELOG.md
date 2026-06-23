@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.1](https://github.com/1D1S/1D1S-design-system/compare/v1.4.0...v1.4.1) (2026-06-23)
+
+
+### Bug Fixes
+
+* DatePicker가 내부 Calendar 옵션을 전달하도록 calendarProps 추가 [patch] ([32643ba](https://github.com/1D1S/1D1S-design-system/commit/32643ba658724d03b4c9f472888481b5a8befb2c))
+
 ## [1.4.0](https://github.com/1D1S/1D1S-design-system/compare/v1.3.0...v1.4.0) (2026-06-20)
 
 
