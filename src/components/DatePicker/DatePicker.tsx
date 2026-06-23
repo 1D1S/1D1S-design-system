@@ -29,7 +29,22 @@ interface BasePickerProps {
   mobileSheet?: boolean;
   /** 바텀시트 상단 제목 (모바일에서만 표시). 기본값은 placeholder. */
   sheetTitle?: string;
+  /**
+   * 내부 Calendar(react-day-picker)로 그대로 전달되는 옵션.
+   * 비활성 날짜(`disabled` 매처), 선택 가능 범위(`fromDate`/`toDate`),
+   * 초기 표시 월(`defaultMonth`) 등을 지정할 수 있다.
+   * `mode`/`selected`/`onSelect`는 내부에서 제어하므로 무시된다.
+   *
+   * @example calendarProps={{ disabled: { before: new Date() } }}
+   */
+  calendarProps?: CalendarPassthroughProps;
 }
+
+/** DatePicker가 내부 Calendar로 넘기는 옵션 (제어 prop 제외) */
+export type CalendarPassthroughProps = Omit<
+  React.ComponentProps<typeof CalendarView>,
+  "mode" | "selected" | "onSelect" | "className"
+>;
 
 const POPOVER_CONTENT_CLASS = cn(
   "z-50 w-auto text-gray-900 outline-none",
@@ -127,6 +142,7 @@ export function DatePicker({
   disableClickPropagation = false,
   mobileSheet = true,
   sheetTitle,
+  calendarProps,
 }: DatePickerProps): React.ReactElement {
   const [open, setOpen] = React.useState(false);
   const isMobile = useIsMobile();
@@ -136,6 +152,7 @@ export function DatePicker({
 
   const calendar = (
     <CalendarView
+      {...calendarProps}
       mode="single"
       selected={value}
       onSelect={(date) => {
@@ -194,6 +211,7 @@ export function RangeDatePicker({
   disableClickPropagation = false,
   mobileSheet = true,
   sheetTitle,
+  calendarProps,
 }: RangeDatePickerProps): React.ReactElement {
   const [open, setOpen] = React.useState(false);
   const isMobile = useIsMobile();
@@ -218,6 +236,7 @@ export function RangeDatePicker({
 
   const calendar = (
     <CalendarView
+      {...calendarProps}
       mode="range"
       selected={value}
       onSelect={(nextRange, selectedDay) => {
