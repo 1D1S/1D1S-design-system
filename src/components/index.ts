@@ -27,6 +27,7 @@ export type { IconName, IconProps } from "./Icons/Icon";
 export * from "./ImagePicker";
 export * from "./ImagePlaceholder";
 export * from "./PageWatermark";
+export * from "./Pagination";
 export * from "./ProgressBar";
 export * from "./Radio";
 export * from "./ScheduleCalendar";
