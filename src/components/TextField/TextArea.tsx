@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { cn } from "../../lib/utils";
-import { Text } from "../Text";
+import { TextField } from "./TextField";
 
 export type TextAreaSize = "sm" | "md" | "lg";
 
@@ -22,16 +22,17 @@ export interface TextAreaProps
   full?: boolean;
 }
 
-/** 사이즈별 글자 크기·패딩·최소 높이 (TextField 사이즈 스케일과 정렬) */
-const SIZE_CLASS: Record<TextAreaSize, string> = {
-  sm: "min-h-[64px] px-3 py-2.5 text-xs",
-  md: "min-h-[80px] px-3.5 py-3 text-sm",
-  lg: "min-h-[96px] px-4 py-3.5 text-base",
+/** 사이즈별 최소 높이 (TextField multiline 위에 덮어쓰기) */
+const MIN_HEIGHT: Record<TextAreaSize, string> = {
+  sm: "min-h-[64px]",
+  md: "min-h-[80px]",
+  lg: "min-h-[96px]",
 };
 
 /**
  * TextArea
  * 다중 행 입력 — 글자수 카운터, label/helper/error 지원.
+ * TextField의 `multiline` 모드를 감싼 얇은 래퍼다.
  *
  * @example
  * ```tsx
@@ -40,111 +41,22 @@ const SIZE_CLASS: Record<TextAreaSize, string> = {
  */
 export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
   (
-    {
-      className,
-      label,
-      labelHint,
-      helper,
-      error,
-      count,
-      max,
-      size = "md",
-      full = true,
-      rows = 4,
-      defaultValue,
-      value,
-      onChange,
-      required,
-      disabled,
-      id,
-      maxLength,
-      ...props
-    },
+    { className, size = "md", count, max, full = true, maxLength, ...rest },
     ref,
-  ) => {
-    const generatedId = React.useId();
-    const fieldId = id || generatedId;
-    const isControlled = value !== undefined;
-    const [inner, setInner] = React.useState<string>(
-      typeof defaultValue === "string" ? defaultValue : "",
-    );
-    const current = (isControlled ? value : inner) as string;
-    const len = current ? String(current).length : 0;
-
-    return (
-      <div className={cn("flex flex-col", full ? "w-full" : "w-[380px]")}>
-        {label ? (
-          <label
-            htmlFor={fieldId}
-            className="mb-1.5 inline-flex items-center gap-1.5"
-          >
-            <Text size="caption3" weight="bold" className="text-gray-700">
-              {label}
-            </Text>
-            {required ? (
-              <Text size="caption3" weight="bold" className="text-brand">
-                *
-              </Text>
-            ) : null}
-            {labelHint ? (
-              <Text size="caption3" weight="regular" className="text-gray-500">
-                {labelHint}
-              </Text>
-            ) : null}
-          </label>
-        ) : null}
-
-        <div className="relative w-full">
-          <textarea
-            id={fieldId}
-            ref={ref}
-            rows={rows}
-            value={isControlled ? value : inner}
-            defaultValue={isControlled ? undefined : defaultValue}
-            onChange={(e) => {
-              if (!isControlled) setInner(e.target.value);
-              onChange?.(e);
-            }}
-            maxLength={maxLength ?? max}
-            required={required}
-            disabled={disabled}
-            aria-invalid={error ? true : undefined}
-            className={cn(
-              "w-full resize-y rounded-2.5 border border-gray-200 bg-white leading-[1.6] text-gray-900",
-              SIZE_CLASS[size],
-              "outline-none transition-[border-color,box-shadow,background-color] duration-200",
-              "placeholder:text-gray-500 hover:border-gray-400",
-              "focus-visible:border-brand focus-visible:ring-2 focus-visible:ring-brand/30 focus-visible:ring-offset-2",
-              "disabled:cursor-not-allowed disabled:border-gray-200 disabled:bg-gray-100 disabled:text-gray-400",
-              "aria-[invalid=true]:border-red-500 aria-[invalid=true]:shadow-focus-error",
-              count && "pb-7",
-              className,
-            )}
-            {...props}
-          />
-          {count ? (
-            <div className="pointer-events-none absolute right-3 bottom-2.5 text-2xs font-semibold tabular-nums text-gray-500">
-              {len}
-              {max ? `/${max}` : ""}
-            </div>
-          ) : null}
-        </div>
-
-        {error || helper ? (
-          <Text
-            size="caption3"
-            weight="regular"
-            className={cn(
-              "mt-1.5",
-              error ? "text-red-500" : "text-gray-500",
-            )}
-          >
-            {error || helper}
-          </Text>
-        ) : null}
-      </div>
-    );
-  },
+  ) => (
+    <div className={full ? "w-full" : "w-[380px]"}>
+      <TextField
+        ref={ref as React.Ref<HTMLInputElement | HTMLTextAreaElement>}
+        multiline
+        size={size}
+        count={count}
+        maxLength={maxLength ?? max}
+        className={cn(MIN_HEIGHT[size], className)}
+        // ponytail: rest는 textarea 속성(onChange 이벤트 타입만 다름) — 경계에서 한 번 캐스팅
+        {...(rest as React.ComponentPropsWithoutRef<typeof TextField>)}
+      />
+    </div>
+  ),
 );
 
 TextArea.displayName = "TextArea";

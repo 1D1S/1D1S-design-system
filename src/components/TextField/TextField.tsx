@@ -108,6 +108,8 @@ export interface TextFieldProps
   multiline?: boolean;
   rows?: number;
   cols?: number;
+  /** 우하단 글자수 카운터 (multiline 전용). `maxLength`와 함께 쓰면 `n/max` 표시 */
+  count?: boolean;
 }
 
 function FieldLabel({
@@ -177,6 +179,10 @@ export const TextField = React.forwardRef<
       multiline = false,
       rows = 8,
       cols,
+      count,
+      value,
+      defaultValue,
+      onChange,
       required,
       disabled,
       id,
@@ -191,6 +197,21 @@ export const TextField = React.forwardRef<
     const isRightInteractive = suffix == null && iconRight != null && !multiline;
     const resolvedState = error ? "error" : disabled ? "disabled" : state;
 
+    const showCounter = Boolean(count) && multiline;
+    const isControlled = value !== undefined;
+    const [innerValue, setInnerValue] = React.useState(
+      typeof defaultValue === "string" ? defaultValue : "",
+    );
+    const currentLength = (isControlled ? String(value ?? "") : innerValue).length;
+    const handleChange = (
+      e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    ): void => {
+      if (!isControlled && showCounter) setInnerValue(e.currentTarget.value);
+      (onChange as
+        | ((e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void)
+        | undefined)?.(e);
+    };
+
     const fieldClass = cn(
       fieldVariants({
         size,
@@ -199,6 +220,7 @@ export const TextField = React.forwardRef<
         multiline,
         state: resolvedState,
       }),
+      showCounter && "pb-7",
       className,
     );
 
@@ -247,6 +269,9 @@ export const TextField = React.forwardRef<
               aria-invalid={error ? true : undefined}
               className={fieldClass}
               ref={ref as React.Ref<HTMLTextAreaElement>}
+              value={value}
+              defaultValue={defaultValue}
+              onChange={handleChange}
               {...(props as Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>, "size">)}
             />
           ) : (
@@ -258,8 +283,18 @@ export const TextField = React.forwardRef<
               aria-invalid={error ? true : undefined}
               className={fieldClass}
               ref={ref as React.Ref<HTMLInputElement>}
+              value={value}
+              defaultValue={defaultValue}
+              onChange={handleChange}
               {...props}
             />
+          )}
+
+          {showCounter && (
+            <div className="pointer-events-none absolute right-3 bottom-2.5 text-2xs font-semibold tabular-nums text-gray-500">
+              {currentLength}
+              {props.maxLength != null ? `/${props.maxLength}` : ""}
+            </div>
           )}
         </div>
 
