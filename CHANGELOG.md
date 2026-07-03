@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://github.com/1D1S/1D1S-design-system/compare/v1.5.0...v2.0.0) (2026-07-03)
+
 ## [1.5.0](https://github.com/1D1S/1D1S-design-system/compare/v1.4.1...v1.5.0) (2026-06-29)
 
 
