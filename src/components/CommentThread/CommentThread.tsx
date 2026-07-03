@@ -130,20 +130,88 @@ function CommentActionsMenu({
   );
 }
 
+// draft를 로컬 state로 둬서 키 입력이 댓글 트리 전체를 리렌더하지 않게 한다
+function ReplyComposer({
+  open,
+  placeholder,
+  submitLabel,
+  cancelLabel,
+  onSubmit,
+  onCancel,
+}: {
+  open: boolean;
+  placeholder: string;
+  submitLabel: string;
+  cancelLabel: string;
+  onSubmit(content: string): void;
+  onCancel(): void;
+}): React.ReactElement {
+  const [draft, setDraft] = React.useState("");
+
+  // 닫힐 때(다른 댓글로 이동 포함) 입력값 초기화
+  React.useEffect(() => {
+    if (!open) setDraft("");
+  }, [open]);
+
+  return (
+    <div
+      aria-hidden={!open}
+      className={cn(
+        "overflow-hidden transition-all duration-200 ease-out",
+        open
+          ? "mt-1 max-h-[260px] opacity-100"
+          : "mt-0 max-h-0 opacity-0 pointer-events-none",
+      )}
+      onClick={(event) => event.stopPropagation()}
+    >
+      <div className="flex items-center gap-1.5 p-1">
+        <TextArea
+          value={draft}
+          onChange={(event) => setDraft(event.target.value)}
+          placeholder={placeholder}
+          rows={1}
+          className="min-h-[36px] flex-1 text-sm"
+        />
+        <button
+          type="button"
+          className="rounded-2 px-2 py-1.5 text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-700"
+          onClick={onCancel}
+        >
+          <Text size="caption2" weight="medium">
+            {cancelLabel}
+          </Text>
+        </button>
+        <button
+          type="button"
+          className={cn(
+            "rounded-2 bg-brand px-2.5 py-1.5 text-white transition-colors hover:bg-main-700",
+            !draft.trim() &&
+              "cursor-not-allowed bg-main-400 hover:bg-main-400",
+          )}
+          onClick={() => onSubmit(draft)}
+          disabled={!draft.trim()}
+        >
+          <Text size="caption2" weight="bold">
+            {submitLabel}
+          </Text>
+        </button>
+      </div>
+    </div>
+  );
+}
+
 function CommentItem({
   comment,
   depth,
   isLast,
   currentUserId,
   activeReplyTargetId,
-  draftReplyContent,
   replyPlaceholder,
   replySubmitLabel,
   replyCancelLabel,
   replyButtonLabel,
   loadMoreRepliesLabel,
   onReplyOpen,
-  onReplyChange,
   onReplySubmit,
   onReplyCancel,
   onLoadMoreReplies,
@@ -155,15 +223,13 @@ function CommentItem({
   isLast: boolean;
   currentUserId?: string;
   activeReplyTargetId: string | null;
-  draftReplyContent: string;
   replyPlaceholder: string;
   replySubmitLabel: string;
   replyCancelLabel: string;
   replyButtonLabel: string;
   loadMoreRepliesLabel: string;
   onReplyOpen(comment: CommentNode): void;
-  onReplyChange(content: string): void;
-  onReplySubmit(comment: CommentNode): void;
+  onReplySubmit(comment: CommentNode, content: string): void;
   onReplyCancel(): void;
   onLoadMoreReplies?(comment: CommentNode): void;
   onDelete?(comment: CommentNode): void;
@@ -237,14 +303,12 @@ function CommentItem({
                   isLast={replyIndex === replies.length - 1}
                   currentUserId={currentUserId}
                   activeReplyTargetId={activeReplyTargetId}
-                  draftReplyContent={draftReplyContent}
                   replyPlaceholder={replyPlaceholder}
                   replySubmitLabel={replySubmitLabel}
                   replyCancelLabel={replyCancelLabel}
                   replyButtonLabel={replyButtonLabel}
                   loadMoreRepliesLabel={loadMoreRepliesLabel}
                   onReplyOpen={onReplyOpen}
-                  onReplyChange={onReplyChange}
                   onReplySubmit={onReplySubmit}
                   onReplyCancel={onReplyCancel}
                   onLoadMoreReplies={onLoadMoreReplies}
@@ -255,49 +319,14 @@ function CommentItem({
             </ul>
           ) : null}
 
-          <div
-            aria-hidden={!isReplyComposerOpen}
-            className={cn(
-              "overflow-hidden transition-all duration-200 ease-out",
-              isReplyComposerOpen
-                ? "mt-1 max-h-[260px] opacity-100"
-                : "mt-0 max-h-0 opacity-0 pointer-events-none",
-            )}
-            onClick={(event) => event.stopPropagation()}
-          >
-            <div className="flex items-center gap-1.5 p-1">
-              <TextArea
-                value={draftReplyContent}
-                onChange={(event) => onReplyChange(event.target.value)}
-                placeholder={replyPlaceholder}
-                rows={1}
-                className="min-h-[36px] flex-1 text-sm"
-              />
-              <button
-                type="button"
-                className="rounded-2 px-2 py-1.5 text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-700"
-                onClick={onReplyCancel}
-              >
-                <Text size="caption2" weight="medium">
-                  {replyCancelLabel}
-                </Text>
-              </button>
-              <button
-                type="button"
-                className={cn(
-                  "rounded-2 bg-brand px-2.5 py-1.5 text-white transition-colors hover:bg-main-700",
-                  !draftReplyContent.trim() &&
-                    "cursor-not-allowed bg-main-400 hover:bg-main-400",
-                )}
-                onClick={() => onReplySubmit(comment)}
-                disabled={!draftReplyContent.trim()}
-              >
-                <Text size="caption2" weight="bold">
-                  {replySubmitLabel}
-                </Text>
-              </button>
-            </div>
-          </div>
+          <ReplyComposer
+            open={isReplyComposerOpen}
+            placeholder={replyPlaceholder}
+            submitLabel={replySubmitLabel}
+            cancelLabel={replyCancelLabel}
+            onSubmit={(content) => onReplySubmit(comment, content)}
+            onCancel={onReplyCancel}
+          />
 
           {(showReplyButton && !isReplyComposerOpen) || hasMoreReplies ? (
             <div className="mt-1.5 flex items-center gap-1">
@@ -355,26 +384,22 @@ export function CommentThread({
   const [activeReplyTargetId, setActiveReplyTargetId] = React.useState<
     string | null
   >(null);
-  const [draftReplyContent, setDraftReplyContent] = React.useState("");
 
   const handleReplyOpen = (comment: CommentNode): void => {
     setActiveReplyTargetId(comment.id);
-    setDraftReplyContent("");
   };
 
   const handleReplyCancel = (): void => {
     setActiveReplyTargetId(null);
-    setDraftReplyContent("");
   };
 
-  const handleReplySubmit = (comment: CommentNode): void => {
-    const trimmedContent = draftReplyContent.trim();
+  const handleReplySubmit = (comment: CommentNode, content: string): void => {
+    const trimmedContent = content.trim();
     if (!trimmedContent) {
       return;
     }
 
     onReplySubmit?.(comment, trimmedContent);
-    setDraftReplyContent("");
     setActiveReplyTargetId(null);
   };
 
@@ -400,14 +425,12 @@ export function CommentThread({
           isLast={index === comments.length - 1}
           currentUserId={currentUserId}
           activeReplyTargetId={activeReplyTargetId}
-          draftReplyContent={draftReplyContent}
           replyPlaceholder={replyPlaceholder}
           replySubmitLabel={replySubmitLabel}
           replyCancelLabel={replyCancelLabel}
           replyButtonLabel={replyButtonLabel}
           loadMoreRepliesLabel={loadMoreRepliesLabel}
           onReplyOpen={handleReplyOpen}
-          onReplyChange={setDraftReplyContent}
           onReplySubmit={handleReplySubmit}
           onReplyCancel={handleReplyCancel}
           onLoadMoreReplies={onLoadMoreReplies}

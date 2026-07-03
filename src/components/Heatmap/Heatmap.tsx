@@ -203,7 +203,8 @@ interface HeatmapCellProps {
   onCellHover?: (info: HeatmapCellInfo | null) => void;
 }
 
-function HeatmapCell({
+// 선택 변경 시 다른 셀들이 통째로 리렌더되지 않도록 memo
+const HeatmapCell = React.memo(function HeatmapCell({
   index,
   level,
   color,
@@ -326,4 +327,4 @@ function HeatmapCell({
       </Popover.Portal>
     </Popover.Root>
   );
-}
+});
