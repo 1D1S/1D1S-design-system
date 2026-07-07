@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.4.0](https://github.com/1D1S/1D1S-design-system/compare/v2.3.0...v2.4.0) (2026-07-07)
+
+
+### Features
+
+* CheckList checkColor prop 추가 — 체크 색상 커스터마이즈 [minor] ([74acd8c](https://github.com/1D1S/1D1S-design-system/commit/74acd8cf94c5fc8afc63f10ec1dc5e4ba13106cc))
+
 ## [2.3.0](https://github.com/1D1S/1D1S-design-system/compare/v2.2.6...v2.3.0) (2026-07-07)
 
 
