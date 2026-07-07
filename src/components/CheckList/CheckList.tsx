@@ -115,7 +115,7 @@ export function CheckList({
               "transition-[background-color,transform] duration-150",
               sizeConfig.row,
               !isInteractionBlocked &&
-                "cursor-pointer hover:bg-gray-100/70 active:scale-[0.97]",
+                "cursor-pointer hover:bg-gray-100 active:scale-[0.97]",
               isDisabled && "cursor-not-allowed",
               isReadOnly && "cursor-default hover:cursor-not-allowed"
             )}
