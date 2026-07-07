@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.2.0](https://github.com/1D1S/1D1S-design-system/compare/v2.1.0...v2.2.0) (2026-07-07)
+
+
+### Features
+
+* CheckList 초록 원형 체크 스타일로 변경 [minor] ([aacd7f0](https://github.com/1D1S/1D1S-design-system/commit/aacd7f002e9775ed91e2d051cd4d7537c267cddf))
+
 ## [2.1.0](https://github.com/1D1S/1D1S-design-system/compare/v2.0.0...v2.1.0) (2026-07-07)
 
 
