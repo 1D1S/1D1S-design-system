@@ -6,6 +6,7 @@ import { Text } from "../Text";
 import { Checkbox } from "../Checkbox";
 
 export type CheckListSize = "sm" | "md" | "lg";
+export type CheckListVariant = "flat" | "card";
 
 export interface CheckListOption {
   id: string;
@@ -22,6 +23,11 @@ export interface CheckListProps {
   onValueChange: (value: string[]) => void;
   /** 사이즈 — `sm`·`md`(default)·`lg` */
   size?: CheckListSize;
+  /**
+   * 스타일 변형 — `flat`(default): 여백만 있는 플랫 행(읽기 전용 표시용),
+   * `card`: 행마다 보더 박스(체크 인터랙션용)
+   */
+  variant?: CheckListVariant;
   /** 추가 클래스 */
   className?: string;
   /** 읽기 전용 여부 (시각 변화 없이 토글만 비활성화) */
@@ -52,6 +58,13 @@ const SIZE_CONFIG: Record<
   lg: { list: "gap-1", row: "gap-3", checkbox: "h-6 w-6", label: "body1" },
 };
 
+/** card 변형 — 행마다 보더 박스, 리스트 간격은 고정 12px */
+const CARD_CONFIG: Record<CheckListSize, { list: string; row: string }> = {
+  sm: { list: "gap-2.5", row: "px-3.5 py-3" },
+  md: { list: "gap-3", row: "px-4 py-3.5" },
+  lg: { list: "gap-3", row: "px-4 py-4" },
+};
+
 /**
  * CheckList
  * 여러 개의 Checkbox를 리스트 형태로 보여주고 다중 선택을 관리하는 컴포넌트
@@ -73,12 +86,15 @@ export function CheckList({
   value,
   onValueChange,
   size = "md",
+  variant = "flat",
   className,
   readOnly = false,
   disabled = false,
 }: CheckListProps): React.ReactElement {
   const baseId = React.useId();
   const sizeConfig = SIZE_CONFIG[size];
+  const cardConfig = CARD_CONFIG[size];
+  const isCard = variant === "card";
 
   const handleToggle = (id: string, nextChecked: boolean): void => {
     if (nextChecked) {
@@ -91,7 +107,11 @@ export function CheckList({
 
   return (
     <div
-      className={cn("stagger-in flex flex-col", sizeConfig.list, className)}
+      className={cn(
+        "stagger-in flex flex-col",
+        isCard ? cardConfig.list : sizeConfig.list,
+        className
+      )}
     >
       {options.map((option) => {
         const isChecked = value.includes(option.id);
@@ -111,13 +131,19 @@ export function CheckList({
             }}
             className={cn(
               "flex w-full items-center text-left",
-              "-mx-2.5 rounded-2 px-2.5 py-1.5",
               /* 임의값 transition-[...] 은 소비처 Tailwind 스캔에서 누락될 수
                  있어 표준 유틸리티 사용 — press scale 이 부드럽게 전환된다 */
               "transition duration-200 ease-out",
+              isCard
+                ? cn(
+                    "rounded-3 border border-gray-200 bg-white",
+                    cardConfig.row
+                  )
+                : "-mx-2.5 rounded-2 px-2.5 py-1.5",
               sizeConfig.row,
+              !isInteractionBlocked && "cursor-pointer active:scale-[0.97]",
               !isInteractionBlocked &&
-                "cursor-pointer hover:bg-gray-100 active:scale-[0.97]",
+                (isCard ? "hover:bg-gray-50" : "hover:bg-gray-100"),
               isDisabled && "cursor-not-allowed",
               isReadOnly && "cursor-default hover:cursor-not-allowed"
             )}
