@@ -44,6 +44,7 @@ export * from "./Tabs";
 export * from "./Tag";
 export * from "./Text";
 export * from "./TextField";
+export * from "./ThumbnailPicker";
 export * from "./Toast";
 export * from "./Toggle";
 export * from "./ToggleGroup";
