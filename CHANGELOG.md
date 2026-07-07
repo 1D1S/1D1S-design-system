@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.2.4](https://github.com/1D1S/1D1S-design-system/compare/v2.2.3...v2.2.4) (2026-07-07)
+
+
+### Features
+
+* CheckList 행 호버 배경 + 프레스 스케일 모션 [patch] ([5776e44](https://github.com/1D1S/1D1S-design-system/commit/5776e447f0a6afdecc31fade97d1f7242c124cc8))
+
 ### [2.2.3](https://github.com/1D1S/1D1S-design-system/compare/v2.2.2...v2.2.3) (2026-07-07)
 
 
