@@ -40,9 +40,14 @@ const SIZE_CONFIG: Record<
     label: "caption1" | "body2" | "body1";
   }
 > = {
-  sm: { list: "gap-3", row: "gap-2.5", checkbox: "h-4 w-4", label: "caption1" },
-  md: { list: "gap-3.5", row: "gap-2.5", checkbox: "h-5 w-5", label: "body2" },
-  lg: { list: "gap-4", row: "gap-3", checkbox: "h-6 w-6", label: "body1" },
+  sm: {
+    list: "gap-3.5",
+    row: "gap-2.5",
+    checkbox: "h-[18px] w-[18px]",
+    label: "body2",
+  },
+  md: { list: "gap-4", row: "gap-3", checkbox: "h-5 w-5", label: "body1" },
+  lg: { list: "gap-5", row: "gap-3", checkbox: "h-6 w-6", label: "body1" },
 };
 
 /**
