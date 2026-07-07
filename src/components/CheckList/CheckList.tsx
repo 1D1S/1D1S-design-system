@@ -41,13 +41,13 @@ const SIZE_CONFIG: Record<
   }
 > = {
   sm: {
-    list: "gap-3.5",
+    list: "gap-4",
     row: "gap-2.5",
     checkbox: "h-[18px] w-[18px]",
     label: "body2",
   },
-  md: { list: "gap-4", row: "gap-3", checkbox: "h-5 w-5", label: "body1" },
-  lg: { list: "gap-5", row: "gap-3", checkbox: "h-6 w-6", label: "body1" },
+  md: { list: "gap-5", row: "gap-3", checkbox: "h-5 w-5", label: "body1" },
+  lg: { list: "gap-6", row: "gap-3", checkbox: "h-6 w-6", label: "body1" },
 };
 
 /**
