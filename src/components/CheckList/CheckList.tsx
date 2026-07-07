@@ -112,7 +112,9 @@ export function CheckList({
             className={cn(
               "flex w-full items-center text-left",
               "-mx-2.5 rounded-2 px-2.5 py-1.5",
-              "transition-[background-color,transform] duration-150",
+              /* 임의값 transition-[...] 은 소비처 Tailwind 스캔에서 누락될 수
+                 있어 표준 유틸리티 사용 — press scale 이 부드럽게 전환된다 */
+              "transition duration-200 ease-out",
               sizeConfig.row,
               !isInteractionBlocked &&
                 "cursor-pointer hover:bg-gray-100 active:scale-[0.97]",
