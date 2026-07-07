@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.2.5](https://github.com/1D1S/1D1S-design-system/compare/v2.2.4...v2.2.5) (2026-07-07)
+
+
+### Bug Fixes
+
+* CheckList 호버 배경을 불투명 gray-100 으로 상향 [patch] ([15302ef](https://github.com/1D1S/1D1S-design-system/commit/15302efc2bcd4adb0dc262afb15baf3753d7c987))
+
 ### [2.2.4](https://github.com/1D1S/1D1S-design-system/compare/v2.2.3...v2.2.4) (2026-07-07)
 
 
