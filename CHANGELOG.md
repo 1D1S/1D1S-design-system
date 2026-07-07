@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.5.0](https://github.com/1D1S/1D1S-design-system/compare/v2.4.1...v2.5.0) (2026-07-07)
+
+
+### Bug Fixes
+
+* ImagePicker webp 등 비허용 타입 차단 [minor] ([7815b29](https://github.com/1D1S/1D1S-design-system/commit/7815b29adc4499fa73d962375f5b3f69872cf658))
+
 ### [2.4.1](https://github.com/1D1S/1D1S-design-system/compare/v2.4.0...v2.4.1) (2026-07-07)
 
 
