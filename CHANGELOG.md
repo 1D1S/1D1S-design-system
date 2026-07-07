@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.2.6](https://github.com/1D1S/1D1S-design-system/compare/v2.2.5...v2.2.6) (2026-07-07)
+
+
+### Bug Fixes
+
+* CheckList press 모션이 부드럽게 전환되도록 표준 transition 유틸 사용 [patch] ([1410a07](https://github.com/1D1S/1D1S-design-system/commit/1410a07f6e6543967941abcd843c384c50ccce3f))
+
 ### [2.2.5](https://github.com/1D1S/1D1S-design-system/compare/v2.2.4...v2.2.5) (2026-07-07)
 
 
