@@ -17,6 +17,13 @@ export interface ImagePickerProps {
   placeholderSubtitle?: string;
   /** 하단 도움말 텍스트 (기본값: "JPG, PNG, GIF 파일을 업로드할 수 있습니다.") */
   helperText?: string;
+  /**
+   * 허용 MIME 타입 목록. OS 파일 선택창 필터(accept)와 실제 검증(드래그
+   * 드롭 포함)에 모두 사용된다. 기본값은 JPG·PNG·GIF (webp/svg 등 차단).
+   */
+  acceptedTypes?: string[];
+  /** 허용되지 않은 타입 선택 시 호출 (기본: 무시) — 토스트 등 피드백용 */
+  onInvalidFile?: (file: File) => void;
   /** 선택 해제 버튼 텍스트 (기본값: "선택 해제") */
   clearLabel?: string;
   /**
@@ -60,6 +67,8 @@ export function ImagePicker({
   placeholderTitle = "썸네일 영역을 클릭해 이미지를 선택하세요.",
   placeholderSubtitle = "또는 이미지를 드래그해서 놓아주세요.",
   helperText = "JPG, PNG, GIF 파일을 업로드할 수 있습니다.",
+  acceptedTypes = ["image/jpeg", "image/png", "image/gif"],
+  onInvalidFile,
   clearLabel = "선택 해제",
   dropZoneClassName = "min-h-[220px] flex-1 lg:min-h-[440px]",
   className,
@@ -77,7 +86,12 @@ export function ImagePicker({
   };
 
   const handleFileSelect = (file: File | null): void => {
-    if (!file || !file.type.startsWith("image/")) return;
+    if (!file) return;
+    // 허용 타입만 통과 — accept 속성을 우회하는 드래그 드롭도 여기서 차단.
+    if (!acceptedTypes.includes(file.type)) {
+      onInvalidFile?.(file);
+      return;
+    }
     setFailedPreviewUrl(null);
     onSelectFile(file);
   };
@@ -166,7 +180,7 @@ export function ImagePicker({
         <input
           ref={fileInputRef}
           type="file"
-          accept="image/*"
+          accept={acceptedTypes.join(",")}
           onChange={handleInputChange}
           className="hidden"
         />
