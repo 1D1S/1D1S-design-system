@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.1.0](https://github.com/1D1S/1D1S-design-system/compare/v2.0.0...v2.1.0) (2026-07-07)
+
+
+### Features
+
+* CheckList 행 카드 스타일 적용 — 체크 시 main-100 하이라이트 [minor] ([dca9a4d](https://github.com/1D1S/1D1S-design-system/commit/dca9a4d6fd09b29f0c1c998e867b38b7dddbbbfc))
+
 ## [2.0.0](https://github.com/1D1S/1D1S-design-system/compare/v1.5.0...v2.0.0) (2026-07-03)
 
 ## [1.5.0](https://github.com/1D1S/1D1S-design-system/compare/v1.4.1...v1.5.0) (2026-06-29)
