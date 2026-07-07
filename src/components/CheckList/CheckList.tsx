@@ -35,9 +35,9 @@ const SIZE_CONFIG: Record<
   CheckListSize,
   { row: string; checkbox: string; label: "caption1" | "body2" | "body1" }
 > = {
-  sm: { row: "gap-3 px-3 py-2.5", checkbox: "h-4 w-4", label: "caption1" },
-  md: { row: "gap-3.5 px-4 py-3.5", checkbox: "h-[18px] w-[18px]", label: "body2" },
-  lg: { row: "gap-4 px-4 py-4", checkbox: "h-5 w-5", label: "body1" },
+  sm: { row: "gap-2.5 px-3 py-2", checkbox: "h-4 w-4", label: "caption1" },
+  md: { row: "gap-3 px-3.5 py-2.5", checkbox: "h-5 w-5", label: "body2" },
+  lg: { row: "gap-3.5 px-4 py-3", checkbox: "h-5 w-5", label: "body1" },
 };
 
 /**
@@ -78,13 +78,8 @@ export function CheckList({
   };
 
   return (
-    <div
-      className={cn(
-        "stagger-in overflow-hidden rounded-4 border border-gray-200 bg-white",
-        className
-      )}
-    >
-      {options.map((option, index) => {
+    <div className={cn("stagger-in flex flex-col gap-2", className)}>
+      {options.map((option) => {
         const isChecked = value.includes(option.id);
         const isDisabled = disabled || option.disabled;
         const isReadOnly = !isDisabled && readOnly;
@@ -101,10 +96,14 @@ export function CheckList({
               event.preventDefault();
             }}
             className={cn(
-              "flex w-full items-center text-left transition-colors",
+              "flex w-full items-center rounded-2.5 border text-left",
+              "transition-colors",
               sizeConfig.row,
-              index > 0 && "border-t border-gray-200",
-              !isInteractionBlocked && "cursor-pointer hover:bg-gray-100/70",
+              isChecked
+                ? "border-main-200 bg-main-100"
+                : "border-gray-200 bg-white",
+              !isInteractionBlocked && "cursor-pointer",
+              !isInteractionBlocked && !isChecked && "hover:bg-gray-50",
               isDisabled && "cursor-not-allowed",
               isReadOnly && "cursor-default hover:cursor-not-allowed"
             )}
@@ -128,10 +127,10 @@ export function CheckList({
             {typeof option.label === "string" || typeof option.label === "number" ? (
               <Text
                 size={sizeConfig.label}
-                weight="medium"
+                weight="semibold"
                 className={cn(
                   "flex-1 transition-colors",
-                  isChecked ? "text-gray-900" : "text-gray-600",
+                  isChecked ? "text-gray-800" : "text-gray-600",
                   isDisabled && "text-gray-400"
                 )}
               >
