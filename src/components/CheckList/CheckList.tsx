@@ -65,9 +65,9 @@ const SIZE_CONFIG: Record<
 
 /** card 변형 — 행마다 보더 박스, 리스트 간격은 고정 12px */
 const CARD_CONFIG: Record<CheckListSize, { list: string; row: string }> = {
-  sm: { list: "gap-2.5", row: "px-3.5 py-3" },
-  md: { list: "gap-3", row: "px-4 py-3.5" },
-  lg: { list: "gap-3", row: "px-4 py-4" },
+  sm: { list: "gap-1.5", row: "px-3.5 py-3" },
+  md: { list: "gap-2", row: "px-4 py-3.5" },
+  lg: { list: "gap-2", row: "px-4 py-4" },
 };
 
 /**
