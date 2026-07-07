@@ -40,14 +40,16 @@ const SIZE_CONFIG: Record<
     label: "caption1" | "body2" | "body1";
   }
 > = {
+  /* 행 py-1.5(12px)가 시각 간격에 포함되므로 list gap 은 그만큼 낮게 잡는다:
+     텍스트 간 간격 = gap + 12px → sm 12 / md 14 / lg 16px 유지 */
   sm: {
-    list: "gap-3",
+    list: "gap-0",
     row: "gap-2.5",
     checkbox: "h-[18px] w-[18px]",
     label: "body2",
   },
-  md: { list: "gap-3.5", row: "gap-3", checkbox: "h-5 w-5", label: "body1" },
-  lg: { list: "gap-4", row: "gap-3", checkbox: "h-6 w-6", label: "body1" },
+  md: { list: "gap-0.5", row: "gap-3", checkbox: "h-5 w-5", label: "body1" },
+  lg: { list: "gap-1", row: "gap-3", checkbox: "h-6 w-6", label: "body1" },
 };
 
 /**
@@ -108,9 +110,12 @@ export function CheckList({
               event.preventDefault();
             }}
             className={cn(
-              "flex w-full items-center text-left transition-colors",
+              "flex w-full items-center text-left",
+              "-mx-2.5 rounded-2 px-2.5 py-1.5",
+              "transition-[background-color,transform] duration-150",
               sizeConfig.row,
-              !isInteractionBlocked && "cursor-pointer",
+              !isInteractionBlocked &&
+                "cursor-pointer hover:bg-gray-100/70 active:scale-[0.97]",
               isDisabled && "cursor-not-allowed",
               isReadOnly && "cursor-default hover:cursor-not-allowed"
             )}
