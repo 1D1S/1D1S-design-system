@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0](https://github.com/1D1S/1D1S-design-system/compare/v2.2.6...v2.3.0) (2026-07-07)
+
+
+### Features
+
+* CheckList variant 추가 — card(보더 박스 행) / flat(기존) [minor] ([402f52b](https://github.com/1D1S/1D1S-design-system/commit/402f52b6f201e131588eeecf043fca96b7bda86c))
+
 ### [2.2.6](https://github.com/1D1S/1D1S-design-system/compare/v2.2.5...v2.2.6) (2026-07-07)
 
 
