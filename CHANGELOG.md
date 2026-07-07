@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.2.1](https://github.com/1D1S/1D1S-design-system/compare/v2.2.0...v2.2.1) (2026-07-07)
+
+
+### Bug Fixes
+
+* CheckList 행 간격·라벨 크기 확대 [patch] ([f042d93](https://github.com/1D1S/1D1S-design-system/commit/f042d93667fd119d73d19d9fbeff84c26087f113))
+
 ## [2.2.0](https://github.com/1D1S/1D1S-design-system/compare/v2.1.0...v2.2.0) (2026-07-07)
 
 
