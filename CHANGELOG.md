@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.4.1](https://github.com/1D1S/1D1S-design-system/compare/v2.4.0...v2.4.1) (2026-07-07)
+
+
+### Bug Fixes
+
+* CheckList card 변형 행 간격 축소 (12→8px) [patch] ([c4eb573](https://github.com/1D1S/1D1S-design-system/commit/c4eb5739ef56db6dd70d0c7ce4cdc6f146752d4f))
+
 ## [2.4.0](https://github.com/1D1S/1D1S-design-system/compare/v2.3.0...v2.4.0) (2026-07-07)
 
 
