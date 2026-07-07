@@ -34,6 +34,11 @@ export interface CheckListProps {
   readOnly?: boolean;
   /** 전체 비활성화 여부 */
   disabled?: boolean;
+  /**
+   * 체크 시 채움/보더 색 (CSS color) — 미지정 시 green-600.
+   * 예: `var(--color-brand)`, `#8dc71e`
+   */
+  checkColor?: string;
 }
 
 /** 사이즈별 리스트·행 간격 / 체크박스 크기 / 라벨 텍스트 사이즈 */
@@ -90,6 +95,7 @@ export function CheckList({
   className,
   readOnly = false,
   disabled = false,
+  checkColor,
 }: CheckListProps): React.ReactElement {
   const baseId = React.useId();
   const sizeConfig = SIZE_CONFIG[size];
@@ -156,10 +162,18 @@ export function CheckList({
                 if (isInteractionBlocked || checkedState === "indeterminate") return;
                 handleToggle(option.id, checkedState === true);
               }}
+              /* checkColor 지정 시 인라인으로 채움/보더 색을 덮어쓴다.
+                 (미지정 시 아래 green-600 클래스가 적용된다) */
+              style={
+                checkColor && isChecked
+                  ? { backgroundColor: checkColor, borderColor: checkColor }
+                  : undefined
+              }
               className={cn(
                 sizeConfig.checkbox,
                 "rounded-full",
-                "data-[state=checked]:border-green-600 data-[state=checked]:bg-green-600",
+                !checkColor &&
+                  "data-[state=checked]:border-green-600 data-[state=checked]:bg-green-600",
                 isReadOnly && "cursor-default hover:cursor-not-allowed"
               )}
             />
