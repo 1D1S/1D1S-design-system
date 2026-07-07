@@ -30,14 +30,19 @@ export interface CheckListProps {
   disabled?: boolean;
 }
 
-/** 사이즈별 행 패딩·간격 / 체크박스 크기 / 라벨 텍스트 사이즈 */
+/** 사이즈별 리스트·행 간격 / 체크박스 크기 / 라벨 텍스트 사이즈 */
 const SIZE_CONFIG: Record<
   CheckListSize,
-  { row: string; checkbox: string; label: "caption1" | "body2" | "body1" }
+  {
+    list: string;
+    row: string;
+    checkbox: string;
+    label: "caption1" | "body2" | "body1";
+  }
 > = {
-  sm: { row: "gap-2.5 px-3 py-2", checkbox: "h-4 w-4", label: "caption1" },
-  md: { row: "gap-3 px-3.5 py-2.5", checkbox: "h-5 w-5", label: "body2" },
-  lg: { row: "gap-3.5 px-4 py-3", checkbox: "h-5 w-5", label: "body1" },
+  sm: { list: "gap-3", row: "gap-2.5", checkbox: "h-4 w-4", label: "caption1" },
+  md: { list: "gap-3.5", row: "gap-2.5", checkbox: "h-5 w-5", label: "body2" },
+  lg: { list: "gap-4", row: "gap-3", checkbox: "h-6 w-6", label: "body1" },
 };
 
 /**
@@ -78,7 +83,9 @@ export function CheckList({
   };
 
   return (
-    <div className={cn("stagger-in flex flex-col gap-2", className)}>
+    <div
+      className={cn("stagger-in flex flex-col", sizeConfig.list, className)}
+    >
       {options.map((option) => {
         const isChecked = value.includes(option.id);
         const isDisabled = disabled || option.disabled;
@@ -96,14 +103,9 @@ export function CheckList({
               event.preventDefault();
             }}
             className={cn(
-              "flex w-full items-center rounded-2.5 border text-left",
-              "transition-colors",
+              "flex w-full items-center text-left transition-colors",
               sizeConfig.row,
-              isChecked
-                ? "border-main-200 bg-main-100"
-                : "border-gray-200 bg-white",
               !isInteractionBlocked && "cursor-pointer",
-              !isInteractionBlocked && !isChecked && "hover:bg-gray-50",
               isDisabled && "cursor-not-allowed",
               isReadOnly && "cursor-default hover:cursor-not-allowed"
             )}
@@ -118,8 +120,8 @@ export function CheckList({
               }}
               className={cn(
                 sizeConfig.checkbox,
-                "rounded-1.5",
-                "data-[state=checked]:border-brand data-[state=checked]:bg-brand",
+                "rounded-full",
+                "data-[state=checked]:border-green-600 data-[state=checked]:bg-green-600",
                 isReadOnly && "cursor-default hover:cursor-not-allowed"
               )}
             />
@@ -127,10 +129,10 @@ export function CheckList({
             {typeof option.label === "string" || typeof option.label === "number" ? (
               <Text
                 size={sizeConfig.label}
-                weight="semibold"
+                weight={isChecked ? "bold" : "medium"}
                 className={cn(
                   "flex-1 transition-colors",
-                  isChecked ? "text-gray-800" : "text-gray-600",
+                  isChecked ? "text-gray-900" : "text-gray-500",
                   isDisabled && "text-gray-400"
                 )}
               >
