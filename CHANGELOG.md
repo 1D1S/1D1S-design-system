@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.7.0](https://github.com/1D1S/1D1S-design-system/compare/v2.6.0...v2.7.0) (2026-07-08)
+
+
+### Features
+
+* ThumbnailPicker 대표 이미지 선택 지원 [minor] ([d057f5f](https://github.com/1D1S/1D1S-design-system/commit/d057f5f7a4eda3b0025962ce987bdf80ca157ba9))
+
 ## [2.6.0](https://github.com/1D1S/1D1S-design-system/compare/v2.5.0...v2.6.0) (2026-07-07)
 
 
