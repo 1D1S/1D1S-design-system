@@ -31,6 +31,19 @@ export interface ThumbnailPickerProps {
   helperText?: string;
   /** 추가 타일 라벨. 기본값 "사진 추가". */
   addLabel?: string;
+  /**
+   * 대표 이미지 인덱스. `onSelectPrimary` 와 함께 줄 때만 동작한다.
+   * 지정된 타일에 강조 테두리와 대표 뱃지를 표시한다. `undefined`/`-1`
+   * 이면 대표 없음.
+   */
+  primaryIndex?: number;
+  /**
+   * 타일을 클릭해 대표로 지정할 때 호출. 이 콜백을 주면 각 이미지 타일이
+   * 클릭 가능해진다(제거 버튼과 별개). 미지정이면 대표 선택 UI 비활성.
+   */
+  onSelectPrimary?: (index: number) => void;
+  /** 대표 뱃지 라벨. 기본값 "대표". */
+  primaryLabel?: string;
   /** 전체 비활성화 여부 */
   disabled?: boolean;
   /** 추가 className (바깥 래퍼) */
@@ -69,11 +82,16 @@ export function ThumbnailPicker({
   onInvalidFile,
   helperText = "JPG, PNG, GIF 파일을 업로드할 수 있습니다.",
   addLabel = "사진 추가",
+  primaryIndex,
+  onSelectPrimary,
+  primaryLabel = "대표",
   disabled = false,
   className,
 }: ThumbnailPickerProps): React.ReactElement {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isDragging, setIsDragging] = useState(false);
+
+  const canSelectPrimary = typeof onSelectPrimary === "function" && !disabled;
 
   const remaining = max === undefined ? Infinity : Math.max(0, max - previews.length);
   const canAdd = !disabled && remaining > 0;
@@ -117,33 +135,76 @@ export function ThumbnailPicker({
   return (
     <div className={cn("stagger-in", className)}>
       <div className="flex flex-wrap gap-2.5">
-        {previews.map((preview, index) => (
-          <div
-            key={`${preview}-${index}`}
-            className="relative shrink-0 overflow-hidden rounded-3 border border-gray-200"
-            style={boxStyle}
-          >
-            <img
-              src={preview}
-              alt={`첨부 이미지 ${index + 1}`}
-              className="h-full w-full object-cover"
-            />
-            {!disabled ? (
-              <button
-                type="button"
-                aria-label={`이미지 ${index + 1} 제거`}
-                onClick={() => onRemove(index)}
-                className={cn(
-                  "absolute top-1.5 right-1.5 flex h-6 w-6 items-center",
-                  "justify-center rounded-full bg-black/60 text-white",
-                  "transition-colors hover:bg-black/75"
-                )}
-              >
-                <Close className="h-3.5 w-3.5" />
-              </button>
-            ) : null}
-          </div>
-        ))}
+        {previews.map((preview, index) => {
+          const isPrimary = index === primaryIndex;
+          return (
+            <div
+              key={`${preview}-${index}`}
+              className="relative shrink-0 overflow-hidden rounded-3 border border-gray-200"
+              style={boxStyle}
+            >
+              <img
+                src={preview}
+                alt={`첨부 이미지 ${index + 1}`}
+                className="h-full w-full object-cover"
+              />
+
+              {/* 대표 선택 오버레이 — onSelectPrimary 를 줄 때만. 제거 버튼과
+                  형제로 두어 버튼 중첩(HTML 무효)을 피한다. */}
+              {canSelectPrimary ? (
+                <button
+                  type="button"
+                  aria-pressed={isPrimary}
+                  aria-label={`${index + 1}번째 이미지를 ${primaryLabel}으로 지정`}
+                  onClick={() => onSelectPrimary?.(index)}
+                  className={cn(
+                    "absolute inset-0 cursor-pointer outline-none",
+                    "focus-visible:ring-2 focus-visible:ring-inset",
+                    "focus-visible:ring-brand/40"
+                  )}
+                />
+              ) : null}
+
+              {isPrimary ? (
+                <>
+                  {/* overflow-hidden 에 잘리지 않도록 inset ring 으로 강조. */}
+                  <span
+                    aria-hidden
+                    className={cn(
+                      "pointer-events-none absolute inset-0 rounded-3",
+                      "ring-2 ring-inset ring-main-700"
+                    )}
+                  />
+                  <span
+                    className={cn(
+                      "pointer-events-none absolute bottom-1.5 left-1.5",
+                      "rounded bg-main-700 px-1.5 py-0.5"
+                    )}
+                  >
+                    <Text size="caption2" weight="bold" className="text-white">
+                      {primaryLabel}
+                    </Text>
+                  </span>
+                </>
+              ) : null}
+
+              {!disabled ? (
+                <button
+                  type="button"
+                  aria-label={`이미지 ${index + 1} 제거`}
+                  onClick={() => onRemove(index)}
+                  className={cn(
+                    "absolute top-1.5 right-1.5 z-10 flex h-6 w-6 items-center",
+                    "justify-center rounded-full bg-black/60 text-white",
+                    "transition-colors hover:bg-black/75"
+                  )}
+                >
+                  <Close className="h-3.5 w-3.5" />
+                </button>
+              ) : null}
+            </div>
+          );
+        })}
 
         {canAdd ? (
           <button

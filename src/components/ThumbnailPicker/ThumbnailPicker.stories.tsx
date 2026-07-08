@@ -48,6 +48,47 @@ export const Multiple: Story = {
   },
 };
 
+/** 대표 이미지 선택 — 타일 클릭으로 대표 지정/해제(토글) */
+export const WithPrimary: Story = {
+  render: () => {
+    const [previews, setPreviews] = useState<string[]>([]);
+    const [primaryIndex, setPrimaryIndex] = useState<number>(-1);
+
+    const handleSelectFiles = (files: File[]): void => {
+      setPreviews((prev) => {
+        const next = [
+          ...prev,
+          ...files.map((file) => URL.createObjectURL(file)),
+        ];
+        // 첫 등록 이미지를 자동 대표로
+        if (prev.length === 0 && next.length > 0) setPrimaryIndex(0);
+        return next;
+      });
+    };
+
+    const handleRemove = (index: number): void => {
+      setPreviews((prev) => {
+        URL.revokeObjectURL(prev[index]);
+        return prev.filter((_, i) => i !== index);
+      });
+      setPrimaryIndex((prev) => (prev === index ? 0 : prev));
+    };
+
+    return (
+      <ThumbnailPicker
+        previews={previews}
+        onSelectFiles={handleSelectFiles}
+        onRemove={handleRemove}
+        max={5}
+        primaryIndex={primaryIndex}
+        onSelectPrimary={(index) =>
+          setPrimaryIndex((prev) => (prev === index ? -1 : index))
+        }
+      />
+    );
+  },
+};
+
 /** 단일 업로드 — max={1} */
 export const Single: Story = {
   render: () => {
