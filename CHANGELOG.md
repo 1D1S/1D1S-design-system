@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.8.0](https://github.com/1D1S/1D1S-design-system/compare/v2.7.0...v2.8.0) (2026-07-10)
+
+
+### Features
+
+* MobileHeader 추가 — 모바일 서브페이지 sticky 헤더 [minor] ([#15](https://github.com/1D1S/1D1S-design-system/issues/15)) ([099185e](https://github.com/1D1S/1D1S-design-system/commit/099185ed27efb7d999af52898479610694ea7fad))
+
 ## [2.7.0](https://github.com/1D1S/1D1S-design-system/compare/v2.6.0...v2.7.0) (2026-07-08)
 
 
