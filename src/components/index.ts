@@ -26,6 +26,7 @@ export { Icon } from "./Icons/Icon";
 export type { IconName, IconProps } from "./Icons/Icon";
 export * from "./ImagePicker";
 export * from "./ImagePlaceholder";
+export * from "./MobileHeader";
 export * from "./PageWatermark";
 export * from "./Pagination";
 export * from "./ProgressBar";
