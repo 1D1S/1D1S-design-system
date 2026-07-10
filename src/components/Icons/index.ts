@@ -1,4 +1,5 @@
 export * from "./AddCircle";
+export * from "./ArrowLeft";
 export * from "./Bell";
 export * from "./BookOpen";
 export * from "./Calendar";
