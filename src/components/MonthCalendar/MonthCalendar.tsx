@@ -127,10 +127,12 @@ export function MonthCalendar({
   const canPrev = !minDate || prevMonthEnd >= minDate;
   const canNext = !maxDate || nextMonthStart <= maxDate;
 
+  const lastRow = weeks.length - 1;
+
   return (
     <div className={cn("w-full", className)}>
-      <div className="mb-2 flex items-center justify-between">
-        <Text size="body2" weight="bold" className="text-gray-900 sm:text-lg">
+      <div className="mb-2.5 flex items-center justify-between">
+        <Text size="body1" weight="extrabold" className="text-gray-900">
           {monthLabel}
         </Text>
         <div className="flex items-center gap-1">
@@ -147,60 +149,67 @@ export function MonthCalendar({
         </div>
       </div>
 
-      <div className="grid grid-cols-7">
-        {weekLabels.map((label, index) => (
-          <div key={`${label}-${index}`} className="pb-1.5 text-center">
-            <Text
-              size="caption3"
-              weight="medium"
+      {/* 격자형 표 — 관리자 ScheduleCalendar 톤(테두리/셀 구분선/헤더 bg). */}
+      <div className="overflow-hidden rounded-3 border border-gray-200 bg-white">
+        <div className="grid grid-cols-7">
+          {weekLabels.map((label, index) => (
+            <div
+              key={`${label}-${index}`}
               className={cn(
-                "text-gray-400",
-                index === 0 && "text-red-400",
-                index === weekLabels.length - 1 && "text-blue-400"
+                "flex h-8 items-center justify-center border-b border-r border-gray-200 bg-gray-50 sm:h-10",
+                index === weekLabels.length - 1 && "border-r-0"
               )}
             >
-              {label}
-            </Text>
-          </div>
-        ))}
-      </div>
+              <Text
+                size="caption3"
+                weight="medium"
+                className="text-gray-500 sm:text-sm"
+              >
+                {label}
+              </Text>
+            </div>
+          ))}
+        </div>
 
-      <div className="grid grid-cols-7 gap-0.5 sm:gap-1">
-        {weeks.map((week) =>
-          week.map((date) => {
-            const dateStr = format(date, DATE_FMT);
-            const meta = dayMap.get(dateStr);
-            const outsideMonth = !isSameMonth(date, cursor);
-            const disabled =
-              meta?.disabled === true ||
-              outsideMonth ||
-              !inRange(dateStr, minDate, maxDate);
-            const isToday = dateStr === todayStr;
-            const isSelected = selectedDate === dateStr;
-            const count = meta?.count ?? 0;
-            const intensity =
-              meta?.intensity ?? (maxCount > 0 ? count / maxCount : 0);
+        <div className="grid grid-cols-7">
+          {weeks.map((week, rowIndex) =>
+            week.map((date, colIndex) => {
+              const dateStr = format(date, DATE_FMT);
+              const meta = dayMap.get(dateStr);
+              const outsideMonth = !isSameMonth(date, cursor);
+              const disabled =
+                meta?.disabled === true ||
+                outsideMonth ||
+                !inRange(dateStr, minDate, maxDate);
+              const isToday = dateStr === todayStr;
+              const isSelected = selectedDate === dateStr;
+              const count = meta?.count ?? 0;
+              const intensity =
+                meta?.intensity ?? (maxCount > 0 ? count / maxCount : 0);
 
-            return (
-              <DayCell
-                key={dateStr}
-                dayNumber={date.getDate()}
-                indicator={indicator}
-                count={count}
-                intensity={intensity}
-                disabled={disabled}
-                dimmed={outsideMonth}
-                isToday={isToday}
-                isSelected={isSelected}
-                onClick={
-                  disabled || !onSelectDate
-                    ? undefined
-                    : () => onSelectDate(dateStr)
-                }
-              />
-            );
-          })
-        )}
+              return (
+                <DayCell
+                  key={dateStr}
+                  dayNumber={date.getDate()}
+                  indicator={indicator}
+                  count={count}
+                  intensity={intensity}
+                  disabled={disabled}
+                  dimmed={outsideMonth}
+                  isToday={isToday}
+                  isSelected={isSelected}
+                  isLastColumn={colIndex === 6}
+                  isLastRow={rowIndex === lastRow}
+                  onClick={
+                    disabled || !onSelectDate
+                      ? undefined
+                      : () => onSelectDate(dateStr)
+                  }
+                />
+              );
+            })
+          )}
+        </div>
       </div>
     </div>
   );
@@ -242,6 +251,8 @@ interface DayCellProps {
   dimmed: boolean;
   isToday: boolean;
   isSelected: boolean;
+  isLastColumn: boolean;
+  isLastRow: boolean;
   onClick?(): void;
 }
 
@@ -254,6 +265,8 @@ function DayCell({
   dimmed,
   isToday,
   isSelected,
+  isLastColumn,
+  isLastRow,
   onClick,
 }: DayCellProps): React.ReactElement {
   const hasValue = count > 0;
@@ -268,10 +281,13 @@ function DayCell({
       aria-current={isToday ? "date" : undefined}
       aria-pressed={onClick ? isSelected : undefined}
       className={cn(
-        "relative flex aspect-square min-h-[40px] flex-col items-center justify-center gap-0.5 overflow-hidden rounded-2 transition-colors sm:min-h-[52px]",
+        "relative flex min-h-[52px] flex-col items-start gap-1 overflow-hidden border-b border-r border-gray-200 p-1.5 text-left align-top transition-colors sm:min-h-[64px] sm:p-2",
+        isLastColumn && "border-r-0",
+        isLastRow && "border-b-0",
         onClick && "hover:bg-gray-50 active:bg-gray-100",
         (disabled || !onClick) && "cursor-default",
-        isSelected && "bg-brand hover:bg-brand active:bg-brand",
+        dimmed && "bg-gray-50",
+        isSelected && "bg-brand-soft ring-1 ring-inset ring-brand",
         isToday && !isSelected && "ring-1 ring-inset ring-main-400"
       )}
     >
@@ -287,7 +303,7 @@ function DayCell({
         className={cn(
           "relative z-[1] text-xs leading-none tabular-nums sm:text-sm",
           isSelected
-            ? "font-bold text-white"
+            ? "font-extrabold text-brand"
             : dimmed || disabled
               ? "font-medium text-gray-300"
               : hasValue
@@ -301,8 +317,8 @@ function DayCell({
       {indicator === "count" && hasValue ? (
         <span
           className={cn(
-            "relative z-[1] rounded-full px-1 text-[10px] font-semibold leading-none tabular-nums sm:text-[11px]",
-            isSelected ? "bg-white/25 text-white" : "bg-brand-soft text-brand"
+            "relative z-[1] rounded-full px-1.5 py-0.5 text-[10px] font-semibold leading-none tabular-nums sm:text-[11px]",
+            isSelected ? "bg-brand text-white" : "bg-brand-soft text-brand"
           )}
         >
           {count}
@@ -312,10 +328,7 @@ function DayCell({
       {indicator === "dot" && hasValue ? (
         <span
           aria-hidden
-          className={cn(
-            "relative z-[1] block size-1 rounded-full sm:size-1.5",
-            isSelected ? "bg-white" : "bg-brand"
-          )}
+          className="relative z-[1] block size-1 rounded-full bg-brand sm:size-1.5"
         />
       ) : null}
     </button>
