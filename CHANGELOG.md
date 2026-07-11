@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.9.0](https://github.com/1D1S/1D1S-design-system/compare/v2.8.0...v2.9.0) (2026-07-11)
+
+
+### Features
+
+* MonthCalendar 추가 — 컨테이너 폭을 채우는 월간 지표 캘린더 [minor] ([#16](https://github.com/1D1S/1D1S-design-system/issues/16)) ([81064c2](https://github.com/1D1S/1D1S-design-system/commit/81064c2b3d0d8844c15897c4668f4ba95f37ecf6))
+
 ## [2.8.0](https://github.com/1D1S/1D1S-design-system/compare/v2.7.0...v2.8.0) (2026-07-10)
 
 
