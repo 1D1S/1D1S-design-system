@@ -281,7 +281,7 @@ function DayCell({
       aria-current={isToday ? "date" : undefined}
       aria-pressed={onClick ? isSelected : undefined}
       className={cn(
-        "relative flex min-h-[52px] flex-col items-start gap-1 overflow-hidden border-b border-r border-gray-200 p-1.5 text-left align-top transition-colors sm:min-h-[64px] sm:p-2",
+        "relative flex h-[52px] flex-col items-start gap-1 overflow-hidden border-b border-r border-gray-200 p-1.5 text-left align-top transition-colors sm:h-[64px] sm:p-2",
         isLastColumn && "border-r-0",
         isLastRow && "border-b-0",
         onClick && "hover:bg-gray-50 active:bg-gray-100",
