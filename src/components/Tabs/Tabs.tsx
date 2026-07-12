@@ -81,7 +81,7 @@ export function Tabs({
               it.onClick?.();
             }}
             className={cn(
-              "relative -mb-px inline-flex items-center justify-center gap-1.5 border-b-2 font-bold transition-colors",
+              "relative -mb-px inline-flex items-center justify-center gap-1.5 whitespace-nowrap border-b-2 font-bold transition-colors",
               "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/30",
               fullWidth && "flex-1",
               sizeClass,
