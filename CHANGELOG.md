@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.10.1](https://github.com/1D1S/1D1S-design-system/compare/v2.10.0...v2.10.1) (2026-07-12)
+
+
+### Bug Fixes
+
+* MonthCalendar 셀 높이 고정 + Tabs 라벨 nowrap ([#17](https://github.com/1D1S/1D1S-design-system/issues/17)) ([476feb0](https://github.com/1D1S/1D1S-design-system/commit/476feb0ce69d2e7aae5e5c2f0dec9d05e0dc4772))
+
 ## [2.10.0](https://github.com/1D1S/1D1S-design-system/compare/v2.9.0...v2.10.0) (2026-07-11)
 
 ## [2.9.0](https://github.com/1D1S/1D1S-design-system/compare/v2.8.0...v2.9.0) (2026-07-11)
