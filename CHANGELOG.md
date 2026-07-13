@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.11.0](https://github.com/1D1S/1D1S-design-system/compare/v2.10.1...v2.11.0) (2026-07-13)
+
+
+### Features
+
+* 카테고리 아이콘 Shapes(기타)·Languages(어학) 추가 [minor] ([#18](https://github.com/1D1S/1D1S-design-system/issues/18)) ([69592d9](https://github.com/1D1S/1D1S-design-system/commit/69592d908791274d0a1b8adcbe6f419760acd8b3))
+
 ### [2.10.1](https://github.com/1D1S/1D1S-design-system/compare/v2.10.0...v2.10.1) (2026-07-12)
 
 
