@@ -20,6 +20,7 @@ import { Flame } from "./Flame";
 import { HamburgerMenu } from "./HamburgerMenu";
 import { Heart } from "./Heart";
 import { HeartFilled } from "./HeartFilled";
+import { Languages } from "./Languages";
 import { Laptop } from "./Laptop";
 import { LogIn } from "./LogIn";
 import { Logo } from "./Logo";
@@ -34,6 +35,7 @@ import { Plus } from "./Plus";
 import { Salad } from "./Salad";
 import { Search } from "./Search";
 import { Settings } from "./Settings";
+import { Shapes } from "./Shapes";
 import { Target } from "./Target";
 import { Trophy } from "./Trophy";
 
@@ -59,6 +61,7 @@ const iconComponents = {
   HamburgerMenu,
   Heart,
   HeartFilled,
+  Languages,
   Laptop,
   LogIn,
   Logo,
@@ -73,6 +76,7 @@ const iconComponents = {
   Salad,
   Search,
   Settings,
+  Shapes,
   Target,
   Trophy,
 } as const;
