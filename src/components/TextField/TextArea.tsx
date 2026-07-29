@@ -44,7 +44,8 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
     { className, size = "md", count, max, full = true, maxLength, ...rest },
     ref,
   ) => (
-    <div className={full ? "w-full" : "w-[380px]"}>
+    // min-w-0: flex row 안에서 textarea 의 intrinsic 폭이 부모를 밀어내지 않게
+    <div className={full ? "w-full min-w-0" : "w-[380px]"}>
       <TextField
         ref={ref as React.Ref<HTMLInputElement | HTMLTextAreaElement>}
         multiline

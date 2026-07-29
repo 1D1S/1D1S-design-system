@@ -147,10 +147,16 @@ function ReplyComposer({
   onCancel(): void;
 }): React.ReactElement {
   const [draft, setDraft] = React.useState("");
+  const textAreaRef = React.useRef<HTMLTextAreaElement>(null);
 
-  // 닫힐 때(다른 댓글로 이동 포함) 입력값 초기화
   React.useEffect(() => {
-    if (!open) setDraft("");
+    // 닫힐 때(다른 댓글로 이동 포함) 입력값 초기화
+    if (!open) {
+      setDraft("");
+      return;
+    }
+    // 열리면 바로 입력 가능하게 — 모바일에서 답글 버튼 외 추가 탭이 필요 없도록
+    textAreaRef.current?.focus();
   }, [open]);
 
   return (
@@ -164,37 +170,41 @@ function ReplyComposer({
       )}
       onClick={(event) => event.stopPropagation()}
     >
-      <div className="flex items-center gap-1.5 p-1">
+      {/* 모바일은 버튼을 아래로 내려 입력 폭을 최대한 확보, sm+ 는 기존 한 줄 배치 유지 */}
+      <div className="flex flex-col gap-1.5 p-1 sm:flex-row sm:items-end">
         <TextArea
+          ref={textAreaRef}
           value={draft}
           onChange={(event) => setDraft(event.target.value)}
           placeholder={placeholder}
-          rows={1}
-          className="min-h-[36px] flex-1 text-sm"
+          rows={2}
+          className="min-h-[64px] text-[0.9375rem] sm:min-h-[52px] sm:text-sm"
         />
-        <button
-          type="button"
-          className="rounded-2 px-2 py-1.5 text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-700"
-          onClick={onCancel}
-        >
-          <Text size="caption2" weight="medium">
-            {cancelLabel}
-          </Text>
-        </button>
-        <button
-          type="button"
-          className={cn(
-            "rounded-2 bg-brand px-2.5 py-1.5 text-white transition-colors hover:bg-main-700",
-            !draft.trim() &&
-              "cursor-not-allowed bg-main-400 hover:bg-main-400",
-          )}
-          onClick={() => onSubmit(draft)}
-          disabled={!draft.trim()}
-        >
-          <Text size="caption2" weight="bold">
-            {submitLabel}
-          </Text>
-        </button>
+        <div className="flex shrink-0 items-center justify-end gap-1.5">
+          <button
+            type="button"
+            className="rounded-2 px-2 py-1.5 text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-700"
+            onClick={onCancel}
+          >
+            <Text size="caption2" weight="medium">
+              {cancelLabel}
+            </Text>
+          </button>
+          <button
+            type="button"
+            className={cn(
+              "rounded-2 bg-brand px-2.5 py-1.5 text-white transition-colors hover:bg-main-700",
+              !draft.trim() &&
+                "cursor-not-allowed bg-main-400 hover:bg-main-400",
+            )}
+            onClick={() => onSubmit(draft)}
+            disabled={!draft.trim()}
+          >
+            <Text size="caption2" weight="bold">
+              {submitLabel}
+            </Text>
+          </button>
+        </div>
       </div>
     </div>
   );
@@ -288,7 +298,8 @@ function CommentItem({
             as="p"
             size="caption1"
             weight="regular"
-            className="mt-1 leading-[1.5] break-words whitespace-pre-wrap text-gray-700"
+            // 모바일 가독성 — 본문만 한 단계 키우고 sm+ 는 기존 caption1(14px) 유지
+            className="mt-1 text-[0.9375rem] leading-[1.5] break-words whitespace-pre-wrap text-gray-700 sm:text-base"
           >
             {comment.content}
           </Text>
