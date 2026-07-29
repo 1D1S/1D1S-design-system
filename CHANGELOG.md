@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.11.1](https://github.com/1D1S/1D1S-design-system/compare/v2.11.0...v2.11.1) (2026-07-29)
+
+
+### Bug Fixes
+
+* CommentThread 대댓글 입력 폭·모바일 폰트·자동 포커스 개선 ([50cdbb2](https://github.com/1D1S/1D1S-design-system/commit/50cdbb268fa078a2b587bd8677a0db8671841214))
+* SelectTrigger 의 min-w-[150px] 제거 — 좁은 그리드에서 부모 폭 초과 ([87ff8a5](https://github.com/1D1S/1D1S-design-system/commit/87ff8a5035ff711a1734e4dca3331ba5f03342fd))
+
 ## [2.11.0](https://github.com/1D1S/1D1S-design-system/compare/v2.10.1...v2.11.0) (2026-07-13)
 
 
