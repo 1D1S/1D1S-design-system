@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.11.2](https://github.com/1D1S/1D1S-design-system/compare/v2.11.1...v2.11.2) (2026-08-01)
+
+
+### Bug Fixes
+
+* CommentThread 답글 입력 포커스 제어 — inert·autoFocusReply·data-reply-input ([c36c38a](https://github.com/1D1S/1D1S-design-system/commit/c36c38a3c6ced882a9f11b9a536fafc1cffda90f))
+
 ### [2.11.1](https://github.com/1D1S/1D1S-design-system/compare/v2.11.0...v2.11.1) (2026-07-29)
 
 
