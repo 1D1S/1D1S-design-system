@@ -169,3 +169,12 @@ export const ManyReplies: Story = {
     ],
   },
 };
+
+/** 자동 포커스 off — 답글 폼이 열려도 포커스를 옮기지 않는다 (외부에서 직접 제어할 때) */
+export const NoAutoFocusReply: Story = {
+  args: {
+    comments,
+    currentUserId: "user-1",
+    autoFocusReply: false,
+  },
+};
