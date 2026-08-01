@@ -34,6 +34,12 @@ export interface CommentThreadProps {
   replyCancelLabel?: string;
   replyButtonLabel?: string;
   loadMoreRepliesLabel?: string;
+  /**
+   * 답글 입력이 열릴 때 해당 입력으로 자동 포커스 (default `true`).
+   * 열린 입력은 `[data-reply-input]` 으로 타겟팅할 수 있다 — 닫힌 입력에는 붙지 않으므로
+   * 셀렉터는 항상 열려 있는 하나만 가리킨다.
+   */
+  autoFocusReply?: boolean;
   onDelete?(comment: CommentNode): void;
   onReport?(comment: CommentNode): void;
   onReplySubmit?(comment: CommentNode, content: string): void;
@@ -133,6 +139,8 @@ function CommentActionsMenu({
 // draft를 로컬 state로 둬서 키 입력이 댓글 트리 전체를 리렌더하지 않게 한다
 function ReplyComposer({
   open,
+  commentId,
+  autoFocus,
   placeholder,
   submitLabel,
   cancelLabel,
@@ -140,6 +148,8 @@ function ReplyComposer({
   onCancel,
 }: {
   open: boolean;
+  commentId: string;
+  autoFocus: boolean;
   placeholder: string;
   submitLabel: string;
   cancelLabel: string;
@@ -147,20 +157,32 @@ function ReplyComposer({
   onCancel(): void;
 }): React.ReactElement {
   const [draft, setDraft] = React.useState("");
+  const containerRef = React.useRef<HTMLDivElement>(null);
   const textAreaRef = React.useRef<HTMLTextAreaElement>(null);
 
   React.useEffect(() => {
-    // 닫힐 때(다른 댓글로 이동 포함) 입력값 초기화
     if (!open) {
+      // 닫힐 때(다른 댓글로 이동 포함) 입력값 초기화
       setDraft("");
+      // inert 미지원 브라우저 폴백 — 접힌 입력이 포커스를 쥔 채 남으면
+      // 모바일 키보드가 안 내려가고 보이지 않는 곳으로 스크롤이 튄다.
+      // 이미 다른 composer 로 포커스가 옮겨간 경우엔 contains 가 false 라 건드리지 않는다.
+      const active = document.activeElement;
+      if (active instanceof HTMLElement && containerRef.current?.contains(active)) {
+        active.blur();
+      }
       return;
     }
     // 열리면 바로 입력 가능하게 — 모바일에서 답글 버튼 외 추가 탭이 필요 없도록
-    textAreaRef.current?.focus();
-  }, [open]);
+    if (autoFocus) textAreaRef.current?.focus();
+  }, [open, autoFocus]);
 
   return (
     <div
+      ref={containerRef}
+      // inert: 닫힌 composer 가 탭 순서·포커스에 남아 외부 포커스 보정이
+      // 엉뚱한 댓글의 입력창을 잡던 문제 차단. aria-hidden 은 구형 웹뷰 폴백.
+      inert={!open}
       aria-hidden={!open}
       className={cn(
         "overflow-hidden transition-all duration-200 ease-out",
@@ -174,6 +196,9 @@ function ReplyComposer({
       <div className="flex flex-col gap-1.5 p-1 sm:flex-row sm:items-end">
         <TextArea
           ref={textAreaRef}
+          // 열린 입력에만 붙여 `[data-reply-input]` 이 항상 하나만 매칭되게 한다
+          data-reply-input={open ? "" : undefined}
+          data-comment-id={commentId}
           value={draft}
           onChange={(event) => setDraft(event.target.value)}
           placeholder={placeholder}
@@ -221,6 +246,7 @@ function CommentItem({
   replyCancelLabel,
   replyButtonLabel,
   loadMoreRepliesLabel,
+  autoFocusReply,
   onReplyOpen,
   onReplySubmit,
   onReplyCancel,
@@ -238,6 +264,7 @@ function CommentItem({
   replyCancelLabel: string;
   replyButtonLabel: string;
   loadMoreRepliesLabel: string;
+  autoFocusReply: boolean;
   onReplyOpen(comment: CommentNode): void;
   onReplySubmit(comment: CommentNode, content: string): void;
   onReplyCancel(): void;
@@ -319,6 +346,7 @@ function CommentItem({
                   replyCancelLabel={replyCancelLabel}
                   replyButtonLabel={replyButtonLabel}
                   loadMoreRepliesLabel={loadMoreRepliesLabel}
+                  autoFocusReply={autoFocusReply}
                   onReplyOpen={onReplyOpen}
                   onReplySubmit={onReplySubmit}
                   onReplyCancel={onReplyCancel}
@@ -332,6 +360,8 @@ function CommentItem({
 
           <ReplyComposer
             open={isReplyComposerOpen}
+            commentId={comment.id}
+            autoFocus={autoFocusReply}
             placeholder={replyPlaceholder}
             submitLabel={replySubmitLabel}
             cancelLabel={replyCancelLabel}
@@ -387,6 +417,7 @@ export function CommentThread({
   replyCancelLabel = "취소",
   replyButtonLabel = "답글 달기",
   loadMoreRepliesLabel = "대댓글 더보기",
+  autoFocusReply = true,
   onReplySubmit,
   onLoadMoreReplies,
   onDelete,
@@ -441,6 +472,7 @@ export function CommentThread({
           replyCancelLabel={replyCancelLabel}
           replyButtonLabel={replyButtonLabel}
           loadMoreRepliesLabel={loadMoreRepliesLabel}
+          autoFocusReply={autoFocusReply}
           onReplyOpen={handleReplyOpen}
           onReplySubmit={handleReplySubmit}
           onReplyCancel={handleReplyCancel}
