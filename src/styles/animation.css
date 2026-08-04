@@ -58,11 +58,15 @@
   50% { transform: translateY(-4px); }
 }
 
+/* filter: hue-rotate 제거 — 매 프레임 리페인트를 강제해 저사양 기기에서
+   전반적인 렉의 주요 원인으로 진단됐다(1D1S-client 가 동일 이름 키프레임을
+   transform 전용으로 덮어쓰던 것을 원본에 반영). transform 만 쓰면 GPU
+   합성으로 끝난다. */
 @keyframes flame-flicker {
-  0%, 100% { transform: scale(1) rotate(-2deg); filter: hue-rotate(0deg); }
-  25% { transform: scale(1.05) rotate(2deg); filter: hue-rotate(-5deg); }
-  50% { transform: scale(0.98) rotate(-1deg); filter: hue-rotate(5deg); }
-  75% { transform: scale(1.03) rotate(1deg); filter: hue-rotate(-3deg); }
+  0%, 100% { transform: scale(1) rotate(-2deg); }
+  25% { transform: scale(1.05) rotate(2deg); }
+  50% { transform: scale(0.98) rotate(-1deg); }
+  75% { transform: scale(1.03) rotate(1deg); }
 }
 
 @keyframes heart-pop {

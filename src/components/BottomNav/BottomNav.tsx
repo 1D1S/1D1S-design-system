@@ -49,7 +49,10 @@ export function BottomNav({
     <nav
       data-slot="bottom-nav"
       className={cn(
-        "sticky bottom-0 z-30 grid border-t border-gray-100 bg-white/95 px-3 pb-3.5 pt-2.5 backdrop-blur-md",
+        // backdrop-blur 금지: 스크롤 콘텐츠와 겹치는 고정 바의 blur 는 저사양
+        // 안드로이드 WebView 에서 매 스크롤 프레임 프레임버퍼 리드백 + 블러
+        // 패스를 강제한다. 95% 불투명 위의 blur 는 시각적 기여도 거의 없다.
+        "sticky bottom-0 z-30 grid border-t border-gray-100 bg-white px-3 pb-3.5 pt-2.5",
         className,
       )}
       style={{ gridTemplateColumns: `repeat(${items.length}, 1fr)` }}

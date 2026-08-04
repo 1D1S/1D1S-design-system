@@ -91,6 +91,11 @@ export interface HeatmapProps
  *
  * `renderCellTooltip`을 넘기면 각 셀에 hover popover + 클릭 선택 인터랙션이 활성화돼요.
  *
+ * 구현 노트: popover 는 **컴포넌트 전체에 하나**만 있고 hover/선택된 셀을
+ * 가상 앵커로 따라간다. 예전엔 셀마다 Popover.Root(상태 + 이펙트 + 포털)를
+ * 만들어 20×7 그리드가 곧 Radix 인스턴스 140개였다 — 마이페이지 마운트가
+ * 눈에 띄게 느려지던 원인. 동작(hover 열림/클릭 선택/80ms 유예)은 동일하다.
+ *
  * @param tone `main` (default) · `mint` · `blue` · `green` · `gray`
  * @param cells 길이 rows×cols 의 number[] 0~4
  * @param cols 컬럼 수 (default 20)
@@ -134,8 +139,32 @@ export function Heatmap({
   const total = rows * cols;
   const data = cells ?? Array.from({ length: total }, () => 0);
   const interactive = Boolean(renderCellTooltip);
-  // 단일 선택 — 한 번에 한 셀만 선택 상태를 가질 수 있도록 부모에서 관리
+  // 단일 선택 — 클릭으로 고정된 셀. 액션 영역 노출 여부를 가른다.
   const [selectedIndex, setSelectedIndex] = React.useState<number | null>(null);
+  // hover 로 열려 있는 셀(선택이 없을 때만 의미).
+  const [hoverIndex, setHoverIndex] = React.useState<number | null>(null);
+  // 단일 popover 의 가상 앵커 — 현재 활성 셀의 DOM 노드를 가리킨다.
+  const anchorRef = React.useRef<HTMLElement | null>(null);
+  const hoverTimeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const activeIndex = selectedIndex ?? hoverIndex;
+  const activeLevel =
+    activeIndex === null
+      ? 0
+      : Math.max(0, Math.min(4, Math.round(data[activeIndex] ?? 0)));
+
+  const clearHoverTimeout = (): void => {
+    if (hoverTimeoutRef.current !== null) {
+      clearTimeout(hoverTimeoutRef.current);
+      hoverTimeoutRef.current = null;
+    }
+  };
+
+  const closeAll = (): void => {
+    clearHoverTimeout();
+    setSelectedIndex(null);
+    setHoverIndex(null);
+  };
 
   return (
     <div
@@ -166,165 +195,98 @@ export function Heatmap({
             />
           );
         }
+        const info: HeatmapCellInfo = { index: i, level };
+        const selected = selectedIndex === i;
         return (
-          <HeatmapCell
+          <button
             key={i}
-            index={i}
-            level={level}
-            color={colors[level]}
-            cellRadius={cellRadius}
-            ariaLabel={ariaLabel?.(i, level)}
-            selected={selectedIndex === i}
-            onSelect={setSelectedIndex}
-            renderCellTooltip={renderCellTooltip}
-            renderCellActions={renderCellActions}
-            onCellClick={onCellClick}
-            onCellHover={onCellHover}
+            type="button"
+            aria-label={ariaLabel?.(i, level)}
+            className={cn(
+              "cursor-pointer transition-[box-shadow,transform] duration-150 ease-out",
+              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-800 focus-visible:ring-offset-1",
+              selected && "ring-2 ring-gray-800 ring-offset-1",
+            )}
+            style={{
+              aspectRatio: "1",
+              borderRadius: cellRadius,
+              background: colors[level],
+              border: "none",
+              padding: 0,
+            }}
+            onMouseEnter={(event) => {
+              clearHoverTimeout();
+              anchorRef.current = event.currentTarget;
+              onCellHover?.(info);
+              if (selectedIndex === null) setHoverIndex(i);
+            }}
+            onMouseLeave={() => {
+              onCellHover?.(null);
+              if (selectedIndex === null) {
+                hoverTimeoutRef.current = setTimeout(
+                  () => setHoverIndex(null),
+                  80,
+                );
+              }
+            }}
+            onClick={(event) => {
+              clearHoverTimeout();
+              anchorRef.current = event.currentTarget;
+              if (selected) {
+                closeAll();
+              } else {
+                setSelectedIndex(i);
+                setHoverIndex(null);
+                onCellClick?.(info);
+              }
+            }}
           />
         );
       })}
+      {interactive ? (
+        // key 로 셀 전환 시 리마운트시켜 가상 앵커 위치를 다시 측정한다.
+        <Popover.Root
+          key={activeIndex ?? "closed"}
+          open={activeIndex !== null}
+          onOpenChange={(next) => {
+            if (!next) closeAll();
+          }}
+        >
+          <Popover.Anchor
+            virtualRef={anchorRef as React.RefObject<HTMLElement>}
+          />
+          <Popover.Portal>
+            <Popover.Content
+              side="top"
+              sideOffset={4}
+              onOpenAutoFocus={(e) => e.preventDefault()}
+              onMouseEnter={clearHoverTimeout}
+              onMouseLeave={() => {
+                if (selectedIndex === null) setHoverIndex(null);
+              }}
+              className={cn(
+                "z-50 min-w-[120px] rounded-2 bg-gray-900 px-3 py-2 text-xs text-white shadow-default",
+                "animate-in fade-in-0 zoom-in-95",
+                "data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95",
+                "data-[side=top]:slide-in-from-bottom-2 data-[side=bottom]:slide-in-from-top-2",
+              )}
+            >
+              {activeIndex !== null && renderCellTooltip ? (
+                <div className="whitespace-nowrap text-xs">
+                  {renderCellTooltip({ index: activeIndex, level: activeLevel })}
+                </div>
+              ) : null}
+              {activeIndex !== null &&
+              selectedIndex === activeIndex &&
+              renderCellActions ? (
+                <div className="mt-2">
+                  {renderCellActions({ index: activeIndex, level: activeLevel })}
+                </div>
+              ) : null}
+            </Popover.Content>
+          </Popover.Portal>
+        </Popover.Root>
+      ) : null}
     </div>
   );
 }
-
-interface HeatmapCellProps {
-  index: number;
-  level: number;
-  color: string;
-  cellRadius: number;
-  ariaLabel?: string;
-  /** 부모가 관리하는 단일 선택 상태 */
-  selected: boolean;
-  /** 선택 변경 요청 — 선택 시 index, 해제 시 null */
-  onSelect: (index: number | null) => void;
-  renderCellTooltip?: (info: HeatmapCellInfo) => React.ReactNode;
-  renderCellActions?: (info: HeatmapCellInfo) => React.ReactNode;
-  onCellClick?: (info: HeatmapCellInfo) => void;
-  onCellHover?: (info: HeatmapCellInfo | null) => void;
-}
-
-// 선택 변경 시 다른 셀들이 통째로 리렌더되지 않도록 memo
-const HeatmapCell = React.memo(function HeatmapCell({
-  index,
-  level,
-  color,
-  cellRadius,
-  ariaLabel,
-  selected,
-  onSelect,
-  renderCellTooltip,
-  renderCellActions,
-  onCellClick,
-  onCellHover,
-}: HeatmapCellProps): React.ReactElement {
-  const [open, setOpen] = React.useState(false);
-  const hoverTimeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
-  const justClickedRef = React.useRef(false);
-  const closingRef = React.useRef(false);
-
-  const info: HeatmapCellInfo = { index, level };
-
-  // 다른 셀이 선택되어 이 셀이 해제되면 열려있던 popover도 닫는다
-  React.useEffect(() => {
-    if (!selected) setOpen(false);
-  }, [selected]);
-
-  const clearHoverTimeout = (): void => {
-    if (hoverTimeoutRef.current !== null) {
-      clearTimeout(hoverTimeoutRef.current);
-      hoverTimeoutRef.current = null;
-    }
-  };
-
-  return (
-    <Popover.Root
-      open={open}
-      onOpenChange={(next) => {
-        if (!next) {
-          if (justClickedRef.current) {
-            justClickedRef.current = false;
-            return;
-          }
-          setOpen(false);
-          if (selected) onSelect(null);
-          closingRef.current = true;
-          setTimeout(() => {
-            closingRef.current = false;
-          }, 200);
-        }
-      }}
-    >
-      <Popover.Trigger asChild>
-        <button
-          type="button"
-          aria-label={ariaLabel}
-          className={cn(
-            "cursor-pointer transition-[box-shadow,transform] duration-150 ease-out",
-            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-800 focus-visible:ring-offset-1",
-            selected && "ring-2 ring-gray-800 ring-offset-1",
-          )}
-          style={{
-            aspectRatio: "1",
-            borderRadius: cellRadius,
-            background: color,
-            border: "none",
-            padding: 0,
-          }}
-          onMouseEnter={() => {
-            clearHoverTimeout();
-            onCellHover?.(info);
-            if (!selected && !closingRef.current) setOpen(true);
-          }}
-          onMouseLeave={() => {
-            onCellHover?.(null);
-            if (!selected) {
-              hoverTimeoutRef.current = setTimeout(() => setOpen(false), 80);
-            }
-          }}
-          onClick={() => {
-            clearHoverTimeout();
-            if (selected) {
-              onSelect(null);
-              setOpen(false);
-              closingRef.current = true;
-              setTimeout(() => {
-                closingRef.current = false;
-              }, 200);
-            } else {
-              justClickedRef.current = true;
-              onSelect(index);
-              setOpen(true);
-              onCellClick?.(info);
-            }
-          }}
-        />
-      </Popover.Trigger>
-      <Popover.Portal>
-        <Popover.Content
-          side="top"
-          sideOffset={4}
-          onOpenAutoFocus={(e) => e.preventDefault()}
-          onMouseEnter={clearHoverTimeout}
-          onMouseLeave={() => {
-            if (!selected) setOpen(false);
-          }}
-          className={cn(
-            "z-50 min-w-[120px] rounded-2 bg-gray-900 px-3 py-2 text-xs text-white shadow-default",
-            "animate-in fade-in-0 zoom-in-95",
-            "data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95",
-            "data-[side=top]:slide-in-from-bottom-2 data-[side=bottom]:slide-in-from-top-2",
-          )}
-        >
-          {renderCellTooltip ? (
-            <div className="whitespace-nowrap text-xs">
-              {renderCellTooltip(info)}
-            </div>
-          ) : null}
-          {selected && renderCellActions ? (
-            <div className="mt-2">{renderCellActions(info)}</div>
-          ) : null}
-        </Popover.Content>
-      </Popover.Portal>
-    </Popover.Root>
-  );
-});
