@@ -4,8 +4,12 @@ import React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../../lib/utils";
 
+// will-change-transform 을 베이스에 두지 않는다. 카드는 리스트에서 가장 많이
+// 반복되는 컴포넌트라, 무조건 걸면 보드 한 페이지에 영구 컴포지터 레이어가
+// 수십 개 생겨 저사양 기기의 타일 메모리를 넘긴다(스크롤 중 재래스터 끊김).
+// hover lift 는 transition 만으로 충분히 부드럽다.
 const cardVariants = cva(
-  "relative overflow-hidden bg-white border border-gray-200 will-change-transform transition-[translate,scale,box-shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]",
+  "relative overflow-hidden bg-white border border-gray-200 transition-[translate,scale,box-shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]",
   {
     variants: {
       radius: {

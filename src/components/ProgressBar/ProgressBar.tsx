@@ -113,8 +113,12 @@ export function ProgressBar({
         }}
       >
         <div
+          // transition-[width] 를 걸지 않는다. width 전이는 매 프레임
+          // 리플로우+리페인트라, 클라이언트가 scaleX 기반 animate-bar-fill 을
+          // fillClassName 으로 얹으면 둘이 동시에 돌았다. 채움 애니메이션이
+          // 필요한 곳은 fillClassName 으로 transform 계열을 주입한다.
           className={cn(
-            "h-full rounded-full bg-brand transition-[width] duration-300 ease-out",
+            "h-full rounded-full bg-brand",
             infinite && "animate-shimmer",
             fillClassName,
           )}

@@ -21,7 +21,9 @@ function DialogOverlay({
   return (
     <DialogPrimitive.Overlay
       className={cn(
-        "fixed inset-0 z-50 bg-black/45 backdrop-blur-[2px]",
+        // blur 없는 딤 오버레이. 전면 블러 + 페이드 동시 실행은 모달 열림이
+        // 앱에서 가장 무거운 인터랙션이 되는 원인이었다(끊기며 열림).
+        "fixed inset-0 z-50 bg-black/50",
         "data-[state=open]:animate-in data-[state=closed]:animate-out",
         "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
         className,

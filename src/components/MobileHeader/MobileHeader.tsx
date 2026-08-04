@@ -48,7 +48,8 @@ export function MobileHeader({
     <header
       data-slot="mobile-header"
       className={cn(
-        "sticky top-0 z-30 border-b border-gray-100 bg-white/95 px-4 backdrop-blur-md lg:hidden",
+        // backdrop-blur 금지(BottomNav 와 같은 이유 — 스크롤 내내 블러 패스).
+        "sticky top-0 z-30 border-b border-gray-100 bg-white px-4 lg:hidden",
         "pt-[env(safe-area-inset-top)]",
         className,
       )}
