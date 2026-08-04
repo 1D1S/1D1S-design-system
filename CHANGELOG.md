@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.11.3](https://github.com/1D1S/1D1S-design-system/compare/v2.11.2...v2.11.3) (2026-08-04)
+
+
+### Bug Fixes
+
+* 저사양 WebView 프레임 최적화 — blur 제거·레이어 축소·Heatmap 단일 팝오버 ([#21](https://github.com/1D1S/1D1S-design-system/issues/21)) ([139e3a6](https://github.com/1D1S/1D1S-design-system/commit/139e3a6857bd673cf2bb8c4a883276c90d66dc75))
+
 ### [2.11.2](https://github.com/1D1S/1D1S-design-system/compare/v2.11.1...v2.11.2) (2026-08-01)
 
 
