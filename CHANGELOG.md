@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.12.2](https://github.com/1D1S/1D1S-design-system/compare/v2.12.1...v2.12.2) (2026-08-19)
+
+
+### Bug Fixes
+
+* **SegmentedControl:** 페이드는 되살리고 그림자 잔상만 제거 [patch] ([047b6f8](https://github.com/1D1S/1D1S-design-system/commit/047b6f848e32844d30077b6c75a428f78ea3a328))
+
 ### [2.12.1](https://github.com/1D1S/1D1S-design-system/compare/v2.12.0...v2.12.1) (2026-08-19)
 
 
