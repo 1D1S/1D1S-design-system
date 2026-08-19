@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.12.0](https://github.com/1D1S/1D1S-design-system/compare/v2.11.3...v2.12.0) (2026-08-19)
+
+
+### Features
+
+* **SegmentedControl:** 슬라이딩 트랙 -> 알약 트리오 [minor] ([#22](https://github.com/1D1S/1D1S-design-system/issues/22)) ([f0fbb36](https://github.com/1D1S/1D1S-design-system/commit/f0fbb3617e52301b4f8f6f1da0cdeea57419ed44))
+
 ### [2.11.3](https://github.com/1D1S/1D1S-design-system/compare/v2.11.2...v2.11.3) (2026-08-04)
 
 
