@@ -26,12 +26,13 @@ const trackVariants = cva(["relative inline-flex items-center gap-1.5 select-non
 const segmentVariants = cva(
   [
     "relative inline-flex h-full items-center justify-center gap-1.5 rounded-full",
-    // 선택 전환은 **즉시**다. 배경색을 200ms 페이드시키면 나가는 칸이
-    // 아직 주황인 채로 들어오는 칸이 주황이 되어 **두 칸이 동시에 켜진
-    // 것처럼** 보인다. 게다가 box-shadow 는 transition-colors 대상이
-    // 아니라 혼자 즉시 사라져, 남은 주황 배경이 테두리·그림자 잔상으로
-    // 읽혔다. 고르는 것은 켜짐/꺼짐 두 상태뿐이라 사이 구간이 없어야 한다.
-    "whitespace-nowrap transition-none outline-none",
+    // 배경·글자만 페이드시킨다. 잔상으로 읽히던 것은 **그림자**였다 —
+    // transition-colors 는 box-shadow 를 옮기지 않아 주황 글로가 페이드
+    // 밖에서 따로 놀았고, 그게 직전 칸에 남은 테두리처럼 보였다.
+    // 그림자는 전환 목록에서 빼 즉시 붙고 즉시 사라지게 두고, 색만
+    // 부드럽게 넘긴다.
+    "whitespace-nowrap outline-none",
+    "transition-[background-color,color] duration-150 ease-out",
     "focus-visible:ring-2 focus-visible:ring-brand/30 focus-visible:ring-offset-2",
     "disabled:cursor-not-allowed disabled:opacity-50",
   ],
