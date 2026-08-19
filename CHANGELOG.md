@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.12.1](https://github.com/1D1S/1D1S-design-system/compare/v2.12.0...v2.12.1) (2026-08-19)
+
+
+### Bug Fixes
+
+* **SegmentedControl:** 선택 전환 잔상 제거 [patch] ([#23](https://github.com/1D1S/1D1S-design-system/issues/23)) ([0310c25](https://github.com/1D1S/1D1S-design-system/commit/0310c25ba09b37aac77ba0c5b6591cf1dea108f4))
+
 ## [2.12.0](https://github.com/1D1S/1D1S-design-system/compare/v2.11.3...v2.12.0) (2026-08-19)
 
 
