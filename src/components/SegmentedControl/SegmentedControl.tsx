@@ -5,30 +5,27 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../../lib/utils";
 import { Text } from "../Text";
 
-const trackVariants = cva(
-  [
-    "relative inline-flex items-center rounded-full bg-gray-100 p-1",
-    "isolate select-none",
-  ],
-  {
-    variants: {
-      size: {
-        sm: "h-8",
-        md: "h-10",
-        lg: "h-[46px]",
-      },
-      fullWidth: {
-        true: "flex w-full",
-        false: "inline-flex w-auto",
-      },
+// 회색 트랙 위를 흰 인디케이터가 미끄러지던 형태에서, **낱개 알약**이
+// 나란히 서는 형태로 바뀌었다(2026-08 리디자인). 트랙이 사라졌으므로
+// 배경·패딩도 없고, 칸 사이는 gap 으로만 벌린다.
+const trackVariants = cva(["relative inline-flex items-center gap-1.5 select-none"], {
+  variants: {
+    size: {
+      sm: "h-8",
+      md: "h-9",
+      lg: "h-11",
     },
-    defaultVariants: { size: "md", fullWidth: true },
+    fullWidth: {
+      true: "flex w-full",
+      false: "inline-flex w-auto",
+    },
   },
-);
+  defaultVariants: { size: "md", fullWidth: true },
+});
 
 const segmentVariants = cva(
   [
-    "relative z-10 inline-flex h-full items-center justify-center gap-1.5 rounded-full",
+    "relative inline-flex h-full items-center justify-center gap-1.5 rounded-full",
     "whitespace-nowrap transition-colors duration-200 ease-out outline-none",
     "focus-visible:ring-2 focus-visible:ring-brand/30 focus-visible:ring-offset-2",
     "disabled:cursor-not-allowed disabled:opacity-50",
@@ -45,8 +42,10 @@ const segmentVariants = cva(
         false: "",
       },
       selected: {
-        true: "text-brand",
-        false: "text-gray-500 hover:text-gray-700",
+        // 선택된 칸만 채운다 — 글자 색만 바꾸던 예전보다 어느 쪽이
+        // 골라져 있는지가 멀리서도 읽힌다.
+        true: "bg-main-800 text-white shadow-[0_4px_12px_-4px_rgba(255,87,34,0.5)]",
+        false: "bg-gray-100 text-gray-500 hover:bg-gray-200 hover:text-gray-700",
       },
     },
     defaultVariants: { size: "md", fullWidth: true, selected: false },
@@ -81,7 +80,11 @@ export interface SegmentedControlProps
 
 /**
  * SegmentedControl
- * 회색 트랙 위에서 흰 인디케이터가 슬라이드 이동하는 단일 선택 세그먼트 컨트롤.
+ * 나란히 선 알약 중 하나만 채워지는 단일 선택 컨트롤.
+ *
+ * 선택 표시가 **칸을 채우는 방식**이라 글자 색만 바뀌던 예전보다 상태가
+ * 멀리서도 읽힌다. 값 선택·비활성·키보드 이동·controlled/uncontrolled 는
+ * 그대로다 — 바뀐 것은 겉모습뿐이다.
  *
  * @example
  * ```tsx
@@ -111,6 +114,7 @@ export function SegmentedControl({
     defaultValue ?? options[0]?.value,
   );
   const selectedValue = isControlled ? value : internalValue;
+  // 키보드 좌/우 이동의 기준점. 인디케이터가 사라진 뒤로는 이 용도뿐이다.
   const selectedIndex = Math.max(
     0,
     options.findIndex((o) => o.value === selectedValue),
@@ -151,20 +155,6 @@ export function SegmentedControl({
       className={cn(trackVariants({ size, fullWidth }), className)}
       {...props}
     >
-      {/* 슬라이딩 인디케이터 — 선택 인덱스만큼 자기 너비의 100%씩 이동 */}
-      <span
-        aria-hidden
-        className={cn(
-          "absolute top-1 bottom-1 left-1 z-0 rounded-full bg-white shadow-sm",
-          // Card와 동일한 DS 표준 "부드러운 이동" 모션
-          "transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]",
-        )}
-        style={{
-          width: `calc((100% - 0.5rem) / ${options.length})`,
-          transform: `translateX(${selectedIndex * 100}%)`,
-        }}
-      />
-
       {options.map((option) => {
         const selected = option.value === selectedValue;
         return (
