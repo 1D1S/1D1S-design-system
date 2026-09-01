@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.13.0](https://github.com/1D1S/1D1S-design-system/compare/v2.12.2...v2.13.0) (2026-09-01)
+
+
+### Features
+
+* **build:** 컴포넌트별 subpath exports로 트리셰이킹 활성화 [minor] ([e556b93](https://github.com/1D1S/1D1S-design-system/commit/e556b9350b5113d2baede1aa0d5faee3494d9ab7))
+
 ### [2.12.2](https://github.com/1D1S/1D1S-design-system/compare/v2.12.1...v2.12.2) (2026-08-19)
 
 
