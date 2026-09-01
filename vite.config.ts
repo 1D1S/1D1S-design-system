@@ -2,7 +2,39 @@ import { defineConfig, type Plugin } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import path from 'path'
+import fs from 'fs'
 import dts from 'vite-plugin-dts'
+
+// 컴포넌트별 서브패스 진입점(@1d1s/design-system/Button)을 위해 각 컴포넌트의
+// index.ts 를 개별 엔트리로 등록한다. 배럴(src/index.ts)이 닿지 않는 모듈
+// (예: Icons/index.ts)도 이렇게 해야 dist 에 파일이 생긴다.
+const componentsDir = path.resolve(__dirname, 'src/components')
+const libEntries = [
+  path.resolve(__dirname, 'src/index.ts'),
+  path.resolve(__dirname, 'src/hooks/index.ts'),
+  path.resolve(__dirname, 'src/lib/utils.ts'),
+  ...fs
+    .readdirSync(componentsDir, { withFileTypes: true })
+    .filter(
+      (d) =>
+        d.isDirectory() &&
+        fs.existsSync(path.join(componentsDir, d.name, 'index.ts')),
+    )
+    .map((d) => path.join(componentsDir, d.name, 'index.ts')),
+]
+
+// dependencies 는 소비 앱에 어차피 설치되므로 번들에 인라인하지 않는다.
+// 인라인하면 Button 하나만 import 해도 radix/date-fns 전체가 딸려와
+// 트리셰이킹이 무의미해진다.
+const pkg = JSON.parse(
+  fs.readFileSync(path.resolve(__dirname, 'package.json'), 'utf-8'),
+) as { dependencies: Record<string, string>; peerDependencies: Record<string, string> }
+const externalPackages = [
+  ...Object.keys(pkg.dependencies),
+  ...Object.keys(pkg.peerDependencies),
+]
+const isExternal = (id: string) =>
+  externalPackages.some((name) => id === name || id.startsWith(`${name}/`))
 
 // 거의 모든 컴포넌트가 'use client' 로 선언돼 있지만, 단일 파일로 번들링하면
 // Rollup 이 모듈 레벨 디렉티브를 전부 제거한다("'use client' was ignored").
@@ -72,20 +104,18 @@ export default defineConfig({
     cssCodeSplit: false,
     reportCompressedSize: true,
     lib: {
-      entry: path.resolve(__dirname, 'src/index.ts'),
+      entry: libEntries,
       name: 'OdosDesignSystem',
       formats: ['es'],
-      fileName: () => 'index.es.js',
     },
     rollupOptions: {
-      external: [
-        'react',
-        'react-dom',
-        'react/jsx-runtime',
-        /^next($|\/)/,
-        'lucide-react',
-      ],
+      external: isExternal,
       output: {
+        // 컴포넌트별로 파일을 쪼개 소비 앱 번들러가 실제로 트리셰이킹할 수 있게 한다.
+        // src 구조를 그대로 dist 에 미러링 → dist/components/Button/index.js
+        preserveModules: true,
+        preserveModulesRoot: path.resolve(__dirname, 'src'),
+        entryFileNames: '[name].js',
         compact: true,
       },
     },
