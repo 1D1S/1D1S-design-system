@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.14.1](https://github.com/1D1S/1D1S-design-system/compare/v2.14.0...v2.14.1) (2026-09-13)
+
+
+### Bug Fixes
+
+* **colors:** 다크 램프가 소비자 :root 오버라이드에 지던 문제 [patch] ([edecb42](https://github.com/1D1S/1D1S-design-system/commit/edecb420148bbbc5a02c92ece00e34ed30d8bf46)), closes [#222](https://github.com/1D1S/1D1S-design-system/issues/222) [#222](https://github.com/1D1S/1D1S-design-system/issues/222)
+
 ## [2.14.0](https://github.com/1D1S/1D1S-design-system/compare/v2.13.0...v2.14.0) (2026-09-13)
 
 
