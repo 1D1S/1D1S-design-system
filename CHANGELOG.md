@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.14.0](https://github.com/1D1S/1D1S-design-system/compare/v2.13.0...v2.14.0) (2026-09-13)
+
+
+### Features
+
+* **colors:** 다크 테마 램프 추가 — DS 단독으로 다크가 선다 [minor] ([6e592e6](https://github.com/1D1S/1D1S-design-system/commit/6e592e62e229781dacd2e8f535a175c76bf80797)), closes [#191c21](https://github.com/1D1S/1D1S-design-system/issues/191c21)
+
 ## [2.13.0](https://github.com/1D1S/1D1S-design-system/compare/v2.12.2...v2.13.0) (2026-09-01)
 
 
