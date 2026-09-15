@@ -50,7 +50,15 @@ const segmentVariants = cva(
       selected: {
         // 선택된 칸만 채운다 — 글자 색만 바꾸던 예전보다 어느 쪽이
         // 골라져 있는지가 멀리서도 읽힌다.
-        true: "bg-main-800 text-fixed-white shadow-[0_4px_12px_-4px_rgba(255,87,34,0.5)]",
+        //
+        // 채움은 **중립**이다(앱 AppSelectionGroup). 주황은 주요 CTA 에
+        // 남긴다 — 셀렉션 그룹은 화면마다 깔리는 자리라 여기가 주황이면
+        // 주황이 흔해진다. gray-900 은 글자 램프라 라이트=near-black,
+        // 다크=near-white 로 뒤집히고, 글자로 쓰는 --white 는 그 반대로
+        // (라이트=흰색, 다크=#191c21) 뒤집혀 두 모드 다 알약 위 글씨가
+        // 읽힌다. 여기서 text-fixed-white 를 쓰면 다크에서 흰 알약에 흰
+        // 글자가 된다 — 면이 같이 뒤집히는 자리라 고정 흰색이 아니다.
+        true: "bg-gray-900 text-white shadow-[0_2px_8px_-2px_rgba(0,0,0,0.12)]",
         false: "bg-gray-100 text-gray-500 hover:bg-gray-200 hover:text-gray-700",
       },
     },
