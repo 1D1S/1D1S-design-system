@@ -13,7 +13,7 @@ export interface ToggleProps
 
 /**
  * Toggle v3
- * 38×22 알약형 스위치. on=brand bg, off=gray-300, 흰색 노브.
+ * 51×31 알약형 스위치(앱 Switch.adaptive·iOS 와 같은 크기). on=brand bg, off=gray-300, 흰색 노브.
  *
  * @example
  * ```tsx
@@ -36,7 +36,7 @@ export const Toggle = React.forwardRef<HTMLInputElement, ToggleProps>(
     const generatedId = React.useId();
     const inputId = id || generatedId;
     const switchEl = (
-      <span className="relative inline-flex h-[22px] w-[38px] shrink-0 items-center">
+      <span className="relative inline-flex h-[31px] w-[51px] shrink-0 items-center">
         <input
           ref={ref}
           id={inputId}
@@ -45,7 +45,7 @@ export const Toggle = React.forwardRef<HTMLInputElement, ToggleProps>(
           className="peer absolute inset-0 m-0 h-full w-full cursor-pointer appearance-none rounded-full bg-gray-300 outline-none transition-colors duration-150 focus-visible:ring-2 focus-visible:ring-brand/30 focus-visible:ring-offset-2 checked:bg-brand disabled:cursor-not-allowed"
           {...props}
         />
-        <span className="pointer-events-none absolute top-[2px] left-[2px] h-[18px] w-[18px] rounded-full bg-fixed-white shadow-knob transition-transform duration-150 ease-out peer-checked:translate-x-4" />
+        <span className="pointer-events-none absolute top-[2px] left-[2px] h-[27px] w-[27px] rounded-full bg-fixed-white shadow-knob transition-transform duration-150 ease-out peer-checked:translate-x-5" />
       </span>
     );
 
