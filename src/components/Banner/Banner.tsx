@@ -6,16 +6,16 @@ import { cn } from "../../lib/utils";
 import { StatusBadge, type StatusBadgeKind } from "../StatusBadge";
 
 const bannerVariants = cva(
-  "relative overflow-hidden rounded-4 p-6 text-white",
+  "relative overflow-hidden rounded-4 p-6",
   {
     variants: {
       tone: {
         orange:
-          "bg-[linear-gradient(135deg,var(--main-600)_0%,var(--main-800)_100%)] shadow-warm",
-        mint: "bg-[linear-gradient(135deg,var(--mint-600)_0%,var(--mint-800)_100%)]",
-        blue: "bg-[linear-gradient(135deg,var(--blue-400)_0%,var(--blue-600)_100%)]",
-        purple: "bg-[linear-gradient(135deg,var(--purple-400)_0%,var(--purple-600)_100%)]",
-        gray: "bg-[linear-gradient(135deg,var(--gray-500)_0%,var(--gray-800)_100%)]",
+          "text-fixed-white bg-[linear-gradient(135deg,var(--main-600)_0%,var(--main-800)_100%)] shadow-warm",
+        mint: "text-white bg-[linear-gradient(135deg,var(--mint-600)_0%,var(--mint-800)_100%)]",
+        blue: "text-white bg-[linear-gradient(135deg,var(--blue-400)_0%,var(--blue-600)_100%)]",
+        purple: "text-fixed-white bg-[linear-gradient(135deg,var(--purple-400)_0%,var(--purple-600)_100%)]",
+        gray: "text-white bg-[linear-gradient(135deg,var(--gray-500)_0%,var(--gray-800)_100%)]",
       },
       size: {
         sm: "p-4 rounded-3",

@@ -20,7 +20,7 @@ const itemVariants = cva(
         lg: "size-12 text-base",
       },
       active: {
-        true: "bg-brand text-white font-semibold",
+        true: "bg-brand text-fixed-white font-semibold",
         false: "text-gray-600 hover:bg-gray-100",
       },
     },

@@ -105,8 +105,8 @@ export function StepIndicator({
                   className={cn(
                     "flex items-center justify-center rounded-full border-2 bg-white transition-colors duration-200",
                     config.circle,
-                    isCompleted && "border-brand bg-brand text-white",
-                    isCurrent && "border-brand bg-brand text-white ring-4 ring-main-300",
+                    isCompleted && "border-brand bg-brand text-fixed-white",
+                    isCurrent && "border-brand bg-brand text-fixed-white ring-4 ring-main-300",
                     !isCompleted && !isCurrent && "border-gray-300 text-gray-600"
                   )}
                   aria-current={isCurrent ? "step" : undefined}
@@ -117,7 +117,7 @@ export function StepIndicator({
                     <Text
                       size={config.numberSize}
                       weight="bold"
-                      className={cn(isCurrent ? "text-white" : "text-gray-600")}
+                      className={cn(isCurrent ? "text-fixed-white" : "text-gray-600")}
                     >
                       {index + 1}
                     </Text>

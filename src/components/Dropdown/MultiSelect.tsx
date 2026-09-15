@@ -62,7 +62,7 @@ export function MultiSelect({
                 onRemove(s);
               }}
               aria-label={`${s} 제거`}
-              className="ml-0.5 inline-flex h-3 w-3 items-center justify-center rounded-full text-brand transition-colors hover:bg-brand hover:text-white"
+              className="ml-0.5 inline-flex h-3 w-3 items-center justify-center rounded-full text-brand transition-colors hover:bg-brand hover:text-fixed-white"
             >
               <svg
                 width="9"

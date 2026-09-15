@@ -46,11 +46,11 @@ function Calendar({
         ),
         day: 'inline-flex h-9 w-9 items-center justify-center rounded-2 border border-transparent p-0 text-sm font-medium text-gray-800 transition-colors duration-200 aria-selected:opacity-100 hover:bg-gray-100 hover:text-gray-900 hover:cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/30 focus-visible:ring-offset-1',
         day_range_start:
-          'day-range-start aria-selected:rounded-2 aria-selected:bg-brand aria-selected:text-white',
+          'day-range-start aria-selected:rounded-2 aria-selected:bg-brand aria-selected:text-fixed-white',
         day_range_end:
-          'day-range-end aria-selected:rounded-2 aria-selected:bg-brand aria-selected:text-white',
+          'day-range-end aria-selected:rounded-2 aria-selected:bg-brand aria-selected:text-fixed-white',
         day_selected:
-          'bg-brand text-white hover:bg-main-700 hover:text-white focus:bg-main-700 focus:text-white',
+          'bg-brand text-fixed-white hover:bg-main-700 hover:text-fixed-white focus:bg-main-700 focus:text-fixed-white',
         day_today: 'text-brand font-extrabold',
         day_outside: 'day-outside text-gray-400 aria-selected:text-gray-500',
         day_disabled: 'cursor-not-allowed text-gray-300 opacity-40 hover:bg-transparent hover:text-gray-300',

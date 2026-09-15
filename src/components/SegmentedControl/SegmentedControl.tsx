@@ -50,7 +50,7 @@ const segmentVariants = cva(
       selected: {
         // 선택된 칸만 채운다 — 글자 색만 바꾸던 예전보다 어느 쪽이
         // 골라져 있는지가 멀리서도 읽힌다.
-        true: "bg-main-800 text-white shadow-[0_4px_12px_-4px_rgba(255,87,34,0.5)]",
+        true: "bg-main-800 text-fixed-white shadow-[0_4px_12px_-4px_rgba(255,87,34,0.5)]",
         false: "bg-gray-100 text-gray-500 hover:bg-gray-200 hover:text-gray-700",
       },
     },

@@ -318,7 +318,7 @@ function DayCell({
         <span
           className={cn(
             "relative z-[1] rounded-full px-1.5 py-0.5 text-[10px] font-semibold leading-none tabular-nums sm:text-[11px]",
-            isSelected ? "bg-brand text-white" : "bg-brand-soft text-brand"
+            isSelected ? "bg-brand text-fixed-white" : "bg-brand-soft text-brand"
           )}
         >
           {count}

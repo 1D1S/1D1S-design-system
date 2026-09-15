@@ -96,7 +96,7 @@ export function CheckContainer({
           className={cn(
             "absolute top-4 right-4 flex w-[clamp(18px,8%,32px)] aspect-square shrink-0 items-center justify-center rounded-full border-2 transition-colors",
             isChecked
-              ? "border-brand bg-brand text-white"
+              ? "border-brand bg-brand text-fixed-white"
               : "border-gray-200 bg-white text-transparent",
             isChecked && "animate-pop",
           )}

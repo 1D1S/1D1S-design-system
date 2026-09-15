@@ -118,7 +118,7 @@ export function GoalAddList({
             className={cn(
               "inline-flex h-7 items-center rounded-1.5 px-2.5 text-xs font-bold transition-colors",
               canAdd
-                ? "bg-brand text-white hover:brightness-105 hover:cursor-pointer"
+                ? "bg-brand text-fixed-white hover:brightness-105 hover:cursor-pointer"
                 : "cursor-not-allowed bg-gray-100 text-gray-400",
             )}
           >

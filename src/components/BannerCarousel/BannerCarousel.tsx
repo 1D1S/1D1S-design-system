@@ -320,7 +320,7 @@ export function BannerCarousel({
                 data-banner-title={banner.title}
                 data-banner-image-url={resolvedBackgroundImageUrl ?? ""}
                 className={cn(
-                  "relative w-full shrink-0 overflow-hidden p-4 pb-10 text-left text-white transition hover:brightness-105 sm:p-8 sm:pb-8",
+                  "relative w-full shrink-0 overflow-hidden p-4 pb-10 text-left text-fixed-white transition hover:brightness-105 sm:p-8 sm:pb-8",
                   "cursor-pointer",
                   aspectRatioClassName,
                 )}
@@ -338,17 +338,17 @@ export function BannerCarousel({
                         backgroundImage: `url(${resolvedBackgroundImageUrl})`,
                       }}
                     />
-                    <div className="absolute inset-0 bg-black/28" />
+                    <div className="absolute inset-0 bg-fixed-black/28" />
                   </>
                 ) : null}
 
-                <div className="pointer-events-none absolute -top-10 -right-8 h-36 w-36 rounded-full bg-white/15 blur-2xl" />
+                <div className="pointer-events-none absolute -top-10 -right-8 h-36 w-36 rounded-full bg-fixed-white/15 blur-2xl" />
 
                 <div className="relative flex h-full flex-col justify-between">
                   <Text
                     size="caption3"
                     weight="medium"
-                    className="text-white/85"
+                    className="text-fixed-white/85"
                   >
                     {banner.type}
                   </Text>
@@ -358,14 +358,14 @@ export function BannerCarousel({
                       <Text
                         size="heading2"
                         weight="bold"
-                        className="line-clamp-1 text-white sm:text-3xl"
+                        className="line-clamp-1 text-fixed-white sm:text-3xl"
                       >
                         {banner.title}
                       </Text>
                       <Text
                         size="caption1"
                         weight="medium"
-                        className="line-clamp-1 text-white/90 sm:text-lg"
+                        className="line-clamp-1 text-fixed-white/90 sm:text-lg"
                       >
                         {banner.subtitle}
                       </Text>
@@ -374,7 +374,7 @@ export function BannerCarousel({
                     <Text
                       size="heading2"
                       weight="bold"
-                      className="text-white sm:text-3xl"
+                      className="text-fixed-white sm:text-3xl"
                     >
                       →
                     </Text>
@@ -390,7 +390,7 @@ export function BannerCarousel({
             <button
               type="button"
               onClick={handlePrev}
-              className="absolute top-1/2 left-2 z-10 -translate-y-1/2 cursor-pointer rounded-full bg-black/25 p-1.5 text-white transition hover:bg-black/40"
+              className="absolute top-1/2 left-2 z-10 -translate-y-1/2 cursor-pointer rounded-full bg-fixed-black/25 p-1.5 text-fixed-white transition hover:bg-fixed-black/40"
               aria-label="이전 배너"
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
@@ -400,7 +400,7 @@ export function BannerCarousel({
             <button
               type="button"
               onClick={handleNext}
-              className="absolute top-1/2 right-2 z-10 -translate-y-1/2 cursor-pointer rounded-full bg-black/25 p-1.5 text-white transition hover:bg-black/40"
+              className="absolute top-1/2 right-2 z-10 -translate-y-1/2 cursor-pointer rounded-full bg-fixed-black/25 p-1.5 text-fixed-white transition hover:bg-fixed-black/40"
               aria-label="다음 배너"
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
@@ -412,7 +412,7 @@ export function BannerCarousel({
 
         {showIndicators ? (
           <div className="pointer-events-none absolute right-4 bottom-3 left-4 flex justify-center">
-            <div className="pointer-events-auto flex items-center gap-2 rounded-full bg-black/25 px-2 py-1">
+            <div className="pointer-events-auto flex items-center gap-2 rounded-full bg-fixed-black/25 px-2 py-1">
               {items.map((banner, index) => (
                 <button
                   key={banner.id === undefined ? `${index}` : String(banner.id)}
@@ -424,8 +424,8 @@ export function BannerCarousel({
                   className={cn(
                     "h-2 cursor-pointer rounded-full transition-all",
                     activeIndex === index
-                      ? "w-5 bg-white"
-                      : "w-2 bg-white/50 hover:bg-white/80",
+                      ? "w-5 bg-fixed-white"
+                      : "w-2 bg-fixed-white/50 hover:bg-fixed-white/80",
                   )}
                   aria-label={`${index + 1}번째 배너로 이동`}
                 />

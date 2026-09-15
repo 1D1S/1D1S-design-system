@@ -12,7 +12,7 @@ const buttonVariants = cva(baseClasses, {
   variants: {
     variant: {
       primary:
-        "bg-brand text-white border-transparent hover:brightness-105 hover:-translate-y-px",
+        "bg-brand text-fixed-white border-transparent hover:brightness-105 hover:-translate-y-px",
       secondary:
         "bg-white text-gray-800 border-gray-200 hover:bg-gray-50 hover:border-gray-300",
       soft:

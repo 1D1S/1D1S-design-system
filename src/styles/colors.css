@@ -25,6 +25,12 @@
   /* Default Colors */
   --color-white: var(--white);
   --color-black: var(--black);
+  /* 다크에서도 안 뒤집히는 흰/검정. --white 는 다크에서 카드 면(#191c21)이
+     되므로, 바탕이 안 뒤집히는 자리(브랜드 채움·사진·스크림 위의 글자와 딤)는
+     이 둘을 쓴다. 변수를 거치지 않는 리터럴이라 .dark 가 건드릴 수 없다.
+     이름은 1D1S-client 가 먼저 쓰던 것과 같다(text-fixed-white). */
+  --color-fixed-white: #ffffff;
+  --color-fixed-black: #000000;
   --color-gray-shadow-70: var(--gray-shadow-70);
   --color-warning: var(--warning);
   --color-accent: var(--accent);

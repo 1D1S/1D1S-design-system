@@ -181,7 +181,7 @@ export function ThumbnailPicker({
                       "rounded bg-main-700 px-1.5 py-0.5"
                     )}
                   >
-                    <Text size="caption2" weight="bold" className="text-white">
+                    <Text size="caption2" weight="bold" className="text-fixed-white">
                       {primaryLabel}
                     </Text>
                   </span>
@@ -195,8 +195,8 @@ export function ThumbnailPicker({
                   onClick={() => onRemove(index)}
                   className={cn(
                     "absolute top-1.5 right-1.5 z-10 flex h-6 w-6 items-center",
-                    "justify-center rounded-full bg-black/60 text-white",
-                    "transition-colors hover:bg-black/75"
+                    "justify-center rounded-full bg-fixed-black/60 text-fixed-white",
+                    "transition-colors hover:bg-fixed-black/75"
                   )}
                 >
                   <Close className="h-3.5 w-3.5" />

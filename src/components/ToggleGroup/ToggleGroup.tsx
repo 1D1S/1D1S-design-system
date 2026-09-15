@@ -12,7 +12,7 @@ const toggleGroupItemVariants = cva(
     'cursor-pointer disabled:pointer-events-none disabled:opacity-50 disabled:active:scale-100',
     'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/30 focus-visible:ring-offset-2',
     'hover:border-gray-400 hover:bg-gray-100',
-    'data-[state=on]:border-brand data-[state=on]:bg-brand data-[state=on]:text-white',
+    'data-[state=on]:border-brand data-[state=on]:bg-brand data-[state=on]:text-fixed-white',
     'data-[state=on]:hover:bg-main-600 data-[state=on]:hover:border-main-600',
     'data-[state=on]:shadow-brand-glow',
     'data-[state=on]:animate-pop',
