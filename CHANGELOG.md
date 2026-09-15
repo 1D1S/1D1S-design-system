@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.15.1](https://github.com/1D1S/1D1S-design-system/compare/v2.15.0...v2.15.1) (2026-09-15)
+
+
+### Bug Fixes
+
+* **SegmentedControl:** 선택 칸 채움 주황 → 중립 — 앱 AppSelectionGroup 정합 [patch] ([1c636a0](https://github.com/1D1S/1D1S-design-system/commit/1c636a09fc888ec10607b5f2661c1ba6310b0e4a)), closes [#191c21](https://github.com/1D1S/1D1S-design-system/issues/191c21)
+
 ## [2.15.0](https://github.com/1D1S/1D1S-design-system/compare/v2.14.1...v2.15.0) (2026-09-15)
 
 
