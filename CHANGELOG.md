@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.15.0](https://github.com/1D1S/1D1S-design-system/compare/v2.14.1...v2.15.0) (2026-09-15)
+
+
+### Features
+
+* **Toggle:** 51×31 로 키움 — 앱 Switch.adaptive(iOS) 와 같은 크기 [minor] ([64a43ad](https://github.com/1D1S/1D1S-design-system/commit/64a43ad9b5a9a77543903f4c55470f7d561e84d9))
+* 프리즈 칸·사진 3열·아코디언 화살표·하단 탭 활성 색 — 앱 정합 [minor] ([dacd9a9](https://github.com/1D1S/1D1S-design-system/commit/dacd9a96a45a75a283c6ea2fea8477554866d98e)), closes [#bfe3](https://github.com/1D1S/1D1S-design-system/issues/bfe3)
+
+
+### Bug Fixes
+
+* **colors:** 다크에서 안 뒤집히는 fixed-white/black 토큰 — 브랜드 채움·사진 위 글자 [minor] ([503c629](https://github.com/1D1S/1D1S-design-system/commit/503c6298f85791b7ff3ce9bcfd5317f43e81c60a)), closes [#191c21](https://github.com/1D1S/1D1S-design-system/issues/191c21)
+
 ### [2.14.1](https://github.com/1D1S/1D1S-design-system/compare/v2.14.0...v2.14.1) (2026-09-13)
 
 
