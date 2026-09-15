@@ -34,6 +34,7 @@
   --color-gray-shadow-70: var(--gray-shadow-70);
   --color-warning: var(--warning);
   --color-accent: var(--accent);
+  --color-frozen: var(--frozen);
 
   /* Brand semantic aliases (v3) */
   --color-brand: var(--brand);
@@ -118,6 +119,10 @@
   --gray-shadow-70: #000000b3;
   --warning: #ff2020;
   --accent: #ff5722;
+  /* 스트릭 프리즈로 메운 날 — 활동 램프(주황)와 갈려야 "기록이 아니라 이어
+     붙인 날"로 읽힌다. 앱 kHeatmapFrozenColor 와 같고, 앱처럼 다크에서도
+     그대로다(그래서 아래 다크 블록에 없다). */
+  --frozen: #bfe3ff;
 
   /* Brand semantic aliases (v3) */
   --brand: var(--main-800);

@@ -75,7 +75,7 @@ export function BottomNav({
             className={cn(
               "flex flex-col items-center justify-center gap-0.5 py-1 transition-colors",
               "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/30",
-              active ? "text-brand" : "text-gray-400 hover:text-gray-600",
+              active ? "text-gray-900" : "text-gray-400 hover:text-gray-600",
             )}
           >
             <span className={cn("leading-none", active && "animate-pop")}>

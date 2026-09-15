@@ -109,3 +109,12 @@ export const InteractiveWithActions: Story = {
     />
   ),
 };
+
+/** 프리즈로 메운 날 — `frozen` 인 칸은 레벨과 무관하게 하늘색(`--frozen`). 다크에서도 그대로다. */
+export const Frozen: Story = {
+  args: {
+    cols: 20,
+    cells: randomCells(7, 20),
+    frozen: Array.from({ length: 140 }, (_, i) => i % 11 === 0),
+  },
+};

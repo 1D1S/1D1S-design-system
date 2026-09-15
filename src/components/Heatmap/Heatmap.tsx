@@ -49,12 +49,19 @@ export interface HeatmapCellInfo {
   index: number;
   /** 셀 레벨 (0~4) */
   level: number;
+  /** 프리즈로 메운 날인지 (`frozen` prop 을 준 경우) */
+  frozen?: boolean;
 }
 
 export interface HeatmapProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, "children" | "onClick"> {
   /** 셀 값 배열 (각 0~4 레벨). 길이는 rows×cols 권장 */
   cells?: number[];
+  /**
+   * 프리즈로 메운 날 — `cells` 와 같은 인덱스. `true` 인 칸은 레벨과 무관하게
+   * `--frozen`(하늘색)으로 칠한다.
+   */
+  frozen?: boolean[];
   /** 컬럼 수 (default 20) */
   cols?: number;
   /** 행 수 (default 7) */
@@ -121,6 +128,7 @@ export interface HeatmapProps
  */
 export function Heatmap({
   cells,
+  frozen,
   cols = 20,
   rows = 7,
   tone = "main",
@@ -182,6 +190,8 @@ export function Heatmap({
     >
       {data.slice(0, total).map((raw, i) => {
         const level = Math.max(0, Math.min(4, Math.round(raw)));
+        const isFrozen = frozen?.[i] === true;
+        const background = isFrozen ? "var(--frozen)" : colors[level];
         if (!interactive) {
           return (
             <div
@@ -190,12 +200,12 @@ export function Heatmap({
               style={{
                 aspectRatio: "1",
                 borderRadius: cellRadius,
-                background: colors[level],
+                background,
               }}
             />
           );
         }
-        const info: HeatmapCellInfo = { index: i, level };
+        const info: HeatmapCellInfo = { index: i, level, frozen: isFrozen };
         const selected = selectedIndex === i;
         return (
           <button
@@ -210,7 +220,7 @@ export function Heatmap({
             style={{
               aspectRatio: "1",
               borderRadius: cellRadius,
-              background: colors[level],
+              background,
               border: "none",
               padding: 0,
             }}

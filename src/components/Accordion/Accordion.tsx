@@ -80,7 +80,7 @@ function AccordionTrigger({
         {children}
         <ChevronDown
           className={cn(
-            "h-4 w-4 sm:h-5 sm:w-5 shrink-0 text-gray-500 transition-transform duration-200"
+            "h-4 w-4 sm:h-5 sm:w-5 shrink-0 text-gray-400 transition-transform duration-200"
           )}
         />
       </AccordionPrimitive.Trigger>

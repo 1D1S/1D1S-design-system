@@ -18,8 +18,13 @@ export interface ThumbnailPickerProps {
    * `1` 로 주면 단일 업로드(첫 장 선택 후 추가 타일 숨김)로 동작한다.
    */
   max?: number;
-  /** 정사각형 한 변 크기(px). 기본값 150. */
+  /** 정사각형 한 변 크기(px). 기본값 150. `columns` 를 주면 무시된다. */
   size?: number;
+  /**
+   * 열 수. 주면 고정 `size` 대신 폭을 꽉 채우는 N열 정사각형 그리드로
+   * 그린다(앱 사진 첨부의 3열). 미지정이면 기존 고정 크기 flex-wrap.
+   */
+  columns?: number;
   /**
    * 허용 MIME 타입. OS 파일 선택창 필터(accept)와 실제 검증(드래그 드롭
    * 포함)에 모두 사용된다. 기본값 JPG·PNG·GIF (webp/svg 등 차단).
@@ -78,6 +83,7 @@ export function ThumbnailPicker({
   onRemove,
   max,
   size = 150,
+  columns,
   acceptedTypes = ["image/jpeg", "image/png", "image/gif"],
   onInvalidFile,
   helperText = "JPG, PNG, GIF 파일을 업로드할 수 있습니다.",
@@ -97,7 +103,8 @@ export function ThumbnailPicker({
   const canAdd = !disabled && remaining > 0;
   const allowMultiple = remaining > 1;
 
-  const boxStyle = { width: size, height: size } as const;
+  const boxStyle = columns ? undefined : { width: size, height: size };
+  const tileClass = columns ? "aspect-square w-full" : undefined;
 
   const acceptFiles = (fileList: FileList | null): void => {
     if (!fileList || remaining <= 0) return;
@@ -134,13 +141,23 @@ export function ThumbnailPicker({
 
   return (
     <div className={cn("stagger-in", className)}>
-      <div className="flex flex-wrap gap-2.5">
+      <div
+        className={columns ? "grid gap-2" : "flex flex-wrap gap-2.5"}
+        style={
+          columns
+            ? { gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))` }
+            : undefined
+        }
+      >
         {previews.map((preview, index) => {
           const isPrimary = index === primaryIndex;
           return (
             <div
               key={`${preview}-${index}`}
-              className="relative shrink-0 overflow-hidden rounded-3 border border-gray-200"
+              className={cn(
+                "relative shrink-0 overflow-hidden rounded-3 border border-gray-200",
+                tileClass
+              )}
               style={boxStyle}
             >
               <img
@@ -227,6 +244,7 @@ export function ThumbnailPicker({
             className={cn(
               "flex shrink-0 cursor-pointer flex-col items-center justify-center",
               "gap-1.5 rounded-3 border-2 border-dashed bg-white text-gray-500",
+              tileClass,
               "transition-colors outline-none",
               "focus-visible:ring-2 focus-visible:ring-brand/30 focus-visible:ring-offset-2",
               isDragging

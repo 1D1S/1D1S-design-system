@@ -106,3 +106,46 @@ export const Single: Story = {
     );
   },
 };
+
+const swatch = (color: string): string =>
+  `data:image/svg+xml,${encodeURIComponent(
+    `<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120"><rect width="120" height="120" fill="${color}"/></svg>`
+  )}`;
+
+/** N열 그리드 — `columns={3}` 이면 폭을 꽉 채우는 정사각형 3열(앱 사진 첨부). `size` 는 무시된다. */
+export const Grid: Story = {
+  decorators: [
+    (Story) => (
+      <div className="w-[360px]">
+        <Story />
+      </div>
+    ),
+  ],
+  render: () => {
+    const [previews, setPreviews] = useState<string[]>(
+      ["#ff8a65", "#7ab3ef", "#96e6c2", "#c4b5fd"].map(swatch)
+    );
+    const [primaryIndex, setPrimaryIndex] = useState(0);
+
+    return (
+      <ThumbnailPicker
+        columns={3}
+        max={5}
+        previews={previews}
+        onSelectFiles={(files) =>
+          setPreviews((prev) => [
+            ...prev,
+            ...files.map((file) => URL.createObjectURL(file)),
+          ])
+        }
+        onRemove={(index) =>
+          setPreviews((prev) => prev.filter((_, i) => i !== index))
+        }
+        primaryIndex={primaryIndex}
+        onSelectPrimary={(index) =>
+          setPrimaryIndex((prev) => (prev === index ? -1 : index))
+        }
+      />
+    );
+  },
+};
