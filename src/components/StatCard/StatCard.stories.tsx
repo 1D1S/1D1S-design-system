@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { Icon } from "../Icons/Icon";
 import { StatCard } from "./StatCard";
 
 const meta: Meta<typeof StatCard> = {
@@ -6,6 +7,7 @@ const meta: Meta<typeof StatCard> = {
   component: StatCard,
   tags: ["autodocs"],
   argTypes: {
+    variant: { control: "select", options: ["raised", "flat"] },
     tone: { control: "select", options: ["white", "brand", "mint", "blue", "gray"] },
     size: { control: "select", options: ["sm", "md", "lg"] },
   },
@@ -41,4 +43,19 @@ export const Sizes: Story = {
       <StatCard label="레벨" value="3" size="lg" />
     </div>
   ),
+};
+
+export const Flat: Story = {
+  render: () => (
+    <div className="grid grid-cols-4 gap-2.5">
+      <StatCard variant="flat" tone="brand" label="현재 스트릭" value="27" icon={<Icon name="Flame" size={14} aria-hidden />} />
+      <StatCard variant="flat" label="최장 스트릭" value="45일" icon={<Icon name="Endless" size={14} aria-hidden />} />
+      <StatCard variant="flat" label="작성한 일지" value="48" helper="이번 달 12개" icon={<Icon name="BookOpen" size={14} aria-hidden />} />
+      <StatCard variant="flat" tone="mint" label="목표 최장 스트릭" value="9일" helper="목표: 물 마시기" icon={<Icon name="Target" size={14} aria-hidden />} />
+    </div>
+  ),
+};
+
+export const WithIcon: Story = {
+  args: { label: "현재 스트릭", value: "27", tone: "brand", icon: <Icon name="Flame" size={14} aria-hidden /> },
 };
