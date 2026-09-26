@@ -15,8 +15,8 @@ export interface SectionHeaderProps
   onActionClick?: () => void;
   /** 기본 액션 라벨 (default `"전체보기 →"`) */
   actionLabel?: React.ReactNode;
-  /** 폰트 크기 변형 */
-  size?: "sm" | "md" | "lg";
+  /** 폰트 크기 변형 — `xl` 은 페이지 섹션 스케일(제목 Text heading2 bold · 부제 caption1, 마이페이지) */
+  size?: "sm" | "md" | "lg" | "xl";
 }
 
 /**
@@ -48,12 +48,14 @@ export function SectionHeader({
     sm: "text-sm font-extrabold tracking-[-0.2px]",
     md: "text-base font-extrabold tracking-[-0.3px]",
     lg: "text-lg font-extrabold tracking-[-0.4px]",
+    xl: "",
   }[size];
 
   const subClass = {
     sm: "text-3xs",
     md: "text-2xs",
     lg: "text-xs",
+    xl: "mt-1 text-base leading-none font-normal",
   }[size];
 
   const resolvedAction =
@@ -75,7 +77,14 @@ export function SectionHeader({
       {...props}
     >
       <div className="min-w-0">
-        <h2 className={cn("text-gray-900", titleClass)}>{title}</h2>
+        <h2 className={cn("text-gray-900", titleClass)}>
+          {size === "xl" ? (
+            // xl: 인라인 span — 줄 높이를 부모 행간(strut)이 잡아 제목 줄이 글자보다 여유 있다.
+            <span className="text-2xl leading-none font-bold">{title}</span>
+          ) : (
+            title
+          )}
+        </h2>
         {subtitle ? (
           <div className={cn("mt-0.5 text-gray-500", subClass)}>{subtitle}</div>
         ) : null}

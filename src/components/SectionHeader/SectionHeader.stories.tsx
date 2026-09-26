@@ -6,7 +6,7 @@ const meta: Meta<typeof SectionHeader> = {
   component: SectionHeader,
   tags: ["autodocs"],
   argTypes: {
-    size: { control: "select", options: ["sm", "md", "lg"] },
+    size: { control: "select", options: ["sm", "md", "lg", "xl"] },
   },
   decorators: [
     (Story) => (
@@ -42,6 +42,7 @@ export const Sizes: Story = {
       <SectionHeader size="sm" title="작은 헤더" subtitle="size=sm" onActionClick={() => undefined} />
       <SectionHeader size="md" title="기본 헤더" subtitle="size=md" onActionClick={() => undefined} />
       <SectionHeader size="lg" title="큰 헤더" subtitle="size=lg" onActionClick={() => undefined} />
+      <SectionHeader size="xl" title="페이지 섹션 헤더" subtitle="size=xl" onActionClick={() => undefined} />
     </div>
   ),
 };
