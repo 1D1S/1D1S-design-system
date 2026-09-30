@@ -114,12 +114,32 @@ const PickerTrigger = React.forwardRef<HTMLButtonElement, PickerTriggerProps>(
 
 PickerTrigger.displayName = "PickerTrigger";
 
+/**
+ * 모달 다이얼로그(Radix Dialog) 안에서 팝오버가 곧바로 닫히는 것을 막는다.
+ *
+ * 팝오버 콘텐츠는 다이얼로그 밖(body)으로 포탈되는데, 열릴 때 스스로 포커스를
+ * 가져간다(FocusScope.onMountAutoFocus). 다이얼로그의 FocusScope 는 trapped 라
+ * 포커스를 곧바로 다이얼로그 안으로 되돌리고, 팝오버는 그것을 "포커스가 밖으로
+ * 나갔다"로 보고 스스로 닫는다. WebKit(사파리·아이패드)에서 재현되고 Chromium
+ * 에서는 나지 않는다 — DatePicker.dialog.browser.test.tsx 가 두 엔진에서 검증한다.
+ *
+ * 열림/닫힘 시 자동 포커스 이동을 막으면 이 다툼이 사라진다. 포커스는 트리거에
+ * 남고(다이얼로그 안이라 트랩과 무관), 캘린더는 포인터로 조작한다.
+ */
 function getPopoverContentProps(disableClickPropagation: boolean): {
   onMouseDownCapture?: (event: React.MouseEvent) => void;
+  onOpenAutoFocus(event: Event): void;
+  onCloseAutoFocus(event: Event): void;
 } {
-  if (!disableClickPropagation) return {};
   return {
-    onMouseDownCapture: (event: React.MouseEvent) => event.stopPropagation(),
+    onOpenAutoFocus: (event: Event) => event.preventDefault(),
+    onCloseAutoFocus: (event: Event) => event.preventDefault(),
+    ...(disableClickPropagation
+      ? {
+          onMouseDownCapture: (event: React.MouseEvent) =>
+            event.stopPropagation(),
+        }
+      : {}),
   };
 }
 
@@ -160,7 +180,9 @@ export function DatePicker({
         if (date) setOpen(false);
       }}
       className={useSheet ? SHEET_CALENDAR_CLASS : undefined}
-      initialFocus
+      // 바텀시트는 자체 포커스 스코프라 안전하다. 팝오버에서 포커스를 옮기면
+      // 다이얼로그 포커스 트랩과 다시 다퉈 즉시 닫힌다(getPopoverContentProps 주석).
+      initialFocus={useSheet}
     />
   );
 
@@ -253,7 +275,9 @@ export function RangeDatePicker({
         }
       }}
       className={useSheet ? SHEET_CALENDAR_CLASS : undefined}
-      initialFocus
+      // 바텀시트는 자체 포커스 스코프라 안전하다. 팝오버에서 포커스를 옮기면
+      // 다이얼로그 포커스 트랩과 다시 다퉈 즉시 닫힌다(getPopoverContentProps 주석).
+      initialFocus={useSheet}
     />
   );
 

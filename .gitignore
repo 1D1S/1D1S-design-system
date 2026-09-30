@@ -55,3 +55,6 @@ coverage
 
 # OS files
 Thumbs.db
+
+# vitest browser mode 실패 스크린샷
+__screenshots__/

@@ -44,6 +44,7 @@
   "scripts": {
     "lint": "eslint .",
     "type-check": "tsc --noEmit",
+    "test": "vitest run --config vitest.config.ts",
     "build": "storybook build",
     "build:lib": "vite build && npm run build:css && node scripts/verify-exports.mjs",
     "build:css": "vite build --config vite.config.css.ts && rm -f dist/_style-entry.js",
