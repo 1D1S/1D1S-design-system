@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.17.0](https://github.com/1D1S/1D1S-design-system/compare/v2.16.0...v2.17.0) (2026-10-03)
+
+
+### Features
+
+* **CircleAvatar:** 기본 프로필을 앱과 같은 그림으로 — main-300 원 + 흰 사람 실루엣 [minor] ([c183ece](https://github.com/1D1S/1D1S-design-system/commit/c183ece4460a80eae8ea6714671b7aa3aa71b86c))
+
 ## [2.16.0](https://github.com/1D1S/1D1S-design-system/compare/v2.15.1...v2.16.0) (2026-10-03)
 
 
