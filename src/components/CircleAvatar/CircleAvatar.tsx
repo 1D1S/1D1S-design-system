@@ -8,6 +8,10 @@ import { Stripe, type StripeTone } from "../Stripe";
 export type CircleAvatarSize = "xs" | "sm" | "md" | "lg" | "xl";
 export type CircleAvatarTone = StripeTone;
 
+/** 기본 프로필 실루엣 — 앱 AppAvatar 의 Icons.person 과 같은 도형(Material "person"). */
+const PERSON_PATH =
+  "M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z";
+
 const sizePx: Record<CircleAvatarSize, number> = {
   xs: 24,
   sm: 32,
@@ -19,13 +23,14 @@ const sizePx: Record<CircleAvatarSize, number> = {
 interface CircleAvatarProps {
   /** 사이즈 — 프리셋 또는 px 숫자 (default `"md"` = 40) */
   size?: CircleAvatarSize | number;
-  /** 이미지가 없을 때 보여줄 줄무늬 톤 — 프리셋 또는 CSS color 문자열 */
+  /** `fallback` 을 줄 때 그 뒤에 깔리는 줄무늬 톤 — 프리셋 또는 CSS color 문자열.
+   *  기본 프로필(fallback 없음)에는 쓰지 않는다. */
   tone?: CircleAvatarTone | string;
   /** 외곽선 (brand-soft 컬러). size>40일 때 3px, 아니면 2px */
   ring?: boolean;
-  /** 이미지 URL — 비어있거나 로드 실패 시 톤 Stripe 패턴으로 fallback */
+  /** 이미지 URL — 비어있거나 로드 실패 시 기본 프로필(peach 원 + 흰 실루엣) */
   imageUrl?: string;
-  /** Stripe 대신 보여줄 커스텀 fallback (이니셜·이모지 등) */
+  /** 기본 프로필 대신 보여줄 커스텀 fallback (이니셜·이모지 등) — 톤 줄무늬 위에 얹힌다 */
   fallback?: React.ReactNode;
   /** alt 텍스트 */
   alt?: string;
@@ -34,7 +39,10 @@ interface CircleAvatarProps {
 
 /**
  * CircleAvatar
- * 원형 아바타 — 이미지 또는 톤 Stripe 패턴.
+ * 원형 아바타 — 이미지, 없으면 **기본 프로필**(main-300 원 + 흰 사람 실루엣).
+ *
+ * 기본 프로필은 앱(AppAvatar)·웹(ProfileAvatar)과 같은 그림이다. 예전 기본값은
+ * 톤 줄무늬였는데, 앱은 실루엣이라 같은 사람이 앱·웹에서 달라 보였다.
  *
  * @param size `xs`(24)·`sm`(32)·`md`(40, default)·`lg`(56)·`xl`(76)·또는 px 숫자
  * @param tone Stripe 컬러 — `peach`(default)·`cream`·`mint`·`blue`·`sky`·`rose`·`gray`·또는 CSS color
@@ -90,15 +98,26 @@ export function CircleAvatar({
           className="object-cover"
           onError={() => setHasErrored(true)}
         />
-      ) : (
+      ) : fallback !== undefined ? (
         <>
           <Stripe tone={tone} className="absolute inset-0 h-full" />
-          {fallback !== undefined ? (
-            <div className="absolute inset-0 flex items-center justify-center text-gray-700">
-              {fallback}
-            </div>
-          ) : null}
+          <div className="absolute inset-0 flex items-center justify-center text-gray-700">
+            {fallback}
+          </div>
         </>
+      ) : (
+        <div
+          className="absolute inset-0 flex items-center justify-center"
+          style={{ background: "var(--main-300)" }}
+        >
+          <svg
+            viewBox="0 0 24 24"
+            aria-hidden
+            style={{ width: px * 0.58, height: px * 0.58, color: "#ffffff" }}
+          >
+            <path d={PERSON_PATH} fill="currentColor" />
+          </svg>
+        </div>
       )}
     </div>
   );
