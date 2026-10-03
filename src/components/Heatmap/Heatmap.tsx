@@ -62,6 +62,13 @@ export interface HeatmapProps
    * `--frozen`(하늘색)으로 칠한다.
    */
   frozen?: boolean[];
+  /**
+   * 셀별 CSS background — `cells` 와 같은 인덱스. 값이 있는 칸은 `frozen`·
+   * 팔레트보다 우선하고, `undefined` 인 칸은 기존 규칙(frozen → 팔레트)대로
+   * 칠한다. `linear-gradient(...)` 로 한 칸을 여러 색으로 나눌 때 쓴다.
+   * 셀의 `cellRadius` 가 그대로 그라디언트를 잘라낸다(배경은 둥근 모서리 안쪽만 칠해진다).
+   */
+  backgrounds?: ReadonlyArray<string | undefined>;
   /** 컬럼 수 (default 20) */
   cols?: number;
   /** 행 수 (default 7) */
@@ -129,6 +136,7 @@ export interface HeatmapProps
 export function Heatmap({
   cells,
   frozen,
+  backgrounds,
   cols = 20,
   rows = 7,
   tone = "main",
@@ -191,7 +199,8 @@ export function Heatmap({
       {data.slice(0, total).map((raw, i) => {
         const level = Math.max(0, Math.min(4, Math.round(raw)));
         const isFrozen = frozen?.[i] === true;
-        const background = isFrozen ? "var(--frozen)" : colors[level];
+        const background =
+          backgrounds?.[i] ?? (isFrozen ? "var(--frozen)" : colors[level]);
         if (!interactive) {
           return (
             <div
