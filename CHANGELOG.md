@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.16.0](https://github.com/1D1S/1D1S-design-system/compare/v2.15.1...v2.16.0) (2026-10-03)
+
+
+### Features
+
+* **Heatmap:** 셀별 backgrounds prop — 한 칸을 여러 색으로 나눠 칠하기 [minor] ([b5c5df1](https://github.com/1D1S/1D1S-design-system/commit/b5c5df110fc22e988749f89fc10d5ce07281682d))
+
 ### [2.15.1](https://github.com/1D1S/1D1S-design-system/compare/v2.15.0...v2.15.1) (2026-09-15)
 
 
