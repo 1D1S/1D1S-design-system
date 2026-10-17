@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.18.0](https://github.com/1D1S/1D1S-design-system/compare/v2.17.0...v2.18.0) (2026-10-17)
+
+
+### Features
+
+* **StatCard,SectionHeader:** StatCard flat 변형·icon 슬롯, SectionHeader xl 크기 추가 [minor] ([c74489c](https://github.com/1D1S/1D1S-design-system/commit/c74489c6112c6f35f9af874475a4f2cc3f0d9be0))
+
+
+### Bug Fixes
+
+* **DatePicker:** 모달 다이얼로그 안에서 팝오버가 즉시 닫히던 문제 — WebKit ([329c58a](https://github.com/1D1S/1D1S-design-system/commit/329c58af578fe13c05a03c46e278728fc4dd4365))
+
 ## [2.17.0](https://github.com/1D1S/1D1S-design-system/compare/v2.16.0...v2.17.0) (2026-10-03)
 
 
