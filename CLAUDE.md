@@ -89,12 +89,3 @@ src/
   (squash 면 PR 제목)에 `[skip ci]`** 를 넣는다. 이때 `push-to-fork` 미러도 같이 건너뛰지만,
   다음 main push 때 트리 전체가 미러되므로 따라잡는다.
 - `push-to-fork.yml`: `main`/`develop` 을 `NOGUEN/1D1S-design-system` 포크로 미러.
-
----
-
-## ⚠️ 현재 브랜치 상태 (2026-10-17)
-
-- 로컬 `main` 이 `origin/main` 과 갈라져 있던 2커밋(StatCard/SectionHeader, DatePicker)은
-  PR #24 로 main 에 반영됐다(→ 2.18.0). 원본은 `origin/preserve/main-local` 에 남아 있다.
-- 남은 일(사용자 확인 후): 로컬 `main` 을 `origin/main` 으로 맞추기
-  (`git reset --hard origin/main`), `preserve/main-local` 삭제 여부 결정, **이 섹션 삭제.**
