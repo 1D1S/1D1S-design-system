@@ -64,7 +64,7 @@ src/
 | `pnpm storybook` | 로컬 Storybook (6006). `.claude/launch.json` 의 preview 도 이걸 띄움 |
 | `pnpm build` | Storybook 정적 빌드 (Vercel 배포용) |
 | `pnpm build:lib` | 라이브러리 빌드: `vite build` → CSS 번들 → `verify-exports.mjs` |
-| (테스트) | **main 에는 아직 `pnpm test` 스크립트·`vitest.config.ts` 가 없다.** `Heatmap.backgrounds.browser.test.tsx` 는 있지만 실행 경로가 없음. 브라우저 테스트 설정(chromium+webkit)은 보류 중인 PR #24 에 들어 있다. 들어오면 처음엔 `pnpm exec playwright install chromium webkit` 필요. **CI 는 테스트를 돌리지 않는다**(auto-release 는 build 만) |
+| `pnpm test` | **브라우저 테스트만** (`*.browser.test.tsx`, vitest 브라우저 모드, chromium+webkit). jsdom 이 못 흉내내는 모달/포탈/포커스용 — DatePicker 다이얼로그·Heatmap backgrounds 회귀. 처음엔 `pnpm exec playwright install chromium webkit` 필요. **CI 는 테스트를 돌리지 않는다**(auto-release 는 build 만) — 머지 전 로컬에서 돌릴 것 |
 | `pnpm lint` / `pnpm type-check` | eslint / `tsc --noEmit` |
 
 빌드 핵심(건드리기 전 `vite.config.ts` 주석 읽기):
@@ -94,13 +94,7 @@ src/
 
 ## ⚠️ 현재 브랜치 상태 (2026-10-17)
 
-- 로컬 `main` 이 `origin/main` 과 **ahead 2 / behind 4** 로 갈라져 있었다. 로컬 끝
-  2커밋은 `origin/preserve/main-local` 에 원본 그대로 보존돼 있다(HEAD `77d0895`).
-- 그 2커밋을 `origin/main`(2.17.0) 위에 cherry-pick 한 `feat/statcard-datepicker-from-local`
-  브랜치로 PR #24 를 올려 뒀다. 충돌 없음. **머지는 보류 — 머지하면 `[minor]` 로
-  2.18.0 이 자동 발행되므로 사용자 별도 승인 전엔 머지하지 말 것.**
-  - StatCard flat 변형·icon 슬롯, SectionHeader xl `[minor]`
-  - DatePicker 모달 안 팝오버 즉시 닫힘(WebKit) 수정 + `pnpm test`/`vitest.config.ts` 신설
-  - 머지 전 할 일: Playwright 설치 후 `pnpm test`(DatePicker·Heatmap) 확인 — 아직 못 돌림.
-- PR 머지 후 할 일: 로컬 `main` 을 `origin/main` 으로 맞추고(`git reset --hard origin/main`
-  — 사용자 확인 후), `preserve/main-local` 삭제 여부 결정, **이 섹션 삭제.**
+- 로컬 `main` 이 `origin/main` 과 갈라져 있던 2커밋(StatCard/SectionHeader, DatePicker)은
+  PR #24 로 main 에 반영됐다(→ 2.18.0). 원본은 `origin/preserve/main-local` 에 남아 있다.
+- 남은 일(사용자 확인 후): 로컬 `main` 을 `origin/main` 으로 맞추기
+  (`git reset --hard origin/main`), `preserve/main-local` 삭제 여부 결정, **이 섹션 삭제.**
