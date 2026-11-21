@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.1.0](https://github.com/1D1S/1D1S-design-system/compare/v3.0.0...v3.1.0) (2026-11-21)
+
+
+### Features
+
+* **Logo:** 로고 마크의 모서리를 살짝 둥글게 [minor] ([2c9b3e1](https://github.com/1D1S/1D1S-design-system/commit/2c9b3e198ebc9a856a7d343d4c9bb8867581492b))
+
 ## [3.0.0](https://github.com/1D1S/1D1S-design-system/compare/v2.18.0...v3.0.0) (2026-11-21)
 
 
