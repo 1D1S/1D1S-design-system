@@ -41,6 +41,50 @@
   --color-brand-soft: var(--brand-soft);
   --color-brand-softer: var(--brand-softer);
 
+  /* ── 플랫 의미 토큰 (1D1S 웹 docs/flat-design-system.md) ──
+     bg 한 면 · fg 본문 · sub 보조 글자 · mute 셰브론/자리표시 · line 1px 헤어라인 ·
+     fill 8px 밴드/칩/입력 바탕 · ink 주황 글자 · soft 옅은 주황 면 · ok/info/danger 상태색.
+     주황 채움은 brand(= main-800). 새 코드는 램프가 아니라 이것을 쓴다. */
+  --color-bg: var(--bg);
+  --color-fg: var(--fg);
+  --color-sub: var(--sub);
+  --color-mute: var(--mute);
+  --color-line: var(--line);
+  --color-fill: var(--fill);
+  --color-ink: var(--ink);
+  --color-soft: var(--soft);
+  --color-ok: var(--ok);
+  --color-ok-soft: var(--ok-soft);
+  --color-info: var(--info);
+  --color-info-soft: var(--info-soft);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+
+  /* 카테고리 태그 — 글자 cat-* + 옅은 면 cat-*-soft. 옅은 면 위 글자 대비 4.5:1 이상. */
+  --color-cat-book: var(--cat-book);
+  --color-cat-book-soft: var(--cat-book-soft);
+  --color-cat-self-dev: var(--cat-self-dev);
+  --color-cat-self-dev-soft: var(--cat-self-dev-soft);
+  --color-cat-exercise: var(--cat-exercise);
+  --color-cat-exercise-soft: var(--cat-exercise-soft);
+  --color-cat-health: var(--cat-health);
+  --color-cat-health-soft: var(--cat-health-soft);
+  --color-cat-hobby: var(--cat-hobby);
+  --color-cat-hobby-soft: var(--cat-hobby-soft);
+  --color-cat-dev: var(--cat-dev);
+  --color-cat-dev-soft: var(--cat-dev-soft);
+  --color-cat-diet: var(--cat-diet);
+  --color-cat-diet-soft: var(--cat-diet-soft);
+  --color-cat-language: var(--cat-language);
+  --color-cat-language-soft: var(--cat-language-soft);
+  --color-cat-etc: var(--cat-etc);
+  --color-cat-etc-soft: var(--cat-etc-soft);
+
+  /* 어두운 강조 면(툴팁·배지)과 그 위 글자 — bg-gray-900 + text-white 는 다크에서 둘 다 뒤집혀 밝은 면이 된다. */
+  --color-inverse-surface: var(--inverse-surface);
+  --color-on-inverse: #ffffff;
+  --color-on-inverse-muted: var(--on-inverse-muted);
+
   /* Green Colors */
   --color-green-200: var(--green-200);
   --color-green-300: var(--green-300);
@@ -58,6 +102,7 @@
   --color-blue-600: var(--blue-600);
 
   /* Red Colors */
+  --color-red-50: var(--red-50);
   --color-red-300: var(--red-300);
   --color-red-400: var(--red-400);
   --color-red-500: var(--red-500);
@@ -89,36 +134,81 @@
   --color-purple-700: var(--purple-700);
 }
 
+/* 값의 정본은 1D1S 웹 클라이언트 src/app.styles/colors.css 다 — 앱(RN 셸)의 화면이 그 웹이다.
+   플랫 리디자인(2026-11)에서 정한 값: 브랜드 #ff5900(다크 #ff6a1b), 푸른 기 없는 중립 회색,
+   의미 토큰. 램프의 네 칸은 의미 토큰과 같은 값이다(100=fill · 200=line · 400=mute ·
+   500=sub · 900=fg) — 램프로 적힌 컴포넌트도 같은 색을 낸다. */
 :root {
   /* Gray Colors */
-  --gray-50: #fafafa;
-  --gray-100: #f5f5f5;
-  --gray-200: #eeeeee;
-  --gray-300: #e0e0e0;
-  --gray-400: #bdbdbd;
-  --gray-500: #9e9e9e;
-  --gray-600: #757575;
-  --gray-700: #616161;
+  --gray-50: #f7f8f9;
+  --gray-100: #f4f4f5;
+  --gray-200: #ededed;
+  --gray-300: #e3e3e3;
+  --gray-400: #8a8a8a;
+  --gray-500: #6b6b6b;
+  --gray-600: #5c5c5c;
+  --gray-700: #4e4e4e;
   --gray-800: #424242;
-  --gray-900: #222222;
+  --gray-900: #1f1f1f;
+
+  /* 플랫 의미 토큰(라이트) */
+  --bg: #ffffff;
+  --fg: var(--gray-900);
+  --sub: var(--gray-500);
+  --mute: var(--gray-400);
+  --line: var(--gray-200);
+  --fill: var(--gray-100);
+  /* 주황 글자 — 흰 면 위 4.8:1. 채움색(main-800)은 글자로 쓰기엔 옅다. */
+  --ink: #c14e10;
+  --soft: #fff2ea;
+  --ok: #12805a;
+  --ok-soft: #e5fff4;
+  --info: #1666ba;
+  --info-soft: #e8f1fb;
+  /* 위험·오류. 브랜드 주황과 헷갈리지 않게 붉은 쪽으로 뺐다. 흰 면 위 5:1 이상. */
+  --danger: #d92d20;
+  --danger-soft: #fff0ee;
+
+  /* 카테고리 태그 — 운동·개발·건강은 브랜드 주황·ok 초록과 붙어 보이지 않게 옆으로 뺐다. */
+  --cat-book: #1d5fd0;
+  --cat-book-soft: #eaf2ff;
+  --cat-self-dev: #4f46e5;
+  --cat-self-dev-soft: #eeefff;
+  --cat-exercise: #96560a;
+  --cat-exercise-soft: #fff3d6;
+  --cat-health: #0e7490;
+  --cat-health-soft: #e2f6fb;
+  --cat-hobby: #8b2fd6;
+  --cat-hobby-soft: #f6ecff;
+  --cat-dev: #38760f;
+  --cat-dev-soft: #edf8df;
+  --cat-diet: #c0246a;
+  --cat-diet-soft: #ffeaf3;
+  --cat-language: #756600;
+  --cat-language-soft: #fbf6c8;
+  --cat-etc: #526077;
+  --cat-etc-soft: #eef1f5;
+
+  --inverse-surface: #1f1f1f;
+  --on-inverse-muted: #d0d0d0;
 
   /* Main Colors */
   --main-100: #fffbfa;
-  --main-200: #fff3e0;
-  --main-300: #ffe0b2;
-  --main-400: #ffccbc;
-  --main-500: #ffab91;
-  --main-600: #ff8a65;
-  --main-700: #ff7043;
-  --main-800: #ff5722;
-  --main-900: #ff3d00;
+  --main-200: #fff6f2;
+  --main-300: #ffebe3;
+  --main-400: #ffdac7;
+  --main-500: #ffc3ad;
+  --main-600: #ffae90;
+  --main-700: #ff6b4a;
+  --main-800: #ff5900;
+  --main-900: #ff3c00;
 
   /* Default Colors */
   --white: #ffffff;
   --black: #111111;
   --gray-shadow-70: #000000b3;
   --warning: #ff2020;
-  --accent: #ff5722;
+  --accent: var(--main-800);
   /* 스트릭 프리즈로 메운 날 — 활동 램프(주황)와 갈려야 "기록이 아니라 이어
      붙인 날"로 읽힌다. 앱 kHeatmapFrozenColor 와 같고, 앱처럼 다크에서도
      그대로다(그래서 아래 다크 블록에 없다). */
@@ -126,7 +216,7 @@
 
   /* Brand semantic aliases (v3) */
   --brand: var(--main-800);
-  --brand-soft: var(--main-200);
+  --brand-soft: var(--soft);
   --brand-softer: var(--main-100);
 
   /* Green Colors */
@@ -146,6 +236,7 @@
   --blue-600: #1666ba;
 
   /* Red Colors */
+  --red-50: #fff4f3;
   --red-300: #ffbaba;
   --red-400: #ff7b7b;
   --red-500: #ff5252;
@@ -209,17 +300,53 @@
    한 단계 올린다. 소비자가 이 위에 자기 다크 값을 더 얹으려면 **같은
    `.dark.dark`** 를 쓰면 된다 — 명시도가 같고 나중에 오므로 이긴다. */
 .dark.dark {
-  /* Gray — 역할 반전(50=가장 어두운 면 … 900=가장 밝은 글자) */
-  --gray-50: #1b1d21;
-  --gray-100: #202226;
-  --gray-200: #2a2d33;
-  --gray-300: #343841;
-  --gray-400: #4b4f57;
-  --gray-500: #8a9099;
-  --gray-600: #a4aab2;
-  --gray-700: #b6bcc4;
-  --gray-800: #d4d8de;
-  --gray-900: #ecedef;
+  /* Gray — 역할 반전(50=가장 어두운 면 … 900=가장 밝은 글자). 푸른 기 없는 회색 한 면(#1c1c1f) 위에
+     선다. 라이트와 같이 100=fill · 200=line · 400=mute · 500=sub · 900=fg. */
+  --gray-50: #222225;
+  --gray-100: #28282c;
+  --gray-200: #2e2e33;
+  --gray-300: #3a3a40;
+  --gray-400: #85858c;
+  --gray-500: #a9a9af;
+  --gray-600: #bcbcc2;
+  --gray-700: #cdcdd2;
+  --gray-800: #e0e0e3;
+  --gray-900: #f2f2f3;
+
+  /* 플랫 의미 토큰(다크). fg·sub·mute·line·fill 은 위 램프를 따라온다. */
+  --bg: #1c1c1f;
+  --ink: #ff955c;
+  --soft: #35251c;
+  --ok: #5ec69d;
+  --ok-soft: #1d3229;
+  --info: #7ab3ef;
+  --info-soft: #1c2a42;
+  --danger: #ff6b5e;
+  --danger-soft: #3a2220;
+
+  /* 카테고리 태그(다크) — 어두운 옅은 면 위 밝은 글자, 6.5:1 이상. */
+  --cat-book: #8ab4ff;
+  --cat-book-soft: #1c2a42;
+  --cat-self-dev: #aab0ff;
+  --cat-self-dev-soft: #26264a;
+  --cat-exercise: #f2b45c;
+  --cat-exercise-soft: #3a2d14;
+  --cat-health: #5ccbe3;
+  --cat-health-soft: #16313a;
+  --cat-hobby: #cf9cff;
+  --cat-hobby-soft: #31203f;
+  --cat-dev: #9fd66a;
+  --cat-dev-soft: #24321a;
+  --cat-diet: #ff8fbd;
+  --cat-diet-soft: #3d1f2c;
+  --cat-language: #dcc94e;
+  --cat-language-soft: #34301a;
+  --cat-etc: #a9b4c6;
+  --cat-etc-soft: #2a2e36;
+
+  --inverse-surface: #3a3a40;
+  --on-inverse-muted: #bcbcc2;
+  --red-50: #2a1717;
 
   /* Main — 채움(700~900)은 유지, 연한 틴트는 어두운 웜톤 */
   --main-100: #241812;
@@ -229,17 +356,16 @@
   --main-500: #8a4d2e;
   --main-600: #c06a42;
   --main-700: #ff7a48;
-  --main-800: #ff5722;
-  --main-900: #ff3d00;
+  /* 브랜드 #ff5900 을 어두운 면에서 같은 색상(21°)으로 한 단계 밝혔다(명도 50 → 55). 흰 글자를 얹는 채움색이라 더 밝히지 않는다. */
+  --main-800: #ff6a1b;
+  --main-900: #ff5900;
 
-  /* Default — `bg-white` / `text-black` 리터럴도 이 변수라 같이 뒤집힌다.
-     --white 는 순백이 아니라 **카드 면**이 된다: 다크에서 흰 카드의 역할을
-     이어받는 값이라 바탕보다 한 단계 밝은 회색이어야 한다. */
-  --white: #191c21;
-  --black: #ecedef;
+  /* Default — `bg-white` / `text-black` 리터럴도 이 변수라 같이 뒤집힌다. 플랫은 카드를 따로 띄우지
+     않으므로 면(bg)·글자(fg)를 그대로 따라간다. */
+  --white: var(--bg);
+  --black: var(--fg);
   --gray-shadow-70: #000000cc;
   --warning: #ff5555;
-  --accent: #ff7a48;
 
   /* Brand semantic aliases 는 위 :root 에서 --main-* 를 가리키므로
      따로 뒤집지 않는다 — main 이 바뀌면 같이 따라온다. */

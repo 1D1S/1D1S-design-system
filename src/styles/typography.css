@@ -92,3 +92,50 @@
   --font-weight-bold: 700;
   --font-weight-extrabold: 800;
 }
+
+/* ── 고정 단계 글자 크기 text-ui-* (1D1S 웹 typography.css 와 같은 값) ──
+   글자 크기만 바꾼다(줄높이는 부모를 따른다) — 위 text-xs 등은 줄높이를 같이 걸어 여러 줄 글에
+   그대로 바꿔 끼우면 무너진다. 화면에서 임의 px(text-[13px]) 대신 이 눈금을 쓴다.
+   lg(1024) 미만에서는 전 단계를 +2px 올린다(앱에서 글자가 작다는 제보로 확정). 스트릭 큰 숫자
+   (display)와 집계 숫자(count)는 그대로다. */
+@theme {
+  --text-ui-4xs: 0.5rem; /* 8 */
+  --text-ui-3xs: 0.625rem; /* 10 */
+  --text-ui-2xs: 0.6875rem; /* 11 */
+  --text-ui-xs: 0.75rem; /* 12 */
+  --text-ui-sm: 0.8125rem; /* 13 */
+  --text-ui-base: 0.875rem; /* 14 */
+  --text-ui-lg: 0.9375rem; /* 15 */
+  --text-ui-xl: 1.0625rem; /* 17 */
+  --text-ui-2xl: 1.1875rem; /* 19 */
+  --text-ui-3xl: 1.3125rem; /* 21 */
+  --text-ui-4xl: 1.5rem; /* 24 */
+  /* 역할 단계 — 눈금 사이 값이라 이름을 역할로 붙였다 */
+  --text-ui-subhead: 1rem; /* 16 리스트 제목 */
+  --text-ui-heading: 1.125rem; /* 18 섹션 제목 */
+  --text-ui-stat: 1.25rem; /* 20 통계 숫자 */
+  --text-ui-title: 1.375rem; /* 22 탭 제목 */
+  --text-ui-display: 2.75rem; /* 44 스트릭 숫자 */
+  --text-ui-display-sm: 2.5rem; /* 40 데스크톱 참여 블록의 큰 숫자 */
+  --text-ui-count: 0.75rem; /* 12 목록의 집계 숫자(일부러 작게, 모바일에서도 그대로) */
+}
+
+@media (max-width: 1023px) {
+  :root {
+    --text-ui-4xs: 0.625rem; /* 10 */
+    --text-ui-3xs: 0.75rem; /* 12 */
+    --text-ui-2xs: 0.8125rem; /* 13 */
+    --text-ui-xs: 0.875rem; /* 14 */
+    --text-ui-sm: 0.9375rem; /* 15 */
+    --text-ui-base: 1rem; /* 16 */
+    --text-ui-lg: 1.0625rem; /* 17 */
+    --text-ui-xl: 1.1875rem; /* 19 */
+    --text-ui-2xl: 1.3125rem; /* 21 */
+    --text-ui-3xl: 1.4375rem; /* 23 */
+    --text-ui-4xl: 1.625rem; /* 26 */
+    --text-ui-subhead: 1.125rem; /* 18 */
+    --text-ui-heading: 1.25rem; /* 20 */
+    --text-ui-stat: 1.375rem; /* 22 */
+    --text-ui-title: 1.5rem; /* 24 */
+  }
+}

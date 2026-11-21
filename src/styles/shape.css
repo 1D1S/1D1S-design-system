@@ -23,3 +23,16 @@
   --radius-4: 1rem; /* 16px */
   --radius-full: 9999px;
 }
+
+/* 모서리 눈금 rounded-ui-* (1D1S 웹·앱 AppRadius 와 같다). 화면에서 rounded-[19px] 같은 임의값 대신 쓴다. */
+@theme {
+  --radius-ui-xs: 4px;
+  --radius-ui-sm: 6px;
+  --radius-ui-md: 8px;
+  --radius-ui-lg: 10px;
+  --radius-ui-xl: 12px;
+  --radius-ui-2xl: 14px;
+  --radius-ui-3xl: 16px;
+  --radius-ui-4xl: 20px;
+  --radius-ui-5xl: 24px;
+}
