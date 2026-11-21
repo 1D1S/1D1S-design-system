@@ -39,15 +39,14 @@ function SelectTrigger({
       data-slot="select-trigger"
       data-size={size}
       className={cn(
-        "group flex w-full items-center justify-between whitespace-nowrap border bg-white outline-none transition-all duration-200",
+        "group flex w-full items-center justify-between whitespace-nowrap border bg-fill outline-none transition-all duration-200",
         "disabled:cursor-not-allowed disabled:opacity-50",
-        "hover:border-gray-400",
-        "data-[placeholder]:text-gray-500 focus-visible:border-brand focus-visible:ring-2 focus-visible:ring-brand/30 focus-visible:ring-offset-2",
+        "data-[placeholder]:text-mute focus-visible:border-brand",
         // min-width 를 두면 좁은 그리드(예: 연/월/일 3열)에서 부모 폭을
         // 넘겨 잘린다. 기본 폭은 w-full 이 잡으므로 하한은 두지 않는다.
         isSmall
-          ? "h-10 min-w-0 rounded-2.5 border-gray-200 px-3.5"
-          : "h-10 min-w-0 rounded-2.5 border-gray-200 px-4",
+          ? "h-10 min-w-0 rounded-ui-xl border-transparent px-3.5"
+          : "h-10 min-w-0 rounded-ui-xl border-transparent px-4",
         className,
       )}
       {...props}

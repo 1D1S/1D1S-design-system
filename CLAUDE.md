@@ -8,22 +8,23 @@ Tailwind v4 + Radix UI, React 19 peer, 모바일 퍼스트.
 
 ---
 
-## ⚠️ 가장 중요 — 브랜드/회색 색의 정본은 DS 가 아니다
+## ⚠️ 가장 중요 — 색·눈금의 정본은 1D1S 웹이다
 
-브랜드 오렌지·회색 램프의 **정본(source of truth)은 이 레포가 아니라 네이티브 앱
-`_1d1s_app/lib/core/theme.dart` ↔ 웹 클라이언트 `colors.css` 쌍**이다. DS 의
-`src/styles/colors.css` 는 그 둘을 **따라 적은 사본**일 뿐이다.
+브랜드 오렌지·회색 램프·의미 토큰의 **정본(source of truth)은 이 레포가 아니라 웹 클라이언트
+`1D1S-client` 의 `src/app.styles/colors.css`·`typography.css`** 다(규칙 문서 `docs/flat-design-system.md`).
+앱(RN 셸)의 화면이 그 웹이고, 어드민도 같은 파일을 읽는다. DS 의 `src/styles/colors.css` 는 그 값을
+**따라 적은 사본**이다.
 
-- 현재 **갈라져 있음**: DS 는 `--main-800`/`--accent` = `#ff5722` (`colors.css:113,121,232`),
-  앱·웹은 `#ff5900`.
-- **이게 웹↔앱 색 불일치의 뿌리다.** 웹은 DS 를 import 한 뒤 자기 `colors.css`
-  `:root` 로 램프를 덮어써서 앱 색을 유지한다. 그래서 **DS 버전만 올리고(2.x)
-  app/web 을 같이 안 고치면** — DS 의 새 색·새 토큰이 덮어쓰기를 빠져나가거나,
-  웹이 DS 의 옛 값에 기대던 곳이 바뀌어 — **소비처끼리 색이 갈라진다.**
-- 색을 바꾸는 DS 릴리스는 **app `theme.dart` → web `colors.css` → DS `colors.css`
-  세 곳을 같은 값으로, 같은 작업 단위에서** 맞춘다. 셋 중 하나만 바꾼 PR 은 미완성이다.
-- 색 관련 작업이면 어느 값이 맞는지 먼저 사용자에게 확인하고(앱 값이 기준),
-  DS 만 단독으로 고치지 말 것.
+- 2026-11 플랫 리디자인 값으로 맞췄다: 브랜드 `#ff5900`(다크 `#ff6a1b`), 푸른 기 없는 중립 회색,
+  의미 토큰(`bg·fg·sub·mute·line·fill·ink·soft·ok·info·danger`), 카테고리 `cat-*`, 글자 눈금
+  `text-ui-*`, 모서리 눈금 `rounded-ui-*`, 면 위의 그림자 없음(`shadow-default`·`shadow-warm` = 0).
+- 색을 바꾸는 작업은 **웹 `colors.css` → DS `colors.css`** 를 같은 값으로, 같은 작업 단위에서 맞춘다
+  (상용 플러터 앱 `_1d1s_app/lib/core/theme.dart` 의 브랜드도 `#ff5900` 이다). 한쪽만 바꾼 PR 은 미완성이다.
+- 웹·어드민은 지금도 자기 토큰 파일로 DS 를 덮어쓴다(같은 값이라 겉모습은 같다). DS 를 올린 뒤
+  그 덮어쓰기를 걷는 것은 각 레포의 일이다.
+- 새 컴포넌트·수정은 램프(`gray-500`)가 아니라 의미 토큰(`text-sub`)으로 적는다. 램프의 네 칸은 의미
+  토큰과 같은 값이라(100=fill · 200=line · 400=mute · 500=sub · 900=fg) 램프로 적힌 기존 컴포넌트도
+  같은 색을 낸다.
 
 `colors.css` 자체에 다크 테마·셀렉터 명시도(`.dark.dark`) 관련 주석이 길게 달려
 있다 — 다크 토큰 건드리기 전 그 주석을 읽을 것. (주석 안에서 `*` `/` 를 붙여 쓰면

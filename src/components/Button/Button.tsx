@@ -11,16 +11,17 @@ const baseClasses =
 const buttonVariants = cva(baseClasses, {
   variants: {
     variant: {
+      // 플랫(1D1S 웹 docs/flat-design-system.md): 선 없는 채움, 떠오르는 움직임 없음.
       primary:
-        "bg-brand text-fixed-white border-transparent hover:brightness-105 hover:-translate-y-px",
+        "bg-brand text-fixed-white border-transparent hover:brightness-105",
       secondary:
-        "bg-white text-gray-800 border-gray-200 hover:bg-gray-50 hover:border-gray-300",
+        "bg-fill text-fg border-transparent hover:bg-gray-200",
       soft:
-        "bg-brand-soft text-brand border-main-300 hover:bg-main-300/70",
+        "bg-soft text-ink border-transparent hover:bg-main-300",
       ghost:
-        "bg-transparent text-gray-700 border-transparent hover:bg-gray-100",
+        "bg-transparent text-sub border-transparent hover:bg-fill hover:text-fg",
       danger:
-        "bg-red-500 text-white border-transparent hover:brightness-105 hover:-translate-y-px",
+        "bg-danger text-fixed-white border-transparent hover:brightness-105",
     },
     size: {
       xs: "h-6 px-2 gap-1",
