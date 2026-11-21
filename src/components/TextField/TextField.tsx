@@ -15,13 +15,13 @@ export type TextFieldState =
 const fieldVariants = cva(
   [
     "w-full transition-[border-color,box-shadow,background-color] duration-200 ease-out outline-none",
-    "rounded-2.5 border border-gray-200 bg-white text-gray-900",
-    "placeholder:text-gray-500",
+    // 플랫: 선 없는 눌린 면(fill). 포커스·오류만 1px 선으로 말한다.
+    "rounded-ui-xl border border-transparent bg-fill text-fg",
+    "placeholder:text-mute",
     // automatic states (used when `state` prop omitted)
-    "hover:border-gray-400",
-    "focus-visible:border-brand focus-visible:ring-2 focus-visible:ring-brand/30 focus-visible:ring-offset-2",
-    "disabled:cursor-not-allowed disabled:border-gray-200 disabled:bg-gray-100 disabled:text-gray-400",
-    "aria-[invalid=true]:border-red-500 aria-[invalid=true]:shadow-focus-error",
+    "focus-visible:border-brand",
+    "disabled:cursor-not-allowed disabled:text-mute disabled:opacity-60",
+    "aria-[invalid=true]:border-danger",
   ],
   {
     variants: {
@@ -36,18 +36,18 @@ const fieldVariants = cva(
       hasSuffix: { true: "", false: "" },
       multiline: {
         false: "",
-        true: "h-auto min-h-[80px] resize-y align-top leading-[1.6] rounded-2.5",
+        true: "h-auto min-h-[80px] resize-y align-top leading-[1.6] rounded-ui-xl",
       },
       // controlled visual state — overrides automatic states
       state: {
         default: "",
         focus:
-          "border-brand ring-2 ring-brand/30 ring-offset-2",
-        filled: "border-gray-300",
+          "border-brand",
+        filled: "border-transparent",
         error:
-          "border-red-500 shadow-focus-error",
+          "border-danger",
         disabled:
-          "cursor-not-allowed border-gray-200 bg-gray-100 text-gray-400",
+          "cursor-not-allowed text-mute opacity-60",
       },
     },
     compoundVariants: [
@@ -304,7 +304,7 @@ export const TextField = React.forwardRef<
             weight="regular"
             className={cn(
               "mt-1.5",
-              error ? "text-red-500" : "text-gray-500",
+              error ? "text-danger" : "text-sub",
             )}
           >
             {error || helper}

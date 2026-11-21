@@ -133,7 +133,9 @@ function DialogFooter({
   return (
     <div
       className={cn(
-        "flex justify-end gap-2 border-t border-gray-100 bg-gray-50 px-5 py-3.5",
+        // 플랫: 면은 한 장 — 회색 띠 없이 1px 선 하나로만 본문과 가른다(긴 폼의 스크롤 경계). 선이 필요 없는
+        // 짧은 확인창은 border-t-0 으로 끈다.
+        "flex justify-end gap-2 border-t border-line px-5 py-3.5",
         className,
       )}
       {...props}
@@ -148,7 +150,7 @@ function DialogTitle({
 }: React.ComponentProps<typeof DialogPrimitive.Title>): React.ReactElement {
   return (
     <DialogPrimitive.Title asChild {...props}>
-      <Text size="body2" weight="extrabold" className={cn("text-black tracking-[-0.3px]", className)}>
+      <Text size="body2" weight="extrabold" className={cn("text-fg tracking-[-0.02em]", className)}>
         {children}
       </Text>
     </DialogPrimitive.Title>
@@ -167,7 +169,7 @@ function DialogDescription({
       <Text
         size="caption2"
         weight="regular"
-        className={cn("text-gray-700 leading-[1.55]", className)}
+        className={cn("text-sub leading-[1.55]", className)}
       >
         {children}
       </Text>
@@ -179,7 +181,7 @@ function DialogDescription({
 
 const confirmToneStyles = {
   brand: { iconBg: "bg-brand-soft", iconColor: "text-brand", buttonVariant: "primary" as const },
-  danger: { iconBg: "bg-red-300/40", iconColor: "text-red-600", buttonVariant: "danger" as const },
+  danger: { iconBg: "bg-danger-soft", iconColor: "text-danger", buttonVariant: "danger" as const },
   mint: { iconBg: "bg-mint-200", iconColor: "text-mint-900", buttonVariant: "primary" as const },
 };
 
@@ -263,7 +265,7 @@ function ConfirmDialog({
             <Icon name={icon} size={26} className={t.iconColor} />
           </div>
           <DialogPrimitive.Title asChild>
-            <Text size="body2" weight="extrabold" className="block text-black tracking-[-0.3px]">
+            <Text size="body2" weight="extrabold" className="block text-fg tracking-[-0.02em]">
               {title}
             </Text>
           </DialogPrimitive.Title>
@@ -272,7 +274,7 @@ function ConfirmDialog({
               <Text
                 size="caption2"
                 weight="regular"
-                className="mt-1.5 block whitespace-pre-line text-gray-600 leading-[1.55]"
+                className="mt-1.5 block whitespace-pre-line text-sub leading-[1.55]"
               >
                 {description}
               </Text>

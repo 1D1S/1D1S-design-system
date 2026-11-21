@@ -7,14 +7,14 @@ import { cn } from '../../lib/utils';
 
 const toggleGroupItemVariants = cva(
   [
-    'inline-flex w-fit items-center justify-center border bg-white whitespace-nowrap',
-    'text-gray-700 transition-all duration-200 ease-out active:scale-95',
+    // 플랫 필터 칩: 선 없는 채움, 고르면 글자색으로 채운다(bg-fg · text-bg).
+    'inline-flex w-fit items-center justify-center border border-transparent bg-fill whitespace-nowrap',
+    'text-fg font-semibold transition-all duration-200 ease-out active:scale-95',
     'cursor-pointer disabled:pointer-events-none disabled:opacity-50 disabled:active:scale-100',
     'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/30 focus-visible:ring-offset-2',
-    'hover:border-gray-400 hover:bg-gray-100',
-    'data-[state=on]:border-brand data-[state=on]:bg-brand data-[state=on]:text-fixed-white',
-    'data-[state=on]:hover:bg-main-600 data-[state=on]:hover:border-main-600',
-    'data-[state=on]:shadow-brand-glow',
+    'hover:bg-gray-200',
+    'data-[state=on]:bg-fg data-[state=on]:text-bg',
+    'data-[state=on]:hover:bg-fg',
     'data-[state=on]:animate-pop',
   ],
   {

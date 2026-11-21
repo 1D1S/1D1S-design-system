@@ -187,7 +187,7 @@ const StreakCell = React.memo(function StreakCell({
             if (!anySelected) setOpen(false);
           }}
           className={cn(
-            "z-50 min-w-[120px] rounded-2 bg-gray-900 px-3 py-2 text-xs text-white shadow-default",
+            "z-50 min-w-[120px] rounded-2 bg-inverse-surface px-3 py-2 text-xs text-on-inverse",
             "animate-in fade-in-0 zoom-in-95",
             "data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95",
             "data-[side=top]:slide-in-from-bottom-2 data-[side=bottom]:slide-in-from-top-2",

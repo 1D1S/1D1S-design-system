@@ -2,16 +2,18 @@ import { cn } from "../../lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
 
 const tagVariants = cva(
-  "inline-flex items-center justify-center font-bold whitespace-nowrap",
+  "inline-flex items-center justify-center font-semibold whitespace-nowrap",
   {
     variants: {
       tone: {
-        gray: "bg-gray-100 text-gray-700",
-        brand: "bg-brand-soft text-brand",
+        // 플랫 칩 — 옅은 면 + 같은 색상의 글자(대비 4.5:1 이상). mint 는 green(ok)과 갈라 보여야 하는
+        // 자리가 있어(어드민 회차 상태: 모집 mint · 진행 green) 제 램프를 그대로 쓴다.
+        gray: "bg-fill text-sub",
+        brand: "bg-soft text-ink",
         mint: "bg-mint-200 text-mint-900",
-        blue: "bg-blue-200 text-blue-600",
-        red: "bg-red-300 text-red-700",
-        green: "bg-green-200 text-green-700",
+        blue: "bg-info-soft text-info",
+        red: "bg-danger-soft text-danger",
+        green: "bg-ok-soft text-ok",
       },
       size: {
         xs: "text-3xs py-0.5 px-1.5 gap-0.5",
@@ -21,13 +23,14 @@ const tagVariants = cva(
       },
       pill: {
         true: "rounded-full",
-        false: "rounded-1",
+        false: "rounded-ui-sm",
       },
     },
     defaultVariants: {
       tone: "brand",
       size: "md",
-      pill: true,
+      // 플랫 칩은 r6(1D1S 웹 Chip). 알약이 필요하면 pill 을 켠다.
+      pill: false,
     },
   },
 );
@@ -46,7 +49,7 @@ export interface TagProps
  *
  * @param tone `gray` · `brand` (default) · `mint` · `blue` · `red` · `green`
  * @param size `xs` · `sm` · `md` (default) · `lg`
- * @param pill 알약형 라운딩 (default `true`)
+ * @param pill 알약형 라운딩 (default `false` — 플랫 칩은 r6)
  * @param icon 라벨 좌측 아이콘 또는 이모지
  *
  * @example
