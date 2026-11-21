@@ -2,6 +2,34 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0](https://github.com/1D1S/1D1S-design-system/compare/v2.18.0...v3.0.0) (2026-11-21)
+
+
+### ⚠ BREAKING CHANGES
+
+* **components:** 컴포넌트의 기본 모양이 바뀐다. ^2 소비처가 다음 설치 때 모르게 따라오지 않도록 메이저로 낸다.
+
+- Button: secondary = 선 없는 fill, soft = soft · ink, ghost 글자 sub, danger = danger 토큰, 떠오르는 hover 제거.
+- TextField·TextArea·Select 트리거: 흰 바탕 + 회색 선 → 선 없는 fill · r12, 포커스는 brand 1px 선(링·오프셋 없음),
+  오류는 danger 선, 자리표시 mute.
+- Tag: r6 칩이 기본(pill 은 옵션), semibold, 톤 = 의미 토큰(gray fill/sub · brand soft/ink · green ok · blue info ·
+  red danger). mint 는 green 과 갈라 보여야 하는 자리가 있어 제 램프 유지.
+- ToggleGroupItem: 선 없는 fill 칩, 선택 = bg-fg · text-bg(주황 채움·그림자 제거).
+- Tooltip(·Streak·Heatmap 툴팁): inverse-surface · on-inverse — bg-gray-900 + text-white 는 다크에서 둘 다 뒤집혀
+  밝은 툴팁이 됐다.
+- Dialog: Footer 의 회색 띠를 걷고 1px 선 하나만(긴 폼의 스크롤 경계), 제목 fg · 본문 sub, ConfirmDialog 의
+  위험 톤 = danger 토큰.
+- cn: tailwind-merge 에 DS 눈금(반경 0~4 · ui-*, 그림자 이름, text-ui-*)을 알린다. 모르면 소비처 덮어쓰기가
+  조용히 안 먹거나(rounded-2.5 rounded-ui-2xl 둘 다 남음) text-ui-* 가 글자색을 지웠다. 브라우저 테스트 추가.
+- peer next 에 ^16 추가(웹·어드민이 16).
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+
+### Features
+
+* **components:** 플랫 기본 모양 — 선 없는 채움 입력·버튼, r6 칩, 필터 칩, 반전 툴팁, 눈금을 아는 cn [major] ([8cc415d](https://github.com/1D1S/1D1S-design-system/commit/8cc415dea24a6ba547d6a72e5732568fe4a3d920))
+* **tokens:** 플랫 리디자인 토큰 — 브랜드 #ff5900 · 중립 회색 · 의미 토큰 · 카테고리 · text-ui/rounded-ui 눈금 [minor] ([7dc92fa](https://github.com/1D1S/1D1S-design-system/commit/7dc92fae28884a37948fdfca748514c9d437e94c)), closes [#ff5900](https://github.com/1D1S/1D1S-design-system/issues/ff5900) [#ff5722](https://github.com/1D1S/1D1S-design-system/issues/ff5722) [#ff5900](https://github.com/1D1S/1D1S-design-system/issues/ff5900) [#ff6a1](https://github.com/1D1S/1D1S-design-system/issues/ff6a1) [#ff5900](https://github.com/1D1S/1D1S-design-system/issues/ff5900) [#fff2](https://github.com/1D1S/1D1S-design-system/issues/fff2)
+
 ## [2.18.0](https://github.com/1D1S/1D1S-design-system/compare/v2.17.0...v2.18.0) (2026-10-17)
 
 
