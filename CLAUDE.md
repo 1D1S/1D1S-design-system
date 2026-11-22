@@ -87,6 +87,4 @@ src/
 - ⚠️ **토큰이 없어도 릴리스된다.** `docs:`·`chore:` 커밋만 있어도 standard-version 이
   patch 를 올려 npm 에 발행한다. `paths-ignore` 는 `CHANGELOG.md`·`package.json`·`.github/**`
   뿐이라 `CLAUDE.md`·README 수정도 걸린다. **릴리스 없이 main 에 올리려면 커밋 메시지
-  (squash 면 PR 제목)에 `[skip ci]`** 를 넣는다. 이때 `push-to-fork` 미러도 같이 건너뛰지만,
-  다음 main push 때 트리 전체가 미러되므로 따라잡는다.
-- `push-to-fork.yml`: `main`/`develop` 을 `NOGUEN/1D1S-design-system` 포크로 미러.
+  (squash 면 PR 제목)에 `[skip ci]`** 를 넣는다.
