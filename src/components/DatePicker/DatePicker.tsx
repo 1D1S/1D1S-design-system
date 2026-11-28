@@ -8,7 +8,6 @@ import { cn } from "../../lib/utils";
 import { useIsMobile } from "../../hooks/useMediaQuery";
 import { Calendar as CalendarView } from "../Calendar";
 import { Calendar as CalendarIcon } from "../Icons";
-import { Text } from "../Text";
 import {
   BottomSheet,
   BottomSheetContent,
@@ -18,6 +17,10 @@ import {
 
 interface BasePickerProps {
   className?: string;
+  /** 트리거 높이 — TextField·Select 와 같은 눈금: `sm` 32px · `default` 40px */
+  size?: "sm" | "default";
+  /** 트리거의 접근성 이름 (보이는 라벨이 없을 때) */
+  "aria-label"?: string;
   placeholder?: string;
   /** 비활성화 상태. 트리거를 클릭해도 열리지 않으며 회색조로 표시된다. */
   disabled?: boolean;
@@ -47,7 +50,7 @@ export type CalendarPassthroughProps = Omit<
 >;
 
 const POPOVER_CONTENT_CLASS = cn(
-  "z-50 w-auto text-gray-900 outline-none",
+  "z-50 w-auto text-fg outline-none",
   "data-[state=open]:animate-in data-[state=closed]:animate-out",
   "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
   "data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",
@@ -65,6 +68,8 @@ const SHEET_CALENDAR_CLASS = "border-0 p-0 shadow-none";
 export interface DatePickerProps extends BasePickerProps {
   value: Date | undefined;
   onChange(date: Date | undefined): void;
+  /** 선택된 날짜가 있을 때 캘린더 아래에 '날짜 지우기'를 보인다. */
+  clearable?: boolean;
 }
 
 export interface RangeDatePickerProps extends BasePickerProps {
@@ -76,35 +81,32 @@ interface PickerTriggerProps
   extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "children"> {
   label?: string;
   placeholder: string;
+  size?: "sm" | "default";
 }
 
 const PickerTrigger = React.forwardRef<HTMLButtonElement, PickerTriggerProps>(
-  ({ label, placeholder, className, type = "button", ...props }, ref) => {
+  ({ label, placeholder, className, size = "default", type = "button", ...props }, ref) => {
+    const isSmall = size === "sm";
     return (
       <button
         ref={ref}
         type={type}
         className={cn(
-          "group flex h-10 w-full items-center justify-between gap-3 rounded-3 border border-gray-200 bg-white px-4",
-          "outline-none transition-all duration-200",
-          "data-[state=open]:border-brand hover:border-gray-400 focus-visible:ring-2 focus-visible:ring-brand/30 focus-visible:ring-offset-2",
-          "disabled:cursor-not-allowed disabled:border-gray-200 disabled:bg-gray-100 disabled:hover:border-gray-200",
+          // 플랫: Select·TextField 와 같은 채움 면, 열림·포커스만 brand 선.
+          "group flex w-full min-w-0 items-center justify-between gap-2 rounded-ui-xl border border-transparent bg-fill font-medium",
+          "outline-none transition-[border-color,background-color] duration-150",
+          "data-[state=open]:border-brand focus-visible:border-brand",
+          "disabled:cursor-not-allowed disabled:opacity-50",
+          isSmall ? "h-8 px-3 text-xs" : "h-10 px-3.5 text-sm",
           className
         )}
         {...props}
       >
-        <Text
-          size="body2"
-          weight="medium"
-          className={cn(
-            label ? "text-gray-900" : "text-gray-500",
-            "group-disabled:text-gray-400"
-          )}
-        >
+        <span className={cn("truncate", label ? "text-fg" : "text-mute")}>
           {label ?? placeholder}
-        </Text>
+        </span>
         <CalendarIcon
-          className="size-4 text-gray-600 group-disabled:text-gray-400"
+          className={cn("shrink-0 text-sub", isSmall ? "size-3.5" : "size-4")}
           strokeWidth={2.2}
         />
       </button>
@@ -157,6 +159,9 @@ export function DatePicker({
   value,
   onChange,
   className,
+  size,
+  "aria-label": ariaLabel,
+  clearable = false,
   placeholder = "YYYY/MM/DD",
   disabled = false,
   disableClickPropagation = false,
@@ -175,6 +180,22 @@ export function DatePicker({
       {...calendarProps}
       mode="single"
       selected={value}
+      footer={
+        clearable && value ? (
+          <button
+            type="button"
+            onClick={() => {
+              onChange(undefined);
+              setOpen(false);
+            }}
+            className="mt-2 h-8 w-full rounded-ui-md text-xs font-semibold text-sub transition-colors hover:bg-fill hover:text-fg"
+          >
+            날짜 지우기
+          </button>
+        ) : (
+          calendarProps?.footer
+        )
+      }
       onSelect={(date) => {
         onChange(date);
         if (date) setOpen(false);
@@ -190,7 +211,7 @@ export function DatePicker({
     return (
       <BottomSheet open={open} onOpenChange={setOpen}>
         <BottomSheetTrigger asChild>
-          <PickerTrigger label={label} placeholder={placeholder} className={className} disabled={disabled} />
+          <PickerTrigger label={label} placeholder={placeholder} className={className} size={size} aria-label={ariaLabel} disabled={disabled} />
         </BottomSheetTrigger>
         <BottomSheetContent showHandle={false} showClose>
           <SheetTitle>{sheetTitle ?? placeholder}</SheetTitle>
@@ -203,7 +224,7 @@ export function DatePicker({
   return (
     <PopoverPrimitive.Root open={open} onOpenChange={setOpen}>
       <PopoverPrimitive.Trigger asChild>
-        <PickerTrigger label={label} placeholder={placeholder} className={className} disabled={disabled} />
+        <PickerTrigger label={label} placeholder={placeholder} className={className} size={size} aria-label={ariaLabel} disabled={disabled} />
       </PopoverPrimitive.Trigger>
 
       <PopoverPrimitive.Portal>
@@ -228,6 +249,8 @@ export function RangeDatePicker({
   value,
   onChange,
   className,
+  size,
+  "aria-label": ariaLabel,
   placeholder = "기간을 선택해주세요",
   disabled = false,
   disableClickPropagation = false,
@@ -285,7 +308,7 @@ export function RangeDatePicker({
     return (
       <BottomSheet open={open} onOpenChange={handleOpenChange}>
         <BottomSheetTrigger asChild>
-          <PickerTrigger label={label} placeholder={placeholder} className={className} disabled={disabled} />
+          <PickerTrigger label={label} placeholder={placeholder} className={className} size={size} aria-label={ariaLabel} disabled={disabled} />
         </BottomSheetTrigger>
         <BottomSheetContent showHandle={false} showClose>
           <SheetTitle>{sheetTitle ?? placeholder}</SheetTitle>
@@ -298,7 +321,7 @@ export function RangeDatePicker({
   return (
     <PopoverPrimitive.Root open={open} onOpenChange={handleOpenChange}>
       <PopoverPrimitive.Trigger asChild>
-        <PickerTrigger label={label} placeholder={placeholder} className={className} disabled={disabled} />
+        <PickerTrigger label={label} placeholder={placeholder} className={className} size={size} aria-label={ariaLabel} disabled={disabled} />
       </PopoverPrimitive.Trigger>
 
       <PopoverPrimitive.Portal>
