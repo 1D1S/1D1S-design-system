@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.2.0](https://github.com/1D1S/1D1S-design-system/compare/v3.1.1...v3.2.0) (2026-11-28)
+
+
+### Features
+
+* **controls:** 컨트롤 높이 눈금 통일·플랫 — Select sm 32/기본 40, DatePicker size·aria-label·clearable, Button sm 32·md 40·icon-sm, asChild 아이콘 지원 [minor] ([bb8e189](https://github.com/1D1S/1D1S-design-system/commit/bb8e189c3cb8e916bb5fda32ec9756a99bab2e07))
+
 ### [3.1.1](https://github.com/1D1S/1D1S-design-system/compare/v3.1.0...v3.1.1) (2026-11-21)
 
 
