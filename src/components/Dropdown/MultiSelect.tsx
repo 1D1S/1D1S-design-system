@@ -42,8 +42,8 @@ export function MultiSelect({
       data-slot="multi-select"
       onClick={onAddClick}
       className={cn(
-        "flex min-h-[38px] w-80 flex-wrap items-center gap-1.5 rounded-2 border border-gray-200 bg-white px-3 py-2.5",
-        onAddClick && "cursor-pointer transition-colors hover:border-gray-300",
+        "flex min-h-10 w-80 flex-wrap items-center gap-1.5 rounded-ui-xl border border-transparent bg-fill px-3 py-2",
+        onAddClick && "cursor-pointer transition-colors hover:bg-gray-200",
         className,
       )}
       {...props}

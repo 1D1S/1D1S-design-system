@@ -1,7 +1,7 @@
 import { cn } from "../../lib/utils";
-import { Slot } from "@radix-ui/react-slot";
+import { Slot, Slottable } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
-import { Text } from "../Text";
+import { Text, textVariants } from "../Text";
 
 const baseClasses =
   "inline-flex items-center justify-center gap-1.5 border transition-[scale,translate,filter,background-color,box-shadow,border-color,color] duration-150 ease-out " +
@@ -25,11 +25,13 @@ const buttonVariants = cva(baseClasses, {
     },
     size: {
       xs: "h-6 px-2 gap-1",
-      sm: "h-[30px] px-3 gap-1",
-      md: "h-[38px] px-4",
+      // TextField·Select 와 같은 높이: sm 32 · md 40. 한 줄에 섞어 놓아도 맞는다.
+      sm: "h-8 px-3 gap-1",
+      md: "h-10 px-4",
       lg: "h-[46px] px-5",
       xl: "h-[54px] px-6",
-      icon: "h-[38px] w-[38px] p-0",
+      icon: "h-10 w-10 p-0",
+      "icon-sm": "h-8 w-8 p-0",
     },
     pill: {
       true: "rounded-full",
@@ -55,6 +57,7 @@ const labelStyleMap = {
   lg: { size: "caption1", weight: "extrabold" },
   xl: { size: "body2", weight: "extrabold" },
   icon: { size: "caption2", weight: "extrabold" },
+  "icon-sm": { size: "caption3", weight: "extrabold" },
 } as const;
 
 export interface ButtonProps
@@ -72,7 +75,8 @@ export interface ButtonProps
  * Button v3
  *
  * @param variant `primary` (default) · `secondary` · `soft` · `ghost` · `danger`
- * @param size `xs` · `sm` · `md` (default) · `lg` · `xl` · `icon`
+ * @param size `xs` · `sm`(32) · `md`(40, default) · `lg` · `xl` · `icon`(40) · `icon-sm`(32)
+ * @param asChild 자식(예: next/link)을 버튼 모양으로. iconLeft/iconRight 는 자식 안에 들어간다.
  * @param pill 둥근 알약형 (rounded-full)
  * @param fullWidth 부모 너비 100%
  * @param iconLeft / iconRight 라벨 양옆 아이콘
@@ -97,11 +101,33 @@ export function Button({
   children,
   ...props
 }: ButtonProps): React.ReactElement {
-  const Comp = asChild ? Slot : "button";
+  const Comp = "button";
   const resolvedSize = size ?? "md";
   const isStringChild =
     typeof children === "string" || typeof children === "number";
-  const showText = resolvedSize !== "icon" && isStringChild;
+  const isIcon = resolvedSize === "icon" || resolvedSize === "icon-sm";
+  const showText = !isIcon && isStringChild;
+
+  if (asChild) {
+    // Slot 은 자식이 하나여야 한다 — 아이콘은 Slottable 로 자식 안쪽에 끼워 넣고,
+    // 라벨 글자 크기는 Text 대신 클래스로 준다(자식의 글자를 감쌀 수 없으므로).
+    return (
+      <Slot
+        data-slot="button"
+        className={cn(
+          buttonVariants({ variant, size, pill, fullWidth }),
+          !isIcon && textVariants(labelStyleMap[resolvedSize]),
+          className,
+        )}
+        aria-disabled={disabled || undefined}
+        {...props}
+      >
+        {iconLeft}
+        <Slottable>{children}</Slottable>
+        {iconRight}
+      </Slot>
+    );
+  }
 
   return (
     <Comp

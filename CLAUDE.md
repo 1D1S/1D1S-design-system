@@ -49,6 +49,12 @@ src/
 - 새 컴포넌트 추가 = 폴더 3파일 + `components/index.ts` 에 export 한 줄.
   (서브패스 진입점·`dist` 미러링·`verify-exports` 가 자동으로 따라온다.)
 
+### 컨트롤 높이 눈금 (3.2.0~)
+한 줄에 섞여 놓이는 컨트롤은 같은 높이·글자 크기를 쓴다: **sm 32px·12px / 기본(md) 40px·14px**.
+TextField · Select(`size="sm"|"default"`) · DatePicker(`size`) · Dropdown · Button(`sm`/`md`, 아이콘 `icon-sm` 32 / `icon` 40).
+입력형 컨트롤은 모두 플랫(채움 `bg-fill`, 선 없음, 열림·포커스만 `border-brand`). 새 컨트롤도 이 눈금을 따른다.
+Select 아이템은 글자 크기를 갖지 않는다 — 선택값이 트리거로 복제되므로 트리거가 크기를 정한다.
+
 ### 토큰 2층 구조
 1. **브랜드 램프** (`colors.css`): `--main-*`, `--gray-*`, `--mint-*`, `green/blue/red/sky/purple`,
    `--brand*`, `--accent`, `--frozen`, `--fixed-white/black`. ← 앱 정합 대상(위 ⚠️).

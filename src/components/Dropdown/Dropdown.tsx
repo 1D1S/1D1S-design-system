@@ -7,21 +7,22 @@ import { ChevronDown } from "../Icons/ChevronDown";
 
 const dropdownTriggerVariants = cva(
   [
-    "inline-flex w-full items-center justify-between rounded-2 border bg-white text-gray-900 font-medium",
+    // 플랫: Select·TextField 와 같은 채움 면. 열림·포커스만 brand 선.
+    "inline-flex w-full items-center justify-between rounded-ui-xl border bg-fill text-fg font-medium",
     "transition-[border-color,box-shadow,background-color] duration-150 ease-out outline-none",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/30 focus-visible:ring-offset-2",
-    "disabled:cursor-not-allowed disabled:bg-gray-100 disabled:text-gray-400",
+    "disabled:cursor-not-allowed disabled:opacity-50",
   ],
   {
     variants: {
       size: {
         sm: "h-8 px-3 text-xs",
-        md: "h-[38px] px-3.5 text-sm",
+        md: "h-10 px-3.5 text-sm",
         lg: "h-[46px] px-4 text-base",
       },
       open: {
-        true: "border-brand shadow-focus",
-        false: "border-gray-200 hover:border-gray-300",
+        true: "border-brand",
+        false: "border-transparent",
       },
     },
     defaultVariants: { size: "md", open: false },
@@ -77,7 +78,7 @@ export const Dropdown = React.forwardRef<HTMLButtonElement, DropdownProps>(
         {label ? (
           <label
             htmlFor={id}
-            className="mb-1.5 inline-block text-2xs font-bold text-gray-700"
+            className="mb-1.5 inline-block text-2xs font-bold text-sub"
           >
             {label}
           </label>
@@ -91,7 +92,7 @@ export const Dropdown = React.forwardRef<HTMLButtonElement, DropdownProps>(
           aria-expanded={open ? true : false}
           className={cn(
             dropdownTriggerVariants({ size, open }),
-            isPlaceholder && "text-gray-400 font-normal",
+            isPlaceholder && "text-mute font-normal",
             className,
           )}
           {...props}
@@ -103,7 +104,7 @@ export const Dropdown = React.forwardRef<HTMLButtonElement, DropdownProps>(
             className={cn(
               "ml-2 shrink-0 transition-transform duration-150",
               open && "rotate-180",
-              disabled ? "text-gray-400" : "text-gray-500",
+              "text-sub",
             )}
             strokeWidth={2}
           />
